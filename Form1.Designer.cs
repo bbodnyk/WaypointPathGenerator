@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,8 +44,13 @@
             this.addHelicalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addManualPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addPolygonGridPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolAddKMLPath = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolInsertWP = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolInsertWPBefore = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolInsertWPAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolDeleteWP = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.POI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAllPOIShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -184,20 +189,6 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabKMLPath = new System.Windows.Forms.TabPage();
-            this.cmbKMLReuse = new System.Windows.Forms.ComboBox();
-            this.radioKMLReuse = new System.Windows.Forms.RadioButton();
-            this.radioKMLNew = new System.Windows.Forms.RadioButton();
-            this.label94 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
-            this.cmbKLMPOI = new System.Windows.Forms.ComboBox();
-            this.chKLMPOI = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.txtKMLPathName = new System.Windows.Forms.TextBox();
-            this.rtbKMLRead = new System.Windows.Forms.RichTextBox();
-            this.btnClearRTBPath = new System.Windows.Forms.Button();
-            this.btnKMLProcess = new System.Windows.Forms.Button();
-            this.btnSelectKMLFile = new System.Windows.Forms.Button();
             this.tabManual = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.radioRel = new System.Windows.Forms.RadioButton();
@@ -367,10 +358,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
-            this.toolDeleteWP = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolInsertWP = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolInsertWPBefore = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolInsertWPAfter = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabOutput.SuspendLayout();
@@ -383,7 +370,6 @@
             this.tabWayActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).BeginInit();
-            this.tabKMLPath.SuspendLayout();
             this.tabManual.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManualPath)).BeginInit();
@@ -417,7 +403,7 @@
             this.toolStripSeparator5,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 254);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 232);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -434,7 +420,8 @@
             this.addCircularPathToolStripMenuItem,
             this.addHelicalPathToolStripMenuItem,
             this.addManualPathToolStripMenuItem,
-            this.addPolygonGridPathToolStripMenuItem});
+            this.addPolygonGridPathToolStripMenuItem,
+            this.ToolAddKMLPath});
             this.ToolAddPath.Name = "ToolAddPath";
             this.ToolAddPath.Size = new System.Drawing.Size(203, 22);
             this.ToolAddPath.Text = "Add Path";
@@ -467,10 +454,40 @@
             this.addPolygonGridPathToolStripMenuItem.Text = "Add Polygon Grid Path";
             this.addPolygonGridPathToolStripMenuItem.Click += new System.EventHandler(this.addPolygonGridPathToolStripMenuItem_Click);
             // 
+            // ToolAddKMLPath
+            // 
+            this.ToolAddKMLPath.Name = "ToolAddKMLPath";
+            this.ToolAddKMLPath.Size = new System.Drawing.Size(181, 22);
+            this.ToolAddKMLPath.Text = "Add KML Path";
+            this.ToolAddKMLPath.Click += new System.EventHandler(this.ToolAddKMLPath_Click);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(200, 6);
+            // 
+            // toolInsertWP
+            // 
+            this.toolInsertWP.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolInsertWPBefore,
+            this.ToolInsertWPAfter});
+            this.toolInsertWP.Name = "toolInsertWP";
+            this.toolInsertWP.Size = new System.Drawing.Size(203, 22);
+            this.toolInsertWP.Text = "Insert Waypoint";
+            // 
+            // ToolInsertWPBefore
+            // 
+            this.ToolInsertWPBefore.Name = "ToolInsertWPBefore";
+            this.ToolInsertWPBefore.Size = new System.Drawing.Size(106, 22);
+            this.ToolInsertWPBefore.Text = "Before";
+            this.ToolInsertWPBefore.Click += new System.EventHandler(this.ToolInsertWPBefore_Click);
+            // 
+            // ToolInsertWPAfter
+            // 
+            this.ToolInsertWPAfter.Name = "ToolInsertWPAfter";
+            this.ToolInsertWPAfter.Size = new System.Drawing.Size(106, 22);
+            this.ToolInsertWPAfter.Text = "After";
+            this.ToolInsertWPAfter.Click += new System.EventHandler(this.ToolInsertWPAfter_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -478,6 +495,13 @@
             this.toolStripMenuItem3.Size = new System.Drawing.Size(203, 22);
             this.toolStripMenuItem3.Text = "Delete Selected Path";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click_1);
+            // 
+            // toolDeleteWP
+            // 
+            this.toolDeleteWP.Name = "toolDeleteWP";
+            this.toolDeleteWP.Size = new System.Drawing.Size(203, 22);
+            this.toolDeleteWP.Text = "Delete Selected Waypoints";
+            this.toolDeleteWP.Click += new System.EventHandler(this.toolDeleteWP_Click);
             // 
             // toolStripSeparator2
             // 
@@ -1054,16 +1078,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(13, 86);
             this.treGMap.Name = "treGMap";
-            treeNode5.Name = "POI";
-            treeNode5.Text = "POI";
-            treeNode6.Name = "Paths";
-            treeNode6.Text = "Paths";
-            treeNode7.Name = "Polygons";
-            treeNode7.Text = "Polygons";
-            treeNode8.Name = "GMap";
-            treeNode8.Text = "Objects";
+            treeNode1.Name = "POI";
+            treeNode1.Text = "POI";
+            treeNode2.Name = "Paths";
+            treeNode2.Text = "Paths";
+            treeNode3.Name = "Polygons";
+            treeNode3.Text = "Polygons";
+            treeNode4.Name = "GMap";
+            treeNode4.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode4});
             this.treGMap.Size = new System.Drawing.Size(121, 292);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1747,153 +1771,6 @@
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn9.Width = 73;
-            // 
-            // tabKMLPath
-            // 
-            this.tabKMLPath.Controls.Add(this.cmbKMLReuse);
-            this.tabKMLPath.Controls.Add(this.radioKMLReuse);
-            this.tabKMLPath.Controls.Add(this.radioKMLNew);
-            this.tabKMLPath.Controls.Add(this.label94);
-            this.tabKMLPath.Controls.Add(this.label76);
-            this.tabKMLPath.Controls.Add(this.cmbKLMPOI);
-            this.tabKMLPath.Controls.Add(this.chKLMPOI);
-            this.tabKMLPath.Controls.Add(this.label17);
-            this.tabKMLPath.Controls.Add(this.txtKMLPathName);
-            this.tabKMLPath.Controls.Add(this.rtbKMLRead);
-            this.tabKMLPath.Controls.Add(this.btnClearRTBPath);
-            this.tabKMLPath.Controls.Add(this.btnKMLProcess);
-            this.tabKMLPath.Controls.Add(this.btnSelectKMLFile);
-            this.tabKMLPath.Location = new System.Drawing.Point(4, 46);
-            this.tabKMLPath.Name = "tabKMLPath";
-            this.tabKMLPath.Padding = new System.Windows.Forms.Padding(3);
-            this.tabKMLPath.Size = new System.Drawing.Size(852, 881);
-            this.tabKMLPath.TabIndex = 6;
-            this.tabKMLPath.Text = "KML Path Segment";
-            this.tabKMLPath.UseVisualStyleBackColor = true;
-            // 
-            // cmbKMLReuse
-            // 
-            this.cmbKMLReuse.FormattingEnabled = true;
-            this.cmbKMLReuse.Location = new System.Drawing.Point(519, 341);
-            this.cmbKMLReuse.Name = "cmbKMLReuse";
-            this.cmbKMLReuse.Size = new System.Drawing.Size(181, 24);
-            this.cmbKMLReuse.TabIndex = 66;
-            // 
-            // radioKMLReuse
-            // 
-            this.radioKMLReuse.AutoSize = true;
-            this.radioKMLReuse.Location = new System.Drawing.Point(133, 336);
-            this.radioKMLReuse.Name = "radioKMLReuse";
-            this.radioKMLReuse.Size = new System.Drawing.Size(218, 20);
-            this.radioKMLReuse.TabIndex = 65;
-            this.radioKMLReuse.Text = "Overwrite Existing Path Segment";
-            this.radioKMLReuse.UseVisualStyleBackColor = true;
-            // 
-            // radioKMLNew
-            // 
-            this.radioKMLNew.AutoSize = true;
-            this.radioKMLNew.Checked = true;
-            this.radioKMLNew.Location = new System.Drawing.Point(132, 310);
-            this.radioKMLNew.Name = "radioKMLNew";
-            this.radioKMLNew.Size = new System.Drawing.Size(169, 20);
-            this.radioKMLNew.TabIndex = 64;
-            this.radioKMLNew.TabStop = true;
-            this.radioKMLNew.Text = "New KML Path Segment";
-            this.radioKMLNew.UseVisualStyleBackColor = true;
-            this.radioKMLNew.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
-            // label94
-            // 
-            this.label94.AutoSize = true;
-            this.label94.Location = new System.Drawing.Point(391, 341);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(104, 16);
-            this.label94.TabIndex = 62;
-            this.label94.Text = "KML Path Name";
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label76.Location = new System.Drawing.Point(317, 14);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(143, 20);
-            this.label76.TabIndex = 33;
-            this.label76.Text = "Import KML Path";
-            this.label76.Click += new System.EventHandler(this.label76_Click);
-            // 
-            // cmbKLMPOI
-            // 
-            this.cmbKLMPOI.FormattingEnabled = true;
-            this.cmbKLMPOI.Location = new System.Drawing.Point(321, 246);
-            this.cmbKLMPOI.Name = "cmbKLMPOI";
-            this.cmbKLMPOI.Size = new System.Drawing.Size(250, 24);
-            this.cmbKLMPOI.TabIndex = 32;
-            // 
-            // chKLMPOI
-            // 
-            this.chKLMPOI.AutoSize = true;
-            this.chKLMPOI.Location = new System.Drawing.Point(203, 248);
-            this.chKLMPOI.Name = "chKLMPOI";
-            this.chKLMPOI.Size = new System.Drawing.Size(87, 20);
-            this.chKLMPOI.TabIndex = 31;
-            this.chKLMPOI.Text = "POI Mode";
-            this.chKLMPOI.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(409, 314);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(104, 16);
-            this.label17.TabIndex = 29;
-            this.label17.Text = "KML Path Name";
-            this.label17.Click += new System.EventHandler(this.label17_Click_1);
-            // 
-            // txtKMLPathName
-            // 
-            this.txtKMLPathName.Location = new System.Drawing.Point(519, 308);
-            this.txtKMLPathName.Name = "txtKMLPathName";
-            this.txtKMLPathName.Size = new System.Drawing.Size(181, 22);
-            this.txtKMLPathName.TabIndex = 28;
-            // 
-            // rtbKMLRead
-            // 
-            this.rtbKMLRead.Location = new System.Drawing.Point(149, 123);
-            this.rtbKMLRead.Name = "rtbKMLRead";
-            this.rtbKMLRead.Size = new System.Drawing.Size(480, 104);
-            this.rtbKMLRead.TabIndex = 1;
-            this.rtbKMLRead.Text = "";
-            // 
-            // btnClearRTBPath
-            // 
-            this.btnClearRTBPath.Location = new System.Drawing.Point(296, 85);
-            this.btnClearRTBPath.Name = "btnClearRTBPath";
-            this.btnClearRTBPath.Size = new System.Drawing.Size(186, 23);
-            this.btnClearRTBPath.TabIndex = 27;
-            this.btnClearRTBPath.Text = "Clear Text Box";
-            this.btnClearRTBPath.UseVisualStyleBackColor = true;
-            this.btnClearRTBPath.Click += new System.EventHandler(this.btnClearRTBPath_Click);
-            // 
-            // btnKMLProcess
-            // 
-            this.btnKMLProcess.Location = new System.Drawing.Point(264, 372);
-            this.btnKMLProcess.Name = "btnKMLProcess";
-            this.btnKMLProcess.Size = new System.Drawing.Size(213, 23);
-            this.btnKMLProcess.TabIndex = 26;
-            this.btnKMLProcess.Text = "Generate KML Path";
-            this.btnKMLProcess.UseVisualStyleBackColor = true;
-            this.btnKMLProcess.Click += new System.EventHandler(this.btnKMLProcess_Click);
-            // 
-            // btnSelectKMLFile
-            // 
-            this.btnSelectKMLFile.Location = new System.Drawing.Point(293, 46);
-            this.btnSelectKMLFile.Name = "btnSelectKMLFile";
-            this.btnSelectKMLFile.Size = new System.Drawing.Size(189, 23);
-            this.btnSelectKMLFile.TabIndex = 0;
-            this.btnSelectKMLFile.Text = "Select KML FIle";
-            this.btnSelectKMLFile.UseVisualStyleBackColor = true;
-            this.btnSelectKMLFile.Click += new System.EventHandler(this.btnSelectKMLFile_Click);
             // 
             // tabManual
             // 
@@ -3667,7 +3544,6 @@
             this.tabLocation.Controls.Add(this.tabKMLPoly);
             this.tabLocation.Controls.Add(this.tabPolyPath);
             this.tabLocation.Controls.Add(this.tabManual);
-            this.tabLocation.Controls.Add(this.tabKMLPath);
             this.tabLocation.Controls.Add(this.tabWayActions);
             this.tabLocation.Controls.Add(this.tabPath);
             this.tabLocation.Controls.Add(this.tabGMap);
@@ -3681,36 +3557,6 @@
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 0;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
-            // 
-            // toolDeleteWP
-            // 
-            this.toolDeleteWP.Name = "toolDeleteWP";
-            this.toolDeleteWP.Size = new System.Drawing.Size(203, 22);
-            this.toolDeleteWP.Text = "Delete Selected Waypoints";
-            this.toolDeleteWP.Click += new System.EventHandler(this.toolDeleteWP_Click);
-            // 
-            // toolInsertWP
-            // 
-            this.toolInsertWP.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolInsertWPBefore,
-            this.ToolInsertWPAfter});
-            this.toolInsertWP.Name = "toolInsertWP";
-            this.toolInsertWP.Size = new System.Drawing.Size(203, 22);
-            this.toolInsertWP.Text = "Insert Waypoint";
-            // 
-            // ToolInsertWPBefore
-            // 
-            this.ToolInsertWPBefore.Name = "ToolInsertWPBefore";
-            this.ToolInsertWPBefore.Size = new System.Drawing.Size(152, 22);
-            this.ToolInsertWPBefore.Text = "Before";
-            this.ToolInsertWPBefore.Click += new System.EventHandler(this.ToolInsertWPBefore_Click);
-            // 
-            // ToolInsertWPAfter
-            // 
-            this.ToolInsertWPAfter.Name = "ToolInsertWPAfter";
-            this.ToolInsertWPAfter.Size = new System.Drawing.Size(152, 22);
-            this.ToolInsertWPAfter.Text = "After";
-            this.ToolInsertWPAfter.Click += new System.EventHandler(this.ToolInsertWPAfter_Click);
             // 
             // Form1
             // 
@@ -3741,8 +3587,6 @@
             this.tabWayActions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).EndInit();
-            this.tabKMLPath.ResumeLayout(false);
-            this.tabKMLPath.PerformLayout();
             this.tabManual.ResumeLayout(false);
             this.tabManual.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -3911,20 +3755,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.TabPage tabKMLPath;
-        private System.Windows.Forms.ComboBox cmbKMLReuse;
-        private System.Windows.Forms.RadioButton radioKMLReuse;
-        private System.Windows.Forms.RadioButton radioKMLNew;
-        private System.Windows.Forms.Label label94;
-        private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.ComboBox cmbKLMPOI;
-        private System.Windows.Forms.CheckBox chKLMPOI;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtKMLPathName;
-        private System.Windows.Forms.RichTextBox rtbKMLRead;
-        private System.Windows.Forms.Button btnClearRTBPath;
-        private System.Windows.Forms.Button btnKMLProcess;
-        private System.Windows.Forms.Button btnSelectKMLFile;
         private System.Windows.Forms.TabPage tabManual;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioRel;
@@ -4104,6 +3934,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolInsertWP;
         private System.Windows.Forms.ToolStripMenuItem ToolInsertWPBefore;
         private System.Windows.Forms.ToolStripMenuItem ToolInsertWPAfter;
+        private System.Windows.Forms.ToolStripMenuItem ToolAddKMLPath;
     }
 }
 

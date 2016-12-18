@@ -385,33 +385,36 @@ namespace Waypoint_Path_Generator
             string name = path.name;
             int id = path.id;
             LinkedList<WayPoints> wplist = path.waypoints;
-            int wpcount = wplist.Count;
-
-            List<PointLatLng> points = new List<PointLatLng>();
-            int count = 0;
-            foreach (WayPoints wp in wplist)
+            if (wplist != null)
             {
-                points.Add(new PointLatLng(wp.lat, wp.lon));
-                _drone_image = _drone_image_notselected;
-                _drone_image = RotateImage(_drone_image_notselected, wp.head);
-                GMapMarker marker = new GMarkerGoogle(
-                    new PointLatLng(wp.lat, wp.lon), _drone_image);
-                //GMarkerGoogleType.blue_pushpin);
-                //marker.Size = new Size(64,64);
-                marker.Offset = new Point(-16,-16);
-                marker.Tag = Convert.ToString(id) + "." + Convert.ToString(count);
-                marker.IsVisible = visible;
-                marker.IsHitTestVisible = true;
-                marker.ToolTipText = "WP(" + Convert.ToString(count) + ") - Alt:" + Convert.ToString(wp.alt);
-                _overmarkers.Markers.Add(marker);
-                wp.marker = marker;
-                count++;
+                int wpcount = wplist.Count;
+
+                List<PointLatLng> points = new List<PointLatLng>();
+                int count = 0;
+                foreach (WayPoints wp in wplist)
+                {
+                    points.Add(new PointLatLng(wp.lat, wp.lon));
+                    _drone_image = _drone_image_notselected;
+                    _drone_image = RotateImage(_drone_image_notselected, wp.head);
+                    GMapMarker marker = new GMarkerGoogle(
+                        new PointLatLng(wp.lat, wp.lon), _drone_image);
+                    //GMarkerGoogleType.blue_pushpin);
+                    //marker.Size = new Size(64,64);
+                    marker.Offset = new Point(-16, -16);
+                    marker.Tag = Convert.ToString(id) + "." + Convert.ToString(count);
+                    marker.IsVisible = visible;
+                    marker.IsHitTestVisible = true;
+                    marker.ToolTipText = "WP(" + Convert.ToString(count) + ") - Alt:" + Convert.ToString(wp.alt);
+                    _overmarkers.Markers.Add(marker);
+                    wp.marker = marker;
+                    count++;
+                }
+                GMapRoute route = new GMapRoute(points, name);
+                route.Stroke = new Pen(Color.Blue, 2);
+                route.Tag = id;
+                route.IsVisible = visible;
+                _overroutes.Routes.Add(route);
             }
-            GMapRoute route = new GMapRoute(points, name);
-            route.Stroke = new Pen(Color.Blue, 2);
-            route.Tag = id;
-            route.IsVisible = visible;
-            _overroutes.Routes.Add(route);
         }
 
         public void Delete_gMapPath(Models.Path path)

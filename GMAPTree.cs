@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace Waypoint_Path_Generator.Models
 {
-    public class GMAPTree
+    public static class GMAPTree
     {
 
-        public void Update_GMapTree(Waypoint_Path_Gen _wpg, TreeView _tregmap)
+        public static void Update_GMapTree(Waypoint_Path_Gen _wpg, TreeView _tregmap)
         {
 
             // Add POI Items

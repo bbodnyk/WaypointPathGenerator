@@ -179,5 +179,17 @@ namespace Waypoint_Path_Generator
             }
             return ang;
         }
+
+        public static double MetersToFeet(double meters)
+        {
+            double conversion = 3.280839;
+            return (meters * conversion);
+        }
+
+        public static double FeetToMeters(double feet)
+        {
+            double conversion = 3.280839;
+            return (feet / conversion);
+        }
     }
 }

@@ -34,5 +34,22 @@ namespace Waypoint_Path_Generator.Models
             //Update_GMapTree();
             _gmap.Add_gMapPath(new_path, true);
         }
+
+        public void Add_Empty_Path(Waypoint_Path_Gen wpg, GMAP gmap, string name, string type)
+        {
+            _wpg = wpg;
+            _gmap = gmap;
+            int id = wpg.PathCount();
+            Models.Path new_path = new Models.Path();
+            new_path.id = id;
+            new_path.name = name;
+            new_path.type = type;
+            new_path.selected = false;
+            new_path.visible = true;
+            new_path.waypoints = null;
+            _wpg.AddPath(new_path);
+            //Update_GMapTree();
+            _gmap.Add_gMapPath(new_path, true);
+        }
     }
 }

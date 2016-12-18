@@ -29,7 +29,6 @@ namespace Waypoint_Path_Generator
         GMAP _gmap;
         Waypoint_Path_Gen _wpg;
         WayPoints _wp;
-        GMAPTree _treGMap;
         TreeView _gmaptree;
         Models.Path _path;
 
@@ -249,7 +248,7 @@ namespace Waypoint_Path_Generator
             Globals.map_center = _gmap.GetCenter();
             txtCenterLat.Text = Convert.ToString(Globals.map_center.Lat);
             txtCenterLon.Text = Convert.ToString(Globals.map_center.Lng);
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, _gmaptree);
 
         }
 
@@ -281,8 +280,8 @@ namespace Waypoint_Path_Generator
             lblImageWidth.Text = "Image Width (ft)";
             lblManualAlt.Text = "Manual Altitude (ft)";
             //txtAltitude.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtAltitude.Text)));
-            txtManualAlt.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtManualAlt.Text)));
-            txtElevation.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtElevation.Text)));
+            txtManualAlt.Text = Convert.ToString(GPS.MetersToFeet(Convert.ToDouble(txtManualAlt.Text)));
+            txtElevation.Text = Convert.ToString(GPS.MetersToFeet(Convert.ToDouble(txtElevation.Text)));
             //txtImageLength.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageWidth.Text)));
             double alt = Convert.ToDouble(txtAltitude.Text);
@@ -299,8 +298,8 @@ namespace Waypoint_Path_Generator
             lblImageWidth.Text = "Image Width (m)";
             lblManualAlt.Text = "Manual Altitude (m)";
             //txtAltitude.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtAltitude.Text)));
-            txtManualAlt.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtManualAlt.Text)));
-            txtElevation.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtElevation.Text)));
+            txtManualAlt.Text = Convert.ToString(GPS.FeetToMeters(Convert.ToDouble(txtManualAlt.Text)));
+            txtElevation.Text = Convert.ToString(GPS.FeetToMeters(Convert.ToDouble(txtElevation.Text)));
             //txtImageLength.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageWidth.Text)));         
             txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(81.0 / 2)) * Convert.ToDouble(txtAltitude.Text)));
@@ -362,7 +361,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        
+
         private void tabPage3_Click(object sender, EventArgs e)
         {
 
@@ -382,7 +381,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-
+        /*
         private double MetersToFeet(double meters)
         {
             double conversion = 3.280839;
@@ -393,7 +392,7 @@ namespace Waypoint_Path_Generator
             double conversion = 3.280839;
             return (feet / conversion);
         }
-
+        */
         private double Modulus(double val1, double val2)
         {
             int i = Convert.ToInt16(val1 / val2);
@@ -452,7 +451,7 @@ namespace Waypoint_Path_Generator
             Globals.manpoint_list.AddLast(waypoint);
             Globals.manpoint_count++;
         }
- 
+
         public void Message(string text1, string text2)
         {
 
@@ -487,8 +486,8 @@ namespace Waypoint_Path_Generator
                     double gimblepitch = point.gimblepitch;
                     if (!Globals.UnitsMetric)
                     {
-                        altitude = FeetToMeters(altitude);
-                        curvesize = FeetToMeters(curvesize);
+                        altitude = GPS.FeetToMeters(altitude);
+                        curvesize = GPS.FeetToMeters(curvesize);
                     }
 
                     str = str + Convert.ToString(lat) + "," + Convert.ToString(lon);
@@ -615,19 +614,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        
-        /*
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-      
 
-        private void btnClearRTBHelix_Click(object sender, EventArgs e)
-        {
-            rtbHelix.Clear();
-        }
-        */
         private void chkRectHome_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -679,7 +666,7 @@ namespace Waypoint_Path_Generator
                     lat = point.lat;
                     lon = point.lon;
                     alt = point.alt;
-                    if (!Globals.UnitsMetric) alt = FeetToMeters(alt);
+                    if (!Globals.UnitsMetric) alt = GPS.FeetToMeters(alt);
 
                     vector = new Vector(lat, lon, alt);
 
@@ -856,12 +843,12 @@ namespace Waypoint_Path_Generator
             }
             Update_Shapecmb();
         }
-
+/*
         private void btnSelectKMLFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                /* Get kml filename */
+                // Get kml filename
 
                 string kml_file = openFileDialog1.FileName;
 
@@ -872,7 +859,7 @@ namespace Waypoint_Path_Generator
                     rtbKMLRead.AppendText("KML File : " + kml_file + "\n");
                     rtbKMLRead.AppendText("\n");
 
-                    /* Open KML File */
+                    // Open KML File
 
                     System.IO.TextReader stream = System.IO.File.OpenText(kml_file);
                     SharpKml.Engine.KmlFile file = KmlFile.Load(stream);
@@ -935,7 +922,7 @@ namespace Waypoint_Path_Generator
                 else { MessageBox.Show("Wrong file type!", "GPS Grid:", MessageBoxButtons.OKCancel, MessageBoxIcon.Error); }
             }
         }
-
+*/
         private void chkCircClearWaypoints_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -996,7 +983,7 @@ namespace Waypoint_Path_Generator
 
         }
 
-
+/*
         private void btnKMLProcess_Click(object sender, EventArgs e)
         {
             int gimblemode = 0;
@@ -1009,7 +996,7 @@ namespace Waypoint_Path_Generator
 
             LinkedList<WayPoints> new_list = new LinkedList<WayPoints>();
 
-            /* Generate Waypoints for each coordinate */
+            // Generate Waypoints for each coordinate
 
             for (int i = 0; i < Globals.kml_point_count; i++)
             {
@@ -1018,7 +1005,7 @@ namespace Waypoint_Path_Generator
                 double alt = Globals.kml_points[i, 2];
                 double heading = 0.0;
 
-                /* Calculate Heading for each Waypoint */
+                // Calculate Heading for each Waypoint
                 if (chKLMPOI.Checked)
                 {
                     int poi_index = cmbKLMPOI.SelectedIndex;
@@ -1082,7 +1069,7 @@ namespace Waypoint_Path_Generator
         {
             rtbKMLRead.Clear();
         }
-
+*/
         private void txtHelixStartAlt_TextChanged(object sender, EventArgs e)
         {
 
@@ -1180,7 +1167,7 @@ namespace Waypoint_Path_Generator
                 _wpg.DeletePath(path);
                 RemovePath_GMapTree(path);
                 _gmap.Delete_gMapPath(path);
-                //Update_GMapTree();
+                //GMAPTree.Update_GMapTree(_wpg, treGMap);;
                 Update_DGVPath();
                 //Fill_Path_Table();
             }
@@ -1323,7 +1310,7 @@ namespace Waypoint_Path_Generator
                 _wpg.DeletePath(path);
                 RemovePath_GMapTree(path);
                 _gmap.Delete_gMapPath(path);
-                //Update_GMapTree();
+                //GMAPTree.Update_GMapTree(_wpg, treGMap);;
                 Update_DGVPath();
                 dgvPathWaypoints.Rows.Clear();
             }
@@ -1336,10 +1323,10 @@ namespace Waypoint_Path_Generator
                 int row = e.RowIndex;
                 Models.Path path = _wpg.PathAt(row);
                 _wpg.DeletePath(path);
-                Update_GMapTree();
+                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
                 //RemovePath_GMapTree(path);
                 _gmap.Delete_gMapPath(path);
-                //Update_GMapTree();
+                //GMAPTree.Update_GMapTree(_wpg, treGMap);;
                 Update_DGVPath();
                 _gmap.ReDrawgMap();
             }
@@ -1356,7 +1343,6 @@ namespace Waypoint_Path_Generator
             cmbCombinePath2.Items.Clear();
             cmbReversePath.Items.Clear();
             cmbManualReuse.Items.Clear();
-            cmbKMLReuse.Items.Clear();
             //cmbCombinePath1.SelectedIndex = -1;
             //cmbCombinePath2.SelectedIndex = -1;
             dgvPaths.Rows.Clear();
@@ -1383,7 +1369,6 @@ namespace Waypoint_Path_Generator
                     cmbCombinePath2.Items.Add(pathname);
                     cmbReversePath.Items.Add(pathname);
                     cmbManualReuse.Items.Add(pathname);
-                    cmbKMLReuse.Items.Add(pathname);
                     count++;
                 } while (count < path_count);
             }
@@ -1419,48 +1404,6 @@ namespace Waypoint_Path_Generator
                     break;
                 }
             }
-        }
-
-        public void Update_GMapTree()
-        {
-
-            // Add POI Items
-            POIPoints pnt;
-            Models.Path path;
-            Models.Shape shape;
-            treGMap.Nodes.Clear();
-            TreeNode tNode;
-            tNode = treGMap.Nodes.Add("Objects");
-            treGMap.Nodes[0].Nodes.Add("POIs");
-            treGMap.Nodes[0].Nodes.Add("Paths");
-            treGMap.Nodes[0].Nodes.Add("Polygons");
-
-            for (int i = 0; i < _wpg.POICount(); i++)
-            {
-                pnt = _wpg.POIPointAt(i);
-                treGMap.Nodes[0].Nodes[0].Nodes.Add(pnt.name);
-                treGMap.Nodes[0].Nodes[0].Nodes[i].Tag = i;
-                treGMap.Nodes[0].Nodes[0].Nodes[i].Checked = pnt.visible;
-            }
-
-
-            for (int i = 0; i < _wpg.PathCount(); i++)
-            {
-                path = _wpg.PathAt(i);
-                treGMap.Nodes[0].Nodes[1].Nodes.Add(path.name);
-                treGMap.Nodes[0].Nodes[1].Nodes[i].Tag = i;
-                treGMap.Nodes[0].Nodes[1].Nodes[i].Checked = path.visible;
-            }
-
-            for (int i = 0; i < _wpg.ShapeCount(); i++)
-            {
-                shape = _wpg.ShapeAt(i);
-                treGMap.Nodes[0].Nodes[2].Nodes.Add(shape.name);
-                treGMap.Nodes[0].Nodes[2].Nodes[i].Tag = i;
-                treGMap.Nodes[0].Nodes[2].Nodes[i].Checked = shape.visible;
-
-            }
-
         }
 
         private void Update_Shapecmb()
@@ -1887,7 +1830,7 @@ namespace Waypoint_Path_Generator
                 poipoint.selected = false;
                 _wpg.AddPOI(poipoint);
                 _gmap.Add_gMapPOI(poipoint);
-                Update_GMapTree();
+                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
                 Update_POI_Dgv();
                 Update_POI_Cmb();
             }
@@ -1915,7 +1858,7 @@ namespace Waypoint_Path_Generator
             poipoint.visible = true;
             _wpg.AddPOI(poipoint);
             _gmap.Add_gMapPOI(poipoint);
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             Update_POI_Dgv();
             Update_POI_Cmb();
         }
@@ -1953,7 +1896,6 @@ namespace Waypoint_Path_Generator
         private void Update_POI_Cmb()
         {
             cmbManPOI.Items.Clear();
-            cmbKLMPOI.Items.Clear();
             cmbManLoc.Items.Clear();
             cmbLocation.Items.Clear();
             int count = _wpg.POICount(); ;
@@ -1964,13 +1906,11 @@ namespace Waypoint_Path_Generator
                 {
                     POIPoints tmp_point = _wpg.POIPointAt(i);
                     cmbManPOI.Items.Add(tmp_point.name);
-                    cmbKLMPOI.Items.Add(tmp_point.name);
                     cmbManLoc.Items.Add(tmp_point.name);
                     cmbLocation.Items.Add(tmp_point.name);
                 }
             }
             cmbManPOI.SelectedIndex = 0;
-            cmbKLMPOI.SelectedIndex = 0;
             cmbManLoc.SelectedIndex = 0;
         }
 
@@ -2340,7 +2280,7 @@ namespace Waypoint_Path_Generator
             else return true;
         }
 
-        
+
 
         private void cmbLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2360,7 +2300,6 @@ namespace Waypoint_Path_Generator
                     txtElevation.Text = Convert.ToString(tmp_point.elev);
                     txtAltitude.Text = Convert.ToString(tmp_point.alt);
                     txtKMLPath.Text = name;
-                    cmbKLMPOI.SelectedIndex = i;
                     cmbManPOI.SelectedIndex = i;
                     Globals.gps_radius = Globals.earth_radius + Convert.ToDouble(txtElevation.Text) + Convert.ToDouble(txtAltitude.Text);
                     txtGPSRadius.Text = Convert.ToString(Globals.gps_radius);
@@ -2733,7 +2672,7 @@ namespace Waypoint_Path_Generator
         private void button1_Click_2(object sender, EventArgs e)
         {
             ReadXml_PolygonKML();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         private void btnClearPolyRTB_Click_1(object sender, EventArgs e)
@@ -2759,7 +2698,7 @@ namespace Waypoint_Path_Generator
                 _wpg.DeleteShape(shape);
                 Update_Shapecmb();
                 _gmap.Delete_gMapPoly(shape);
-                Update_GMapTree();
+                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             }
         }
 
@@ -3185,7 +3124,7 @@ namespace Waypoint_Path_Generator
                 }
                 RemovePOI_GMapTree(row);
                 _gmap.Delete_gMapPOI(_wpg.POIPointAt(row));
-                Update_GMapTree();
+                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
                 _wpg.POIPointDeleteAt(row);
                 //Globals.POIpoint_Handler = false;
                 Update_POI_Dgv();
@@ -3515,7 +3454,7 @@ namespace Waypoint_Path_Generator
             if (name != "") newpath.name = name;
             // Add Path
 
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             _wpg.AddPath(newpath);
             Update_DGVPath();
             cmbCombinePath1.ResetText();
@@ -3555,7 +3494,7 @@ namespace Waypoint_Path_Generator
             type = type + "/Split";
             _path.Add_Path(_wpg, _gmap, path1_name, type, wp1);
             _path.Add_Path(_wpg, _gmap, path2_name, type, wp2);
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             Update_DGVPath();
             dgvPathWaypoints.Rows.Clear();
             cmbSplitAt.SelectedIndex = -1;
@@ -3631,7 +3570,7 @@ namespace Waypoint_Path_Generator
             poipoint.selected = false;
             _wpg.AddPOI(poipoint);
             _gmap.ReDrawgMap();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             Update_POI_Dgv();
             Update_POI_Cmb();
         }
@@ -3708,7 +3647,7 @@ namespace Waypoint_Path_Generator
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             _gmap.BuildgMap();
-            //Update_GMapTree();
+            //GMAPTree.Update_GMapTree(_wpg, treGMap);;
         }
 
         private void tabGMap_Click(object sender, EventArgs e)
@@ -3750,7 +3689,7 @@ namespace Waypoint_Path_Generator
             }
             else
             {
-                for (int i= 0; i < _wpg.POICount(); i++)
+                for (int i = 0; i < _wpg.POICount(); i++)
                 {
                     POIPoints pnt = _wpg.POIPointAt(i);
                     if (pnt.name == marker_tag) pnt.selected = !pnt.selected;
@@ -3776,7 +3715,7 @@ namespace Waypoint_Path_Generator
             Globals.MouseDown = false;
             txtMouseStatus.Text = "Up";
             //cntxtgMap.Close();
-            //Update_GMapTree();
+            //GMAPTree.Update_GMapTree(_wpg, treGMap);;
             Update_POI_Dgv();
             Update_POI_Cmb();
 
@@ -4054,7 +3993,7 @@ namespace Waypoint_Path_Generator
 
             int path_count = _wpg.PathCount();
             //int tree_path_count = treGMap.Nodes[1].Nodes.Count;
-            //Update_GMapTree();
+            //GMAPTree.Update_GMapTree(_wpg, treGMap);;
 
             // Adjust selected waypoint
 
@@ -4134,7 +4073,7 @@ namespace Waypoint_Path_Generator
         private void btngMapRedraw_Click(object sender, EventArgs e)
         {
             _gmap.ReDrawgMap();
-            //Update_GMapTree();
+            //GMAPTree.Update_GMapTree(_wpg, treGMap);;
         }
 
         private void treGMap_AfterSelect(object sender, TreeViewEventArgs e)
@@ -4200,7 +4139,7 @@ namespace Waypoint_Path_Generator
             frmAddPOI form = new frmAddPOI(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon);
             form.ShowDialog();
             _gmap.ReDrawgMap();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             Update_POI_Dgv();
             Update_POI_Cmb();
         }
@@ -4218,7 +4157,7 @@ namespace Waypoint_Path_Generator
                 _wpg.POIPointAt(i).visible = true;
             }
             _gmap.ReDrawgMap();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         private void ToolAllPOIHide_Click(object sender, EventArgs e)
@@ -4229,7 +4168,7 @@ namespace Waypoint_Path_Generator
                 _wpg.POIPointAt(i).visible = false;
             }
             _gmap.ReDrawgMap();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         private void ToolAllPathShow_Click(object sender, EventArgs e)
@@ -4240,7 +4179,7 @@ namespace Waypoint_Path_Generator
                 _wpg.PathAt(i).visible = true;
             }
             _gmap.ReDrawgMap();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         private void ToolAllPathHide_Click(object sender, EventArgs e)
@@ -4250,7 +4189,7 @@ namespace Waypoint_Path_Generator
             {
                 _wpg.PathAt(i).visible = false;
             }
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             _gmap.ReDrawgMap();
 
         }
@@ -4262,7 +4201,7 @@ namespace Waypoint_Path_Generator
             {
                 _wpg.ShapeAt(i).visible = true;
             }
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             _gmap.ReDrawgMap();
         }
 
@@ -4273,7 +4212,7 @@ namespace Waypoint_Path_Generator
             {
                 _wpg.ShapeAt(i).visible = false;
             }
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             _gmap.ReDrawgMap();
         }
 
@@ -4281,14 +4220,14 @@ namespace Waypoint_Path_Generator
         {
             dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         private void addHelicalPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         private void addManualPathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4296,10 +4235,10 @@ namespace Waypoint_Path_Generator
             double cam_length = Convert.ToDouble(txtImageLength.Text);
             double cam_width = Convert.ToDouble(txtImageWidth.Text);
             DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon,
-                Convert.ToDouble(Globals.default_cam_hor_ang), Convert.ToDouble(Globals.default_cam_ver_ang), 
+                Convert.ToDouble(Globals.default_cam_hor_ang), Convert.ToDouble(Globals.default_cam_ver_ang),
                 Convert.ToDouble(Globals.default_cam_hor_over), Convert.ToDouble(Globals.default_cam_ver_over));
             dialog.ShowDialog();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         private void addPolygonGridPathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4308,7 +4247,7 @@ namespace Waypoint_Path_Generator
                 Convert.ToDouble(Globals.default_cam_hor_ang), Convert.ToDouble(Globals.default_cam_ver_ang),
                 Convert.ToDouble(Globals.default_cam_hor_over), Convert.ToDouble(Globals.default_cam_ver_over));
             dialog.ShowDialog();
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
 
         // Delete all selected Paths
@@ -4343,17 +4282,17 @@ namespace Waypoint_Path_Generator
 
         private void toolDeleteWP_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < _wpg.PathCount(); i++)
+            for (int i = 0; i < _wpg.PathCount(); i++)
             {
                 Models.Path path = _wpg.PathAt(i);
                 LinkedList<WayPoints> wp_list = path.waypoints;
-                for(int j= wp_list.Count-1; j >= 0; j--)
+                for (int j = wp_list.Count - 1; j >= 0; j--)
                 {
                     WayPoints wp = wp_list.ElementAt(j);
                     if (wp.selected) wp_list.Remove(wp);
                 }
             }
-            Update_GMapTree();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             _gmap.ReDrawgMap();
         }
 
@@ -4366,6 +4305,12 @@ namespace Waypoint_Path_Generator
         {
 
         }
+
+        private void ToolAddKMLPath_Click(object sender, EventArgs e)
+        {
+            DialogKMLPath dialog = new DialogKMLPath(_wpg, _gmap, treGMap, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            dialog.Show();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
     }
 }
-

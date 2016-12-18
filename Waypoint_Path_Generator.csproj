@@ -134,7 +134,7 @@
     </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
-    <Compile Include="Models\GMAPTree.cs" />
+    <Compile Include="GMAPTree.cs" />
     <Compile Include="Models\Waypoint_Path_Gen.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\PolyPoint.cs" />
@@ -161,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogAddRectPath.resx">
       <DependentUpon>DialogAddRectPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogKMLPath.resx">
+      <DependentUpon>DialogKMLPath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
