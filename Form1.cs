@@ -144,8 +144,8 @@ namespace Waypoint_Path_Generator
             txtCenterLat.Text = "40.273441";
             txtCenterLon.Text = "-76.82967";
             txtPOIAlt.Text = "5";
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(81.0 / 2)) * 30.0));
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(66.0 / 2)) * 30.0));
+            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(81.0 / 2)) * 30.0));
+            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(66.0 / 2)) * 30.0));
             txtEarthRadius.Text = Convert.ToString(Globals.earth_radius);
 
             // Read Config File
@@ -286,8 +286,8 @@ namespace Waypoint_Path_Generator
             //txtImageLength.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageWidth.Text)));
             double alt = Convert.ToDouble(txtAltitude.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(81.0 / 2)) * alt));
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(66.0 / 2)) * alt));
+            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(81.0 / 2)) * alt));
+            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(66.0 / 2)) * alt));
         }
 
         private void metricToolStripMenuItem_Click(object sender, EventArgs e)
@@ -303,8 +303,8 @@ namespace Waypoint_Path_Generator
             txtElevation.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtElevation.Text)));
             //txtImageLength.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageWidth.Text)));         
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(81.0 / 2)) * Convert.ToDouble(txtAltitude.Text)));
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(66.0 / 2)) * Convert.ToDouble(txtAltitude.Text)));
+            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(81.0 / 2)) * Convert.ToDouble(txtAltitude.Text)));
+            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(66.0 / 2)) * Convert.ToDouble(txtAltitude.Text)));
         }
 
 
@@ -330,8 +330,8 @@ namespace Waypoint_Path_Generator
             double alt = Convert.ToDouble(txtAltitude.Text);
             double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
             double ver_ang = Convert.ToDouble(txtCamVerAngle.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(hor_ang / 2)) * alt));
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(ver_ang / 2)) * alt));
+            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(hor_ang / 2)) * alt));
+            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(ver_ang / 2)) * alt));
         }
 
 
@@ -382,23 +382,6 @@ namespace Waypoint_Path_Generator
         {
 
         }
-
-
-
-
-
-
-
-        private double RadiansToDegrees(double radians)
-        {
-            return radians * (180.0 / Math.PI);
-        }
-
-        private double DegreesToRadians(double degrees)
-        {
-            return degrees / (180.0 / Math.PI);
-        }
-
 
         private double MetersToFeet(double meters)
         {
@@ -537,7 +520,7 @@ namespace Waypoint_Path_Generator
         {
             double alt = Convert.ToDouble(txtAltitude.Text);
             double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(hor_ang / 2)) * alt));
+            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(hor_ang / 2)) * alt));
             Globals.default_cam_hor_ang = txtCamHorAngle.Text;
         }
 
@@ -555,7 +538,7 @@ namespace Waypoint_Path_Generator
         {
             double alt = Convert.ToDouble(txtAltitude.Text);
             double ver_ang = Convert.ToDouble(txtCamHorAngle.Text);
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(ver_ang / 2)) * alt));
+            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(ver_ang / 2)) * alt));
             Globals.default_cam_ver_ang = txtCamVerAngle.Text;
         }
 
@@ -613,24 +596,6 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        /*
-        private void btnClearRTBGrid_Click(object sender, EventArgs e)
-        {
-            rtbRectGrid.Clear();
-        }
-
-        private void txtGridAlt_TextChanged(object sender, EventArgs e)
-        {
-            //txtAltitude.Text = txtGridAlt.Text;
-            double alt = Convert.ToDouble(txtGridAlt.Text);
-            double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(hor_ang / 2)) * alt));
-
-            alt = Convert.ToDouble(txtGridAlt.Text);
-            double ver_ang = Convert.ToDouble(txtCamVerAngle.Text);
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(ver_ang / 2)) * alt));
-        }
-        */
 
         private void txtAltitude_TextChanged(object sender, EventArgs e)
         {
@@ -639,11 +604,11 @@ namespace Waypoint_Path_Generator
             txtAltPolyPath.Text = txtAltitude.Text;
             double alt = Convert.ToDouble(txtAltitude.Text);
             double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(hor_ang / 2)) * alt));
+            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(hor_ang / 2)) * alt));
 
             alt = Convert.ToDouble(txtAltitude.Text);
             double ver_ang = Convert.ToDouble(txtCamVerAngle.Text);
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(DegreesToRadians(ver_ang / 2)) * alt));
+            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(ver_ang / 2)) * alt));
         }
 
         private void rtbCircle_TextChanged(object sender, EventArgs e)
@@ -736,7 +701,7 @@ namespace Waypoint_Path_Generator
 
                     //image_len = 25;
                     //image_wid = 50;
-                    double diag_ang = RadiansToDegrees(Math.Atan(image_len / image_wid));
+                    double diag_ang = GPS.RadiansToDegrees(Math.Atan(image_len / image_wid));
                     double diag_len = Math.Sqrt((image_len * image_len) + (image_wid * image_wid));
 
                     for (int i = 0; i < Globals.waypoint_list.Count; i++)
@@ -1063,7 +1028,7 @@ namespace Waypoint_Path_Generator
                     heading = GPS.GPS_Bearing(lat, lon, poi_lat, poi_lon);
                     gimblemode = 2;
                     double distance = GPS.GPS_Distance(lat, lon, poi_lat, poi_lon, Globals.gps_radius);
-                    gimblepitch = -RadiansToDegrees(Math.Atan(alt / distance));
+                    gimblepitch = -GPS.RadiansToDegrees(Math.Atan(alt / distance));
                     gimblemode = 2;
                 }
                 else {

@@ -11,14 +11,12 @@ namespace Waypoint_Path_Generator
         private double _lon;
         private GMAP _gmap;
         private Waypoint_Path_Gen _wpg;
-        private GPS _gps;
         private WayPoints _wp;
         private Path _path;
         private int _current_path_index = -1;
 
         public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, double lat, double lon)
         {
-            _gps = new GPS();
             _wp = new WayPoints();
             _path = new Path();
             _wpg = wpg;
@@ -105,7 +103,7 @@ namespace Waypoint_Path_Generator
 
             LinkedList<WayPoints> new_list = new LinkedList<WayPoints>();
             int gimblemode = 0;
-            double gimplepitch = -_gps.RadiansToDegrees(Math.Atan(altitude / circle_radius));
+            double gimplepitch = -GPS.RadiansToDegrees(Math.Atan(altitude / circle_radius));
             double curvesize = 0;
             double rotdir = 0;
 
@@ -132,19 +130,19 @@ namespace Waypoint_Path_Generator
             if (radioCCW.Checked) angle_increment = -angle_increment;
             do
             {
-                circ_lat = _gps.GPS_Lat_BearDist(lat_center, lon_center, angle, circle_radius, Form1.Globals.gps_radius);
-                circ_lon = _gps.GPS_Lon_BearDist(lat_center, lon_center, circ_lat, angle, circle_radius, Form1.Globals.gps_radius);
+                circ_lat = GPS.GPS_Lat_BearDist(lat_center, lon_center, angle, circle_radius, Form1.Globals.gps_radius);
+                circ_lon = GPS.GPS_Lon_BearDist(lat_center, lon_center, circ_lat, angle, circle_radius, Form1.Globals.gps_radius);
 
                 if (chkCircPOI.Checked)
                 {
-                    heading = _gps.GPS_Bearing(circ_lat, circ_lon, lat_camera, lon_camera);
-                    distance = _gps.GPS_Distance(circ_lat, circ_lon, lat_camera, lon_camera, Form1.Globals.gps_radius);
-                    gimplepitch = -_gps.RadiansToDegrees(Math.Atan(altitude / distance));
+                    heading = GPS.GPS_Bearing(circ_lat, circ_lon, lat_camera, lon_camera);
+                    distance = GPS.GPS_Distance(circ_lat, circ_lon, lat_camera, lon_camera, Form1.Globals.gps_radius);
+                    gimplepitch = -GPS.RadiansToDegrees(Math.Atan(altitude / distance));
                     gimblemode = 2;
                 }
                 else {
-                    heading = _gps.Mod_Angle(angle + 90);
-                    if (radioCCW.Checked) heading = _gps.Mod_Angle(heading + 180.0);
+                    heading = GPS.Mod_Angle(angle + 90);
+                    if (radioCCW.Checked) heading = GPS.Mod_Angle(heading + 180.0);
                     gimplepitch = 0;
                     gimblemode = 0;
                 }

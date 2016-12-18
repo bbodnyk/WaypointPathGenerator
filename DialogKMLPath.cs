@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Waypoint_Path_Generator
 {
-    public partial class Form2 : Form
+    public partial class DialogKMLPath : Form
     {
-        public Form2()
+        public DialogKMLPath()
         {
             InitializeComponent();
         }

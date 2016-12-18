@@ -17,7 +17,6 @@ namespace Waypoint_Path_Generator
         private double _lon;
         private GMAP _gmap;
         private Waypoint_Path_Gen _wpg;
-        private GPS _gps;
         private WayPoints _wp;
         private Path _path;
         private Shape _poly;
@@ -34,7 +33,6 @@ namespace Waypoint_Path_Generator
         public DialogAddRectPath(Waypoint_Path_Gen wpg, GMAP gmap, double lat, double lon,
             double cam_ang_hor, double cam_ang_ver, double over_wid, double over_hgt)
         {
-            _gps = new GPS();
             _wp = new WayPoints();
             _path = new Path();
             _wpg = wpg;
@@ -192,8 +190,8 @@ namespace Waypoint_Path_Generator
             double box_width = Convert.ToDouble(txtGridLength.Text);
             double box_height = Convert.ToDouble(txtGridWidth.Text);
             double altitude = Convert.ToDouble(txtPathAlt.Text);
-            _camera_width = (2 * (Math.Tan(_gps.DegreesToRadians(_camera_angle_hor / 2)) * altitude));
-            _camera_height = (2 * (Math.Tan(_gps.DegreesToRadians(_camera_angle_ver / 2)) * altitude));
+            _camera_width = (2 * (Math.Tan(GPS.DegreesToRadians(_camera_angle_hor / 2)) * altitude));
+            _camera_height = (2 * (Math.Tan(GPS.DegreesToRadians(_camera_angle_ver / 2)) * altitude));
 
             if (!Form1.Globals.UnitsMetric)
             {
@@ -219,7 +217,7 @@ namespace Waypoint_Path_Generator
 
 
             double diagonal_length = Math.Sqrt((box_width / 2) * (box_width / 2) + (box_height / 2) * (box_height / 2));
-            double diagonal_angle = _gps.RadiansToDegrees(Math.Atan((box_width / 2) / (box_height / 2)));
+            double diagonal_angle = GPS.RadiansToDegrees(Math.Atan((box_width / 2) / (box_height / 2)));
 
             
 
@@ -235,17 +233,17 @@ namespace Waypoint_Path_Generator
             double lat_right;
             double lon_right;
 
-            lat_top = _gps.GPS_Lat_BearDist(lat_center, lon_center, 0, box_height / 2, gps_radius);
-            lon_top = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 0, box_height / 2, gps_radius);
+            lat_top = GPS.GPS_Lat_BearDist(lat_center, lon_center, 0, box_height / 2, gps_radius);
+            lon_top = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 0, box_height / 2, gps_radius);
 
-            lat_bottom = _gps.GPS_Lat_BearDist(lat_center, lon_center, 180, box_height / 2, gps_radius);
-            lon_bottom = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_bottom, 180, box_height / 2, gps_radius);
+            lat_bottom = GPS.GPS_Lat_BearDist(lat_center, lon_center, 180, box_height / 2, gps_radius);
+            lon_bottom = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_bottom, 180, box_height / 2, gps_radius);
 
-            lat_left = _gps.GPS_Lat_BearDist(lat_center, lon_center, 270, box_width / 2, gps_radius);
-            lon_left = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_left, 270, box_width / 2, gps_radius);
+            lat_left = GPS.GPS_Lat_BearDist(lat_center, lon_center, 270, box_width / 2, gps_radius);
+            lon_left = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_left, 270, box_width / 2, gps_radius);
 
-            lat_right = _gps.GPS_Lat_BearDist(lat_center, lon_center, 90, box_width / 2, gps_radius);
-            lon_right = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_right, 90, box_width / 2, gps_radius);
+            lat_right = GPS.GPS_Lat_BearDist(lat_center, lon_center, 90, box_width / 2, gps_radius);
+            lon_right = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_right, 90, box_width / 2, gps_radius);
 
             /* Calculate 4 corner locations */
 
@@ -259,23 +257,23 @@ namespace Waypoint_Path_Generator
             double lon_bottom_right;
             double[,] polypnt = new double[4,2];
 
-            lat_top_left = _gps.GPS_Lat_BearDist(lat_center, lon_center, -diagonal_angle, diagonal_length, gps_radius);
-            lon_top_left = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, -diagonal_angle, diagonal_length, gps_radius);
+            lat_top_left = GPS.GPS_Lat_BearDist(lat_center, lon_center, -diagonal_angle, diagonal_length, gps_radius);
+            lon_top_left = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, -diagonal_angle, diagonal_length, gps_radius);
             polypnt[0,0] = lat_top_left;
             polypnt[0,1] = lon_top_left;
 
-            lat_top_right = _gps.GPS_Lat_BearDist(lat_center, lon_center, diagonal_angle, diagonal_length, gps_radius);
-            lon_top_right = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, diagonal_angle, diagonal_length, gps_radius);
+            lat_top_right = GPS.GPS_Lat_BearDist(lat_center, lon_center, diagonal_angle, diagonal_length, gps_radius);
+            lon_top_right = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, diagonal_angle, diagonal_length, gps_radius);
             polypnt[1, 0] = lat_top_right;
             polypnt[1, 1] = lon_top_right;
 
-            lat_bottom_right = _gps.GPS_Lat_BearDist(lat_center, lon_center, 180 - diagonal_angle, diagonal_length, gps_radius);
-            lon_bottom_right = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 - diagonal_angle, diagonal_length, gps_radius);
+            lat_bottom_right = GPS.GPS_Lat_BearDist(lat_center, lon_center, 180 - diagonal_angle, diagonal_length, gps_radius);
+            lon_bottom_right = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 - diagonal_angle, diagonal_length, gps_radius);
             polypnt[2, 0] = lat_bottom_right;
             polypnt[2, 1] = lon_bottom_right;
 
-            lat_bottom_left = _gps.GPS_Lat_BearDist(lat_center, lon_center, 180 + diagonal_angle, diagonal_length, gps_radius);
-            lon_bottom_left = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 + diagonal_angle, diagonal_length, gps_radius);
+            lat_bottom_left = GPS.GPS_Lat_BearDist(lat_center, lon_center, 180 + diagonal_angle, diagonal_length, gps_radius);
+            lon_bottom_left = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 + diagonal_angle, diagonal_length, gps_radius);
             polypnt[3, 0] = lat_bottom_left;
             polypnt[3, 1] = lon_bottom_left;
 
@@ -286,13 +284,13 @@ namespace Waypoint_Path_Generator
             for (int i = 0; i < 4; i++)
             {
 
-                double rot_bearing = _gps.GPS_Bearing(lat_center, lon_center, polypnt[i,0], polypnt[i,1]);
-                double rot_distance = _gps.GPS_Distance(lat_center, lon_center, polypnt[i, 0], polypnt[i, 1], gps_radius);
+                double rot_bearing = GPS.GPS_Bearing(lat_center, lon_center, polypnt[i,0], polypnt[i,1]);
+                double rot_distance = GPS.GPS_Distance(lat_center, lon_center, polypnt[i, 0], polypnt[i, 1], gps_radius);
 
                 // Calculate a new location by increasing the bearing
 
-                new_lat = _gps.GPS_Lat_BearDist(lat_center, lon_center, rot_bearing + box_rotate, rot_distance, gps_radius);
-                new_lon = _gps.GPS_Lon_BearDist(lat_center, lon_center, new_lat, rot_bearing + box_rotate, rot_distance, gps_radius);
+                new_lat = GPS.GPS_Lat_BearDist(lat_center, lon_center, rot_bearing + box_rotate, rot_distance, gps_radius);
+                new_lon = GPS.GPS_Lon_BearDist(lat_center, lon_center, new_lat, rot_bearing + box_rotate, rot_distance, gps_radius);
                 polypnt[i, 0] = new_lat;
                 polypnt[i, 1] = new_lon;
             }
@@ -357,12 +355,12 @@ namespace Waypoint_Path_Generator
 
                 if (radioUpLeft.Checked | radioLowLeft.Checked)
                 {
-                    _wp.Add_Leg_List(_gps, new_list, lat_left, lon_left, lat_right, lon_right, 
+                    _wp.Add_Leg_List(new_list, lat_left, lon_left, lat_right, lon_right, 
                         altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                 }
                 else
                 {
-                    _wp.Add_Leg_List(_gps, new_list, lat_right, lon_right, lat_left, lon_left, 
+                    _wp.Add_Leg_List(new_list, lat_right, lon_right, lat_left, lon_left, 
                         altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                 }
 
@@ -380,19 +378,19 @@ namespace Waypoint_Path_Generator
                 {
                     double offset = row_increment;
                     double diagonal_length_2 = Math.Sqrt((box_width / 2) * (box_width / 2) + (offset / 2) * (offset / 2));
-                    double diagonal_angle_2 = _gps.RadiansToDegrees(Math.Atan((box_width / 2) / (offset / 2)));
+                    double diagonal_angle_2 = GPS.RadiansToDegrees(Math.Atan((box_width / 2) / (offset / 2)));
 
-                    lat_top_left = _gps.GPS_Lat_BearDist(lat_center, lon_center, -diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
-                    lon_top_left = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, -diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lat_top_left = GPS.GPS_Lat_BearDist(lat_center, lon_center, -diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lon_top_left = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, -diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
 
-                    lat_top_right = _gps.GPS_Lat_BearDist(lat_center, lon_center, diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
-                    lon_top_right = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lat_top_right = GPS.GPS_Lat_BearDist(lat_center, lon_center, diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lon_top_right = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
 
-                    lat_bottom_left = _gps.GPS_Lat_BearDist(lat_center, lon_center, 180 + diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
-                    lon_bottom_left = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 + diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lat_bottom_left = GPS.GPS_Lat_BearDist(lat_center, lon_center, 180 + diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lon_bottom_left = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 + diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
 
-                    lat_bottom_right = _gps.GPS_Lat_BearDist(lat_center, lon_center, 180 - diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
-                    lon_bottom_right = _gps.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 - diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lat_bottom_right = GPS.GPS_Lat_BearDist(lat_center, lon_center, 180 - diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
+                    lon_bottom_right = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_top, 180 - diagonal_angle_2 + box_rotate, diagonal_length_2, gps_radius);
 
                     if (startend)
                     {
@@ -400,33 +398,33 @@ namespace Waypoint_Path_Generator
                     }
                     if (radioLowLeft.Checked)
                     {
-                        _wp.Add_Leg_List(_gps, new_list, lat_bottom_left, lon_bottom_left, lat_bottom_right, lon_bottom_right, 
+                        _wp.Add_Leg_List(new_list, lat_bottom_left, lon_bottom_left, lat_bottom_right, lon_bottom_right, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
-                        _wp.Add_Leg_List(_gps, new_list, lat_top_right, lon_top_right, lat_top_left, lon_top_left, 
+                        _wp.Add_Leg_List(new_list, lat_top_right, lon_top_right, lat_top_left, lon_top_left, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                     }
 
                     if (radioLowRight.Checked)
                     {
-                        _wp.Add_Leg_List(_gps, new_list, lat_bottom_right, lon_bottom_right, lat_bottom_left, lon_bottom_left, 
+                        _wp.Add_Leg_List(new_list, lat_bottom_right, lon_bottom_right, lat_bottom_left, lon_bottom_left, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
-                        _wp.Add_Leg_List(_gps, new_list, lat_top_left, lon_top_left, lat_top_right, lon_top_right, 
+                        _wp.Add_Leg_List(new_list, lat_top_left, lon_top_left, lat_top_right, lon_top_right, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                     }
 
                     if (radioUpLeft.Checked)
                     {
-                        _wp.Add_Leg_List(_gps, new_list, lat_top_left, lon_top_left, lat_top_right, lon_top_right, 
+                        _wp.Add_Leg_List(new_list, lat_top_left, lon_top_left, lat_top_right, lon_top_right, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
-                        _wp.Add_Leg_List(_gps, new_list, lat_bottom_right, lon_bottom_right, lat_bottom_left, lon_bottom_left, 
+                        _wp.Add_Leg_List(new_list, lat_bottom_right, lon_bottom_right, lat_bottom_left, lon_bottom_left, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                     }
 
                     if (radioUpRight.Checked)
                     {
-                        _wp.Add_Leg_List(_gps, new_list, lat_top_right, lon_top_right, lat_top_left, lon_top_left, 
+                        _wp.Add_Leg_List(new_list, lat_top_right, lon_top_right, lat_top_left, lon_top_left, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
-                        _wp.Add_Leg_List(_gps, new_list, lat_bottom_left, lon_bottom_left, lat_bottom_right, lon_bottom_right, 
+                        _wp.Add_Leg_List(new_list, lat_bottom_left, lon_bottom_left, lat_bottom_right, lon_bottom_right, 
                             altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                     }
 
@@ -440,8 +438,8 @@ namespace Waypoint_Path_Generator
                     /* More than 2 rows */
 
                     double row_span = (num_rows - 1) * row_increment;
-                    lat_top = _gps.GPS_Lat_BearDist(lat_center, lon_center, 0 + box_rotate, row_span / 2, gps_radius);
-                    lat_bottom = _gps.GPS_Lat_BearDist(lat_center, lon_center, 180 + box_rotate, row_span / 2, gps_radius);
+                    lat_top = GPS.GPS_Lat_BearDist(lat_center, lon_center, 0 + box_rotate, row_span / 2, gps_radius);
+                    lat_bottom = GPS.GPS_Lat_BearDist(lat_center, lon_center, 180 + box_rotate, row_span / 2, gps_radius);
                     double degrees_per_foot = (lat_top - lat_bottom) / row_span;
 
                     if (startend)
@@ -463,7 +461,7 @@ namespace Waypoint_Path_Generator
                         {
                             if (radioLowLeft.Checked)
                             {
-                                _wp.Add_Leg_List(_gps, new_list, lat_bottom, lon_left, lat_bottom, lon_right, 
+                                _wp.Add_Leg_List(new_list, lat_bottom, lon_left, lat_bottom, lon_right, 
                                     altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_bottom;
                                 next_lon_start = lon_right;
@@ -471,7 +469,7 @@ namespace Waypoint_Path_Generator
                             }
                             if (radioLowRight.Checked)
                             {
-                                _wp.Add_Leg_List(_gps, new_list, lat_bottom, lon_right, lat_bottom, lon_left, 
+                                _wp.Add_Leg_List(new_list, lat_bottom, lon_right, lat_bottom, lon_left, 
                                     altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_bottom;
                                 next_lon_start = lon_left;
@@ -479,7 +477,7 @@ namespace Waypoint_Path_Generator
                             }
                             if (radioUpLeft.Checked)
                             {
-                                _wp.Add_Leg_List(_gps, new_list, lat_top, lon_left, lat_top, lon_right, 
+                                _wp.Add_Leg_List(new_list, lat_top, lon_left, lat_top, lon_right, 
                                     altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_top;
                                 next_lon_start = lon_right;
@@ -487,7 +485,7 @@ namespace Waypoint_Path_Generator
                             }
                             if (radioUpRight.Checked)
                             {
-                                _wp.Add_Leg_List(_gps, new_list, lat_top, lon_right, lat_top, lon_left, 
+                                _wp.Add_Leg_List(new_list, lat_top, lon_right, lat_top, lon_left, 
                                     altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_top;
                                 next_lon_start = lon_left;
@@ -501,7 +499,7 @@ namespace Waypoint_Path_Generator
 
                             //lat_current = Globals.waypoints[Globals.waypoint_count - 1, 0];
                             lat_next = lat_current + (-ver_dir_flag * (degrees_per_foot * row_increment));
-                            _wp.Add_Leg_List(_gps, new_list, lat_next, next_lon_start, lat_next, next_lon_end, 
+                            _wp.Add_Leg_List(new_list, lat_next, next_lon_start, lat_next, next_lon_end, 
                                 altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, actions, _video, _camera_height, _overlap_height);
                             lon_tmp = next_lon_start;
                             next_lon_start = next_lon_end;
@@ -553,13 +551,13 @@ namespace Waypoint_Path_Generator
 
                     // Calculate Bearing and distance from first waypoint
 
-                    bearing = _gps.GPS_Bearing(lat_first, lon_first, lat, lon);
-                    distance = _gps.GPS_Distance(lat_first, lon_first, lat, lon, gps_radius);
+                    bearing = GPS.GPS_Bearing(lat_first, lon_first, lat, lon);
+                    distance = GPS.GPS_Distance(lat_first, lon_first, lat, lon, gps_radius);
 
                     // Calculate a new location by increasing the bearing
 
-                    new_lat = _gps.GPS_Lat_BearDist(lat_first, lon_first, bearing + box_rotate, distance, gps_radius);
-                    new_lon = _gps.GPS_Lon_BearDist(lat_first, lon_first, new_lat, bearing + box_rotate, distance, gps_radius);
+                    new_lat = GPS.GPS_Lat_BearDist(lat_first, lon_first, bearing + box_rotate, distance, gps_radius);
+                    new_lon = GPS.GPS_Lon_BearDist(lat_first, lon_first, new_lat, bearing + box_rotate, distance, gps_radius);
 
                     // Set new waypoint
 

@@ -34,7 +34,6 @@ namespace Waypoint_Path_Generator
 
         private Waypoint_Path_Gen _wpg;
         private GMAP _gmap;
-        private GPS _gps;
         private WayPoints _wp;
         private Path _path;
         private double _lat;
@@ -52,7 +51,6 @@ namespace Waypoint_Path_Generator
         {
             _wpg = wpg;
             _gmap = gmap;
-            _gps = new GPS();
             _wp = new WayPoints();
             _path = new Path();
             _lat = lat;
@@ -100,8 +98,8 @@ namespace Waypoint_Path_Generator
             //
 
             double altitude = Convert.ToDouble(txtGridAlt.Text);
-            _camera_width = (2 * (Math.Tan(_gps.DegreesToRadians(_cam_ang_hor / 2)) * altitude));
-            _camera_height = (2 * (Math.Tan(_gps.DegreesToRadians(_cam_ang_ver / 2)) * altitude));
+            _camera_width = (2 * (Math.Tan(GPS.DegreesToRadians(_cam_ang_hor / 2)) * altitude));
+            _camera_height = (2 * (Math.Tan(GPS.DegreesToRadians(_cam_ang_ver / 2)) * altitude));
 
             // Get Poly Name and points
             //
@@ -171,7 +169,7 @@ namespace Waypoint_Path_Generator
             double head = Convert.ToDouble(txtHeading.Text);
             double bearing = head - 90.0;
             double path_delta = _camera_width * ((100 - _over_wid) / 100);
-            double dist = _gps.GPS_Distance(lat_min, lon_min, lat_max, lon_max, Form1.Globals.gps_radius);
+            double dist = GPS.GPS_Distance(lat_min, lon_min, lat_max, lon_max, Form1.Globals.gps_radius);
             int num_path = Convert.ToInt16(dist / path_delta);
             double lat_base = lat_min;
             double lon_base = lon_min;
@@ -182,11 +180,11 @@ namespace Waypoint_Path_Generator
             }
 
             // Generate First Potential Path
-            double new_lat1 = _gps.GPS_Lat_BearDist(lat_base, lon_base, bearing, 1000, Form1.Globals.gps_radius);
-            double new_lon1 = _gps.GPS_Lon_BearDist(lat_base, lon_base, new_lat1, bearing, 1000, Form1.Globals.gps_radius);
-            double new_lat2 = _gps.GPS_Lat_BearDist(lat_base, lon_base, bearing, -1000, Form1.Globals.gps_radius);
-            double new_lon2 = _gps.GPS_Lon_BearDist(lat_base, lon_base, new_lat2, bearing, -1000, Form1.Globals.gps_radius);
-            double bear = _gps.GPS_Bearing(new_lat1, new_lon1, new_lat2, new_lon2);
+            double new_lat1 = GPS.GPS_Lat_BearDist(lat_base, lon_base, bearing, 1000, Form1.Globals.gps_radius);
+            double new_lon1 = GPS.GPS_Lon_BearDist(lat_base, lon_base, new_lat1, bearing, 1000, Form1.Globals.gps_radius);
+            double new_lat2 = GPS.GPS_Lat_BearDist(lat_base, lon_base, bearing, -1000, Form1.Globals.gps_radius);
+            double new_lon2 = GPS.GPS_Lon_BearDist(lat_base, lon_base, new_lat2, bearing, -1000, Form1.Globals.gps_radius);
+            double bear = GPS.GPS_Bearing(new_lat1, new_lon1, new_lat2, new_lon2);
 
             // Generate Path Waypoints to show paths
             //_wp.Add_Waypoint_List(new_list, new_lat1, new_lon1, 30, 0, 0, 0, 0, 0, no_actions);
@@ -204,14 +202,14 @@ namespace Waypoint_Path_Generator
 
             for (int i = 0; i < num_path; i++)
             {
-                new_lat_base = _gps.GPS_Lat_BearDist(lat_base, lon_base, 0 + bearing, path_delta * i, Form1.Globals.gps_radius);
-                new_lon_base = _gps.GPS_Lon_BearDist(lat_base, lon_base, new_lat_base, 0 + bearing, path_delta * i, Form1.Globals.gps_radius);
+                new_lat_base = GPS.GPS_Lat_BearDist(lat_base, lon_base, 0 + bearing, path_delta * i, Form1.Globals.gps_radius);
+                new_lon_base = GPS.GPS_Lon_BearDist(lat_base, lon_base, new_lat_base, 0 + bearing, path_delta * i, Form1.Globals.gps_radius);
 
-                new_lat1 = _gps.GPS_Lat_BearDist(new_lat_base, new_lon_base, bearing + 90, 1000, Form1.Globals.gps_radius);
-                new_lon1 = _gps.GPS_Lon_BearDist(new_lat_base, new_lon_base, new_lat1, bearing + 90, 1000, Form1.Globals.gps_radius);
-                new_lat2 = _gps.GPS_Lat_BearDist(new_lat_base, new_lon_base, bearing + 270, 1000, Form1.Globals.gps_radius);
-                new_lon2 = _gps.GPS_Lon_BearDist(new_lat_base, new_lon_base, new_lat2, bearing + 270, 1000, Form1.Globals.gps_radius);
-                bear = _gps.GPS_Bearing(new_lat1, new_lon1, new_lat2, new_lon2);
+                new_lat1 = GPS.GPS_Lat_BearDist(new_lat_base, new_lon_base, bearing + 90, 1000, Form1.Globals.gps_radius);
+                new_lon1 = GPS.GPS_Lon_BearDist(new_lat_base, new_lon_base, new_lat1, bearing + 90, 1000, Form1.Globals.gps_radius);
+                new_lat2 = GPS.GPS_Lat_BearDist(new_lat_base, new_lon_base, bearing + 270, 1000, Form1.Globals.gps_radius);
+                new_lon2 = GPS.GPS_Lon_BearDist(new_lat_base, new_lon_base, new_lat2, bearing + 270, 1000, Form1.Globals.gps_radius);
+                bear = GPS.GPS_Bearing(new_lat1, new_lon1, new_lat2, new_lon2);
 
                 //_wp.Add_Waypoint_List(new_list, new_lat1, new_lon1, 30, 0, 0, 0, 0, 0, no_actions);
                 //_wp.Add_Waypoint_List(new_list, new_lat2, new_lon2, 30, 0, 0, 0, 0, 0, no_actions);
@@ -266,7 +264,7 @@ namespace Waypoint_Path_Generator
                     pvec2.pnt2.lat = poly_vectors[j, 1].lat;
                     pvec2.pnt2.lon = poly_vectors[j, 1].lon;
 
-                    _gps.GPS_Intersection(pvec1, pvec2, out lines_intersect, out segments_intersect, out intersection, out closep1, out closep2);
+                    GPS.GPS_Intersection(pvec1, pvec2, out lines_intersect, out segments_intersect, out intersection, out closep1, out closep2);
                     if (lines_intersect & segments_intersect)
                     {
 
@@ -282,10 +280,10 @@ namespace Waypoint_Path_Generator
                             double lon = Convert.ToDouble(intersection.Y);
                             if (firstleg)
                             {
-                                heading = _gps.GPS_Bearing(lat1, lon1, lat, lon);
+                                heading = GPS.GPS_Bearing(lat1, lon1, lat, lon);
                                 firstleg = false;
                             }
-                            _wp.Add_Leg_List(_gps, new_list, lat1, lon1, lat, lon, altitude, heading, 0, 0, 0, 0, pict_actions, video, _camera_height, _over_hgt);
+                            _wp.Add_Leg_List(new_list, lat1, lon1, lat, lon, altitude, heading, 0, 0, 0, 0, pict_actions, video, _camera_height, _over_hgt);
                             leg_count++;
                             firstpnt = true;
                         }

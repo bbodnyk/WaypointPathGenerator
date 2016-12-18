@@ -1,6 +1,6 @@
 ﻿namespace Waypoint_Path_Generator
 {
-    partial class Form2
+    partial class DialogKMLPath
     {
         /// <summary>
         /// Required designer variable.

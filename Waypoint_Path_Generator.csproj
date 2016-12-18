@@ -126,6 +126,12 @@
     <Compile Include="DialogAddPolyGridPath.Designer.cs">
       <DependentUpon>DialogAddPolyGridPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogKMLPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogKMLPath.Designer.cs">
+      <DependentUpon>DialogKMLPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="Models\GMAPTree.cs" />
