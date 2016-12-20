@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14,
+            treeNode15});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,12 +45,20 @@
             this.addManualPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addPolygonGridPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddKMLPath = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolAddPolyPerimPath = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolAddPoly = new System.Windows.Forms.ToolStripMenuItem();
+            this.kMLPolygonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolInsertWP = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolInsertWPBefore = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolInsertWPAfter = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolSplitatWP = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolSplitBefore = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolSplitAfter = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolDeleteWP = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolDeleteShape = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.POI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAllPOIShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +72,7 @@
             this.unHideAllPolygon = new System.Windows.Forms.ToolStripMenuItem();
             this.hideAllPolygon = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolToggleCenter = new System.Windows.Forms.ToolStripMenuItem();
             this.toolReDrawgMap = new System.Windows.Forms.ToolStripMenuItem();
             this.label9 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -229,26 +238,6 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPolyPath = new System.Windows.Forms.TabPage();
-            this.label97 = new System.Windows.Forms.Label();
-            this.txtAltPolyPath = new System.Windows.Forms.TextBox();
-            this.btnPolyPath = new System.Windows.Forms.Button();
-            this.label96 = new System.Windows.Forms.Label();
-            this.cmbPolyPath = new System.Windows.Forms.ComboBox();
-            this.label95 = new System.Windows.Forms.Label();
-            this.dgvPolyPath = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label92 = new System.Windows.Forms.Label();
-            this.tabKMLPoly = new System.Windows.Forms.TabPage();
-            this.dgvPolygons = new System.Windows.Forms.DataGridView();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label78 = new System.Windows.Forms.Label();
-            this.btnClearPolyRTB = new System.Windows.Forms.Button();
-            this.btnReadKMLPoly = new System.Windows.Forms.Button();
-            this.rtbKMLPoly = new System.Windows.Forms.RichTextBox();
-            this.label77 = new System.Windows.Forms.Label();
             this.tabActions = new System.Windows.Forms.TabPage();
             this.label71 = new System.Windows.Forms.Label();
             this.btnSaveAction = new System.Windows.Forms.Button();
@@ -358,6 +347,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
+            this.toolUnselectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabOutput.SuspendLayout();
@@ -373,10 +364,6 @@
             this.tabManual.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManualPath)).BeginInit();
-            this.tabPolyPath.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPolyPath)).BeginInit();
-            this.tabKMLPoly.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPolygons)).BeginInit();
             this.tabActions.SuspendLayout();
             this.tabPOI.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPOI)).BeginInit();
@@ -390,10 +377,16 @@
             this.cntxtgMap.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolAddPOI,
             this.ToolAddPath,
+            this.toolAddPoly,
             this.toolStripSeparator4,
             this.toolInsertWP,
+            this.toolSplitatWP,
+            this.toolStripSeparator7,
+            this.toolUnselectAll,
+            this.toolStripSeparator6,
             this.toolStripMenuItem3,
             this.toolDeleteWP,
+            this.toolDeleteShape,
             this.toolStripSeparator2,
             this.POI,
             this.toolStripSeparator1,
@@ -401,9 +394,10 @@
             this.toolStripSeparator3,
             this.toolStripMenuItem4,
             this.toolStripSeparator5,
+            this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 232);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 376);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -421,7 +415,8 @@
             this.addHelicalPathToolStripMenuItem,
             this.addManualPathToolStripMenuItem,
             this.addPolygonGridPathToolStripMenuItem,
-            this.ToolAddKMLPath});
+            this.ToolAddKMLPath,
+            this.ToolAddPolyPerimPath});
             this.ToolAddPath.Name = "ToolAddPath";
             this.ToolAddPath.Size = new System.Drawing.Size(203, 22);
             this.ToolAddPath.Text = "Add Path";
@@ -429,37 +424,59 @@
             // addCircularPathToolStripMenuItem
             // 
             this.addCircularPathToolStripMenuItem.Name = "addCircularPathToolStripMenuItem";
-            this.addCircularPathToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.addCircularPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.addCircularPathToolStripMenuItem.Text = "Add Circular Path";
             this.addCircularPathToolStripMenuItem.Click += new System.EventHandler(this.addCircularPathToolStripMenuItem_Click);
             // 
             // addHelicalPathToolStripMenuItem
             // 
             this.addHelicalPathToolStripMenuItem.Name = "addHelicalPathToolStripMenuItem";
-            this.addHelicalPathToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.addHelicalPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.addHelicalPathToolStripMenuItem.Text = "Add Helical Path";
             this.addHelicalPathToolStripMenuItem.Click += new System.EventHandler(this.addHelicalPathToolStripMenuItem_Click);
             // 
             // addManualPathToolStripMenuItem
             // 
             this.addManualPathToolStripMenuItem.Name = "addManualPathToolStripMenuItem";
-            this.addManualPathToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.addManualPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.addManualPathToolStripMenuItem.Text = "Add Rectangular Path";
             this.addManualPathToolStripMenuItem.Click += new System.EventHandler(this.addManualPathToolStripMenuItem_Click);
             // 
             // addPolygonGridPathToolStripMenuItem
             // 
             this.addPolygonGridPathToolStripMenuItem.Name = "addPolygonGridPathToolStripMenuItem";
-            this.addPolygonGridPathToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.addPolygonGridPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.addPolygonGridPathToolStripMenuItem.Text = "Add Polygon Grid Path";
             this.addPolygonGridPathToolStripMenuItem.Click += new System.EventHandler(this.addPolygonGridPathToolStripMenuItem_Click);
             // 
             // ToolAddKMLPath
             // 
             this.ToolAddKMLPath.Name = "ToolAddKMLPath";
-            this.ToolAddKMLPath.Size = new System.Drawing.Size(181, 22);
+            this.ToolAddKMLPath.Size = new System.Drawing.Size(208, 22);
             this.ToolAddKMLPath.Text = "Add KML Path";
             this.ToolAddKMLPath.Click += new System.EventHandler(this.ToolAddKMLPath_Click);
+            // 
+            // ToolAddPolyPerimPath
+            // 
+            this.ToolAddPolyPerimPath.Name = "ToolAddPolyPerimPath";
+            this.ToolAddPolyPerimPath.Size = new System.Drawing.Size(208, 22);
+            this.ToolAddPolyPerimPath.Text = "Add Polygon Perimeter Path";
+            this.ToolAddPolyPerimPath.Click += new System.EventHandler(this.ToolAddPolyPerimPath_Click);
+            // 
+            // toolAddPoly
+            // 
+            this.toolAddPoly.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kMLPolygonToolStripMenuItem});
+            this.toolAddPoly.Name = "toolAddPoly";
+            this.toolAddPoly.Size = new System.Drawing.Size(203, 22);
+            this.toolAddPoly.Text = "Add Polygon";
+            // 
+            // kMLPolygonToolStripMenuItem
+            // 
+            this.kMLPolygonToolStripMenuItem.Name = "kMLPolygonToolStripMenuItem";
+            this.kMLPolygonToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.kMLPolygonToolStripMenuItem.Text = "KML Polygon";
+            this.kMLPolygonToolStripMenuItem.Click += new System.EventHandler(this.kMLPolygonToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -478,16 +495,44 @@
             // ToolInsertWPBefore
             // 
             this.ToolInsertWPBefore.Name = "ToolInsertWPBefore";
-            this.ToolInsertWPBefore.Size = new System.Drawing.Size(106, 22);
-            this.ToolInsertWPBefore.Text = "Before";
+            this.ToolInsertWPBefore.Size = new System.Drawing.Size(199, 22);
+            this.ToolInsertWPBefore.Text = "Before Selected Waypoint";
             this.ToolInsertWPBefore.Click += new System.EventHandler(this.ToolInsertWPBefore_Click);
             // 
             // ToolInsertWPAfter
             // 
             this.ToolInsertWPAfter.Name = "ToolInsertWPAfter";
-            this.ToolInsertWPAfter.Size = new System.Drawing.Size(106, 22);
-            this.ToolInsertWPAfter.Text = "After";
+            this.ToolInsertWPAfter.Size = new System.Drawing.Size(199, 22);
+            this.ToolInsertWPAfter.Text = "After Selected Waypoint";
             this.ToolInsertWPAfter.Click += new System.EventHandler(this.ToolInsertWPAfter_Click);
+            // 
+            // toolSplitatWP
+            // 
+            this.toolSplitatWP.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolSplitBefore,
+            this.ToolSplitAfter});
+            this.toolSplitatWP.Name = "toolSplitatWP";
+            this.toolSplitatWP.Size = new System.Drawing.Size(203, 22);
+            this.toolSplitatWP.Text = "Split Path";
+            // 
+            // ToolSplitBefore
+            // 
+            this.ToolSplitBefore.Name = "ToolSplitBefore";
+            this.ToolSplitBefore.Size = new System.Drawing.Size(199, 22);
+            this.ToolSplitBefore.Text = "Before Selected Waypoint";
+            this.ToolSplitBefore.Click += new System.EventHandler(this.ToolSplitBefore_Click);
+            // 
+            // ToolSplitAfter
+            // 
+            this.ToolSplitAfter.Name = "ToolSplitAfter";
+            this.ToolSplitAfter.Size = new System.Drawing.Size(199, 22);
+            this.ToolSplitAfter.Text = "After Selected Waypoint";
+            this.ToolSplitAfter.Click += new System.EventHandler(this.ToolSplitAfter_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(200, 6);
             // 
             // toolStripMenuItem3
             // 
@@ -502,6 +547,13 @@
             this.toolDeleteWP.Size = new System.Drawing.Size(203, 22);
             this.toolDeleteWP.Text = "Delete Selected Waypoints";
             this.toolDeleteWP.Click += new System.EventHandler(this.toolDeleteWP_Click);
+            // 
+            // toolDeleteShape
+            // 
+            this.toolDeleteShape.Name = "toolDeleteShape";
+            this.toolDeleteShape.Size = new System.Drawing.Size(203, 22);
+            this.toolDeleteShape.Text = "Delete Selected Polygons";
+            this.toolDeleteShape.Click += new System.EventHandler(this.toolDeleteShape_Click);
             // 
             // toolStripSeparator2
             // 
@@ -592,6 +644,13 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(200, 6);
+            // 
+            // toolToggleCenter
+            // 
+            this.toolToggleCenter.Name = "toolToggleCenter";
+            this.toolToggleCenter.Size = new System.Drawing.Size(203, 22);
+            this.toolToggleCenter.Text = "Toggle Map Center";
+            this.toolToggleCenter.Click += new System.EventHandler(this.toolToggleCenter_Click);
             // 
             // toolReDrawgMap
             // 
@@ -759,10 +818,10 @@
             this.tabOutput.Controls.Add(this.dgvWaypoints);
             this.tabOutput.Controls.Add(this.btnOutputCVS);
             this.tabOutput.Controls.Add(this.label24);
-            this.tabOutput.Location = new System.Drawing.Point(4, 46);
+            this.tabOutput.Location = new System.Drawing.Point(4, 25);
             this.tabOutput.Name = "tabOutput";
             this.tabOutput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOutput.Size = new System.Drawing.Size(852, 881);
+            this.tabOutput.Size = new System.Drawing.Size(852, 902);
             this.tabOutput.TabIndex = 5;
             this.tabOutput.Text = "Output Path";
             this.tabOutput.UseVisualStyleBackColor = true;
@@ -1009,9 +1068,9 @@
             this.tabGMap.Controls.Add(this.label109);
             this.tabGMap.Controls.Add(this.cmbGMapProvider);
             this.tabGMap.Controls.Add(this.gMapControl);
-            this.tabGMap.Location = new System.Drawing.Point(4, 46);
+            this.tabGMap.Location = new System.Drawing.Point(4, 25);
             this.tabGMap.Name = "tabGMap";
-            this.tabGMap.Size = new System.Drawing.Size(852, 881);
+            this.tabGMap.Size = new System.Drawing.Size(852, 902);
             this.tabGMap.TabIndex = 16;
             this.tabGMap.Text = "Path Preview";
             this.tabGMap.UseVisualStyleBackColor = true;
@@ -1078,16 +1137,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(13, 86);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode13.Name = "POI";
+            treeNode13.Text = "POI";
+            treeNode14.Name = "Paths";
+            treeNode14.Text = "Paths";
+            treeNode15.Name = "Polygons";
+            treeNode15.Text = "Polygons";
+            treeNode16.Name = "GMap";
+            treeNode16.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode16});
             this.treGMap.Size = new System.Drawing.Size(121, 292);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1176,9 +1235,9 @@
             this.tabPath.Controls.Add(this.label10);
             this.tabPath.Controls.Add(this.label79);
             this.tabPath.Controls.Add(this.dgvPaths);
-            this.tabPath.Location = new System.Drawing.Point(4, 46);
+            this.tabPath.Location = new System.Drawing.Point(4, 25);
             this.tabPath.Name = "tabPath";
-            this.tabPath.Size = new System.Drawing.Size(852, 881);
+            this.tabPath.Size = new System.Drawing.Size(852, 902);
             this.tabPath.TabIndex = 13;
             this.tabPath.Text = "Edit Path Segments";
             this.tabPath.UseVisualStyleBackColor = true;
@@ -1444,10 +1503,10 @@
             this.tabWayActions.Controls.Add(this.label49);
             this.tabWayActions.Controls.Add(this.label50);
             this.tabWayActions.Controls.Add(this.dgvActionsPath);
-            this.tabWayActions.Location = new System.Drawing.Point(4, 46);
+            this.tabWayActions.Location = new System.Drawing.Point(4, 25);
             this.tabWayActions.Name = "tabWayActions";
             this.tabWayActions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWayActions.Size = new System.Drawing.Size(852, 881);
+            this.tabWayActions.Size = new System.Drawing.Size(852, 902);
             this.tabWayActions.TabIndex = 8;
             this.tabWayActions.Text = "Edit Segment Waypoints";
             this.tabWayActions.UseVisualStyleBackColor = true;
@@ -1806,10 +1865,10 @@
             this.tabManual.Controls.Add(this.label33);
             this.tabManual.Controls.Add(this.label32);
             this.tabManual.Controls.Add(this.dgvManualPath);
-            this.tabManual.Location = new System.Drawing.Point(4, 46);
+            this.tabManual.Location = new System.Drawing.Point(4, 25);
             this.tabManual.Name = "tabManual";
             this.tabManual.Padding = new System.Windows.Forms.Padding(3);
-            this.tabManual.Size = new System.Drawing.Size(852, 881);
+            this.tabManual.Size = new System.Drawing.Size(852, 902);
             this.tabManual.TabIndex = 9;
             this.tabManual.Text = "Manual Path Segment";
             this.tabManual.UseVisualStyleBackColor = true;
@@ -2176,201 +2235,6 @@
             this.dataGridViewTextBoxColumn5.HeaderText = "Heading";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // tabPolyPath
-            // 
-            this.tabPolyPath.Controls.Add(this.label97);
-            this.tabPolyPath.Controls.Add(this.txtAltPolyPath);
-            this.tabPolyPath.Controls.Add(this.btnPolyPath);
-            this.tabPolyPath.Controls.Add(this.label96);
-            this.tabPolyPath.Controls.Add(this.cmbPolyPath);
-            this.tabPolyPath.Controls.Add(this.label95);
-            this.tabPolyPath.Controls.Add(this.dgvPolyPath);
-            this.tabPolyPath.Controls.Add(this.label92);
-            this.tabPolyPath.Location = new System.Drawing.Point(4, 46);
-            this.tabPolyPath.Name = "tabPolyPath";
-            this.tabPolyPath.Size = new System.Drawing.Size(852, 881);
-            this.tabPolyPath.TabIndex = 14;
-            this.tabPolyPath.Text = "Poly Perimeter Path";
-            this.tabPolyPath.UseVisualStyleBackColor = true;
-            // 
-            // label97
-            // 
-            this.label97.AutoSize = true;
-            this.label97.Location = new System.Drawing.Point(267, 312);
-            this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(52, 16);
-            this.label97.TabIndex = 54;
-            this.label97.Text = "Altitude";
-            // 
-            // txtAltPolyPath
-            // 
-            this.txtAltPolyPath.Location = new System.Drawing.Point(333, 309);
-            this.txtAltPolyPath.Name = "txtAltPolyPath";
-            this.txtAltPolyPath.Size = new System.Drawing.Size(68, 22);
-            this.txtAltPolyPath.TabIndex = 53;
-            this.txtAltPolyPath.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textPosNumeric_KeyPress);
-            // 
-            // btnPolyPath
-            // 
-            this.btnPolyPath.Location = new System.Drawing.Point(274, 397);
-            this.btnPolyPath.Name = "btnPolyPath";
-            this.btnPolyPath.Size = new System.Drawing.Size(264, 23);
-            this.btnPolyPath.TabIndex = 52;
-            this.btnPolyPath.Text = "Generate Poly Path Segment";
-            this.btnPolyPath.UseVisualStyleBackColor = true;
-            this.btnPolyPath.Click += new System.EventHandler(this.btnPolyPath_Click);
-            // 
-            // label96
-            // 
-            this.label96.AutoSize = true;
-            this.label96.Location = new System.Drawing.Point(261, 351);
-            this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(58, 16);
-            this.label96.TabIndex = 51;
-            this.label96.Text = "Polygon";
-            // 
-            // cmbPolyPath
-            // 
-            this.cmbPolyPath.FormattingEnabled = true;
-            this.cmbPolyPath.Location = new System.Drawing.Point(333, 348);
-            this.cmbPolyPath.Name = "cmbPolyPath";
-            this.cmbPolyPath.Size = new System.Drawing.Size(219, 24);
-            this.cmbPolyPath.TabIndex = 50;
-            // 
-            // label95
-            // 
-            this.label95.AutoSize = true;
-            this.label95.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label95.Location = new System.Drawing.Point(266, 264);
-            this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(277, 20);
-            this.label95.TabIndex = 49;
-            this.label95.Text = "Generate Polygon Perimeter Path";
-            // 
-            // dgvPolyPath
-            // 
-            this.dgvPolyPath.AllowUserToAddRows = false;
-            this.dgvPolyPath.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPolyPath.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn23});
-            this.dgvPolyPath.Location = new System.Drawing.Point(171, 55);
-            this.dgvPolyPath.Name = "dgvPolyPath";
-            this.dgvPolyPath.Size = new System.Drawing.Size(443, 157);
-            this.dgvPolyPath.TabIndex = 48;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.HeaderText = "Index";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.Width = 300;
-            // 
-            // label92
-            // 
-            this.label92.AutoSize = true;
-            this.label92.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label92.Location = new System.Drawing.Point(346, 23);
-            this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(121, 20);
-            this.label92.TabIndex = 47;
-            this.label92.Text = "KML Polygons";
-            // 
-            // tabKMLPoly
-            // 
-            this.tabKMLPoly.Controls.Add(this.dgvPolygons);
-            this.tabKMLPoly.Controls.Add(this.label78);
-            this.tabKMLPoly.Controls.Add(this.btnClearPolyRTB);
-            this.tabKMLPoly.Controls.Add(this.btnReadKMLPoly);
-            this.tabKMLPoly.Controls.Add(this.rtbKMLPoly);
-            this.tabKMLPoly.Controls.Add(this.label77);
-            this.tabKMLPoly.Location = new System.Drawing.Point(4, 46);
-            this.tabKMLPoly.Name = "tabKMLPoly";
-            this.tabKMLPoly.Padding = new System.Windows.Forms.Padding(3);
-            this.tabKMLPoly.Size = new System.Drawing.Size(852, 881);
-            this.tabKMLPoly.TabIndex = 12;
-            this.tabKMLPoly.Text = "KML Polygon";
-            this.tabKMLPoly.UseVisualStyleBackColor = true;
-            // 
-            // dgvPolygons
-            // 
-            this.dgvPolygons.AllowUserToAddRows = false;
-            this.dgvPolygons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPolygons.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column20,
-            this.Column21});
-            this.dgvPolygons.Location = new System.Drawing.Point(151, 47);
-            this.dgvPolygons.Name = "dgvPolygons";
-            this.dgvPolygons.Size = new System.Drawing.Size(443, 157);
-            this.dgvPolygons.TabIndex = 46;
-            this.dgvPolygons.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPolygons_CellContentClick);
-            this.dgvPolygons.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPolygons_RowsRemoved);
-            // 
-            // Column20
-            // 
-            this.Column20.HeaderText = "Index";
-            this.Column20.Name = "Column20";
-            this.Column20.ReadOnly = true;
-            // 
-            // Column21
-            // 
-            this.Column21.HeaderText = "Name";
-            this.Column21.Name = "Column21";
-            this.Column21.Width = 300;
-            // 
-            // label78
-            // 
-            this.label78.AutoSize = true;
-            this.label78.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label78.Location = new System.Drawing.Point(326, 15);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(121, 20);
-            this.label78.TabIndex = 45;
-            this.label78.Text = "KML Polygons";
-            // 
-            // btnClearPolyRTB
-            // 
-            this.btnClearPolyRTB.Location = new System.Drawing.Point(299, 358);
-            this.btnClearPolyRTB.Name = "btnClearPolyRTB";
-            this.btnClearPolyRTB.Size = new System.Drawing.Size(186, 23);
-            this.btnClearPolyRTB.TabIndex = 41;
-            this.btnClearPolyRTB.Text = "Clear Text Box";
-            this.btnClearPolyRTB.UseVisualStyleBackColor = true;
-            this.btnClearPolyRTB.Click += new System.EventHandler(this.btnClearPolyRTB_Click_1);
-            // 
-            // btnReadKMLPoly
-            // 
-            this.btnReadKMLPoly.Location = new System.Drawing.Point(299, 317);
-            this.btnReadKMLPoly.Name = "btnReadKMLPoly";
-            this.btnReadKMLPoly.Size = new System.Drawing.Size(186, 23);
-            this.btnReadKMLPoly.TabIndex = 40;
-            this.btnReadKMLPoly.Text = "Select KML File";
-            this.btnReadKMLPoly.UseVisualStyleBackColor = true;
-            this.btnReadKMLPoly.Click += new System.EventHandler(this.button1_Click_2);
-            // 
-            // rtbKMLPoly
-            // 
-            this.rtbKMLPoly.Location = new System.Drawing.Point(151, 403);
-            this.rtbKMLPoly.Name = "rtbKMLPoly";
-            this.rtbKMLPoly.Size = new System.Drawing.Size(480, 96);
-            this.rtbKMLPoly.TabIndex = 39;
-            this.rtbKMLPoly.Text = "";
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label77.Location = new System.Drawing.Point(307, 284);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(169, 20);
-            this.label77.TabIndex = 38;
-            this.label77.Text = "Import KML Polygon";
-            // 
             // tabActions
             // 
             this.tabActions.Controls.Add(this.label71);
@@ -2425,10 +2289,10 @@
             this.tabActions.Controls.Add(this.cmbAction1);
             this.tabActions.Controls.Add(this.label55);
             this.tabActions.Controls.Add(this.cmbActionsList);
-            this.tabActions.Location = new System.Drawing.Point(4, 46);
+            this.tabActions.Location = new System.Drawing.Point(4, 25);
             this.tabActions.Name = "tabActions";
             this.tabActions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabActions.Size = new System.Drawing.Size(852, 881);
+            this.tabActions.Size = new System.Drawing.Size(852, 902);
             this.tabActions.TabIndex = 11;
             this.tabActions.Text = "Actions";
             this.tabActions.UseVisualStyleBackColor = true;
@@ -2999,9 +2863,9 @@
             this.tabPOI.Controls.Add(this.label41);
             this.tabPOI.Controls.Add(this.label40);
             this.tabPOI.Controls.Add(this.dgvPOI);
-            this.tabPOI.Location = new System.Drawing.Point(4, 46);
+            this.tabPOI.Location = new System.Drawing.Point(4, 25);
             this.tabPOI.Name = "tabPOI";
-            this.tabPOI.Size = new System.Drawing.Size(852, 881);
+            this.tabPOI.Size = new System.Drawing.Size(852, 902);
             this.tabPOI.TabIndex = 10;
             this.tabPOI.Text = "POI";
             this.tabPOI.UseVisualStyleBackColor = true;
@@ -3223,10 +3087,10 @@
             this.tabPage7.Controls.Add(this.label8);
             this.tabPage7.Controls.Add(this.label7);
             this.tabPage7.Controls.Add(this.label6);
-            this.tabPage7.Location = new System.Drawing.Point(4, 46);
+            this.tabPage7.Location = new System.Drawing.Point(4, 25);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(852, 881);
+            this.tabPage7.Size = new System.Drawing.Size(852, 902);
             this.tabPage7.TabIndex = 7;
             this.tabPage7.Text = "Camera";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -3398,10 +3262,10 @@
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 46);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(852, 881);
+            this.tabPage1.Size = new System.Drawing.Size(852, 902);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Location";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -3541,8 +3405,6 @@
             this.tabLocation.Controls.Add(this.tabPage7);
             this.tabLocation.Controls.Add(this.tabPOI);
             this.tabLocation.Controls.Add(this.tabActions);
-            this.tabLocation.Controls.Add(this.tabKMLPoly);
-            this.tabLocation.Controls.Add(this.tabPolyPath);
             this.tabLocation.Controls.Add(this.tabManual);
             this.tabLocation.Controls.Add(this.tabWayActions);
             this.tabLocation.Controls.Add(this.tabPath);
@@ -3557,6 +3419,18 @@
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 0;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
+            // 
+            // toolUnselectAll
+            // 
+            this.toolUnselectAll.Name = "toolUnselectAll";
+            this.toolUnselectAll.Size = new System.Drawing.Size(203, 22);
+            this.toolUnselectAll.Text = "Unselect All";
+            this.toolUnselectAll.Click += new System.EventHandler(this.toolUnselectAll_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(200, 6);
             // 
             // Form1
             // 
@@ -3592,12 +3466,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManualPath)).EndInit();
-            this.tabPolyPath.ResumeLayout(false);
-            this.tabPolyPath.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPolyPath)).EndInit();
-            this.tabKMLPoly.ResumeLayout(false);
-            this.tabKMLPoly.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPolygons)).EndInit();
             this.tabActions.ResumeLayout(false);
             this.tabActions.PerformLayout();
             this.tabPOI.ResumeLayout(false);
@@ -3795,26 +3663,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.TabPage tabPolyPath;
-        private System.Windows.Forms.Label label97;
-        private System.Windows.Forms.TextBox txtAltPolyPath;
-        private System.Windows.Forms.Button btnPolyPath;
-        private System.Windows.Forms.Label label96;
-        private System.Windows.Forms.ComboBox cmbPolyPath;
-        private System.Windows.Forms.Label label95;
-        private System.Windows.Forms.DataGridView dgvPolyPath;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.Label label92;
-        private System.Windows.Forms.TabPage tabKMLPoly;
-        private System.Windows.Forms.DataGridView dgvPolygons;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
-        private System.Windows.Forms.Label label78;
-        private System.Windows.Forms.Button btnClearPolyRTB;
-        private System.Windows.Forms.Button btnReadKMLPoly;
-        private System.Windows.Forms.RichTextBox rtbKMLPoly;
-        private System.Windows.Forms.Label label77;
         private System.Windows.Forms.TabPage tabActions;
         private System.Windows.Forms.Label label71;
         private System.Windows.Forms.Button btnSaveAction;
@@ -3935,6 +3783,17 @@
         private System.Windows.Forms.ToolStripMenuItem ToolInsertWPBefore;
         private System.Windows.Forms.ToolStripMenuItem ToolInsertWPAfter;
         private System.Windows.Forms.ToolStripMenuItem ToolAddKMLPath;
+        private System.Windows.Forms.ToolStripMenuItem toolSplitatWP;
+        private System.Windows.Forms.ToolStripMenuItem ToolSplitBefore;
+        private System.Windows.Forms.ToolStripMenuItem ToolSplitAfter;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem toolDeleteShape;
+        private System.Windows.Forms.ToolStripMenuItem toolAddPoly;
+        private System.Windows.Forms.ToolStripMenuItem kMLPolygonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolAddPolyPerimPath;
+        private System.Windows.Forms.ToolStripMenuItem toolToggleCenter;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem toolUnselectAll;
     }
 }
 

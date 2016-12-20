@@ -132,6 +132,18 @@
     <Compile Include="DialogKMLPath.Designer.cs">
       <DependentUpon>DialogKMLPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogKMLPolygon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogKMLPolygon.Designer.cs">
+      <DependentUpon>DialogKMLPolygon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogPolyPerimPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogPolyPerimPath.Designer.cs">
+      <DependentUpon>DialogPolyPerimPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -164,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogKMLPath.resx">
       <DependentUpon>DialogKMLPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogKMLPolygon.resx">
+      <DependentUpon>DialogKMLPolygon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogPolyPerimPath.resx">
+      <DependentUpon>DialogPolyPerimPath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

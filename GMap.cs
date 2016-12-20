@@ -40,7 +40,7 @@ namespace Waypoint_Path_Generator
             _mapcontrol = mapcontrol;
             _mapcontrol.MapProvider = global::GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
             global::GMap.NET.GMaps.Instance.Mode = global::GMap.NET.AccessMode.ServerOnly;
-            _mapcontrol.ShowCenter = false;
+            //_mapcontrol.ShowCenter = false;
             _overmarkers = new GMapOverlay("markers");
             _overroutes = new GMapOverlay("routes");
             _overpolys = new GMapOverlay("polygons");
@@ -49,6 +49,11 @@ namespace Waypoint_Path_Generator
             _mapcontrol.Overlays.Add(_overpolys);
             _poi_image = (Bitmap)Image.FromFile("camera.png", true);
             _poi_selected_image = (Bitmap)Image.FromFile("camera_selected.png", true);
+        }
+
+        public void ToogleCenter()
+        {
+            _mapcontrol.ShowCenter = !_mapcontrol.ShowCenter;
         }
 
         public void BuildgMap()
@@ -82,7 +87,7 @@ namespace Waypoint_Path_Generator
             */
             _markers.Clear();
             _mapcontrol.Overlays.Clear();
-            _mapcontrol.ShowCenter = false;
+            //_mapcontrol.ShowCenter = false;
             _overmarkers = new GMapOverlay("markers");
             _overroutes = new GMapOverlay("routes");
             _overpolys = new GMapOverlay("polygons");
@@ -198,10 +203,12 @@ namespace Waypoint_Path_Generator
                     points.Add(new PointLatLng(wp.lat, wp.lon));
                 }
                 GMapPolygon poly = new GMapPolygon(points, name);
-                poly.Stroke = new Pen(Color.Yellow, 1);
+                if(polyshape.selected) poly.Stroke = new Pen(Color.Red, 1);
+                else poly.Stroke = new Pen(Color.Yellow, 1);
                 poly.Fill = new SolidBrush(Color.FromArgb(25, Color.Yellow));
                 poly.Tag = polyshape.name;
                 poly.IsVisible = visible;
+
                 _overpolys.Polygons.Add(poly);
 
             }
@@ -222,7 +229,7 @@ namespace Waypoint_Path_Generator
             //_markers.Clear();
             _mapcontrol.Overlays.Clear();
             _mapcontrol.Position = center_position;
-            _mapcontrol.ShowCenter = false;
+            //_mapcontrol.ShowCenter = false;
             _overmarkers = new GMapOverlay("markers");
             _overroutes = new GMapOverlay("routes");
             _overpolys = new GMapOverlay("polygons");
@@ -333,10 +340,12 @@ namespace Waypoint_Path_Generator
                     points.Add(new PointLatLng(wp.lat, wp.lon));
                 }
                 GMapPolygon poly = new GMapPolygon(points, name);
-                poly.Stroke = new Pen(Color.Yellow, 1);
+                if (polyshape.selected) poly.Stroke = new Pen(Color.Red, 1);
+                else poly.Stroke = new Pen(Color.Yellow, 1);
                 poly.Fill = new SolidBrush(Color.FromArgb(25, Color.Yellow));
                 poly.Tag = polyshape.name;
                 poly.IsVisible = polyshape.visible;
+                poly.IsHitTestVisible = true;
                 _overpolys.Polygons.Add(poly);
 
             }

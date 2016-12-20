@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Waypoint_Path_Generator.Models;
 
 namespace Waypoint_Path_Generator.Models
 {
@@ -13,7 +14,65 @@ namespace Waypoint_Path_Generator.Models
         public bool visible;
         public GMap.NET.WindowsForms.GMapMarker marker;
 
+        public void Insert_Waypoint_List( Waypoint_Path_Gen wpg, double lat, double lon, bool before)
+        {
+            // Find Selected WP
+            for (int path_id = 0; path_id < wpg.PathCount(); path_id++)
+            {
+                Path path = wpg.PathAt(path_id);
+                LinkedList<WayPoints> wp_list = path.waypoints;
+                LinkedListNode<WayPoints> node = wp_list.First;
+                LinkedListNode<WayPoints> next_node;
+                while(node != null)
+                {
+                    next_node = node.Next;
+                    if (node.Value.selected)
+                    {
+                        WayPoints wp_new = new WayPoints();
+                        wp_new.lat = lat;
+                        wp_new.lon = lon;
+                        wp_new.alt = node.Value.alt;
+                        wp_new.head = node.Value.head;
+                        wp_new.curvesize = node.Value.curvesize;
+                        wp_new.rotationdir = node.Value.rotationdir;
+                        wp_new.gimblemode = node.Value.gimblemode;
+                        wp_new.gimblepitch = node.Value.gimblepitch;
+                        wp_new.actions = node.Value.actions;
+                        wp_new.selected = true;
+                        wp_new.visible = true;
 
+                        if (before) wp_list.AddBefore(node, wp_new);
+                        else wp_list.AddAfter(node, wp_new);
+                        node.Value.selected = false;
+                        return;
+                    }
+
+                    node = next_node;
+                }
+                
+            }
+
+            
+        }
+        /*
+        int count = 0;
+        LinkedListNode<POIPoints> node = poi_list.First;
+        LinkedListNode<POIPoints> next_node;
+        while (node != null)
+        {
+            next_node = node.Next;
+            if (count == index)
+            {
+
+                poi_list.AddBefore(node, pnt);
+                next_node = node.Next;
+                poi_list.Remove(node);
+                break;
+            }
+            count++;
+            node = next_node;
+        }
+        */
         public void Add_Waypoint_List(LinkedList<WayPoints> list, double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int[,] actions)
         {
             WayPoints waypoint = new WayPoints();

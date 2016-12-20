@@ -209,6 +209,145 @@ namespace Waypoint_Path_Generator.Models
             path_list.ElementAt(index).name = name;
         }
 
+        public void SplitPath(bool before)
+        {
+            Path path;
+            Path path1 = new Path();
+            Path path2 = new Path();
+            string path_name;
+            int selected_wp_index = -1;
+            int selected_path_index = -1;
+            Path selected_path;
+            LinkedList<WayPoints> wp_list;
+
+            // Get Selected Waypoint
+            for (int i = 0; i < PathCount(); i++)
+            {
+                path = PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    if (wp_list.ElementAt(j).selected)
+                    {
+                        selected_wp_index = j;
+                        break;
+                    }
+                }
+                if (selected_wp_index != -1)
+                {
+                    selected_path_index = i;
+                    selected_path = PathAt(i);
+                    break;
+                }
+
+            }
+            if (selected_path_index == -1 | selected_wp_index == -1) return;
+
+            // Create two new paths
+
+            path = PathAt(selected_path_index);
+            path_name = path.name;
+            path1.name = path_name + "-1";
+            path2.name = path_name + "-2";
+            path1.type = path.type + " - Split";
+            path2.type = path.type + " - Split";
+            path1.selected = false;
+            path2.selected = false;
+            path1.visible = true;
+            path2.visible = true;
+
+            // Create two Waypoint Lists
+
+            wp_list = path.waypoints;
+            LinkedList<WayPoints> wp_list1 = new LinkedList<WayPoints>();
+            LinkedList<WayPoints> wp_list2 = new LinkedList<WayPoints>();
+            int wp_count = wp_list.Count;
+            if (wp_count <= 1) return;
+
+            // Split at first Waypoint
+
+            if (selected_wp_index == 0)
+            {
+                WayPoints wpnew = new WayPoints();
+                wpnew = wp_list.ElementAt(0);
+                wp_list1.AddLast(wpnew);
+                for (int i = 1; i < wp_count - 1; i++)
+                {
+                    wpnew = new WayPoints();
+                    wpnew = wp_list.ElementAt(i);
+                    wp_list2.AddLast(wpnew);
+                }
+            }
+
+            // Split at last wp
+
+            if (selected_wp_index == wp_count - 1)
+            {
+                WayPoints wpnew;
+                for (int i = 0; i < wp_count - 1; i++)
+                {
+                    wpnew = new WayPoints();
+                    wpnew = wp_list.ElementAt(i);
+                    wp_list1.AddLast(wpnew);
+                }
+                wpnew = new WayPoints();
+                wpnew = wp_list.ElementAt(wp_count - 1);
+                wp_list2.AddLast(wpnew);
+            }
+
+            // Split at Middle
+
+            if (selected_wp_index > 0 & selected_wp_index < wp_count - 1)
+            {
+                WayPoints wpnew;
+                if (before)
+                {
+                    for (int i = 0; i < selected_wp_index; i++)
+                    {
+                        wpnew = new WayPoints();
+                        wpnew = wp_list.ElementAt(i);
+                        wp_list1.AddLast(wpnew);
+                    }
+                    for (int i = selected_wp_index; i < wp_count - 1; i++)
+                    {
+                        wpnew = new WayPoints();
+                        wpnew = wp_list.ElementAt(i);
+                        wp_list2.AddLast(wpnew);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i <= selected_wp_index; i++)
+                    {
+                        wpnew = new WayPoints();
+                        wpnew = wp_list.ElementAt(i);
+                        wp_list1.AddLast(wpnew);
+                    }
+                    for (int i = selected_wp_index + 1; i < wp_count - 1; i++)
+                    {
+                        wpnew = new WayPoints();
+                        wpnew = wp_list.ElementAt(i);
+                        wp_list2.AddLast(wpnew);
+                    }
+                }
+            }
+            // Add Waypoints to paths
+
+            path1.waypoints = wp_list1;
+            path2.waypoints = wp_list2;
+
+            // Delete original Path
+
+            DeletePath(path);
+
+            // Add two new paths
+
+            AddPath(path1);
+            AddPath(path2);
+
+
+        }
+
         public void ReversePathWP(int i)
         {
             // Build new wp list
@@ -685,6 +824,72 @@ namespace Waypoint_Path_Generator.Models
                 }
 
                 file.Close();
+            }
+        }
+
+        public int SelectedPathCount()
+        {
+            int count = 0;
+            for (int i = 0; i < PathCount(); i++)
+            {
+                if (PathAt(i).selected) count++;
+            }
+            return count;
+        }
+
+        public int SelectedPolyCount()
+        {
+            int count = 0;
+            for (int i = 0; i < ShapeCount(); i++)
+            {
+                if (ShapeAt(i).selected) count++;
+            }
+            return count;
+        }
+
+        public int SelectedWPCount()
+        {
+            int count = 0;
+            for (int i = 0; i < PathCount(); i++)
+            {
+                Path path = PathAt(i);
+                LinkedList<WayPoints> wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    if (wp_list.ElementAt(j).selected) count++;
+                }
+            }
+            return count;
+        }
+
+        public void UnselectAll()
+        {
+            // Unselect All Paths, including Waypoints
+
+            for (int i = 0; i < PathCount(); i++)
+            {
+                Path path = PathAt(i);
+                path.selected = false;
+                LinkedList<WayPoints> wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    wp_list.ElementAt(j).selected = false;
+                }
+            }
+            // All Shapes
+
+            for (int i = 0; i < ShapeCount(); i++)
+            {
+                Shape shape = ShapeAt(i);
+                shape.selected = false;
+            }
+
+            // All POIs
+
+            for (int i = 0; i < POICount(); i++)
+            {
+                POIPoints pnt = POIPointAt(i);
+                pnt.selected = false;
             }
         }
     }

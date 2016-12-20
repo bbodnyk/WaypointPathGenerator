@@ -146,6 +146,7 @@
             this.Controls.Add(this.btnSelectKMLFile);
             this.Name = "DialogKMLPath";
             this.Text = "Import KML Path";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

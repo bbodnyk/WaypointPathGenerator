@@ -164,7 +164,7 @@ namespace Waypoint_Path_Generator
             Update_POI_Cmb();
             Update_DGVPath();
             Update_Actioncmb();
-            Update_Shapecmb();
+            //Update_Shapecmb();
             Update_GUI();
 
             // Set Waypoint dgv to be unsortable
@@ -600,7 +600,6 @@ namespace Waypoint_Path_Generator
         {
             Globals.default_altitude = txtAltitude.Text;
             txtManualAlt.Text = txtAltitude.Text;
-            txtAltPolyPath.Text = txtAltitude.Text;
             double alt = Convert.ToDouble(txtAltitude.Text);
             double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
             txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(hor_ang / 2)) * alt));
@@ -773,76 +772,7 @@ namespace Waypoint_Path_Generator
 
         }
 
-        public void ReadXml_PolygonKML()
-        {
-            if (openFileDialog3.ShowDialog() == DialogResult.OK)
-            {
-                /* Get kml filename */
-
-                string kml_file = openFileDialog3.FileName;
-                rtbKMLPoly.AppendText("KML Poly File : " + kml_file + "\n");
-
-                if (kml_file.Contains(".kml"))
-                {
-                    System.IO.TextReader stream = System.IO.File.OpenText(kml_file);
-                    SharpKml.Engine.KmlFile file = KmlFile.Load(stream);
-                    Kml _kml = file.Root as Kml;
-
-                    SharpKml.Dom.Placemark[] tempPlaceMarks = new SharpKml.Dom.Placemark[1000];
-                    SharpKml.Dom.Placemark tmp_placemark = new SharpKml.Dom.Placemark();
-                    CoordinateCollection coordinates = new CoordinateCollection();
-                    Globals.poly_point_count = 0;
-
-                    if (_kml != null)
-                    {
-                        Vector vector;
-                        double lat;
-                        double lon;
-                        double alt;
-                        string name = "";
-
-                        foreach (var placemark in _kml.Flatten().OfType<SharpKml.Dom.Placemark>())
-                        {
-                            name = placemark.Name;
-                        }
-                        rtbKMLPoly.AppendText("Name : " + name + "\n");
-                        Models.Shape shape = new Models.Shape();
-                        shape.name = name;
-
-                        foreach (var linering in _kml.Flatten().OfType<LinearRing>())
-                        {
-                            coordinates = linering.Coordinates;
-                            int num = coordinates.Count;
-
-                            LinkedList<PolyPoint> shape_points = new LinkedList<PolyPoint>();
-
-                            rtbKMLPoly.AppendText("Num Coordinates : " + Convert.ToString(num) + "\n");
-                            for (int i = 0; i < num; i++)
-                            {
-                                PolyPoint point = new PolyPoint();
-                                vector = coordinates.ElementAt(i);
-                                lat = vector.Latitude;
-                                lon = vector.Longitude;
-                                alt = (double)vector.Altitude;
-                                point.lat = lat;
-                                point.lon = lon;
-                                point.alt = alt;
-                                shape_points.AddLast(point);
-                                rtbKMLPoly.AppendText("Coordinate(" + Convert.ToString(i) + ") = ");
-                                rtbKMLPoly.AppendText(Convert.ToString(lat));
-                                rtbKMLPoly.AppendText(Convert.ToString(lon) + "\n");
-                                //dgvWaypoints.Rows.Add(Globals.waypoint_count, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(30));
-                            }
-                            shape.points = shape_points;
-                            _wpg.AddShape(shape);
-                            _gmap.Add_gMapPoly(shape, false);
-                        }
-
-                    }
-                }
-            }
-            Update_Shapecmb();
-        }
+        
 /*
         private void btnSelectKMLFile_Click(object sender, EventArgs e)
         {
@@ -932,7 +862,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-
+        /*
         private void btnPolyPath_Click(object sender, EventArgs e)
         {
             int poly_index = cmbPolyPath.SelectedIndex;
@@ -946,7 +876,7 @@ namespace Waypoint_Path_Generator
 
             double lat, lat_next;
             double lon, lon_next;
-            double alt = Convert.ToDouble(txtAltPolyPath.Text);
+            double alt = 30;
             double head;
             int gimblemode = 0;
             double gimblepitch = 0;
@@ -982,7 +912,7 @@ namespace Waypoint_Path_Generator
             _path.Add_Path(_wpg, _gmap, path_name, path_type, waypoints);
 
         }
-
+        */
 /*
         private void btnKMLProcess_Click(object sender, EventArgs e)
         {
@@ -1405,14 +1335,13 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
-
+        /*
         private void Update_Shapecmb()
         {
             Globals.Shape_Handler = false;
             Models.Shape shape;
             int count = _wpg.ShapeCount();
             cmbPolyPath.Items.Clear();
-            dgvPolygons.Rows.Clear();
             dgvPolyPath.Rows.Clear();
 
             for (int i = 0; i < count; i++)
@@ -1420,12 +1349,11 @@ namespace Waypoint_Path_Generator
                 shape = _wpg.ShapeAt(i);
                 string name = shape.name;
                 cmbPolyPath.Items.Add(name);
-                dgvPolygons.Rows.Add(i, name);
                 dgvPolyPath.Rows.Add(i, name);
             }
             Globals.Shape_Handler = true;
         }
-
+        */
         private void Update_Actioncmb()
         {
             int count = _wpg.ActionCount();
@@ -1462,7 +1390,7 @@ namespace Waypoint_Path_Generator
 
             if (name == "tabGrid")
             {
-                Update_Shapecmb();
+                //Update_Shapecmb();
             }
 
             if (name == "tabActions")
@@ -2359,7 +2287,7 @@ namespace Waypoint_Path_Generator
                 Update_POI_Cmb();
                 Update_DGVPath();
                 Update_Actioncmb();
-                Update_Shapecmb();
+                //Update_Shapecmb();
                 Update_GUI();
             }
         }
@@ -2378,7 +2306,7 @@ namespace Waypoint_Path_Generator
             Update_POI_Cmb();
             Update_DGVPath();
             Update_Actioncmb();
-            Update_Shapecmb();
+            //Update_Shapecmb();
             Update_GUI();
         }
 
@@ -2629,55 +2557,9 @@ namespace Waypoint_Path_Generator
 
         }
 
-        //private void cmbGridPOI_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int index = cmbGridPOI.SelectedIndex;
-        //    cmbGridCamPOI.SelectedIndex = index;
-        //}
-
         private void label76_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnClearPolyRTB_Click(object sender, EventArgs e)
-        {
-            rtbKMLPoly.Clear();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            ReadXml_PolygonKML();
-        }
-        /*
-        private void chkGridRect_CheckedChanged(object sender, EventArgs e)
-        {
-            bool flag = chkGridRect.Checked;
-            chkGridPoly.Checked = !flag;
-            cmbShape.ResetText();
-            cmbShape.Enabled = false;
-            cmbGridPOI.Enabled = true;
-            chkOnePass.Enabled = true;
-        }
-
-        private void chkGridPoly_CheckedChanged(object sender, EventArgs e)
-        {
-            bool flag = chkGridPoly.Checked;
-            chkGridRect.Checked = !flag;
-            cmbShape.Enabled = true;
-            cmbGridPOI.Enabled = false;
-            chkOnePass.Enabled = false;
-        }
-        */
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            ReadXml_PolygonKML();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
-        }
-
-        private void btnClearPolyRTB_Click_1(object sender, EventArgs e)
-        {
-            rtbKMLPoly.Clear();
         }
 
         private void dgvPolygons_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -2696,7 +2578,7 @@ namespace Waypoint_Path_Generator
                 int row = e.RowIndex;
                 Models.Shape shape = _wpg.ShapeAt(row);
                 _wpg.DeleteShape(shape);
-                Update_Shapecmb();
+                //Update_Shapecmb();
                 _gmap.Delete_gMapPoly(shape);
                 GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             }
@@ -4106,7 +3988,12 @@ namespace Waypoint_Path_Generator
 
         private void gMap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
         {
-            int id = Convert.ToInt16(item.Tag);
+            string name = Convert.ToString(item.Tag);
+            for(int i = 0; i < _wpg.ShapeCount(); i++)
+            { 
+                if(name == _wpg.ShapeAt(i).name) _wpg.ShapeAt(i).selected = !_wpg.ShapeAt(i).selected;
+            }
+            _gmap.ReDrawgMap();
         }
 
         private void gMap_OnMapDrag()
@@ -4227,7 +4114,7 @@ namespace Waypoint_Path_Generator
         {
             DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void addManualPathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4276,6 +4163,8 @@ namespace Waypoint_Path_Generator
 
             Update_DGVPath();
             //Fill_Path_Table();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            _gmap.ReDrawgMap();
         }
 
         // Delete all selected Waypoints
@@ -4298,12 +4187,26 @@ namespace Waypoint_Path_Generator
 
         private void ToolInsertWPBefore_Click(object sender, EventArgs e)
         {
-
+            int count = _wpg.SelectedWPCount();
+            if(count != 1)
+            {
+                MessageBox.Show("One Way Point must be Selected");
+                return;
+            }
+            _wp.Insert_Waypoint_List(_wpg, Globals.mouse_down_lat, Globals.mouse_down_lon, true);
+            _gmap.ReDrawgMap();
         }
 
         private void ToolInsertWPAfter_Click(object sender, EventArgs e)
         {
-
+            int count = _wpg.SelectedWPCount();
+            if (count != 1)
+            {
+                MessageBox.Show("One Way Point must be Selected");
+                return;
+            }
+            _wp.Insert_Waypoint_List(_wpg, Globals.mouse_down_lat, Globals.mouse_down_lon, false);
+            _gmap.ReDrawgMap();
         }
 
         private void ToolAddKMLPath_Click(object sender, EventArgs e)
@@ -4311,6 +4214,68 @@ namespace Waypoint_Path_Generator
             DialogKMLPath dialog = new DialogKMLPath(_wpg, _gmap, treGMap, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.Show();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void toolDeleteShape_Click(object sender, EventArgs e)
+        {
+            for(int i = _wpg.ShapeCount() - 1; i >= 0; i--)
+            {
+                if (_wpg.ShapeAt(i).selected) _wpg.DeleteShape(_wpg.ShapeAt(i));
+            }
+            _gmap.ReDrawgMap();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void kMLPolygonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogKMLPolygon dialog = new DialogKMLPolygon(_wpg, _gmap, treGMap);
+            dialog.Show();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void ToolAddPolyPerimPath_Click(object sender, EventArgs e)
+        {
+            DialogPolyPerimPath dialog = new DialogPolyPerimPath(_wpg, _gmap, treGMap);
+            dialog.Show();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void toolToggleCenter_Click(object sender, EventArgs e)
+        {
+            _gmap.ToogleCenter();
+            _gmap.ReDrawgMap();
+        }
+
+        private void toolUnselectAll_Click(object sender, EventArgs e)
+        {
+            _wpg.UnselectAll();
+            _gmap.ReDrawgMap();
+        }
+
+        private void ToolSplitBefore_Click(object sender, EventArgs e)
+        {
+            int count = _wpg.SelectedWPCount();
+            if (count != 1)
+            {
+                MessageBox.Show("One Way Point must be Selected");
+                return;
+            }
+            _wpg.SplitPath(true);
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void ToolSplitAfter_Click(object sender, EventArgs e)
+        {
+            int count = _wpg.SelectedWPCount();
+            if (count != 1)
+            {
+                MessageBox.Show("One Way Point must be Selected");
+                return;
+            }
+            _wpg.SplitPath(false);
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
         }
     }
 }
