@@ -468,6 +468,7 @@
             this.selectedPolygonToolStripMenuItem.Name = "selectedPolygonToolStripMenuItem";
             this.selectedPolygonToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.selectedPolygonToolStripMenuItem.Text = "Selected Polygon";
+            this.selectedPolygonToolStripMenuItem.Click += new System.EventHandler(this.selectedPolygonToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -729,20 +730,20 @@
             this.startupXMLToolStripMenuItem,
             this.browseXMLToolStripMenuItem});
             this.reloadStartXMLToolStripMenuItem.Name = "reloadStartXMLToolStripMenuItem";
-            this.reloadStartXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reloadStartXMLToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.reloadStartXMLToolStripMenuItem.Text = "Open XML";
             // 
             // startupXMLToolStripMenuItem
             // 
             this.startupXMLToolStripMenuItem.Name = "startupXMLToolStripMenuItem";
-            this.startupXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startupXMLToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.startupXMLToolStripMenuItem.Text = "Startup XML";
             this.startupXMLToolStripMenuItem.Click += new System.EventHandler(this.startupXMLToolStripMenuItem_Click);
             // 
             // browseXMLToolStripMenuItem
             // 
             this.browseXMLToolStripMenuItem.Name = "browseXMLToolStripMenuItem";
-            this.browseXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.browseXMLToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.browseXMLToolStripMenuItem.Text = "Browse XML";
             this.browseXMLToolStripMenuItem.Click += new System.EventHandler(this.browseXMLToolStripMenuItem_Click);
             // 
@@ -752,7 +753,7 @@
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem});
             this.saveXMLToolStripMenuItem.Name = "saveXMLToolStripMenuItem";
-            this.saveXMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveXMLToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.saveXMLToolStripMenuItem.Text = "Save XML";
             // 
             // saveToolStripMenuItem
@@ -775,7 +776,7 @@
             this.unitsToolStripMenuItem,
             this.cameraToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // unitsToolStripMenuItem
@@ -810,7 +811,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 

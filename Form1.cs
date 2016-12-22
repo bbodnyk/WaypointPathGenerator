@@ -4441,11 +4441,29 @@ namespace Waypoint_Path_Generator
                 {
                     DialogEditPath dialog = new DialogEditPath(_wpg, _gmap, treGMap, i);
                     dialog.Show();
-                    //GMAPTree.Update_GMapTree(_wpg, treGMap);
-                    //_gmap.ReDrawgMap();
                 }
             }
 
+        }
+
+        // Edit Single select Polygon
+
+        private void selectedPolygonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int poly_count = _wpg.SelectedPolyCount();
+            if (poly_count != 1)
+            {
+                MessageBox.Show("Select a single Polygon");
+                return;
+            }
+            for (int i = 0; i < _wpg.ShapeCount(); i++)
+            {
+                if (_wpg.ShapeAt(i).selected)
+                {
+                    DialogEditPolygon dialog = new DialogEditPolygon(_wpg, _gmap, treGMap, i);
+                    dialog.Show();
+                }
+            }
         }
     }
 }

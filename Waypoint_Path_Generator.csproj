@@ -156,6 +156,12 @@
     <Compile Include="DialogEditPath.Designer.cs">
       <DependentUpon>DialogEditPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogEditPolygon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogEditPolygon.Designer.cs">
+      <DependentUpon>DialogEditPolygon.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogEditPOI.resx">
       <DependentUpon>DialogEditPOI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogEditPolygon.resx">
+      <DependentUpon>DialogEditPolygon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogKMLPath.resx">
       <DependentUpon>DialogKMLPath.cs</DependentUpon>
