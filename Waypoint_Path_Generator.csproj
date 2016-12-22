@@ -150,6 +150,12 @@
     <Compile Include="DialogEditPOI.Designer.cs">
       <DependentUpon>DialogEditPOI.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogEditPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogEditPath.Designer.cs">
+      <DependentUpon>DialogEditPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogAddRectPath.resx">
       <DependentUpon>DialogAddRectPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogEditPath.resx">
+      <DependentUpon>DialogEditPath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogEditPOI.resx">
       <DependentUpon>DialogEditPOI.cs</DependentUpon>

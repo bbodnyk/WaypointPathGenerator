@@ -181,6 +181,7 @@
             this.Controls.Add(this.txtPOIName);
             this.Name = "DialogEditPOI";
             this.Text = "Edit POI";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

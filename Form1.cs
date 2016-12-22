@@ -1347,13 +1347,13 @@ namespace Waypoint_Path_Generator
 
             if (name == "tabMap")
             {
-                //Update_DGVPath();
+                
             }
 
             if (name == "tabGMap")
             {
-                //Update_DGVPath();
-                //Update_Shapecmb();
+                GMAPTree.Update_GMapTree(_wpg, treGMap);
+                _gmap.ReDrawgMap();
             }
 
             if (name == "tabGrid")
@@ -2252,6 +2252,8 @@ namespace Waypoint_Path_Generator
                 _wpg.ReadXml_Path(filename);
                 _wpg.ReadXml_Actions(filename);
                 _wpg.ReadXml_Polygon(filename);
+                GMAPTree.Update_GMapTree(_wpg, treGMap);
+                _gmap.ReDrawgMap();
                 Update_POI_Dgv();
                 Update_POI_Cmb();
                 Update_DGVPath();
@@ -2271,6 +2273,8 @@ namespace Waypoint_Path_Generator
                 _wpg.ReadXml_Actions("waypoint_path_generator.xml");
                 _wpg.ReadXml_Polygon("waypoint_path_generator.xml");
             }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
             Update_POI_Dgv();
             Update_POI_Cmb();
             Update_DGVPath();
@@ -4397,6 +4401,8 @@ namespace Waypoint_Path_Generator
             _gmap.ReDrawgMap();
         }
 
+        // Edit single selected POI
+
         private void selectedPOIToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int poi_count = _wpg.SelectedPOICount();
@@ -4416,6 +4422,30 @@ namespace Waypoint_Path_Generator
                     _gmap.ReDrawgMap();
                 }
             }
+        }
+
+        // Edit single selected path 
+
+        private void selectedPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount();
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected)
+                {
+                    DialogEditPath dialog = new DialogEditPath(_wpg, _gmap, treGMap, i);
+                    dialog.Show();
+                    //GMAPTree.Update_GMapTree(_wpg, treGMap);
+                    //_gmap.ReDrawgMap();
+                }
+            }
+
         }
     }
 }
