@@ -26,6 +26,7 @@ namespace Waypoint_Path_Generator
         private Bitmap _drone_image_notselected;
         private Bitmap _drone_image_selected;
         private List<GMAPWPMarker> _markers = new List<GMAPWPMarker>();
+        private Waypoint_Path_Gen _wpg;
 
         private class GMAPWPMarker
         {
@@ -35,8 +36,9 @@ namespace Waypoint_Path_Generator
             public GMapMarker marker;
         }
 
-        public GMAP(GMapControl mapcontrol)
+        public GMAP(Waypoint_Path_Gen wpg, GMapControl mapcontrol)
         {
+            _wpg = wpg;
             _mapcontrol = mapcontrol;
             _mapcontrol.MapProvider = global::GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
             global::GMap.NET.GMaps.Instance.Mode = global::GMap.NET.AccessMode.ServerOnly;
@@ -49,6 +51,7 @@ namespace Waypoint_Path_Generator
             _mapcontrol.Overlays.Add(_overpolys);
             _poi_image = (Bitmap)Image.FromFile("camera.png", true);
             _poi_selected_image = (Bitmap)Image.FromFile("camera_selected.png", true);
+
         }
 
         public void ToogleCenter()
@@ -101,11 +104,11 @@ namespace Waypoint_Path_Generator
 
             // Map POI
 
-            int poicount = Form1.Globals.wpg.POICount();
+            int poicount = _wpg.POICount();
             for (int i = 0; i < poicount; i++)
             {
                 GMapMarker marker;
-                POIPoints pnt = Form1.Globals.wpg.POIPointAt(i);
+                POIPoints pnt = _wpg.POIPointAt(i);
                 string poiname = pnt.name;
                 if (i == 0) _mapcontrol.Position = new global::GMap.NET.PointLatLng(pnt.lat, pnt.lon);
                 if (pnt.selected)
@@ -124,12 +127,12 @@ namespace Waypoint_Path_Generator
 
             // Map Path
 
-            int pathcount = Form1.Globals.wpg.PathCount();
+            int pathcount = PathCount();
 
 
             for (int i = 0; i < pathcount; i++)
             {
-                Path path = Form1.Globals.wpg.PathAt(i);
+                Path path = _wpg.PathAt(i);
                 string name = path.name;
                 bool visible = path.visible;
                 LinkedList<WayPoints> wplist = path.waypoints;
@@ -186,11 +189,11 @@ namespace Waypoint_Path_Generator
 
             // Map Polygon
 
-            int polycount = Form1.Globals.wpg.ShapeCount();
+            int polycount = _wpg.ShapeCount();
 
             for (int i = 0; i < polycount; i++)
             {
-                Shape polyshape = Form1.Globals.wpg.ShapeAt(i);
+                Shape polyshape = _wpg.ShapeAt(i);
                 string name = polyshape.name;
                 bool visible = polyshape.visible;
                 LinkedList<PolyPoint> wplist = polyshape.points;
@@ -221,6 +224,11 @@ namespace Waypoint_Path_Generator
             _center = _mapcontrol.Position;
         }
 
+        private int PathCount()
+        {
+            throw new NotImplementedException();
+        }
+
         public void ReDrawgMap()
         {
             string lat, lon, poiname;
@@ -240,11 +248,11 @@ namespace Waypoint_Path_Generator
 
             // Map POI
 
-            int poicount = Form1.Globals.wpg.POICount();
+            int poicount = _wpg.POICount();
             for (int i = 0; i < poicount; i++)
             {
                 GMapMarker marker;
-                POIPoints pnt = Form1.Globals.wpg.POIPointAt(i);
+                POIPoints pnt = _wpg.POIPointAt(i);
                 poiname = pnt.name;
                 //if (i == 0) _mapcontrol.Position = new global::GMap.NET.PointLatLng(pnt.lat, pnt.lon);
                 if (pnt.selected)
@@ -264,12 +272,12 @@ namespace Waypoint_Path_Generator
 
             // Map Path
 
-            int pathcount = Form1.Globals.wpg.PathCount();
+            int pathcount = _wpg.PathCount();
 
 
             for (int i = 0; i < pathcount; i++)
             {
-                Models.Path path = Form1.Globals.wpg.PathAt(i);
+                Models.Path path = _wpg.PathAt(i);
                 bool path_visible = path.visible;
                 string name = path.name;
                 LinkedList<WayPoints> wplist = path.waypoints;
@@ -324,11 +332,11 @@ namespace Waypoint_Path_Generator
 
             // Map Polygon
 
-            int polycount = Form1.Globals.wpg.ShapeCount();
+            int polycount = _wpg.ShapeCount();
 
             for (int i = 0; i < polycount; i++)
             {
-                Models.Shape polyshape = Form1.Globals.wpg.ShapeAt(i);
+                Models.Shape polyshape = _wpg.ShapeAt(i);
                 string name = polyshape.name;
                 LinkedList<PolyPoint> wplist = polyshape.points;
                 int wpcount = wplist.Count;

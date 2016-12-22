@@ -20,9 +20,11 @@ namespace Waypoint_Path_Generator.Models
         static LinkedList<Models.Path> path_list;
         static LinkedList<Models.Action> action_list;
         static LinkedList<WpgShape> shape_list;
+        static Options _options;
 
-        public Waypoint_Path_Gen()
+        public Waypoint_Path_Gen(Options options)
         {
+            _options = options;
             poi_list = new LinkedList<POIPoints>();
             path_list = new LinkedList<Models.Path>();
             action_list = new LinkedList<Models.Action>();
@@ -308,7 +310,7 @@ namespace Waypoint_Path_Generator.Models
                         wpnew = wp_list.ElementAt(i);
                         wp_list1.AddLast(wpnew);
                     }
-                    for (int i = selected_wp_index; i < wp_count - 1; i++)
+                    for (int i = selected_wp_index; i < wp_count; i++)
                     {
                         wpnew = new WayPoints();
                         wpnew = wp_list.ElementAt(i);
@@ -323,7 +325,7 @@ namespace Waypoint_Path_Generator.Models
                         wpnew = wp_list.ElementAt(i);
                         wp_list1.AddLast(wpnew);
                     }
-                    for (int i = selected_wp_index + 1; i < wp_count - 1; i++)
+                    for (int i = selected_wp_index + 1; i < wp_count; i++)
                     {
                         wpnew = new WayPoints();
                         wpnew = wp_list.ElementAt(i);
@@ -462,13 +464,13 @@ namespace Waypoint_Path_Generator.Models
                                                         //MessageBox.Show(Globals.default_location);
                 xml_writer.WriteElementString("Default_Location", Form1.Globals.default_location);
                 xml_writer.WriteElementString("Default_Altitude", Form1.Globals.default_altitude);
-                xml_writer.WriteElementString("Out_CVS_Path", Form1.Globals.default_out_csv_file);
-                xml_writer.WriteElementString("Out_KML_Path", Form1.Globals.default_out_kml_file);
+                xml_writer.WriteElementString("Out_CVS_Path", _options.def_csv_path);
+                xml_writer.WriteElementString("Out_KML_Path", _options.def_kml_path);
                 xml_writer.WriteElementString("Cam_Hor_Angle", Form1.Globals.default_cam_hor_ang);
                 xml_writer.WriteElementString("Cam_Ver_Angle", Form1.Globals.default_cam_ver_ang);
                 xml_writer.WriteElementString("Cam_Hor_OverLap", Form1.Globals.default_cam_hor_over);
                 xml_writer.WriteElementString("Cam_Ver_OverLap", Form1.Globals.default_cam_ver_over);
-                xml_writer.WriteElementString("Earth_Radius", Convert.ToString(Form1.Globals.earth_radius));
+                xml_writer.WriteElementString("Earth_Radius", Convert.ToString(_options.earth_radius));
                 xml_writer.WriteEndElement(); // End of Config
 
                 // Write POI
@@ -517,7 +519,7 @@ namespace Waypoint_Path_Generator.Models
 
                 // Write Polygons
 
-                int shape_count = Form1.Globals.wpg.ShapeCount();
+                int shape_count = ShapeCount();
                 Models.Shape shape;
                 PolyPoint point;
 
@@ -608,13 +610,13 @@ namespace Waypoint_Path_Generator.Models
             {
                 Form1.Globals.default_location = node.SelectSingleNode("Default_Location").InnerText;
                 Form1.Globals.default_altitude = node.SelectSingleNode("Default_Altitude").InnerText;
-                Form1.Globals.default_out_csv_file = node.SelectSingleNode("Out_CVS_Path").InnerText;
-                Form1.Globals.default_out_kml_file = node.SelectSingleNode("Out_KML_Path").InnerText;
+                _options.def_csv_path = node.SelectSingleNode("Out_CVS_Path").InnerText;
+                _options.def_kml_path = node.SelectSingleNode("Out_KML_Path").InnerText;
                 Form1.Globals.default_cam_hor_ang = node.SelectSingleNode("Cam_Hor_Angle").InnerText;
                 Form1.Globals.default_cam_ver_ang = node.SelectSingleNode("Cam_Ver_Angle").InnerText;
                 Form1.Globals.default_cam_hor_over = node.SelectSingleNode("Cam_Hor_OverLap").InnerText;
                 Form1.Globals.default_cam_ver_over = node.SelectSingleNode("Cam_Ver_OverLap").InnerText;
-                Form1.Globals.earth_radius = Convert.ToDouble(node.SelectSingleNode("Earth_Radius").InnerText);
+                _options.earth_radius = Convert.ToDouble(node.SelectSingleNode("Earth_Radius").InnerText);
             }
         }
 
@@ -631,7 +633,7 @@ namespace Waypoint_Path_Generator.Models
             XmlNodeList shapelist = xmlDoc.DocumentElement.SelectNodes("/WPG/Polygon_List/Polygon");
             int shape_count = shapelist.Count;
             dialog_text = dialog_text + "Shape Count : " + shape_count + "\n";
-            Form1.Globals.wpg.ClearShapes();
+            ClearShapes();
             foreach (XmlNode shape_node in shapelist)
             {
                 Models.Shape shape = new Models.Shape();
@@ -675,7 +677,7 @@ namespace Waypoint_Path_Generator.Models
             int path_count = pathlist.Count;
             dialog_text = dialog_text + "Path Count : " + path_count + "\n";
 
-            Form1.Globals.wpg.ClearPath();
+            ClearPath();
 
             foreach (XmlNode path_node in pathlist)
             {
@@ -733,7 +735,7 @@ namespace Waypoint_Path_Generator.Models
                 }
                 //MessageBox.Show(dialog_text, "xxx");
                 path.waypoints = way_list;
-                Form1.Globals.wpg.AddPath(path);
+                AddPath(path);
                 path_count++;
             }
 
@@ -741,7 +743,7 @@ namespace Waypoint_Path_Generator.Models
 
         public void ReadXml_Actions(string file_name)
         {
-            Form1.Globals.wpg.ClearActions();
+            ClearActions();
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(file_name);
             XmlNodeList nodelist = xmlDoc.DocumentElement.SelectNodes("/WPG/WP_Action_List/WP_Action");
@@ -767,7 +769,7 @@ namespace Waypoint_Path_Generator.Models
                     count++;
                 }
                 action.actions = array;
-                Form1.Globals.wpg.AddAction(action);
+                AddAction(action);
             }
 
         }
@@ -776,7 +778,7 @@ namespace Waypoint_Path_Generator.Models
 
         public void ReadXml_POI(string file_name)
         {
-            Form1.Globals.wpg.ClearPOI();
+            ClearPOI();
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.Load(file_name);
             XmlNodeList nodelist = xmlDoc.DocumentElement.SelectNodes("/WPG/POI");
@@ -792,7 +794,7 @@ namespace Waypoint_Path_Generator.Models
                 point.cam_alt = Convert.ToDouble(node.SelectSingleNode("Cam_Alt").InnerText);
                 point.selected = false;
                 point.visible = false;
-                Form1.Globals.wpg.AddPOI(point);
+                AddPOI(point);
             }
         }
 
@@ -800,7 +802,7 @@ namespace Waypoint_Path_Generator.Models
         {
             // Read POI File
 
-            Form1.Globals.wpg.ClearPOI();
+            ClearPOI();
             if (File.Exists("waypoint_path_generator.poi"))
             {
                 System.IO.StreamReader file = new System.IO.StreamReader("c:\\tmp\\waypoint_path_generator.poi");
@@ -819,12 +821,22 @@ namespace Waypoint_Path_Generator.Models
                     poipoint.alt = Convert.ToDouble(items[4]);
                     poipoint.cam_alt = Convert.ToDouble(items[5]);
 
-                    Form1.Globals.wpg.AddPOI(poipoint);
+                    AddPOI(poipoint);
                     count++;
                 }
 
                 file.Close();
             }
+        }
+
+        public int SelectedPOICount()
+        {
+            int count = 0;
+            for (int i = 0; i < POICount(); i++)
+            {
+                if (poi_list.ElementAt(i).selected) count++;
+            }
+            return count;
         }
 
         public int SelectedPathCount()

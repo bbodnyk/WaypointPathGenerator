@@ -144,9 +144,16 @@
     <Compile Include="DialogPolyPerimPath.Designer.cs">
       <DependentUpon>DialogPolyPerimPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogEditPOI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogEditPOI.Designer.cs">
+      <DependentUpon>DialogEditPOI.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
+    <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Waypoint_Path_Gen.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\PolyPoint.cs" />
@@ -173,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogAddRectPath.resx">
       <DependentUpon>DialogAddRectPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogEditPOI.resx">
+      <DependentUpon>DialogEditPOI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogKMLPath.resx">
       <DependentUpon>DialogKMLPath.cs</DependentUpon>

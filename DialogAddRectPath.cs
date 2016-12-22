@@ -129,10 +129,6 @@ namespace Waypoint_Path_Generator
         private void BuildRectPath()
         {
 
-            /* Constants */
-
-            double earth_radius = Form1.Globals.earth_radius;
-
             // Get center position
 
             double lat_home = _lat;
