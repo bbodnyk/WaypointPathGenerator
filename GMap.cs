@@ -127,7 +127,7 @@ namespace Waypoint_Path_Generator
 
             // Map Path
 
-            int pathcount = PathCount();
+            int pathcount = _wpg.PathCount();
 
 
             for (int i = 0; i < pathcount; i++)
@@ -222,11 +222,6 @@ namespace Waypoint_Path_Generator
                 Form1.Globals.Map_FirstDraw = false;
             }
             _center = _mapcontrol.Position;
-        }
-
-        private int PathCount()
-        {
-            throw new NotImplementedException();
         }
 
         public void ReDrawgMap()

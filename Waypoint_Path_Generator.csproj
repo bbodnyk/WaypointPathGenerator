@@ -162,6 +162,18 @@
     <Compile Include="DialogEditPolygon.Designer.cs">
       <DependentUpon>DialogEditPolygon.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogManualPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogManualPath.Designer.cs">
+      <DependentUpon>DialogManualPath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogEditWP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogEditWP.Designer.cs">
+      <DependentUpon>DialogEditWP.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -202,6 +214,9 @@
     <EmbeddedResource Include="DialogEditPolygon.resx">
       <DependentUpon>DialogEditPolygon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DialogEditWP.resx">
+      <DependentUpon>DialogEditWP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogKMLPath.resx">
       <DependentUpon>DialogKMLPath.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogAddPOI.resx">
       <DependentUpon>DialogAddPOI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogManualPath.resx">
+      <DependentUpon>DialogManualPath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

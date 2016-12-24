@@ -4465,5 +4465,58 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
+
+        // Delete Selected POI 
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+         }
+
+        private void toolAddManualPath_Click(object sender, EventArgs e)
+        {
+            DialogManualPath dialog = new DialogManualPath(_wpg, _gmap, treGMap, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            dialog.Show();
+        }
+
+        private void selectedWaypointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Only 1 waypoint can be selected
+
+            int wp_count = _wpg.SelectedWPCount();
+            if (wp_count != 1)
+            {
+                MessageBox.Show("Select a single Waypoint");
+                return;
+            }
+
+            // Find single selected waypoint
+
+            Models.Path path;
+            LinkedList<WayPoints> wp_list;
+            int path_id = 0, wp_index = 0;
+
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                path = _wpg.PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    WayPoints wp = wp_list.ElementAt(j);
+                    if (wp.selected)
+                    {
+                        
+                            path_id = i;
+                            wp_index = j;
+                            wp_count = wp_list.Count;
+                    }
+                }
+            }
+
+            // Edit the WayPoint
+
+            DialogEditWP dialog = new DialogEditWP(_wpg, _gmap, path_id, wp_index);
+            dialog.Show();
+            //_gmap.ReDrawgMap();
+        }
     }
 }
