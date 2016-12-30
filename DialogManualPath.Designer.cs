@@ -44,6 +44,7 @@
             this.txtPathName.Size = new System.Drawing.Size(161, 20);
             this.txtPathName.TabIndex = 0;
             this.txtPathName.Text = "Untitled Manual";
+            this.txtPathName.TextChanged += new System.EventHandler(this.txtPathName_TextChanged);
             // 
             // label1
             // 
@@ -62,6 +63,7 @@
             this.btnAccept.TabIndex = 2;
             this.btnAccept.Text = "Add Manual Path";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // btnCancel
             // 
@@ -90,6 +92,7 @@
             this.txtManualAltitude.Size = new System.Drawing.Size(57, 20);
             this.txtManualAltitude.TabIndex = 5;
             this.txtManualAltitude.Text = "30";
+            this.txtManualAltitude.TextChanged += new System.EventHandler(this.txtManualAltitude_TextChanged);
             // 
             // label2
             // 

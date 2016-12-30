@@ -54,6 +54,7 @@
             this.selectedPOIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedPolygonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectedWaypointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolInsertWP = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolInsertWPBefore = new System.Windows.Forms.ToolStripMenuItem();
@@ -308,7 +309,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
-            this.selectedWaypointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabOutput.SuspendLayout();
@@ -357,7 +357,7 @@
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 470);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 448);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -482,6 +482,13 @@
             this.selectedPolygonToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.selectedPolygonToolStripMenuItem.Text = "Selected Polygon";
             this.selectedPolygonToolStripMenuItem.Click += new System.EventHandler(this.selectedPolygonToolStripMenuItem_Click);
+            // 
+            // selectedWaypointToolStripMenuItem
+            // 
+            this.selectedWaypointToolStripMenuItem.Name = "selectedWaypointToolStripMenuItem";
+            this.selectedWaypointToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.selectedWaypointToolStripMenuItem.Text = "Selected Waypoint";
+            this.selectedWaypointToolStripMenuItem.Click += new System.EventHandler(this.selectedWaypointToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
@@ -1257,6 +1264,7 @@
             this.gMapControl.OnRouteClick += new GMap.NET.WindowsForms.RouteClick(this.gMap_OnRouteClick);
             this.gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMap_OnMapDrag);
             this.gMapControl.Load += new System.EventHandler(this.gMap_Load);
+            this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
             this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseDoubleClick);
             this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseDown);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseMove);
@@ -2971,13 +2979,6 @@
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 0;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
-            // 
-            // selectedWaypointToolStripMenuItem
-            // 
-            this.selectedWaypointToolStripMenuItem.Name = "selectedWaypointToolStripMenuItem";
-            this.selectedWaypointToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.selectedWaypointToolStripMenuItem.Text = "Selected Waypoint";
-            this.selectedWaypointToolStripMenuItem.Click += new System.EventHandler(this.selectedWaypointToolStripMenuItem_Click);
             // 
             // Form1
             // 

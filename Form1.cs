@@ -88,6 +88,7 @@ namespace Waypoint_Path_Generator
             public static int ActionsPath = -1;
             public static bool UnitsMetric = true;
             public static bool Map_FirstDraw = true;
+            public static bool path_active = false;
             public static PointLatLng map_center;
             GMapOverlay markers = new GMapOverlay("markers");
             GMapOverlay overroutes = new GMapOverlay("routes");
@@ -3830,6 +3831,7 @@ namespace Waypoint_Path_Generator
 
         private void gMap_MouseMove(object sender, MouseEventArgs e)
         {
+            int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
             double old_lat = Convert.ToDouble(txtMouseLat.Text);
             double old_lon = Convert.ToDouble(txtMouseLon.Text);
             txtMouseLat.Text = Convert.ToString(gMapControl.FromLocalToLatLng(e.X, e.Y).Lat);
@@ -3913,6 +3915,28 @@ namespace Waypoint_Path_Generator
                 }
                 _gmap.ReDrawgMap();
             }
+
+            // Add Waypoint to New Path
+
+            if (Globals.path_active)
+            {
+                LinkedList<WayPoints> wp_list = _path.waypoints;
+                wp_list.RemoveLast();
+                WayPoints wp_last = wp_list.Last();
+                double lat_last = wp_last.lat;
+                double lon_last = wp_last.lon;
+                _wp = new WayPoints();
+                _wp.lat = lat;
+                _wp.lon = lon;
+                _wp.head = GPS.GPS_Bearing(lat_last, lon_last, lat, lon);
+                _wp.visible = true;
+                _wp.selected = false;
+                _wp.alt = 30;
+                _wp.actions = actions;
+                wp_list.AddLast(_wp);
+                _path.waypoints = wp_list;
+                _gmap.ReDrawgMap();
+            }
         }
 
         private void rtbMap_TextChanged(object sender, EventArgs e)
@@ -3955,7 +3979,9 @@ namespace Waypoint_Path_Generator
         private void gMap_OnRouteClick(GMapRoute item, MouseEventArgs e)
         {
             int id = Convert.ToInt16(item.Tag);
+            //_path = _wpg.PathAt(id);
             bool selected = _wpg.PathAt(id).selected;
+            //if(!selected)Globals.path_active = true;
             SelectPath(_wpg.PathAt(id), !selected);
         }
 
@@ -4474,7 +4500,9 @@ namespace Waypoint_Path_Generator
 
         private void toolAddManualPath_Click(object sender, EventArgs e)
         {
-            DialogManualPath dialog = new DialogManualPath(_wpg, _gmap, treGMap, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            _path = new Models.Path();
+            Globals.path_active = true;
+            DialogManualPath dialog = new DialogManualPath(_wpg, _gmap, treGMap, _path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.Show();
         }
 
@@ -4517,6 +4545,43 @@ namespace Waypoint_Path_Generator
             DialogEditWP dialog = new DialogEditWP(_wpg, _gmap, path_id, wp_index);
             dialog.Show();
             //_gmap.ReDrawgMap();
+        }
+
+        private void gMapControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (Globals.path_active)
+            {
+                string button = Convert.ToString(e.Button);
+                if (button == "Left")
+                {
+                    int x = e.X;
+                    int y = e.Y;
+                    //MessageBox.Show("X/Y :" + Convert.ToString(e.X) + " " + Convert.ToString(e.Y));
+                    double lat = gMapControl.FromLocalToLatLng(x, y).Lat;
+                    double lon = gMapControl.FromLocalToLatLng(x, y).Lng;
+                    LinkedList<WayPoints> wp_list = _path.waypoints;
+                    WayPoints wp = wp_list.Last();
+                    wp.selected = false;
+                    int count = wp_list.Count;
+                    WayPoints new_wp = new WayPoints();
+                    new_wp.lat = lat;
+                    new_wp.lon = lon;
+                    new_wp.head = GPS.GPS_Bearing(lat, lon, wp.lat, wp.lon);
+                    new_wp.visible = true;
+                    new_wp.selected = false;
+                    wp_list.AddLast(new_wp);
+                    //_path.waypoints = wp_list;
+                    _gmap.ReDrawgMap();
+                    return;
+                }
+                if (button == "Middle")
+                {
+                    LinkedList<WayPoints> wp_list = _path.waypoints;
+                    wp_list.RemoveLast();
+                    Globals.path_active = false;
+                    return;
+                }
+            }
         }
     }
 }
