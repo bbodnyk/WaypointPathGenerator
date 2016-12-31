@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10,
+            treeNode11});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -285,6 +285,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSelectedPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -332,7 +334,7 @@
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 476);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 498);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -556,6 +558,9 @@
             // 
             // toolStripMenuItem3
             // 
+            this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.allToolStripMenuItem,
+            this.deleteSelectedPathsToolStripMenuItem});
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(203, 22);
             this.toolStripMenuItem3.Text = "Delete Selected Path";
@@ -923,16 +928,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 86);
             this.treGMap.Name = "treGMap";
-            treeNode5.Name = "POI";
-            treeNode5.Text = "POI";
-            treeNode6.Name = "Paths";
-            treeNode6.Text = "Paths";
-            treeNode7.Name = "Polygons";
-            treeNode7.Text = "Polygons";
-            treeNode8.Name = "GMap";
-            treeNode8.Text = "Objects";
+            treeNode9.Name = "POI";
+            treeNode9.Text = "POI";
+            treeNode10.Name = "Paths";
+            treeNode10.Text = "Paths";
+            treeNode11.Name = "Polygons";
+            treeNode11.Text = "Polygons";
+            treeNode12.Name = "GMap";
+            treeNode12.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode12});
             this.treGMap.Size = new System.Drawing.Size(121, 292);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -2713,6 +2718,20 @@
             this.tabLocation.TabIndex = 2;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
             // 
+            // allToolStripMenuItem
+            // 
+            this.allToolStripMenuItem.Name = "allToolStripMenuItem";
+            this.allToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.allToolStripMenuItem.Text = "Delete All Paths";
+            this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
+            // 
+            // deleteSelectedPathsToolStripMenuItem
+            // 
+            this.deleteSelectedPathsToolStripMenuItem.Name = "deleteSelectedPathsToolStripMenuItem";
+            this.deleteSelectedPathsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.deleteSelectedPathsToolStripMenuItem.Text = "Delete Selected Paths";
+            this.deleteSelectedPathsToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedPathsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3000,6 +3019,8 @@
         private System.Windows.Forms.ToolStripMenuItem selectedWaypointToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem toolOutputPath;
+        private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteSelectedPathsToolStripMenuItem;
     }
 }
 
