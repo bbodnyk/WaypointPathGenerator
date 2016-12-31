@@ -4101,6 +4101,15 @@ namespace Waypoint_Path_Generator
 
         private void addPolygonGridPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Make sure only one polygon is selected
+
+            int poly_count = _wpg.SelectedPolyCount();
+            if (poly_count != 1)
+            {
+                MessageBox.Show("Select a single Polygon");
+                return;
+            }
+
             DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon,
                 Convert.ToDouble(Globals.default_cam_hor_ang), Convert.ToDouble(Globals.default_cam_ver_ang),
                 Convert.ToDouble(Globals.default_cam_hor_over), Convert.ToDouble(Globals.default_cam_ver_over));

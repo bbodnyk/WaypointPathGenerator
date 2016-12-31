@@ -33,8 +33,6 @@
             this.chkRectHome = new System.Windows.Forms.CheckBox();
             this.lblGridAlt = new System.Windows.Forms.Label();
             this.txtGridAlt = new System.Windows.Forms.TextBox();
-            this.label82 = new System.Windows.Forms.Label();
-            this.cmbShape = new System.Windows.Forms.ComboBox();
             this.trkAltitude = new System.Windows.Forms.TrackBar();
             this.txtHeading = new System.Windows.Forms.TextBox();
             this.trkHeading = new System.Windows.Forms.TrackBar();
@@ -50,7 +48,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(175, 228);
+            this.btnCancel.Location = new System.Drawing.Point(175, 189);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -60,7 +58,7 @@
             // 
             // btnAddPath
             // 
-            this.btnAddPath.Location = new System.Drawing.Point(48, 228);
+            this.btnAddPath.Location = new System.Drawing.Point(48, 189);
             this.btnAddPath.Name = "btnAddPath";
             this.btnAddPath.Size = new System.Drawing.Size(75, 23);
             this.btnAddPath.TabIndex = 1;
@@ -98,24 +96,6 @@
             this.txtGridAlt.TabIndex = 22;
             this.txtGridAlt.Text = "30";
             this.txtGridAlt.TextChanged += new System.EventHandler(this.txtGridAlt_TextChanged_1);
-            // 
-            // label82
-            // 
-            this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(10, 188);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(76, 13);
-            this.label82.TabIndex = 46;
-            this.label82.Text = "Polygon Name";
-            // 
-            // cmbShape
-            // 
-            this.cmbShape.FormattingEnabled = true;
-            this.cmbShape.Location = new System.Drawing.Point(92, 185);
-            this.cmbShape.Name = "cmbShape";
-            this.cmbShape.Size = new System.Drawing.Size(188, 21);
-            this.cmbShape.TabIndex = 45;
-            this.cmbShape.SelectedIndexChanged += new System.EventHandler(this.cmbShape_SelectedIndexChanged);
             // 
             // trkAltitude
             // 
@@ -201,7 +181,7 @@
             // 
             // rtbPoly
             // 
-            this.rtbPoly.Location = new System.Drawing.Point(12, 257);
+            this.rtbPoly.Location = new System.Drawing.Point(12, 218);
             this.rtbPoly.Name = "rtbPoly";
             this.rtbPoly.Size = new System.Drawing.Size(268, 208);
             this.rtbPoly.TabIndex = 98;
@@ -220,9 +200,7 @@
             this.Controls.Add(this.radioPhoto);
             this.Controls.Add(this.trkHeading);
             this.Controls.Add(this.txtHeading);
-            this.Controls.Add(this.cmbShape);
             this.Controls.Add(this.trkAltitude);
-            this.Controls.Add(this.label82);
             this.Controls.Add(this.lblGridAlt);
             this.Controls.Add(this.txtGridAlt);
             this.Controls.Add(this.chkRectHome);
@@ -244,8 +222,6 @@
         private System.Windows.Forms.CheckBox chkRectHome;
         private System.Windows.Forms.Label lblGridAlt;
         private System.Windows.Forms.TextBox txtGridAlt;
-        private System.Windows.Forms.Label label82;
-        private System.Windows.Forms.ComboBox cmbShape;
         private System.Windows.Forms.TrackBar trkAltitude;
         private System.Windows.Forms.TextBox txtHeading;
         private System.Windows.Forms.TrackBar trkHeading;

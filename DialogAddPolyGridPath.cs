@@ -36,6 +36,7 @@ namespace Waypoint_Path_Generator
         private GMAP _gmap;
         private WayPoints _wp;
         private Path _path;
+        private int _poly_index;
         private double _lat;
         private double _lon;
         private double _cam_ang_hor;
@@ -62,14 +63,19 @@ namespace Waypoint_Path_Generator
 
             InitializeComponent();
             
+            // Get selected Polygon
 
 
             int shape_count = _wpg.ShapeCount();
             for (int i = 0; i < shape_count; i++)
             {
-                cmbShape.Items.Add(_wpg.ShapeAt(i).name);
+                if (_wpg.ShapeAt(i).selected)
+                {
+                    _poly_index = i;
+                    break;
+                }
             }
-            if (shape_count > 0) cmbShape.SelectedIndex = 0;
+            
             BuildPolyGridPath();
             _current_path_index = _wpg.PathCount() - 1;
         }
@@ -106,15 +112,15 @@ namespace Waypoint_Path_Generator
             Double[,] point_arr = new double[1000, 3];
             WPG_Vector[,] poly_vectors = new WPG_Vector[1000, 2];
             WPG_Vector[,] path_vectors = new WPG_Vector[1000, 2];
-            int poly_index = cmbShape.SelectedIndex;
-            if (poly_index == -1)
+            //int poly_index = cmbShape.SelectedIndex;
+            if (_poly_index == -1)
             {
                 MessageBox.Show("Error : Select a Polygon");
                 return;
             }
             LinkedList<PolyPoint> points = new LinkedList<PolyPoint>();
             PolyPoint point = new PolyPoint();
-            Models.Shape poly = _wpg.ShapeAt(poly_index);
+            Models.Shape poly = _wpg.ShapeAt(_poly_index);
             rtbPoly.Clear();
             rtbPoly.AppendText("Polygon : " + poly.name+"\n");
 
