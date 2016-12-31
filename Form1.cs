@@ -236,6 +236,10 @@ namespace Waypoint_Path_Generator
             txtCenterLon.Text = Convert.ToString(Globals.map_center.Lng);
             GMAPTree.Update_GMapTree(_wpg, _gmaptree);
 
+            // Activate Map Tab
+
+            tabLocation.SelectedIndex = 5;
+
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
@@ -3529,7 +3533,7 @@ namespace Waypoint_Path_Generator
                 text = text + "Latitude : " + Convert.ToString(lat) + "\n";
                 text = text + "Longitude :" + Convert.ToString(lon) + "\n";
                 //text = text + "Button : " + button + "\n";
-                MessageBox.Show(text);
+                //MessageBox.Show(text);
             }
         }
 
@@ -4464,7 +4468,29 @@ namespace Waypoint_Path_Generator
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
-         }
+            // Only 1 waypoint can be selected
+
+            int poi_count = _wpg.SelectedPOICount();
+            if (poi_count != 1)
+            {
+                MessageBox.Show("Select a single POI");
+                return;
+            }
+
+            // Get selected Path
+
+            Models.Path path = null;
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                if (_wpg.POIPointAt(i).selected)
+                {
+                    _wpg.POIPointDeleteAt(i);
+                    break;
+                }
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
 
         private void toolAddManualPath_Click(object sender, EventArgs e)
         {
