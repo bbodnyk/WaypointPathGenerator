@@ -36,7 +36,8 @@ namespace Waypoint_Path_Generator
             txtwprotdirection.Text = Convert.ToString(_wp.rotationdir);
             txtwpgimblemode.Text = Convert.ToString(_wp.gimblemode);
             txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
-            
+            trkHeading.Value = Convert.ToInt16(_wp.head);
+            trkCurveSize.Value = Convert.ToInt16(_wp.curvesize);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -54,14 +55,35 @@ namespace Waypoint_Path_Generator
             //txtwplat.Text = Convert.ToString(_wp.lat);
             //txtwplon.Text = Convert.ToString(_wp.lon);
             _wp.alt = Convert.ToDouble(txtwpalt.Text);
-
-            //txtwphead.Text = Convert.ToString(_wp.head);
-            //txtwpcurvesize.Text = Convert.ToString(_wp.curvesize);
-            //txtwprotdirection.Text = Convert.ToString(_wp.rotationdir);
-            //txtwpgimblemode.Text = Convert.ToString(_wp.gimblemode);
-            //txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
+            _wp.head = Convert.ToDouble(txtwphead.Text);
+            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
+            _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
+            _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
+            _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
             _gmap.ReDrawgMap();
             this.Close();
+        }
+
+        private void trkHeading_Scroll(object sender, EventArgs e)
+        {
+            txtwphead.Text = Convert.ToString(trkHeading.Value);
+        }
+
+        private void txtwphead_TextChanged(object sender, EventArgs e)
+        {
+            _wp.head = Convert.ToDouble(txtwphead.Text);
+            _gmap.ReDrawgMap();
+        }
+
+        private void trkCurceSize_Scroll(object sender, EventArgs e)
+        {
+            txtwpcurvesize.Text = Convert.ToString(trkCurveSize.Value);
+        }
+
+        private void txtwpcurvesize_TextChanged(object sender, EventArgs e)
+        {
+            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
+            _gmap.ReDrawgMap();
         }
     }
 }

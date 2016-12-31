@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10,
+            treeNode11});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,32 +106,6 @@
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.tabOutput = new System.Windows.Forms.TabPage();
-            this.chkGenCamRect = new System.Windows.Forms.CheckBox();
-            this.label52 = new System.Windows.Forms.Label();
-            this.txtKMLPath = new System.Windows.Forms.TextBox();
-            this.txtKMLFilePath = new System.Windows.Forms.TextBox();
-            this.txtCSVFilePath = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.btnClearWP = new System.Windows.Forms.Button();
-            this.dgvOutPaths = new System.Windows.Forms.DataGridView();
-            this.path_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WPcnt_column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnOutputKML = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.dgvWaypoints = new System.Windows.Forms.DataGridView();
-            this.Waypoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Altitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Heading = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GimbleMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.GimblePitch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnOutputCVS = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
             this.tabGMap = new System.Windows.Forms.TabPage();
             this.txtMapScale = new System.Windows.Forms.TextBox();
             this.txtMouseStatus = new System.Windows.Forms.TextBox();
@@ -309,11 +283,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolOutputPath = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.tabOutput.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOutPaths)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvWaypoints)).BeginInit();
             this.tabGMap.SuspendLayout();
             this.tabWayActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).BeginInit();
@@ -353,11 +326,13 @@
             this.toolStripMenuItem2,
             this.toolStripSeparator3,
             this.toolStripMenuItem4,
+            this.toolStripSeparator9,
+            this.toolOutputPath,
             this.toolStripSeparator5,
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 448);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 476);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -646,14 +621,14 @@
             // ToolAllPathShow
             // 
             this.ToolAllPathShow.Name = "ToolAllPathShow";
-            this.ToolAllPathShow.Size = new System.Drawing.Size(121, 22);
+            this.ToolAllPathShow.Size = new System.Drawing.Size(152, 22);
             this.ToolAllPathShow.Text = "Unhide All";
             this.ToolAllPathShow.Click += new System.EventHandler(this.ToolAllPathShow_Click);
             // 
             // ToolAllPathHide
             // 
             this.ToolAllPathHide.Name = "ToolAllPathHide";
-            this.ToolAllPathHide.Size = new System.Drawing.Size(121, 22);
+            this.ToolAllPathHide.Size = new System.Drawing.Size(152, 22);
             this.ToolAllPathHide.Text = "Hide All";
             this.ToolAllPathHide.Click += new System.EventHandler(this.ToolAllPathHide_Click);
             // 
@@ -854,259 +829,6 @@
             // 
             this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
             // 
-            // tabOutput
-            // 
-            this.tabOutput.Controls.Add(this.chkGenCamRect);
-            this.tabOutput.Controls.Add(this.label52);
-            this.tabOutput.Controls.Add(this.txtKMLPath);
-            this.tabOutput.Controls.Add(this.txtKMLFilePath);
-            this.tabOutput.Controls.Add(this.txtCSVFilePath);
-            this.tabOutput.Controls.Add(this.label38);
-            this.tabOutput.Controls.Add(this.label37);
-            this.tabOutput.Controls.Add(this.btnClearWP);
-            this.tabOutput.Controls.Add(this.dgvOutPaths);
-            this.tabOutput.Controls.Add(this.btnOutputKML);
-            this.tabOutput.Controls.Add(this.label25);
-            this.tabOutput.Controls.Add(this.dgvWaypoints);
-            this.tabOutput.Controls.Add(this.btnOutputCVS);
-            this.tabOutput.Controls.Add(this.label24);
-            this.tabOutput.Location = new System.Drawing.Point(4, 25);
-            this.tabOutput.Name = "tabOutput";
-            this.tabOutput.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOutput.Size = new System.Drawing.Size(852, 902);
-            this.tabOutput.TabIndex = 5;
-            this.tabOutput.Text = "Output Path";
-            this.tabOutput.UseVisualStyleBackColor = true;
-            this.tabOutput.Click += new System.EventHandler(this.tabPage6_Click_1);
-            this.tabOutput.Enter += new System.EventHandler(this.tabPage6_Click);
-            // 
-            // chkGenCamRect
-            // 
-            this.chkGenCamRect.AutoSize = true;
-            this.chkGenCamRect.Location = new System.Drawing.Point(488, 501);
-            this.chkGenCamRect.Name = "chkGenCamRect";
-            this.chkGenCamRect.Size = new System.Drawing.Size(228, 20);
-            this.chkGenCamRect.TabIndex = 14;
-            this.chkGenCamRect.Text = "Generate Camera Image Polygon";
-            this.chkGenCamRect.UseVisualStyleBackColor = true;
-            this.chkGenCamRect.CheckedChanged += new System.EventHandler(this.chkGenCamRect_CheckedChanged);
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(101, 503);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(104, 16);
-            this.label52.TabIndex = 13;
-            this.label52.Text = "KML Path Name";
-            // 
-            // txtKMLPath
-            // 
-            this.txtKMLPath.Location = new System.Drawing.Point(211, 499);
-            this.txtKMLPath.Name = "txtKMLPath";
-            this.txtKMLPath.Size = new System.Drawing.Size(214, 22);
-            this.txtKMLPath.TabIndex = 12;
-            // 
-            // txtKMLFilePath
-            // 
-            this.txtKMLFilePath.Location = new System.Drawing.Point(211, 536);
-            this.txtKMLFilePath.Name = "txtKMLFilePath";
-            this.txtKMLFilePath.Size = new System.Drawing.Size(214, 22);
-            this.txtKMLFilePath.TabIndex = 4;
-            this.txtKMLFilePath.Text = "c:\\tmp\\waypoints.kml";
-            this.txtKMLFilePath.TextChanged += new System.EventHandler(this.txtKMLFilePath_TextChanged);
-            // 
-            // txtCSVFilePath
-            // 
-            this.txtCSVFilePath.Location = new System.Drawing.Point(211, 457);
-            this.txtCSVFilePath.Name = "txtCSVFilePath";
-            this.txtCSVFilePath.Size = new System.Drawing.Size(214, 22);
-            this.txtCSVFilePath.TabIndex = 0;
-            this.txtCSVFilePath.Text = "c:\\tmp\\waypoints.csv";
-            this.txtCSVFilePath.TextChanged += new System.EventHandler(this.txtCSVFilePath_TextChanged);
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(312, 3);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(165, 24);
-            this.label38.TabIndex = 11;
-            this.label38.Text = "Generated Paths";
-            this.label38.Click += new System.EventHandler(this.label38_Click);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(301, 203);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(224, 24);
-            this.label37.TabIndex = 10;
-            this.label37.Text = "Waypoint Output Buffer";
-            // 
-            // btnClearWP
-            // 
-            this.btnClearWP.Location = new System.Drawing.Point(331, 230);
-            this.btnClearWP.Name = "btnClearWP";
-            this.btnClearWP.Size = new System.Drawing.Size(146, 23);
-            this.btnClearWP.TabIndex = 9;
-            this.btnClearWP.Text = "Clear Output Buffer";
-            this.btnClearWP.UseVisualStyleBackColor = true;
-            this.btnClearWP.Click += new System.EventHandler(this.btnClearWP_Click);
-            // 
-            // dgvOutPaths
-            // 
-            this.dgvOutPaths.AllowUserToAddRows = false;
-            this.dgvOutPaths.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOutPaths.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.path_column,
-            this.Name_column,
-            this.type_column,
-            this.WPcnt_column});
-            this.dgvOutPaths.Location = new System.Drawing.Point(133, 30);
-            this.dgvOutPaths.Name = "dgvOutPaths";
-            this.dgvOutPaths.Size = new System.Drawing.Size(535, 154);
-            this.dgvOutPaths.TabIndex = 7;
-            this.dgvOutPaths.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPaths_CellClick);
-            this.dgvOutPaths.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOutPaths_CellValueChanged);
-            this.dgvOutPaths.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPaths_RowsRemoved);
-            // 
-            // path_column
-            // 
-            this.path_column.HeaderText = "Path";
-            this.path_column.Name = "path_column";
-            this.path_column.ReadOnly = true;
-            this.path_column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.path_column.Width = 50;
-            // 
-            // Name_column
-            // 
-            this.Name_column.HeaderText = "Name";
-            this.Name_column.Name = "Name_column";
-            this.Name_column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Name_column.Width = 250;
-            // 
-            // type_column
-            // 
-            this.type_column.HeaderText = "Type";
-            this.type_column.Name = "type_column";
-            this.type_column.ReadOnly = true;
-            this.type_column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // WPcnt_column
-            // 
-            this.WPcnt_column.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.WPcnt_column.HeaderText = "WP Count";
-            this.WPcnt_column.Name = "WPcnt_column";
-            this.WPcnt_column.ReadOnly = true;
-            this.WPcnt_column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.WPcnt_column.Width = 73;
-            // 
-            // btnOutputKML
-            // 
-            this.btnOutputKML.Location = new System.Drawing.Point(488, 536);
-            this.btnOutputKML.Name = "btnOutputKML";
-            this.btnOutputKML.Size = new System.Drawing.Size(170, 23);
-            this.btnOutputKML.TabIndex = 6;
-            this.btnOutputKML.Text = "Output KML File";
-            this.btnOutputKML.UseVisualStyleBackColor = true;
-            this.btnOutputKML.Click += new System.EventHandler(this.btnOutputKML_Click);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(106, 539);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(89, 16);
-            this.label25.TabIndex = 5;
-            this.label25.Text = "KML File Path";
-            // 
-            // dgvWaypoints
-            // 
-            this.dgvWaypoints.AllowUserToAddRows = false;
-            this.dgvWaypoints.AllowUserToDeleteRows = false;
-            this.dgvWaypoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvWaypoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Waypoint,
-            this.Latitude,
-            this.Longitude,
-            this.Altitude,
-            this.Heading,
-            this.GimbleMode,
-            this.GimblePitch});
-            this.dgvWaypoints.Location = new System.Drawing.Point(28, 259);
-            this.dgvWaypoints.Name = "dgvWaypoints";
-            this.dgvWaypoints.ReadOnly = true;
-            this.dgvWaypoints.Size = new System.Drawing.Size(746, 179);
-            this.dgvWaypoints.TabIndex = 3;
-            // 
-            // Waypoint
-            // 
-            this.Waypoint.HeaderText = "Waypoint";
-            this.Waypoint.Name = "Waypoint";
-            this.Waypoint.ReadOnly = true;
-            this.Waypoint.Width = 75;
-            // 
-            // Latitude
-            // 
-            this.Latitude.HeaderText = "Latitude";
-            this.Latitude.Name = "Latitude";
-            this.Latitude.ReadOnly = true;
-            this.Latitude.Width = 125;
-            // 
-            // Longitude
-            // 
-            this.Longitude.HeaderText = "Longitude";
-            this.Longitude.Name = "Longitude";
-            this.Longitude.ReadOnly = true;
-            this.Longitude.Width = 125;
-            // 
-            // Altitude
-            // 
-            this.Altitude.HeaderText = "Altitude";
-            this.Altitude.Name = "Altitude";
-            this.Altitude.ReadOnly = true;
-            // 
-            // Heading
-            // 
-            this.Heading.HeaderText = "Heading";
-            this.Heading.Name = "Heading";
-            this.Heading.ReadOnly = true;
-            // 
-            // GimbleMode
-            // 
-            this.GimbleMode.HeaderText = "Gimble Mode";
-            this.GimbleMode.Name = "GimbleMode";
-            this.GimbleMode.ReadOnly = true;
-            // 
-            // GimblePitch
-            // 
-            this.GimblePitch.HeaderText = "Gimble Pitch";
-            this.GimblePitch.Name = "GimblePitch";
-            this.GimblePitch.ReadOnly = true;
-            // 
-            // btnOutputCVS
-            // 
-            this.btnOutputCVS.Location = new System.Drawing.Point(488, 457);
-            this.btnOutputCVS.Name = "btnOutputCVS";
-            this.btnOutputCVS.Size = new System.Drawing.Size(170, 23);
-            this.btnOutputCVS.TabIndex = 2;
-            this.btnOutputCVS.Text = "Output CSV File";
-            this.btnOutputCVS.UseVisualStyleBackColor = true;
-            this.btnOutputCVS.Click += new System.EventHandler(this.btnOutputCVS_Click);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(112, 460);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(93, 16);
-            this.label24.TabIndex = 1;
-            this.label24.Text = " CSV File Path";
-            this.label24.Click += new System.EventHandler(this.label24_Click);
-            // 
             // tabGMap
             // 
             this.tabGMap.Controls.Add(this.txtMapScale);
@@ -1189,16 +911,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 86);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode9.Name = "POI";
+            treeNode9.Text = "POI";
+            treeNode10.Name = "Paths";
+            treeNode10.Text = "Paths";
+            treeNode11.Name = "Polygons";
+            treeNode11.Text = "Polygons";
+            treeNode12.Name = "GMap";
+            treeNode12.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode12});
             this.treGMap.Size = new System.Drawing.Size(121, 292);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -2969,7 +2691,6 @@
             this.tabLocation.Controls.Add(this.tabManual);
             this.tabLocation.Controls.Add(this.tabWayActions);
             this.tabLocation.Controls.Add(this.tabGMap);
-            this.tabLocation.Controls.Add(this.tabOutput);
             this.tabLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabLocation.Location = new System.Drawing.Point(0, 70);
             this.tabLocation.Multiline = true;
@@ -2979,6 +2700,18 @@
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 0;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(200, 6);
+            // 
+            // toolOutputPath
+            // 
+            this.toolOutputPath.Name = "toolOutputPath";
+            this.toolOutputPath.Size = new System.Drawing.Size(203, 22);
+            this.toolOutputPath.Text = "Output Selected Path";
+            this.toolOutputPath.Click += new System.EventHandler(this.toolOutputPath_Click);
             // 
             // Form1
             // 
@@ -2995,10 +2728,6 @@
             this.cntxtgMap.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabOutput.ResumeLayout(false);
-            this.tabOutput.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOutPaths)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvWaypoints)).EndInit();
             this.tabGMap.ResumeLayout(false);
             this.tabGMap.PerformLayout();
             this.tabWayActions.ResumeLayout(false);
@@ -3088,32 +2817,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectedPOIToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectedPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectedPolygonToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabOutput;
-        private System.Windows.Forms.CheckBox chkGenCamRect;
-        private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.TextBox txtKMLPath;
-        private System.Windows.Forms.TextBox txtKMLFilePath;
-        private System.Windows.Forms.TextBox txtCSVFilePath;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Button btnClearWP;
-        private System.Windows.Forms.DataGridView dgvOutPaths;
-        private System.Windows.Forms.DataGridViewTextBoxColumn path_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn type_column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WPcnt_column;
-        private System.Windows.Forms.Button btnOutputKML;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.DataGridView dgvWaypoints;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Waypoint;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Latitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Altitude;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Heading;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GimbleMode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn GimblePitch;
-        private System.Windows.Forms.Button btnOutputCVS;
-        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TabPage tabGMap;
         private System.Windows.Forms.TextBox txtMapScale;
         private System.Windows.Forms.TextBox txtMouseStatus;
@@ -3295,6 +2998,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem toolAddManualPath;
         private System.Windows.Forms.ToolStripMenuItem selectedWaypointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem toolOutputPath;
     }
 }
 

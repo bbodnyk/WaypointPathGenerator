@@ -35,6 +35,7 @@ namespace Waypoint_Path_Generator.Models
             hor_overlap_percent = 25;
             hor_overlap_percent = 15;
             earth_radius = 6371000;
+            units_metric = true;
         }
     }
 }

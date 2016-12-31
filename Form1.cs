@@ -167,10 +167,6 @@ namespace Waypoint_Path_Generator
             {
                 dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            foreach (DataGridViewColumn dgvc in dgvWaypoints.Columns)
-            {
-                dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
             foreach (DataGridViewColumn dgvc in dgvManualPath.Columns)
             {
                 dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -309,8 +305,6 @@ namespace Waypoint_Path_Generator
             int index = cmbLocation.FindStringExact(Globals.default_location);
             cmbLocation.SelectedIndex = index;
             txtAltitude.Text = save;
-            txtCSVFilePath.Text = _options.def_csv_path;
-            txtKMLFilePath.Text = _options.def_kml_path;
             txtCamHorAngle.Text = Globals.default_cam_hor_ang;
             txtCamVerAngle.Text = Globals.default_cam_ver_ang;
             txtImageHorOverlap.Text = Globals.default_cam_hor_over;
@@ -440,7 +434,7 @@ namespace Waypoint_Path_Generator
             MessageBox.Show(messageBoxCS.ToString(), "Message");
         }
 
-
+/*
         private void btnOutputCVS_Click(object sender, EventArgs e)
         {
             WayPoints point = new WayPoints();
@@ -492,7 +486,7 @@ namespace Waypoint_Path_Generator
             }
             else { Message("Waypoint Count", Convert.ToString(point_count)); }
         }
-
+*/
 
         private void txtCamHorAngle_TextChanged(object sender, EventArgs e)
         {
@@ -603,6 +597,7 @@ namespace Waypoint_Path_Generator
 
         }
 
+/*
         private void btnOutputKML_Click(object sender, EventArgs e)
         {
             int pcount = 0;
@@ -659,7 +654,7 @@ namespace Waypoint_Path_Generator
                 folder.AddFeature(placemark);
                 // kml.Feature = placemark;
 
-                /* Generate camera rectangles */
+                // Generate camera rectangles
 
                 if (chkGenCamRect.Checked)
                 {
@@ -735,11 +730,7 @@ namespace Waypoint_Path_Generator
             }
             else { Message("Waypoint Count", Convert.ToString(point_count)); }
         }
-
-        private void txtKMLFilePath_TextChanged(object sender, EventArgs e)
-        {
-            _options.def_kml_path = txtKMLFilePath.Text;
-        }
+*/
 
         private void txtLocationName_TextChanged(object sender, EventArgs e)
         {
@@ -999,6 +990,7 @@ namespace Waypoint_Path_Generator
 
         }
 
+        /*
         private void dgvPaths_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1071,7 +1063,7 @@ namespace Waypoint_Path_Generator
             }
             else
             {
-                /* Delete Path */
+                // Delete Path
 
                 _wpg.DeletePath(path);
                 RemovePath_GMapTree(path);
@@ -1081,6 +1073,7 @@ namespace Waypoint_Path_Generator
                 //Fill_Path_Table();
             }
         }
+        */
 
         private void dgvManualPath_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
@@ -1249,7 +1242,6 @@ namespace Waypoint_Path_Generator
             cmbManualReuse.Items.Clear();
             //cmbCombinePath1.SelectedIndex = -1;
             //cmbCombinePath2.SelectedIndex = -1;
-            dgvOutPaths.Rows.Clear();
             dgvActionsPath.Rows.Clear();
             Models.Path path;
             LinkedList<WayPoints> waypoint;
@@ -1265,14 +1257,12 @@ namespace Waypoint_Path_Generator
                     pathname = Convert.ToString(count) + " - " + name;
                     waypoint = path.waypoints;
                     int way_count = waypoint.Count();
-                    dgvOutPaths.Rows.Add(count, path.name, path.type, way_count);
                     dgvActionsPath.Rows.Add(count, path.name, path.type, way_count);
                     cmbManualReuse.Items.Add(pathname);
                     count++;
                 } while (count < path_count);
             }
            
-            dgvOutPaths.ClearSelection();
             dgvActionsPath.ClearSelection();
             Globals.Path_Handler = true;
         }
@@ -1380,22 +1370,6 @@ namespace Waypoint_Path_Generator
                 //dgvPathWaypoints.Rows.Clear();
             }
 
-            if (name == "tabOutput")
-            {
-                Update_DGVPath();
-
-                /* Fill Waypoint Table */
-
-                dgvWaypoints.Rows.Clear();
-                int wp_count = Globals.waypoint_list.Count();
-                for (int i = 0; i < wp_count; i++)
-                {
-                    dgvWaypoints.Rows.Add(i + 1, Convert.ToString(Globals.waypoint_list.ElementAt(i).lat),
-                        Convert.ToString(Globals.waypoint_list.ElementAt(i).lon), Convert.ToString(Globals.waypoint_list.ElementAt(i).alt),
-                        Convert.ToString(Globals.waypoint_list.ElementAt(i).head));
-                }
-            }
-
             // Manual Path Tab
             if (name == "tabManual")
             {
@@ -1426,11 +1400,12 @@ namespace Waypoint_Path_Generator
 
         }
 
+        /*
         private void Fill_Path_Table()
         {
             int path_count = _wpg.PathCount();
 
-            /* Fill Path Table */
+            // Fill Path Table
 
             dgvOutPaths.Rows.Clear();
             Models.Path path;
@@ -1450,7 +1425,7 @@ namespace Waypoint_Path_Generator
 
             }
         }
-
+        */
         private void tabPage6_Click(object sender, EventArgs e)
         {
 
@@ -1459,12 +1434,6 @@ namespace Waypoint_Path_Generator
         private void tabPage6_Click_1(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnClearWP_Click(object sender, EventArgs e)
-        {
-            dgvWaypoints.Rows.Clear();
-            Globals.waypoint_list.Clear();
         }
 
         private void label9_Click(object sender, EventArgs e)
@@ -2065,7 +2034,7 @@ namespace Waypoint_Path_Generator
             _wpg.ChangePathName(row, newname);
             Update_DGVPath();
         }
-*/
+
 
         private void dgvOutPaths_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -2080,7 +2049,7 @@ namespace Waypoint_Path_Generator
             _wpg.ChangePathName(row, newname);
             Update_DGVPath();
         }
-
+*/
         private void dgvWayActionsPath_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             /* Ignore event if turned off */
@@ -2197,7 +2166,6 @@ namespace Waypoint_Path_Generator
                     txtCenterLon.Text = Convert.ToString(tmp_point.lon);
                     txtElevation.Text = Convert.ToString(tmp_point.elev);
                     txtAltitude.Text = Convert.ToString(tmp_point.alt);
-                    txtKMLPath.Text = name;
                     cmbManPOI.SelectedIndex = i;
                     Globals.gps_radius = _options.earth_radius + Convert.ToDouble(txtElevation.Text) + Convert.ToDouble(txtAltitude.Text);
                     txtGPSRadius.Text = Convert.ToString(Globals.gps_radius);
@@ -3380,12 +3348,12 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
-*/
+
         private void txtCSVFilePath_TextChanged(object sender, EventArgs e)
         {
             _options.def_csv_path = txtCSVFilePath.Text;
         }
-
+*/
         private void tabManual_Click(object sender, EventArgs e)
         {
 
@@ -4570,7 +4538,10 @@ namespace Waypoint_Path_Generator
                     new_wp.visible = true;
                     new_wp.selected = false;
                     wp_list.AddLast(new_wp);
-                    //_path.waypoints = wp_list;
+                    for(int i = 0; i < wp_list.Count; i++)
+                    {
+                        wp_list.ElementAt(i).selected = false;
+                    }
                     _gmap.ReDrawgMap();
                     return;
                 }
@@ -4579,9 +4550,34 @@ namespace Waypoint_Path_Generator
                     LinkedList<WayPoints> wp_list = _path.waypoints;
                     wp_list.RemoveLast();
                     Globals.path_active = false;
+                    _path.selected = false;
+                    _gmap.ReDrawgMap();
                     return;
                 }
             }
+        }
+
+        private void toolOutputPath_Click(object sender, EventArgs e)
+        {
+            // Make sure only one path is selected
+
+            int path_count = _wpg.SelectedPathCount();
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Path");
+                return;
+            }
+
+            // Get selected Path
+
+            Models.Path path = null;
+            for (int i= 0;i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected) path = _wpg.PathAt(i);
+            }
+
+            DialogOutputPath dialog = new DialogOutputPath(_options, _wpg, path);
+            dialog.Show();
         }
     }
 }
