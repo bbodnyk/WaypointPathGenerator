@@ -36,12 +36,41 @@ namespace Waypoint_Path_Generator
             public GMapMarker marker;
         }
 
-        public GMAP(Waypoint_Path_Gen wpg, GMapControl mapcontrol)
+        public GMAP(Waypoint_Path_Gen wpg, GMapControl mapcontrol, int index)
         {
             _wpg = wpg;
             _mapcontrol = mapcontrol;
-            _mapcontrol.MapProvider = global::GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
+            _mapcontrol.MinZoom = 1;
+            _mapcontrol.MaxZoom = 24;
+
+            switch (index)
+            {
+                case 0:
+                    _mapcontrol.MapProvider = global::GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
+                    break;
+                case 1:
+                    _mapcontrol.MapProvider = global::GMap.NET.MapProviders.GoogleMapProvider.Instance;
+                    break;
+                case 2:
+                    _mapcontrol.MapProvider = global::GMap.NET.MapProviders.GoogleTerrainMapProvider.Instance;
+                    break;
+                case 3:
+                    _mapcontrol.MapProvider = global::GMap.NET.MapProviders.GoogleHybridMapProvider.Instance;
+                    break;
+                case 4:
+                    _mapcontrol.MapProvider = global::GMap.NET.MapProviders.GoogleChinaSatelliteMapProvider.Instance;
+                    break;
+                case 5:
+                    _mapcontrol.MapProvider = global::GMap.NET.MapProviders.ArcGIS_Topo_US_2D_MapProvider.Instance;
+                    break;
+                case 6:
+                    _mapcontrol.MapProvider = global::GMap.NET.MapProviders.GoogleSatelliteMapProvider.Instance;
+                    break;
+            }
+
+            //_mapcontrol.MapProvider = global::GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
             global::GMap.NET.GMaps.Instance.Mode = global::GMap.NET.AccessMode.ServerOnly;
+            _mapcontrol.DragButton = MouseButtons.Middle;
             //_mapcontrol.ShowCenter = false;
             _overmarkers = new GMapOverlay("markers");
             _overroutes = new GMapOverlay("routes");
@@ -117,6 +146,8 @@ namespace Waypoint_Path_Generator
                     { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_image); }
 
                 //    GMarkerGoogleType.blue_pushpin);
+
+                //marker.Size = new Size(32, 32);
                 marker.Offset = new Point(-16, -16);
                 marker.ToolTipText = poiname;
                 marker.Tag = poiname;

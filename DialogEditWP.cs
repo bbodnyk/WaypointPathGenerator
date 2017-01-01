@@ -38,6 +38,10 @@ namespace Waypoint_Path_Generator
             txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
             trkHeading.Value = Convert.ToInt16(_wp.head);
             trkCurveSize.Value = Convert.ToInt16(_wp.curvesize);
+            for(int i = 0; i < _wpg.ActionCount(); i++)
+            {
+                cmbActions.Items.Add(_wpg.ActionAt(i).name);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -83,6 +87,12 @@ namespace Waypoint_Path_Generator
         private void txtwpcurvesize_TextChanged(object sender, EventArgs e)
         {
             _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
+            _gmap.ReDrawgMap();
+        }
+
+        private void txtwpalt_TextChanged(object sender, EventArgs e)
+        {
+            _wp.alt = Convert.ToDouble(txtwpalt.Text);
             _gmap.ReDrawgMap();
         }
     }

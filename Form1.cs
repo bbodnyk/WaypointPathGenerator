@@ -129,7 +129,7 @@ namespace Waypoint_Path_Generator
 
             // Create new GMap
 
-            _gmap = new GMAP(_wpg, gMapControl);
+            _gmap = new GMAP(_wpg, gMapControl,0);
             _gmaptree = treGMap;
 
             // Default Center
@@ -3474,6 +3474,9 @@ namespace Waypoint_Path_Generator
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            int index = cmbGMapProvider.SelectedIndex;
+            _gmap = new GMAP(_wpg, gMapControl, index);
             _gmap.BuildgMap();
             //GMAPTree.Update_GMapTree(_wpg, treGMap);;
         }
@@ -3812,11 +3815,9 @@ namespace Waypoint_Path_Generator
             double lon = gMapControl.FromLocalToLatLng(e.X, e.Y).Lng;
             double lat_delta = lat - old_lat;
             double lon_delta = lon - old_lon;
-            txtMouseLatDelta.Text = Convert.ToString(lat_delta);
-            txtMouseLonDelta.Text = Convert.ToString(lon_delta);
             Double scale = gMapControl.Zoom;
             string button = Convert.ToString(e.Button);
-            txtMapScale.Text = Convert.ToString(scale);
+            trkMapScale.Value = Convert.ToInt16(scale);
 
             // See whether to redraw Tree View
 
@@ -4462,9 +4463,8 @@ namespace Waypoint_Path_Generator
                 return;
             }
 
-            // Get selected Path
+            // Get selected POI
 
-            Models.Path path = null;
             for (int i = 0; i < _wpg.POICount(); i++)
             {
                 if (_wpg.POIPointAt(i).selected)
@@ -4628,6 +4628,183 @@ namespace Waypoint_Path_Generator
             }
             GMAPTree.Update_GMapTree(_wpg, treGMap);
             _gmap.ReDrawgMap();
+        }
+
+        private void saveXMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void toolAbout_Click(object sender, EventArgs e)
+        {
+            DialogAbout dialog = new DialogAbout();
+            dialog.Show();
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtMouseLon_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trkMapScale_Scroll(object sender, EventArgs e)
+        {
+            gMapControl.Zoom = Convert.ToInt16(trkMapScale.Value);
+        }
+
+        private void selectedPOIToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            int poi_count = _wpg.SelectedPOICount();
+            if (poi_count != 1)
+            {
+                MessageBox.Show("Select a single POI");
+                return;
+            }
+
+            // Get selected POI
+
+            int i;
+            for (i = 0; i < _wpg.POICount(); i++)
+            {
+                if (_wpg.POIPointAt(i).selected)
+                {
+                    break;
+                }
+            }
+
+            POIPoints poi = _wpg.POIPointAt(i);
+            string str = "POI Properties\n\n";
+            str = str + "Name : " + poi.name + "\n";
+            str = str + "Lat : " + Convert.ToString(poi.lat) + "\n";
+            str = str + "Lon : " + Convert.ToString(poi.lon) + "\n";
+            str = str + "Elevation : " + Convert.ToString(poi.elev) + "\n";
+            str = str + "Altitude : " + Convert.ToString(poi.alt) + "\n";
+            str = str + "Camera Altitude : " + Convert.ToString(poi.cam_alt) + "\n";
+            MessageBox.Show(str);
+        }
+
+        private void selectedPathToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // Make sure only one path is selected
+
+            int path_count = _wpg.SelectedPathCount();
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Path");
+                return;
+            }
+
+            // Get selected Path
+
+            Models.Path path = null;
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected)
+                {
+                    path = _wpg.PathAt(i);
+                    break;
+                }
+            }
+
+            // Calculate Path Length
+
+            LinkedList<WayPoints> wp_list = path.waypoints;
+
+            double dist = 0.0;
+            double lat1, lon1, lat2, lon2;
+            for(int i = 0; i < wp_list.Count() - 1; i++)
+            {
+                lat1 = wp_list.ElementAt(i).lat;
+                lon1 = wp_list.ElementAt(i).lon;
+                lat2 = wp_list.ElementAt(i+1).lat;
+                lon2 = wp_list.ElementAt(i+1).lon;
+                dist = dist + GPS.GPS_Distance(lat1, lon1, lat2, lon2, Globals.gps_radius);
+            }
+            string str = "Path Properties\n\n";
+            str = str + "Name : " + path.name + "\n";
+            str = str + "Type : " + path.type + "\n";           
+            str = str + "Waypoint Count : " + Convert.ToString(wp_list.Count) + "\n";
+            str = str + "Distance : " + TrimTo(Convert.ToString(dist),3) + "\n";
+            MessageBox.Show(str);
+        }
+
+        private void selectedWaypointToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // Only 1 waypoint can be selected
+
+            int wp_count = _wpg.SelectedWPCount();
+            if (wp_count != 1)
+            {
+                MessageBox.Show("Select a single Waypoint");
+                return;
+            }
+
+            // Find single selected waypoint
+
+            Models.Path path;
+            LinkedList<WayPoints> wp_list;
+            WayPoints wp;
+            int path_id = 0, wp_index = 0;
+
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                path = _wpg.PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    wp = wp_list.ElementAt(j);
+                    if (wp.selected)
+                    {
+
+                        path_id = i;
+                        wp_index = j;
+                        wp_count = wp_list.Count;
+                    }
+                }
+            }
+
+            path = _wpg.PathAt(path_id);
+            wp_list = path.waypoints;
+            wp = wp_list.ElementAt(wp_index);
+
+            string str = "Waypoint Properties\n\n";
+            str = str + "Path : " + path.name + "\n";
+            str = str + "Waypoint Count : " + Convert.ToString(wp_list.Count) + "\n\n";
+            str = str + "Waypoint ID : " + Convert.ToString(wp_index) + "\n";
+            str = str + "Latitude : " + TrimTo(Convert.ToString(wp.lat),6) + "\n";
+            str = str + "Longitude : " + TrimTo(Convert.ToString(wp.lon),6) + "\n";
+            str = str + "Altitude : " + Convert.ToString(wp.alt) + "\n";
+            str = str + "Heading : " + TrimTo(Convert.ToString(wp.head),2) + "\n";
+            str = str + "Curve Size : " + Convert.ToString(wp.curvesize) + "\n";
+            str = str + "Rotation Dir : " + Convert.ToString(wp.rotationdir) + "\n";
+            str = str + "Gimble Mode : " + Convert.ToString(wp.gimblemode) + "\n";
+            str = str + "Gimble Pitch : " + Convert.ToString(wp.gimblepitch) + "\n";
+            MessageBox.Show(str);
+        }
+
+        private void selectedPolygonToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            int poly_count = _wpg.SelectedPolyCount();
+            if (poly_count != 1)
+            {
+                MessageBox.Show("Select a single Polygon");
+                return;
+            }
+            for (int i = 0; i < _wpg.ShapeCount(); i++)
+            {
+                if (_wpg.ShapeAt(i).selected)
+                {
+                    Models.Shape shape = _wpg.ShapeAt(i);
+                    string str = "Polygon Properties\n\n";
+                    str = str + "Name : " + shape.name + "\n";
+                    int count = shape.points.Count - 1;
+                    str = str + "Number Points : " + Convert.ToString(count) + "\n";
+                    MessageBox.Show(str);
+                }
+            }
         }
     }
 }

@@ -94,6 +94,7 @@
             this.txtwpalt.Name = "txtwpalt";
             this.txtwpalt.Size = new System.Drawing.Size(100, 20);
             this.txtwpalt.TabIndex = 4;
+            this.txtwpalt.TextChanged += new System.EventHandler(this.txtwpalt_TextChanged);
             // 
             // label3
             // 
