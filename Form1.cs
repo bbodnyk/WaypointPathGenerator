@@ -167,10 +167,6 @@ namespace Waypoint_Path_Generator
             {
                 dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            foreach (DataGridViewColumn dgvc in dgvManualPath.Columns)
-            {
-                dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
 
             if (_wpg.POICount() == 0)
             {
@@ -268,9 +264,6 @@ namespace Waypoint_Path_Generator
             lblElevation.Text = "Elevation (ft)";
             lblImageLength.Text = "Image Length (ft)";
             lblImageWidth.Text = "Image Width (ft)";
-            lblManualAlt.Text = "Manual Altitude (ft)";
-            //txtAltitude.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtAltitude.Text)));
-            txtManualAlt.Text = Convert.ToString(GPS.MetersToFeet(Convert.ToDouble(txtManualAlt.Text)));
             txtElevation.Text = Convert.ToString(GPS.MetersToFeet(Convert.ToDouble(txtElevation.Text)));
             //txtImageLength.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageWidth.Text)));
@@ -286,9 +279,6 @@ namespace Waypoint_Path_Generator
             lblElevation.Text = "Elevation (m)";
             lblImageLength.Text = "Image Length (m)";
             lblImageWidth.Text = "Image Width (m)";
-            lblManualAlt.Text = "Manual Altitude (m)";
-            //txtAltitude.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtAltitude.Text)));
-            txtManualAlt.Text = Convert.ToString(GPS.FeetToMeters(Convert.ToDouble(txtManualAlt.Text)));
             txtElevation.Text = Convert.ToString(GPS.FeetToMeters(Convert.ToDouble(txtElevation.Text)));
             //txtImageLength.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageWidth.Text)));         
@@ -523,7 +513,6 @@ namespace Waypoint_Path_Generator
         private void txtAltitude_TextChanged(object sender, EventArgs e)
         {
             Globals.default_altitude = txtAltitude.Text;
-            txtManualAlt.Text = txtAltitude.Text;
             double alt = Convert.ToDouble(txtAltitude.Text);
             double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
             txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(hor_ang / 2)) * alt));
@@ -587,45 +576,6 @@ namespace Waypoint_Path_Generator
         private void txtCircAlt_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void dgvManualPath_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            if (Globals.ManWp_Handler)
-            {
-                int rowcount = dgvManualPath.SelectedRows.Count;
-                int index = e.RowIndex;
-                Globals.ManWp_Handler = false;
-                dgvManualPath.Rows.Clear();
-                Globals.ManWp_Handler = true;
-                WayPoints waypoint = Globals.manpoint_list.ElementAt(index);
-                Globals.manpoint_list.Remove(waypoint);
-                if (rowcount > 0)
-                {
-                    while (rowcount > 0)
-                    {
-                        if (index < Globals.manpoint_list.Count)
-                        {
-                            //MessageBox.Show("Index : " + Convert.ToString(index) + " Point Count : " + Convert.ToString(Globals.manpoint_list.Count));
-                            waypoint = Globals.manpoint_list.ElementAt(index);
-                            Globals.manpoint_list.Remove(waypoint);
-                        }
-                        rowcount--;
-                    }
-                }
-                Globals.manpoint_count = Globals.manpoint_list.Count();
-
-                double lat, lon, alt, head;
-
-                for (int i = 0; i < Globals.manpoint_list.Count(); i++)
-                {
-                    lat = Globals.manpoint_list.ElementAt(i).lat;
-                    lon = Globals.manpoint_list.ElementAt(i).lon;
-                    alt = Globals.manpoint_list.ElementAt(i).alt;
-                    head = Globals.manpoint_list.ElementAt(i).head;
-                    dgvManualPath.Rows.Add(i, lat, lon, alt, head);
-                }
-            }
         }
 
         private void dgvActionsWaypoints_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -753,7 +703,7 @@ namespace Waypoint_Path_Generator
             // Fill Path Table 
 
             Globals.Path_Handler = false;
-            cmbManualReuse.Items.Clear();
+            //cmbManualReuse.Items.Clear();
             //cmbCombinePath1.SelectedIndex = -1;
             //cmbCombinePath2.SelectedIndex = -1;
             dgvActionsPath.Rows.Clear();
@@ -772,7 +722,7 @@ namespace Waypoint_Path_Generator
                     waypoint = path.waypoints;
                     int way_count = waypoint.Count();
                     dgvActionsPath.Rows.Add(count, path.name, path.type, way_count);
-                    cmbManualReuse.Items.Add(pathname);
+                    //cmbManualReuse.Items.Add(pathname);
                     count++;
                 } while (count < path_count);
             }
@@ -808,25 +758,7 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
-        /*
-        private void Update_Shapecmb()
-        {
-            Globals.Shape_Handler = false;
-            Models.Shape shape;
-            int count = _wpg.ShapeCount();
-            cmbPolyPath.Items.Clear();
-            dgvPolyPath.Rows.Clear();
-
-            for (int i = 0; i < count; i++)
-            {
-                shape = _wpg.ShapeAt(i);
-                string name = shape.name;
-                cmbPolyPath.Items.Add(name);
-                dgvPolyPath.Rows.Add(i, name);
-            }
-            Globals.Shape_Handler = true;
-        }
-        */
+ 
         private void Update_Actioncmb()
         {
             int count = _wpg.ActionCount();
@@ -850,11 +782,6 @@ namespace Waypoint_Path_Generator
         {
             string name = e.TabPage.Name;
 
-            if (name == "tabMap")
-            {
-
-            }
-
             if (name == "tabGMap")
             {
                 GMAPTree.Update_GMapTree(_wpg, treGMap);
@@ -872,35 +799,7 @@ namespace Waypoint_Path_Generator
                 cmbActionsList.SelectedIndex = 0;
             }
 
-            if (name == "tabWayActions")
-            {
-                //Update_DGVPath();
-                //dgvActionsWaypoints.Rows.Clear();
-            }
-
-            if (name == "tabPath")
-            {
-                //Update_DGVPath();
-                //dgvPathWaypoints.Rows.Clear();
-            }
-
-            // Manual Path Tab
-            if (name == "tabManual")
-            {
-                if (Globals.manpoint_count == 0)
-                {
-                    txtCurrentLat.Text = txtCenterLat.Text;
-                    txtCurrentlon.Text = txtCenterLon.Text;
-                    double lat = Convert.ToDouble(txtCenterLat.Text);
-                    double lon = Convert.ToDouble(txtCenterLon.Text);
-                    double alt = Convert.ToDouble(txtAltitude.Text);
-                }
-                else
-                {
-                    txtCurrentLat.Text = Convert.ToString(Globals.manpoint_list.Last().lat);
-                    txtCurrentlon.Text = Convert.ToString(Globals.manpoint_list.Last().lon);
-                }
-            }
+            
             if (name == "tabPOI")
             {
                 Update_POI_Dgv();
@@ -914,32 +813,6 @@ namespace Waypoint_Path_Generator
 
         }
 
-        /*
-        private void Fill_Path_Table()
-        {
-            int path_count = _wpg.PathCount();
-
-            // Fill Path Table
-
-            dgvOutPaths.Rows.Clear();
-            Models.Path path;
-            LinkedList<WayPoints> waypoint;
-            path_count = _wpg.PathCount();
-            int count = 0;
-            if (path_count > 0)
-            {
-                do
-                {
-                    path = _wpg.PathAt(count);
-                    waypoint = path.waypoints;
-                    int way_count = waypoint.Count();
-                    dgvOutPaths.Rows.Add(path.id, path.name, path.type, way_count, "X");
-                    count++;
-                } while (count < path_count);
-
-            }
-        }
-        */
         private void tabPage6_Click(object sender, EventArgs e)
         {
 
@@ -960,191 +833,7 @@ namespace Waypoint_Path_Generator
 
         }
 
-        private void btnAddWaypoint_Click(object sender, EventArgs e)
-        {
-            double lat = Convert.ToDouble(txtCurrentLat.Text);
-            double lon = Convert.ToDouble(txtCurrentlon.Text);
-            double alt = Convert.ToDouble(txtManualAlt.Text);
-            double bearing = Convert.ToDouble(txtManualBearing.Text);
-            double head;
-            double distance = Convert.ToDouble(txtManualDistance.Text);
-            double gimblepitch = 0;
-            int gimblemode = 0;
-            double curvesize = 0;
-            double rotdir = 0;
-            double poi_lat = Convert.ToDouble(txtCenterLat.Text);
-            double poi_lon = Convert.ToDouble(txtCenterLon.Text);
-            int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-            cmbManLoc.SelectedIndex = 0;
-
-            /*
-            if (chkManPOI.Checked)
-
-                string name = cmbHelixPOI.GetItemText(cmbManPOI.SelectedItem);
-                int poi_count = _wpg.poi_list.Count();
-
-                for (int i = 0; i < poi_count; i++)
-                {
-                    string poi_name = _wpg.poi_list.ElementAt(i).name;
-                    if (poi_name == name)
-                    {
-                        poi_lat = _wpg.poi_list.ElementAt(i).lat;
-                        poi_lon = _wpg.poi_list.ElementAt(i).lon;
-                        txtCurrentLat.Text = Convert.ToString(poi_lat);
-                        txtCurrentlon.Text = Convert.ToString(poi_lon);
-                    }
-                }
-
-                Add_Man_Waypoint(poi_lat, poi_lon, alt, 0.0, gimblemode, gimblepitch);
-
-                for (int i = 0; i < Globals.manpoint_count; i++)
-                {
-                    lat = Globals.manpoint_list.ElementAt(i).lat;
-                    lon = Globals.manpoint_list.ElementAt(i).lon;
-                    alt = Globals.manpoint_list.ElementAt(i).alt;
-                    head = Globals.manpoint_list.ElementAt(i).head;
-                    dgvManualPath.Rows.Add(i, lat, lon, alt, head, "X");
-                }
-
-                chkManPOI.Checked = false;
-                */
-
-
-            if (radioAbs.Checked)
-            {
-                bearing = Convert.ToDouble(txtManualBearing.Text);
-            }
-            else
-            {
-                if (Globals.manpoint_count == 0) bearing = Convert.ToDouble(txtManualBearing.Text);
-                else bearing = Convert.ToDouble(Globals.manpoint_list.Last().head) + bearing;
-            }
-
-            bearing = Mod_Angle(bearing);
-            double lat_new = GPS.GPS_Lat_BearDist(lat, lon, bearing, distance, Globals.gps_radius);
-            double lon_new = GPS.GPS_Lon_BearDist(lat, lon, lat_new, bearing, distance, Globals.gps_radius);
-            head = 0.0;
-            gimblemode = 0;
-            gimblepitch = 0;
-            int last = Globals.manpoint_count - 1;
-
-            if (Globals.manpoint_count > 0)
-            {
-                /* Change heading of last Waypoint */
-                WayPoints last_way;
-                last_way = Globals.manpoint_list.Last();
-                last_way.head = bearing;
-                Globals.manpoint_list.RemoveLast();
-                Globals.manpoint_list.AddLast(last_way);
-            }
-
-            Add_Man_Waypoint(lat_new, lon_new, alt, bearing, curvesize, rotdir, gimblemode, gimblepitch, actions);
-            Globals.ManWp_Handler = false;
-            dgvManualPath.Rows.Clear();
-            Globals.ManWp_Handler = true;
-            txtCurrentLat.Text = Convert.ToString(lat_new);
-            txtCurrentlon.Text = Convert.ToString(lon_new);
-
-            cmbManPathWP.Items.Clear();
-
-            for (int i = 0; i < Globals.manpoint_count; i++)
-            {
-                lat = Globals.manpoint_list.ElementAt(i).lat;
-                lon = Globals.manpoint_list.ElementAt(i).lon;
-                alt = Globals.manpoint_list.ElementAt(i).alt;
-                head = Globals.manpoint_list.ElementAt(i).head;
-                dgvManualPath.Rows.Add(i, lat, lon, alt, head);
-                cmbManPathWP.Items.Add(i);
-            }
-
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnManualPath_Click(object sender, EventArgs e)
-        {
-            double lat;
-            double lon;
-            double alt;
-            double head;
-            int gimblemode = 0;
-            double gimblepitch = 0;
-            double curvesize = 0;
-            double rotdir = 0;
-            int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-            LinkedList<WayPoints> new_list = new LinkedList<WayPoints>();
-
-            int count = Globals.manpoint_list.Count();
-            for (int i = 0; i < count; i++)
-            {
-                lat = Globals.manpoint_list.ElementAt(i).lat;
-                lon = Globals.manpoint_list.ElementAt(i).lon;
-                alt = Globals.manpoint_list.ElementAt(i).alt;
-                head = Globals.manpoint_list.ElementAt(i).head;
-                _wp.Add_Waypoint_List(new_list, lat, lon, alt, head, curvesize, rotdir, gimblemode, gimblepitch, actions);
-            }
-
-            // Save Path
-
-            string path_name;
-
-            if (radioManNew.Checked)
-            {
-                path_name = txtManualName.Text;
-                if (path_name == "") path_name = "Untitled";
-                _path.Add_Path(_wpg, _gmap, path_name, "Manual", new_list);
-            }
-            else
-            {
-                int index = cmbManualReuse.SelectedIndex;
-                if (index == -1)
-                {
-                    MessageBox.Show("Select an existing Path");
-                    cmbManualReuse.ResetText();
-                    return;
-                }
-                Models.Path path = _wpg.PathAt(index);
-                string exist_type = path.type;
-                if (exist_type == "Manual")
-                {
-                    _wpg.ChangePathWP(index, new_list);
-                }
-                else
-                {
-                    MessageBox.Show("Select an existing Path of the same type");
-                    cmbManualReuse.ResetText();
-                    return;
-                }
-                _wpg.ChangePathWP(index, new_list);
-                cmbManualReuse.ResetText();
-            }
-
-
-            //Add_Path(txtManualName.Text, "Manual", new_list);
-
-            //Globals.manpoint_count = 0;
-            //Globals.manpoint_list.Clear();
-        }
-
-        private void btnClearManual_Click(object sender, EventArgs e)
-        {
-            Globals.ManWp_Handler = false;
-            dgvManualPath.Rows.Clear();
-            Globals.ManWp_Handler = true;
-            txtCurrentLat.Text = txtCenterLat.Text;
-            txtCurrentlon.Text = txtCenterLon.Text;
-            double lat = Convert.ToDouble(txtCenterLat.Text);
-            double lon = Convert.ToDouble(txtCenterLon.Text);
-            double alt = Convert.ToDouble(txtAltitude.Text);
-            Globals.manpoint_count = 0;
-            Globals.manpoint_list.Clear();
-        }
-
-        private void txtManualAlt_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -1163,59 +852,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        /*
-        private void Update_Center_POI()
-        {
-            string name = txtLocationName.Text;
-            LinkedListNode<POIPoints> node = _wpg.poi_list.First;
-            LinkedListNode<POIPoints> next_node;
-            while (node != null)
-            {
-                next_node = node.Next;
-                if (name == node.Value.name)
-                {
-                    POIPoints point;
-                    point.lat = Convert.ToDouble(txtCenterLat.Text);
-                    point.lon = Convert.ToDouble(txtCenterLon.Text);
-                    point.alt = node.Value.alt;
-                    point.name = name;
-                    point.elev = 150;
-                    point.cam_alt = 4;
-                    _wpg.poi_list.AddBefore(node, point);
-                    _wpg.poi_list.Remove(node);
-
-                }
-                node = next_node;
-            }
-        }
-        
-        private void btnAddPOI_Click(object sender, EventArgs e)
-        {
-            if (txtPOILat.Text != "" & txtPOILon.Text != "" & txtPOIAlt.Text != "")
-            {
-                double lat = Convert.ToDouble(txtPOILat.Text);
-                double lon = Convert.ToDouble(txtPOILon.Text);
-                double alt = Convert.ToDouble(txtPOIAlt.Text);
-                double elev = Convert.ToDouble(txtPOIElev.Text);
-                double cam_alt = Convert.ToDouble(txtPOICamAlt.Text);
-
-                POIPoints poipoint = new POIPoints();
-                poipoint.name = txtPOIName.Text;
-                poipoint.lat = lat;
-                poipoint.lon = lon;
-                poipoint.elev = elev;
-                poipoint.alt = alt;
-                poipoint.cam_alt = cam_alt;
-                poipoint.visible = true;
-                poipoint.selected = false;
-                _wpg.AddPOI(poipoint);
-                _gmap.Add_gMapPOI(poipoint);
-                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
-                Update_POI_Dgv();
-                Update_POI_Cmb();
-            }
-        }
-        */
+ 
         private void btnCreatePOIWP_Click(object sender, EventArgs e)
         {
             int index = Convert.ToInt16(txtPOIWP.Text);
@@ -1275,23 +912,23 @@ namespace Waypoint_Path_Generator
 
         private void Update_POI_Cmb()
         {
-            cmbManPOI.Items.Clear();
-            cmbManLoc.Items.Clear();
+            //cmbManPOI.Items.Clear();
+            //cmbManLoc.Items.Clear();
             cmbLocation.Items.Clear();
             int count = _wpg.POICount(); ;
             if (count > 0)
             {
-                cmbManLoc.Items.Add("");
+                //cmbManLoc.Items.Add("");
                 for (int i = 0; i < count; i++)
                 {
                     POIPoints tmp_point = _wpg.POIPointAt(i);
-                    cmbManPOI.Items.Add(tmp_point.name);
-                    cmbManLoc.Items.Add(tmp_point.name);
+                    //cmbManPOI.Items.Add(tmp_point.name);
+                    //cmbManLoc.Items.Add(tmp_point.name);
                     cmbLocation.Items.Add(tmp_point.name);
                 }
             }
-            cmbManPOI.SelectedIndex = 0;
-            cmbManLoc.SelectedIndex = 0;
+            //cmbManPOI.SelectedIndex = 0;
+            //cmbManLoc.SelectedIndex = 0;
         }
 
         private void label18_Click(object sender, EventArgs e)
@@ -1304,48 +941,6 @@ namespace Waypoint_Path_Generator
 
         }
 
-        //private void cmbCircCenter_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    int index = cmbCircCenter.SelectedIndex;
-        //   cmbCircPOI.SelectedIndex = index;
-        //    cmbCircHome.SelectedIndex = index;
-        //}
-
-        private void cmbManLoc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedname = cmbManLoc.SelectedItem.ToString();
-            for (int i = 0; i < _wpg.POICount(); i++)
-            {
-                POIPoints tmp_point = _wpg.POIPointAt(i);
-                if (selectedname == tmp_point.name)
-                {
-                    txtCurrentLat.Text = Convert.ToString(tmp_point.lat);
-                    txtCurrentlon.Text = Convert.ToString(tmp_point.lon);
-                }
-            }
-        }
-        /*
-        private void btnAddLocation_Click(object sender, EventArgs e)
-        {
-            if (txtCenterLat.Text != "" & txtCenterLon.Text != "" & txtAltitude.Text != "")
-            {
-                double lat = Convert.ToDouble(txtCenterLat.Text);
-                double lon = Convert.ToDouble(txtCenterLon.Text);
-                double alt = Convert.ToDouble(txtAltitude.Text);
-
-                POIPoints poipoint = new POIPoints();
-                poipoint.name = txtLocationName.Text;
-                poipoint.lat = lat;
-                poipoint.lon = lon;
-                poipoint.alt = alt;
-                _wpg.AddPOI(poipoint);
-                //_wpg.poi_list.AddLast(poipoint);
-
-                Update_POI_Dgv();
-                Update_POI_Cmb();
-            }
-        }
-        */
         private void dgvActionsPath_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1436,91 +1031,7 @@ namespace Waypoint_Path_Generator
             }
 
         }
-
-        private void dgvManualPath_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            /* Ignore event if turned off */
-
-            if (!Globals.ActionWaypoint_Handler) return;
-
-            /* Get row & col */
-
-            int row = e.RowIndex;
-            if (row == -1) return;
-            int col = e.ColumnIndex;
-            double cell_value = Convert.ToDouble(dgvManualPath.Rows[row].Cells[col].Value.ToString());
-
-            LinkedListNode<WayPoints> node = Globals.manpoint_list.First;
-            LinkedListNode<WayPoints> next_node;
-            WayPoints new_wp = new WayPoints();
-            int count = 0;
-
-            while (node != null)
-            {
-                next_node = node.Next;
-                count++;
-                if (count == row + 1)
-                {
-                    /* Create new wp */
-
-                    new_wp.lat = node.Value.lat;
-                    new_wp.lon = node.Value.lon;
-                    new_wp.alt = node.Value.alt;
-                    new_wp.head = node.Value.head;
-                    new_wp.curvesize = node.Value.curvesize;
-                    new_wp.rotationdir = node.Value.rotationdir;
-                    new_wp.gimblemode = node.Value.gimblemode;
-                    new_wp.gimblepitch = node.Value.gimblepitch;
-                    new_wp.actions = node.Value.actions;
-
-                    /* Modify value of new_wp */
-
-                    if (col == 1) new_wp.lat = cell_value;
-                    if (col == 2) new_wp.lon = cell_value;
-                    if (col == 3) new_wp.alt = cell_value;
-                    if (col == 4) new_wp.head = cell_value;
-                    if (col == 5) new_wp.curvesize = cell_value;
-                    if (col == 6) new_wp.rotationdir = cell_value;
-                    if (col == 7) new_wp.gimblemode = Convert.ToInt16(cell_value);
-                    if (col == 8) new_wp.gimblepitch = cell_value;
-                    //if (col == 9) new_wp.actions[0, 0] = Convert.ToInt16(cell_value);
-                    //if (col == 10) new_wp.actions[0, 1] = Convert.ToInt16(cell_value);
-                    //if (col == 11) new_wp.actions[1, 0] = Convert.ToInt16(cell_value);
-                    //if (col == 12) new_wp.actions[1, 1] = Convert.ToInt16(cell_value);
-
-                    /* Action Changed */
-
-                    if (col > 8)
-                    {
-                        int[,] actions = new int[15, 2];
-                        for (int i = 0; i < 15; i++)
-                        {
-                            actions[i, 0] = node.Value.actions[i, 0];
-                            actions[i, 1] = node.Value.actions[i, 1];
-                        }
-                        int action_id = (col - 9) / 2;
-                        if (Odd(col)) actions[action_id, 0] = Convert.ToInt16(cell_value);
-                        else actions[action_id, 1] = Convert.ToInt16(cell_value);
-                        new_wp.actions = actions;
-                    }
-
-                    /*
-                    for (int i = 0; i < 2; i++)
-                    {
-                        int actionscol = 9 + (i * 2);
-                        MessageBox.Show("Col = " + col + " Cell Actions Col : " + actionscol);
-                        if (col == actionscol) new_wp.actions[i, 0] = Convert.ToInt16(cell_value);
-                        if (col == actionscol+1) new_wp.actions[i, 1] = Convert.ToInt16(cell_value);
-                    }
-                    */
-                    Globals.manpoint_list.AddBefore(node, new_wp);
-                    Globals.manpoint_list.Remove(node);
-                }
-
-                node = next_node;
-            }
-        }
-
+ 
         private void dgvActionsPath_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1534,50 +1045,21 @@ namespace Waypoint_Path_Generator
             _wpg.ChangePathName(row, newname);
             Update_DGVPath();
         }
-        /*
-                private void dgvPaths_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-                {
-                    int row = e.RowIndex;
-                    if (row == -1) return;
-                    int col = e.ColumnIndex;
-                    if (col != 1)
-                    {
-                        return;
-                    }
-                    string newname = dgvPaths.Rows[row].Cells[col].Value.ToString();
-                    _wpg.ChangePathName(row, newname);
-                    Update_DGVPath();
-                }
-
-
-                private void dgvOutPaths_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-                {
-                    int row = e.RowIndex;
-                    if (row == -1) return;
-                    int col = e.ColumnIndex;
-                    if (col != 1)
-                    {
-                        return;
-                    }
-                    string newname = dgvOutPaths.Rows[row].Cells[col].Value.ToString();
-                    _wpg.ChangePathName(row, newname);
-                    Update_DGVPath();
-                }
-        */
+ 
         private void dgvWayActionsPath_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            /* Ignore event if turned off */
+            // Ignore event if turned off
 
             if (!Globals.ActionWaypoint_Handler) return;
 
-            /* Get row & col */
+            // Get row & col
 
             int row = e.RowIndex;
             if (row == -1) return;
             int col = e.ColumnIndex;
             double cell_value = Convert.ToDouble(dgvActionsWaypoints.Rows[row].Cells[col].Value.ToString());
 
-            /* Find Waypoint Record */
+            // Find Waypoint Record
 
             Models.Path path = _wpg.PathAt(Globals.ActionsPath);
             LinkedList<WayPoints> waypoints = path.waypoints;
@@ -1636,15 +1118,6 @@ namespace Waypoint_Path_Generator
                         new_wp.actions = actions;
                     }
 
-                    /*
-                    for (int i = 0; i < 2; i++)
-                    {
-                        int actionscol = 9 + (i * 2);
-                        MessageBox.Show("Col = " + col + " Cell Actions Col : " + actionscol);
-                        if (col == actionscol) new_wp.actions[i, 0] = Convert.ToInt16(cell_value);
-                        if (col == actionscol+1) new_wp.actions[i, 1] = Convert.ToInt16(cell_value);
-                    }
-                    */
                     waypoints.AddBefore(node, new_wp);
                     waypoints.Remove(node);
                 }
@@ -1680,7 +1153,7 @@ namespace Waypoint_Path_Generator
                     txtCenterLon.Text = Convert.ToString(tmp_point.lon);
                     txtElevation.Text = Convert.ToString(tmp_point.elev);
                     txtAltitude.Text = Convert.ToString(tmp_point.alt);
-                    cmbManPOI.SelectedIndex = i;
+                    //cmbManPOI.SelectedIndex = i;
                     Globals.gps_radius = _options.earth_radius + Convert.ToDouble(txtElevation.Text) + Convert.ToDouble(txtAltitude.Text);
                     txtGPSRadius.Text = Convert.ToString(Globals.gps_radius);
                 }
@@ -2485,45 +1958,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        /*
-                private void dgvPOI_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-                {
-                    int row = e.RowIndex;
-                    int col = e.ColumnIndex;
-                    dgvPOI.Rows[e.RowIndex].ErrorText = String.Empty;
-                    // Text for value empty
-                    if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
-                    {
-
-                        dgvPOI.Rows[e.RowIndex].ErrorText =
-                            "Value must not be empty";
-                        e.Cancel = true;
-                        return;
-                    }
-                    // Text for number
-                    String text = e.FormattedValue.ToString();
-                    double num;
-                    if (col > 1)
-                        if (!double.TryParse(text, out num))
-                        {
-                            dgvPOI.Rows[e.RowIndex].ErrorText =
-                            "Value must be numeric";
-                            e.Cancel = true;
-                            return;
-                        }
-                    if (col > 3)
-                    {
-                        num = Convert.ToDouble(text);
-                        if (num < 0)
-                        {
-                            dgvPOI.Rows[e.RowIndex].ErrorText =
-                            "Value must be positive";
-                            e.Cancel = true;
-                            return;
-                        }
-                    }
-                }
-        */
+ 
         private void dgvActionsWaypoints_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             int row = e.RowIndex;
@@ -2594,58 +2029,7 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
-
-        private void dgvManualPath_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            int row = e.RowIndex;
-            int col = e.ColumnIndex;
-            double num;
-            dgvManualPath.Rows[e.RowIndex].ErrorText = String.Empty;
-            // Check for value empty
-            if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
-            {
-
-                dgvManualPath.Rows[e.RowIndex].ErrorText =
-                    "Value must not be empty";
-                e.Cancel = true;
-                return;
-            }
-            String text = e.FormattedValue.ToString();
-            // Check Cols 1 thru the end for numeric values
-            if (col >= 1)
-            {
-                if (!double.TryParse(text, out num))
-                {
-                    dgvManualPath.Rows[e.RowIndex].ErrorText =
-                    "Value must be numeric";
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            // Check Columns for positive values
-            if (col == 3)
-            {
-                if (Convert.ToDouble(text) < 0)
-                {
-                    dgvManualPath.Rows[e.RowIndex].ErrorText =
-                    "Value must be positive";
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            // Check for invalid Heading
-            if (col == 4)
-            {
-                if (Convert.ToDouble(text) < 0.0 | Convert.ToDouble(text) > 360.0)
-                {
-                    dgvManualPath.Rows[e.RowIndex].ErrorText =
-                    "Value must be between 0.0 and 360.0";
-                    e.Cancel = true;
-                    return;
-                }
-            }
-        }
-
+ 
         private void dgvActionsWaypoints_MouseUp(object sender, MouseEventArgs e)
         {
             if (Globals.ActionWaypoint_Handler)
@@ -2689,185 +2073,12 @@ namespace Waypoint_Path_Generator
 
             }
         }
-        /*
-                private void dgvPaths_CellClick_1(object sender, DataGridViewCellEventArgs e)
-                {
-                    int row = e.RowIndex;
-                    if (row == -1) return;
-                    int col = e.ColumnIndex;
-                    //int path_index = Convert.ToInt16(dgvActionsWaypoints.Rows[row].Cells[0].Value.ToString());
-                    cmbSplitAt.Items.Clear();
-                    Models.Path path = _wpg.PathAt(row);
-                    int path_id = path.id;
-                    Globals.ActionsPath = row;
-                    Globals.ActionWaypoint_Handler = false;
-                    string path_name = path.name;
-                    string path_type = path.type;
-                    LinkedList<WayPoints> waypoints = path.waypoints;
-                    dgvPathWaypoints.Rows.Clear();
-                    int wp_count = waypoints.Count;
-                    int count = 0;
-                    int path_wcount = waypoints.Count();
-                    cmbSplitAt.Items.Clear();
-                    while (count < path_wcount)
-                    {
-                        double lat = waypoints.ElementAt(count).lat;
-                        double lon = waypoints.ElementAt(count).lon;
-                        double alt = waypoints.ElementAt(count).alt;
-                        double head = waypoints.ElementAt(count).head;
-                        int gimblemode = waypoints.ElementAt(count).gimblemode;
-                        double gimblepitch = waypoints.ElementAt(count).gimblepitch;
-                        double curvesize = waypoints.ElementAt(count).curvesize;
-                        double rotdir = waypoints.ElementAt(count).rotationdir;
-                        int[,] actions = waypoints.ElementAt(count).actions;
-                        if (head < 0.0) head = head + 360.0;
-                        dgvPathWaypoints.Rows.Add(count, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt), Convert.ToString(head));
-                        if (count > 0 & count < path_wcount) cmbSplitAt.Items.Add(count);
-                        count++;
-                    }
-                    Globals.ActionWaypoint_Handler = true;
-                }
-
-                private void btnReversePath_Click(object sender, EventArgs e)
-                {
-                    int index = cmbReversePath.SelectedIndex;
-                    if (index == -1)
-                    {
-                        MessageBox.Show("Select a Path Segment to Reverse");
-                        return;
-                    }
-                    Models.Path path = _wpg.PathAt(index);
-                    _wpg.ReversePathWP(index);
-                    dgvPathWaypoints.Rows.Clear();
-                    Update_DGVPath();
-                    cmbReversePath.ResetText();
-                }
-
-                private void btnCombinePaths_Click(object sender, EventArgs e)
-                {
-                    int index1 = cmbCombinePath1.SelectedIndex;
-                    int index2 = cmbCombinePath2.SelectedIndex;
-                    if (index1 == -1 | index2 == -1)
-                    {
-                        MessageBox.Show("Error - Select Two Paths", "Combine Paths");
-                        return;
-                    }
-                    if (index1 == index2)
-                    {
-                        MessageBox.Show("Error - Can not combine the same path", "Combine Paths");
-                        return;
-                    }
-
-                    // Combine Paths
-
-                    Models.Path newpath = new Models.Path();
-                    newpath.name = "Combined-";
-                    newpath.type = "Composite";
-                    newpath.selected = false;
-                    newpath.visible = false;
-                    LinkedList<WayPoints> newwp = new LinkedList<WayPoints>();
-
-                    // Process 1st Path
-
-                    Models.Path path = _wpg.PathAt(index1);
-                    newpath.name = newpath.name + path.name;
-                    LinkedList<WayPoints> wpold = path.waypoints;
-                    foreach (var wp in wpold)
-                    {
-                        newwp.AddLast(wp);
-                    }
-
-                    // Process 2nd Path
-
-                    path = _wpg.PathAt(index2);
-                    newpath.name = newpath.name + path.name;
-                    wpold = path.waypoints;
-                    foreach (var wp in wpold)
-                    {
-                        newwp.AddLast(wp);
-                    }
-                    newpath.waypoints = newwp;
-                    // Set Name
-                    string name = txtCombineName.Text;
-                    if (name != "") newpath.name = name;
-                    // Add Path
-
-                    GMAPTree.Update_GMapTree(_wpg, treGMap); ;
-                    _wpg.AddPath(newpath);
-                    Update_DGVPath();
-                    cmbCombinePath1.ResetText();
-                    cmbCombinePath2.ResetText();
-                    txtCombineName.Text = "";
-                }
-        */
+  
         private void label2_Click(object sender, EventArgs e)
         {
 
         }
-        /*
-                private void btnSplitPath_Click(object sender, EventArgs e)
-                {
-                    int index = cmbSplitAt.SelectedIndex;
-                    if (index == -1)
-                    {
-                        MessageBox.Show("Error: Can not spit before 0");
-                        return;
-                    }
-                    //MessageBox.Show("Index : "+Convert.ToString(index));
-                    int path_index = Globals.ActionsPath;
-                    Models.Path oldpath = _wpg.PathAt(path_index);
-                    string path1_name = oldpath.name + "_1";
-                    string path2_name = oldpath.name + "_2";
-                    string type = oldpath.type;
-                    LinkedList<WayPoints> oldwp_list = oldpath.waypoints;
-                    LinkedList<WayPoints> wp1 = new LinkedList<WayPoints>();
-                    LinkedList<WayPoints> wp2 = new LinkedList<WayPoints>();
-                    int wpcount = oldwp_list.Count();
-                    for (int i = 0; i < wpcount; i++)
-                    {
-                        WayPoints wp = oldwp_list.ElementAt(i);
-                        if (i <= index) wp1.AddLast(wp);
-                        else wp2.AddLast(wp);
-                    }
-                    type = type + "/Split";
-                    _path.Add_Path(_wpg, _gmap, path1_name, type, wp1);
-                    _path.Add_Path(_wpg, _gmap, path2_name, type, wp2);
-                    GMAPTree.Update_GMapTree(_wpg, treGMap); ;
-                    Update_DGVPath();
-                    dgvPathWaypoints.Rows.Clear();
-                    cmbSplitAt.SelectedIndex = -1;
-                }
 
-                private void cmbSplitAt_SelectedIndexChanged(object sender, EventArgs e)
-                {
-
-                }
-
-                private void dgvPathWaypoints_Click(object sender, EventArgs e)
-                {
-
-                }
-
-                private void dgvPathWaypoints_MouseUp(object sender, MouseEventArgs e)
-                {
-                    int count = dgvPathWaypoints.SelectedRows.Count;
-                    if (count > 0)
-                    {
-                        int index = dgvPathWaypoints.SelectedRows[0].Index;
-                        if (index != 0) cmbSplitAt.SelectedIndex = index - count;
-                        else
-                        {
-                            cmbSplitAt.ResetText();
-                            cmbSplitAt.SelectedIndex = -1;
-                        }
-                    }
-                }
-
-                private void txtCSVFilePath_TextChanged(object sender, EventArgs e)
-                {
-                    _options.def_csv_path = txtCSVFilePath.Text;
-                }
-        */
         private void tabManual_Click(object sender, EventArgs e)
         {
 
@@ -2876,41 +2087,6 @@ namespace Waypoint_Path_Generator
         private void button1_Click_4(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnCreateWPPOI_Click(object sender, EventArgs e)
-        {
-            // Get wp index
-            int wp_index = cmbManPathWP.SelectedIndex;
-            if (wp_index == -1)
-            {
-                MessageBox.Show("Error: Select a WP");
-                return;
-            }
-            // Get wp name
-            string name = txtManPathWPName.Text;
-            // Get values of wp
-            double lat = Globals.manpoint_list.ElementAt(wp_index).lat;
-            double lon = Globals.manpoint_list.ElementAt(wp_index).lon;
-            double alt = Globals.manpoint_list.ElementAt(wp_index).alt;
-            double head = Globals.manpoint_list.ElementAt(wp_index).head;
-            double elev = 150;
-            //double cam_alt = Convert.ToDouble(txtPOICamAlt.Text);
-
-            POIPoints poipoint = new POIPoints();
-            poipoint.name = name;
-            poipoint.lat = lat;
-            poipoint.lon = lon;
-            poipoint.elev = elev;
-            poipoint.alt = alt;
-            poipoint.cam_alt = 5;
-            poipoint.visible = true;
-            poipoint.selected = false;
-            _wpg.AddPOI(poipoint);
-            _gmap.ReDrawgMap();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
-            Update_POI_Dgv();
-            Update_POI_Cmb();
         }
 
         private void radioCCW_CheckedChanged(object sender, EventArgs e)

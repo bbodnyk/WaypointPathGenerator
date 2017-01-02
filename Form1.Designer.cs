@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -169,46 +169,6 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabManual = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioRel = new System.Windows.Forms.RadioButton();
-            this.radioAbs = new System.Windows.Forms.RadioButton();
-            this.cmbManualReuse = new System.Windows.Forms.ComboBox();
-            this.radioManReUse = new System.Windows.Forms.RadioButton();
-            this.radioManNew = new System.Windows.Forms.RadioButton();
-            this.label93 = new System.Windows.Forms.Label();
-            this.btnCreateWPPOI = new System.Windows.Forms.Button();
-            this.label87 = new System.Windows.Forms.Label();
-            this.txtManPathWPName = new System.Windows.Forms.TextBox();
-            this.txtManualAlt = new System.Windows.Forms.TextBox();
-            this.txtManualName = new System.Windows.Forms.TextBox();
-            this.txtManualBearing = new System.Windows.Forms.TextBox();
-            this.txtManualDistance = new System.Windows.Forms.TextBox();
-            this.txtCurrentLat = new System.Windows.Forms.TextBox();
-            this.txtCurrentlon = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.cmbManPathWP = new System.Windows.Forms.ComboBox();
-            this.label47 = new System.Windows.Forms.Label();
-            this.cmbManLoc = new System.Windows.Forms.ComboBox();
-            this.cmbManPOI = new System.Windows.Forms.ComboBox();
-            this.chkManPOI = new System.Windows.Forms.CheckBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.lblManualAlt = new System.Windows.Forms.Label();
-            this.btnClearManual = new System.Windows.Forms.Button();
-            this.btnManualPath = new System.Windows.Forms.Button();
-            this.label36 = new System.Windows.Forms.Label();
-            this.btnAddWaypoint = new System.Windows.Forms.Button();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.dgvManualPath = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabActions = new System.Windows.Forms.TabPage();
             this.label71 = new System.Windows.Forms.Label();
             this.btnSaveAction = new System.Windows.Forms.Button();
@@ -301,9 +261,6 @@
             this.tabWayActions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).BeginInit();
-            this.tabManual.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvManualPath)).BeginInit();
             this.tabActions.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1055,16 +1012,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 97);
             this.treGMap.Name = "treGMap";
-            treeNode5.Name = "POI";
-            treeNode5.Text = "POI";
-            treeNode6.Name = "Paths";
-            treeNode6.Text = "Paths";
-            treeNode7.Name = "Polygons";
-            treeNode7.Text = "Polygons";
-            treeNode8.Name = "GMap";
-            treeNode8.Text = "Objects";
+            treeNode1.Name = "POI";
+            treeNode1.Text = "POI";
+            treeNode2.Name = "Paths";
+            treeNode2.Text = "Paths";
+            treeNode3.Name = "Polygons";
+            treeNode3.Text = "Polygons";
+            treeNode4.Name = "GMap";
+            treeNode4.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode4});
             this.treGMap.Size = new System.Drawing.Size(121, 281);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1444,410 +1401,6 @@
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn9.Width = 73;
-            // 
-            // tabManual
-            // 
-            this.tabManual.Controls.Add(this.groupBox3);
-            this.tabManual.Controls.Add(this.cmbManualReuse);
-            this.tabManual.Controls.Add(this.radioManReUse);
-            this.tabManual.Controls.Add(this.radioManNew);
-            this.tabManual.Controls.Add(this.label93);
-            this.tabManual.Controls.Add(this.btnCreateWPPOI);
-            this.tabManual.Controls.Add(this.label87);
-            this.tabManual.Controls.Add(this.txtManPathWPName);
-            this.tabManual.Controls.Add(this.txtManualAlt);
-            this.tabManual.Controls.Add(this.txtManualName);
-            this.tabManual.Controls.Add(this.txtManualBearing);
-            this.tabManual.Controls.Add(this.txtManualDistance);
-            this.tabManual.Controls.Add(this.txtCurrentLat);
-            this.tabManual.Controls.Add(this.txtCurrentlon);
-            this.tabManual.Controls.Add(this.label30);
-            this.tabManual.Controls.Add(this.label28);
-            this.tabManual.Controls.Add(this.cmbManPathWP);
-            this.tabManual.Controls.Add(this.label47);
-            this.tabManual.Controls.Add(this.cmbManLoc);
-            this.tabManual.Controls.Add(this.cmbManPOI);
-            this.tabManual.Controls.Add(this.chkManPOI);
-            this.tabManual.Controls.Add(this.label39);
-            this.tabManual.Controls.Add(this.lblManualAlt);
-            this.tabManual.Controls.Add(this.btnClearManual);
-            this.tabManual.Controls.Add(this.btnManualPath);
-            this.tabManual.Controls.Add(this.label36);
-            this.tabManual.Controls.Add(this.btnAddWaypoint);
-            this.tabManual.Controls.Add(this.label35);
-            this.tabManual.Controls.Add(this.label34);
-            this.tabManual.Controls.Add(this.label33);
-            this.tabManual.Controls.Add(this.label32);
-            this.tabManual.Controls.Add(this.dgvManualPath);
-            this.tabManual.Location = new System.Drawing.Point(4, 25);
-            this.tabManual.Name = "tabManual";
-            this.tabManual.Padding = new System.Windows.Forms.Padding(3);
-            this.tabManual.Size = new System.Drawing.Size(852, 902);
-            this.tabManual.TabIndex = 9;
-            this.tabManual.Text = "Manual Path Segment";
-            this.tabManual.UseVisualStyleBackColor = true;
-            this.tabManual.Click += new System.EventHandler(this.tabManual_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.radioRel);
-            this.groupBox3.Controls.Add(this.radioAbs);
-            this.groupBox3.Location = new System.Drawing.Point(60, 108);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 50);
-            this.groupBox3.TabIndex = 61;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Angular Bearing";
-            // 
-            // radioRel
-            // 
-            this.radioRel.AutoSize = true;
-            this.radioRel.Location = new System.Drawing.Point(118, 17);
-            this.radioRel.Name = "radioRel";
-            this.radioRel.Size = new System.Drawing.Size(76, 20);
-            this.radioRel.TabIndex = 24;
-            this.radioRel.Text = "Relative";
-            this.radioRel.UseVisualStyleBackColor = true;
-            // 
-            // radioAbs
-            // 
-            this.radioAbs.AutoSize = true;
-            this.radioAbs.Checked = true;
-            this.radioAbs.Location = new System.Drawing.Point(22, 17);
-            this.radioAbs.Name = "radioAbs";
-            this.radioAbs.Size = new System.Drawing.Size(79, 20);
-            this.radioAbs.TabIndex = 23;
-            this.radioAbs.TabStop = true;
-            this.radioAbs.Text = "Absolute";
-            this.radioAbs.UseVisualStyleBackColor = true;
-            // 
-            // cmbManualReuse
-            // 
-            this.cmbManualReuse.FormattingEnabled = true;
-            this.cmbManualReuse.Location = new System.Drawing.Point(485, 697);
-            this.cmbManualReuse.Name = "cmbManualReuse";
-            this.cmbManualReuse.Size = new System.Drawing.Size(181, 24);
-            this.cmbManualReuse.TabIndex = 60;
-            // 
-            // radioManReUse
-            // 
-            this.radioManReUse.AutoSize = true;
-            this.radioManReUse.Location = new System.Drawing.Point(99, 692);
-            this.radioManReUse.Name = "radioManReUse";
-            this.radioManReUse.Size = new System.Drawing.Size(218, 20);
-            this.radioManReUse.TabIndex = 59;
-            this.radioManReUse.Text = "Overwrite Existing Path Segment";
-            this.radioManReUse.UseVisualStyleBackColor = true;
-            // 
-            // radioManNew
-            // 
-            this.radioManNew.AutoSize = true;
-            this.radioManNew.Checked = true;
-            this.radioManNew.Location = new System.Drawing.Point(98, 666);
-            this.radioManNew.Name = "radioManNew";
-            this.radioManNew.Size = new System.Drawing.Size(187, 20);
-            this.radioManNew.TabIndex = 58;
-            this.radioManNew.TabStop = true;
-            this.radioManNew.Text = "New Manual Path Segment";
-            this.radioManNew.UseVisualStyleBackColor = true;
-            // 
-            // label93
-            // 
-            this.label93.AutoSize = true;
-            this.label93.Location = new System.Drawing.Point(357, 667);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(122, 16);
-            this.label93.TabIndex = 57;
-            this.label93.Text = "Manual Path Name";
-            // 
-            // btnCreateWPPOI
-            // 
-            this.btnCreateWPPOI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreateWPPOI.Location = new System.Drawing.Point(309, 353);
-            this.btnCreateWPPOI.Name = "btnCreateWPPOI";
-            this.btnCreateWPPOI.Size = new System.Drawing.Size(199, 23);
-            this.btnCreateWPPOI.TabIndex = 39;
-            this.btnCreateWPPOI.Text = "Create WP POI";
-            this.btnCreateWPPOI.UseVisualStyleBackColor = true;
-            this.btnCreateWPPOI.Click += new System.EventHandler(this.btnCreateWPPOI_Click);
-            // 
-            // label87
-            // 
-            this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(502, 317);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(70, 16);
-            this.label87.TabIndex = 38;
-            this.label87.Text = "POI Name";
-            // 
-            // txtManPathWPName
-            // 
-            this.txtManPathWPName.Location = new System.Drawing.Point(583, 314);
-            this.txtManPathWPName.Name = "txtManPathWPName";
-            this.txtManPathWPName.Size = new System.Drawing.Size(121, 22);
-            this.txtManPathWPName.TabIndex = 37;
-            this.txtManPathWPName.Text = "WP POI";
-            // 
-            // txtManualAlt
-            // 
-            this.txtManualAlt.Location = new System.Drawing.Point(342, 202);
-            this.txtManualAlt.Name = "txtManualAlt";
-            this.txtManualAlt.Size = new System.Drawing.Size(100, 22);
-            this.txtManualAlt.TabIndex = 25;
-            this.txtManualAlt.TextChanged += new System.EventHandler(this.txtManualAlt_TextChanged);
-            this.txtManualAlt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textPosNumeric_KeyPress);
-            // 
-            // txtManualName
-            // 
-            this.txtManualName.Location = new System.Drawing.Point(485, 667);
-            this.txtManualName.Name = "txtManualName";
-            this.txtManualName.Size = new System.Drawing.Size(181, 22);
-            this.txtManualName.TabIndex = 19;
-            this.txtManualName.Text = "Untitled";
-            // 
-            // txtManualBearing
-            // 
-            this.txtManualBearing.Location = new System.Drawing.Point(342, 124);
-            this.txtManualBearing.Name = "txtManualBearing";
-            this.txtManualBearing.Size = new System.Drawing.Size(100, 22);
-            this.txtManualBearing.TabIndex = 10;
-            this.txtManualBearing.Text = "0";
-            this.txtManualBearing.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textNumeric_KeyPress);
-            // 
-            // txtManualDistance
-            // 
-            this.txtManualDistance.Location = new System.Drawing.Point(584, 124);
-            this.txtManualDistance.Name = "txtManualDistance";
-            this.txtManualDistance.Size = new System.Drawing.Size(100, 22);
-            this.txtManualDistance.TabIndex = 9;
-            this.txtManualDistance.Text = "0";
-            this.txtManualDistance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textPosNumeric_KeyPress);
-            // 
-            // txtCurrentLat
-            // 
-            this.txtCurrentLat.Location = new System.Drawing.Point(342, 86);
-            this.txtCurrentLat.Name = "txtCurrentLat";
-            this.txtCurrentLat.Size = new System.Drawing.Size(100, 22);
-            this.txtCurrentLat.TabIndex = 6;
-            this.txtCurrentLat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textNumeric_KeyPress);
-            // 
-            // txtCurrentlon
-            // 
-            this.txtCurrentlon.Location = new System.Drawing.Point(584, 89);
-            this.txtCurrentlon.Name = "txtCurrentlon";
-            this.txtCurrentlon.Size = new System.Drawing.Size(100, 22);
-            this.txtCurrentlon.TabIndex = 5;
-            this.txtCurrentlon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textNumeric_KeyPress);
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(260, 314);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(75, 16);
-            this.label30.TabIndex = 36;
-            this.label30.Text = "Waypoint #";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(286, 18);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(267, 25);
-            this.label28.TabIndex = 35;
-            this.label28.Text = "Manual Path Generation";
-            // 
-            // cmbManPathWP
-            // 
-            this.cmbManPathWP.FormattingEnabled = true;
-            this.cmbManPathWP.Location = new System.Drawing.Point(341, 311);
-            this.cmbManPathWP.Name = "cmbManPathWP";
-            this.cmbManPathWP.Size = new System.Drawing.Size(121, 24);
-            this.cmbManPathWP.TabIndex = 33;
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(306, 49);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(30, 16);
-            this.label47.TabIndex = 32;
-            this.label47.Text = "POI";
-            this.label47.Click += new System.EventHandler(this.label47_Click);
-            // 
-            // cmbManLoc
-            // 
-            this.cmbManLoc.FormattingEnabled = true;
-            this.cmbManLoc.Location = new System.Drawing.Point(342, 46);
-            this.cmbManLoc.Name = "cmbManLoc";
-            this.cmbManLoc.Size = new System.Drawing.Size(250, 24);
-            this.cmbManLoc.TabIndex = 31;
-            this.cmbManLoc.SelectedIndexChanged += new System.EventHandler(this.cmbManLoc_SelectedIndexChanged);
-            // 
-            // cmbManPOI
-            // 
-            this.cmbManPOI.FormattingEnabled = true;
-            this.cmbManPOI.Location = new System.Drawing.Point(342, 163);
-            this.cmbManPOI.Name = "cmbManPOI";
-            this.cmbManPOI.Size = new System.Drawing.Size(250, 24);
-            this.cmbManPOI.TabIndex = 30;
-            // 
-            // chkManPOI
-            // 
-            this.chkManPOI.AutoSize = true;
-            this.chkManPOI.Location = new System.Drawing.Point(224, 165);
-            this.chkManPOI.Name = "chkManPOI";
-            this.chkManPOI.Size = new System.Drawing.Size(87, 20);
-            this.chkManPOI.TabIndex = 29;
-            this.chkManPOI.Text = "POI Mode";
-            this.chkManPOI.UseVisualStyleBackColor = true;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(328, 275);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(206, 25);
-            this.label39.TabIndex = 27;
-            this.label39.Text = "Manual Waypoints";
-            // 
-            // lblManualAlt
-            // 
-            this.lblManualAlt.AutoSize = true;
-            this.lblManualAlt.Location = new System.Drawing.Point(215, 205);
-            this.lblManualAlt.Name = "lblManualAlt";
-            this.lblManualAlt.Size = new System.Drawing.Size(121, 16);
-            this.lblManualAlt.TabIndex = 26;
-            this.lblManualAlt.Text = "Manual Altitude (m)";
-            // 
-            // btnClearManual
-            // 
-            this.btnClearManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearManual.Location = new System.Drawing.Point(333, 623);
-            this.btnClearManual.Name = "btnClearManual";
-            this.btnClearManual.Size = new System.Drawing.Size(162, 23);
-            this.btnClearManual.TabIndex = 22;
-            this.btnClearManual.Text = "Clear Waypoints";
-            this.btnClearManual.UseVisualStyleBackColor = true;
-            this.btnClearManual.Click += new System.EventHandler(this.btnClearManual_Click);
-            // 
-            // btnManualPath
-            // 
-            this.btnManualPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnManualPath.Location = new System.Drawing.Point(322, 722);
-            this.btnManualPath.Name = "btnManualPath";
-            this.btnManualPath.Size = new System.Drawing.Size(173, 23);
-            this.btnManualPath.TabIndex = 21;
-            this.btnManualPath.Text = "Generate Manual Path";
-            this.btnManualPath.UseVisualStyleBackColor = true;
-            this.btnManualPath.Click += new System.EventHandler(this.btnManualPath_Click);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(357, 697);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(122, 16);
-            this.label36.TabIndex = 20;
-            this.label36.Text = "Manual Path Name";
-            // 
-            // btnAddWaypoint
-            // 
-            this.btnAddWaypoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddWaypoint.Location = new System.Drawing.Point(291, 240);
-            this.btnAddWaypoint.Name = "btnAddWaypoint";
-            this.btnAddWaypoint.Size = new System.Drawing.Size(270, 23);
-            this.btnAddWaypoint.TabIndex = 13;
-            this.btnAddWaypoint.Text = "Generate Waypoint";
-            this.btnAddWaypoint.UseVisualStyleBackColor = true;
-            this.btnAddWaypoint.Click += new System.EventHandler(this.btnAddWaypoint_Click);
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(505, 127);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(61, 16);
-            this.label35.TabIndex = 12;
-            this.label35.Text = "Distance";
-            this.label35.Click += new System.EventHandler(this.label35_Click);
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(266, 127);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(55, 16);
-            this.label34.TabIndex = 11;
-            this.label34.Text = "Bearing";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(236, 89);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(100, 16);
-            this.label33.TabIndex = 8;
-            this.label33.Text = "Current Latitude";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(466, 92);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(112, 16);
-            this.label32.TabIndex = 7;
-            this.label32.Text = "Current Longitude";
-            // 
-            // dgvManualPath
-            // 
-            this.dgvManualPath.AllowUserToAddRows = false;
-            this.dgvManualPath.AllowUserToResizeRows = false;
-            this.dgvManualPath.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvManualPath.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            this.dgvManualPath.Location = new System.Drawing.Point(99, 382);
-            this.dgvManualPath.Name = "dgvManualPath";
-            this.dgvManualPath.Size = new System.Drawing.Size(617, 226);
-            this.dgvManualPath.TabIndex = 4;
-            this.dgvManualPath.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvManualPath_CellValidating);
-            this.dgvManualPath.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvManualPath_CellValueChanged);
-            this.dgvManualPath.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvManualPath_RowsRemoved);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Waypoint";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Latitude";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Longitude";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Altitude";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Heading";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // tabActions
             // 
@@ -2793,7 +2346,6 @@
             this.tabLocation.Controls.Add(this.tabPage1);
             this.tabLocation.Controls.Add(this.tabPage7);
             this.tabLocation.Controls.Add(this.tabActions);
-            this.tabLocation.Controls.Add(this.tabManual);
             this.tabLocation.Controls.Add(this.tabWayActions);
             this.tabLocation.Controls.Add(this.tabGMap);
             this.tabLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2828,11 +2380,6 @@
             this.tabWayActions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).EndInit();
-            this.tabManual.ResumeLayout(false);
-            this.tabManual.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvManualPath)).EndInit();
             this.tabActions.ResumeLayout(false);
             this.tabActions.PerformLayout();
             this.tabPage7.ResumeLayout(false);
@@ -2959,46 +2506,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.TabPage tabManual;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton radioRel;
-        private System.Windows.Forms.RadioButton radioAbs;
-        private System.Windows.Forms.ComboBox cmbManualReuse;
-        private System.Windows.Forms.RadioButton radioManReUse;
-        private System.Windows.Forms.RadioButton radioManNew;
-        private System.Windows.Forms.Label label93;
-        private System.Windows.Forms.Button btnCreateWPPOI;
-        private System.Windows.Forms.Label label87;
-        private System.Windows.Forms.TextBox txtManPathWPName;
-        private System.Windows.Forms.TextBox txtManualAlt;
-        private System.Windows.Forms.TextBox txtManualName;
-        private System.Windows.Forms.TextBox txtManualBearing;
-        private System.Windows.Forms.TextBox txtManualDistance;
-        private System.Windows.Forms.TextBox txtCurrentLat;
-        private System.Windows.Forms.TextBox txtCurrentlon;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.ComboBox cmbManPathWP;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.ComboBox cmbManLoc;
-        private System.Windows.Forms.ComboBox cmbManPOI;
-        private System.Windows.Forms.CheckBox chkManPOI;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label lblManualAlt;
-        private System.Windows.Forms.Button btnClearManual;
-        private System.Windows.Forms.Button btnManualPath;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Button btnAddWaypoint;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.DataGridView dgvManualPath;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.TabPage tabActions;
         private System.Windows.Forms.Label label71;
         private System.Windows.Forms.Button btnSaveAction;
