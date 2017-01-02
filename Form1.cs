@@ -438,59 +438,6 @@ namespace Waypoint_Path_Generator
             MessageBox.Show(messageBoxCS.ToString(), "Message");
         }
 
-        /*
-                private void btnOutputCVS_Click(object sender, EventArgs e)
-                {
-                    WayPoints point = new WayPoints();
-                    string str = "";
-                    string filename = txtCSVFilePath.Text;
-
-                    int pcount = 0;
-                    int point_count = Globals.waypoint_list.Count;
-                    if (point_count > 0)
-                    {
-                        do
-                        {
-                            point = Globals.waypoint_list.ElementAt(pcount);
-                            double lat = point.lat;
-                            double lon = point.lon;
-                            double altitude = point.alt;
-
-                            double head = point.head;
-                            double curvesize = point.curvesize;
-                            double rotationdir = point.rotationdir;
-                            int gimblemode = point.gimblemode;
-                            double gimblepitch = point.gimblepitch;
-                            if (!Globals.UnitsMetric)
-                            {
-                                altitude = GPS.FeetToMeters(altitude);
-                                curvesize = GPS.FeetToMeters(curvesize);
-                            }
-
-                            str = str + Convert.ToString(lat) + "," + Convert.ToString(lon);
-                            str = str + ", " + Convert.ToString(altitude);
-                            str = str + ", " + Convert.ToString(head);
-                            str = str + ", " + Convert.ToString(curvesize);
-                            str = str + ", " + Convert.ToString(rotationdir);
-                            str = str + ", " + Convert.ToString(gimblemode);
-                            str = str + ", " + Convert.ToString(gimblepitch);
-                            for (int i = 0; i < 15; i++)
-                            {
-                                str = str + ", " + Convert.ToString(point.actions[i, 0]);
-                                str = str + ", " + Convert.ToString(point.actions[i, 1]);
-                            }
-                            str = str + "\r\n";
-                            pcount++;
-
-                        } while (pcount < point_count);
-
-                        // Write to File 
-
-                        System.IO.File.WriteAllText(filename, str);
-                    }
-                    else { Message("Waypoint Count", Convert.ToString(point_count)); }
-                }
-        */
 
         private void txtCamHorAngle_TextChanged(object sender, EventArgs e)
         {
@@ -601,140 +548,6 @@ namespace Waypoint_Path_Generator
 
         }
 
-        /*
-                private void btnOutputKML_Click(object sender, EventArgs e)
-                {
-                    int pcount = 0;
-                    int point_count = Globals.waypoint_list.Count;
-                    if (point_count > 0)
-                    {
-                        double lat_center = Convert.ToDouble(txtCenterLat.Text);
-                        double lon_center = Convert.ToDouble(txtCenterLon.Text);
-                        double lat, new_lat, start_lat;
-                        double lon, new_lon, start_lon;
-                        double image_len = Convert.ToDouble(txtImageLength.Text) / 2;
-                        double image_wid = Convert.ToDouble(txtImageWidth.Text) / 2;
-                        double alt;
-                        double bear;
-                        string location_name = txtKMLPath.Text;
-                        string filename = txtKMLFilePath.Text;
-
-                        Kml kml = new Kml();
-
-                        Folder folder = new Folder();
-                        SharpKml.Dom.Placemark placemark = new SharpKml.Dom.Placemark();
-                        LineString linestring = new LineString();
-                        var vector = new Vector();
-                        CoordinateCollection coordinates = new CoordinateCollection();
-
-                        Style path_style = new Style();
-                        path_style.Polygon = new PolygonStyle();
-                        path_style.Line = new LineStyle();
-                        // Color32( alpha, blue, green, red
-                        path_style.Polygon.Color = new Color32(128, 255, 255, 0);
-                        path_style.Line.Color = new Color32(255, 255, 255, 0);
-                        linestring.AltitudeMode = AltitudeMode.RelativeToGround;
-                        linestring.Extrude = true;
-                        WayPoints point = new WayPoints();
-
-                        do
-                        {
-                            point = Globals.waypoint_list.ElementAt(pcount);
-                            lat = point.lat;
-                            lon = point.lon;
-                            alt = point.alt;
-                            if (!Globals.UnitsMetric) alt = GPS.FeetToMeters(alt);
-
-                            vector = new Vector(lat, lon, alt);
-
-                            coordinates.Add(vector);
-                            pcount++;
-                        } while (pcount < point_count);
-
-                        linestring.Coordinates = coordinates;
-                        placemark.Geometry = linestring;
-                        placemark.AddStyle(path_style);
-                        placemark.Name = location_name;
-                        folder.AddFeature(placemark);
-                        // kml.Feature = placemark;
-
-                        // Generate camera rectangles
-
-                        if (chkGenCamRect.Checked)
-                        {
-
-                            //image_len = 25;
-                            //image_wid = 50;
-                            double diag_ang = GPS.RadiansToDegrees(Math.Atan(image_len / image_wid));
-                            double diag_len = Math.Sqrt((image_len * image_len) + (image_wid * image_wid));
-
-                            for (int i = 0; i < Globals.waypoint_list.Count; i++)
-                            {
-                                Style poly_style = new Style();
-                                poly_style.Polygon = new PolygonStyle();
-                                poly_style.Line = new LineStyle();
-                                // Color32( alpha, blue, green, red
-                                poly_style.Polygon.Color = new Color32(128, 0, 255, 255);
-                                poly_style.Line.Color = new Color32(255, 0, 255, 255);
-                                Kml kml_rect = new Kml();
-                                SharpKml.Dom.Placemark rect_placemark = new SharpKml.Dom.Placemark();
-                                Polygon poly = new Polygon();
-                                OuterBoundary outer = new OuterBoundary();
-                                LinearRing line = new LinearRing();
-                                CoordinateCollection coor = new CoordinateCollection();
-                                poly.AltitudeMode = AltitudeMode.RelativeToGround;
-                                poly.Extrude = false;
-
-                                point = Globals.waypoint_list.ElementAt(i);
-                                lat = point.lat;
-                                lon = point.lon;
-                                //alt = point.alt;
-                                alt = 2;
-                                bear = point.head;
-                                coor.Clear();
-                                new_lat = GPS.GPS_Lat_BearDist(lat, lon, diag_ang + bear, diag_len, Globals.gps_radius);
-                                new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, diag_ang + bear, diag_len, Globals.gps_radius);
-                                start_lat = new_lat;
-                                start_lon = new_lon;
-                                vector = new Vector(new_lat, new_lon, alt);
-                                coor.Add(vector);
-                                new_lat = GPS.GPS_Lat_BearDist(lat, lon, 180 - diag_ang + bear, diag_len, Globals.gps_radius);
-                                new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 180 - diag_ang + bear, diag_len, Globals.gps_radius);
-                                vector = new Vector(new_lat, new_lon, alt);
-                                coor.Add(vector);
-                                new_lat = GPS.GPS_Lat_BearDist(lat, lon, 180 + diag_ang + bear, diag_len, Globals.gps_radius);
-                                new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 180 + diag_ang + bear, diag_len, Globals.gps_radius);
-                                vector = new Vector(new_lat, new_lon, alt);
-                                coor.Add(vector);
-                                new_lat = GPS.GPS_Lat_BearDist(lat, lon, 360 - diag_ang + bear, diag_len, Globals.gps_radius);
-                                new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 360 - diag_ang + bear, diag_len, Globals.gps_radius);
-                                vector = new Vector(new_lat, new_lon, alt);
-                                coor.Add(vector);
-                                vector = new Vector(start_lat, start_lon, alt);
-                                coor.Add(vector);
-
-                                line.Coordinates = coor;
-                                outer.LinearRing = line;
-                                poly.OuterBoundary = outer;
-
-                                rect_placemark.Geometry = poly;
-                                rect_placemark.AddStyle(poly_style);
-                                rect_placemark.Name = "WP " + Convert.ToString(i);
-                                folder.AddFeature(rect_placemark);
-                            }
-                        }
-
-                        kml.Feature = folder;
-                        Serializer serializer = new Serializer();
-                        serializer.Serialize(kml);
-
-
-                        System.IO.File.WriteAllText(filename, serializer.Xml);
-
-                    }
-                    else { Message("Waypoint Count", Convert.ToString(point_count)); }
-                }
-        */
 
         private void txtLocationName_TextChanged(object sender, EventArgs e)
         {
@@ -746,87 +559,6 @@ namespace Waypoint_Path_Generator
 
         }
 
-
-        /*
-                private void btnSelectKMLFile_Click(object sender, EventArgs e)
-                {
-                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                    {
-                        // Get kml filename
-
-                        string kml_file = openFileDialog1.FileName;
-
-                        if (kml_file.Contains(".kml"))
-                        {
-
-                            Globals.kml_filename = kml_file;
-                            rtbKMLRead.AppendText("KML File : " + kml_file + "\n");
-                            rtbKMLRead.AppendText("\n");
-
-                            // Open KML File
-
-                            System.IO.TextReader stream = System.IO.File.OpenText(kml_file);
-                            SharpKml.Engine.KmlFile file = KmlFile.Load(stream);
-                            Kml _kml = file.Root as Kml;
-
-                            SharpKml.Dom.Placemark[] tempPlaceMarks = new SharpKml.Dom.Placemark[1000];
-                            SharpKml.Dom.Placemark tmp_placemark = new SharpKml.Dom.Placemark();
-                            CoordinateCollection coordinates = new CoordinateCollection();
-
-
-                            Globals.kml_point_count = 0;
-
-                            //rtbKMLRead.AppendText("Waypoint Count : " + Convert.ToString(Globals.waypoint_count) + "\n");
-
-                            int numOfPlaceMarks = 0;
-
-                            if (_kml != null)
-                            {
-                                foreach (var placemark in _kml.Flatten().OfType<SharpKml.Dom.Placemark>())
-                                {
-                                    string placename = placemark.Name;
-                                    rtbKMLRead.AppendText("Placemark Name : " + placename + "\n");
-                                    tmp_placemark.Name = placename;
-                                    numOfPlaceMarks++;
-                                }
-                                rtbKMLRead.AppendText("Number of Placemarks : " + Convert.ToString(numOfPlaceMarks) + "\n");
-
-
-                                int num_linestring = 0;
-                                Vector vector;
-                                double lat;
-                                double lon;
-                                double alt;
-
-                                foreach (var linestring in _kml.Flatten().OfType<LineString>())
-                                {
-                                    coordinates = linestring.Coordinates;
-                                    int num = coordinates.Count;
-                                    rtbKMLRead.AppendText("Num Coordinates : " + Convert.ToString(num) + "\n");
-                                    for (int i = 0; i < num; i++)
-                                    {
-                                        vector = coordinates.ElementAt(i);
-                                        lat = vector.Latitude;
-                                        lon = vector.Longitude;
-                                        alt = (double)vector.Altitude;
-                                        rtbKMLRead.AppendText("Lat/Lon : " + Convert.ToString(lat));
-                                        rtbKMLRead.AppendText(", " + Convert.ToString(lon) + "Altitude : " + Convert.ToString(alt) + "\n");
-                                        Globals.kml_points[Globals.kml_point_count, 0] = lat;
-                                        Globals.kml_points[Globals.kml_point_count, 1] = lon;
-                                        Globals.kml_points[Globals.kml_point_count, 2] = alt;
-                                        Globals.kml_point_count++;
-                                        //dgvWaypoints.Rows.Add(Globals.waypoint_count, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(30));
-                                    }
-                                    num_linestring++;
-                                }
-                                rtbKMLRead.AppendText("Number of Linestrings : " + Convert.ToString(num_linestring) + "\n");
-
-                            }
-                        }
-                        else { MessageBox.Show("Wrong file type!", "GPS Grid:", MessageBoxButtons.OKCancel, MessageBoxIcon.Error); }
-                    }
-                }
-        */
         private void chkCircClearWaypoints_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -836,144 +568,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        /*
-        private void btnPolyPath_Click(object sender, EventArgs e)
-        {
-            int poly_index = cmbPolyPath.SelectedIndex;
-            if (poly_index == -1)
-            {
-                MessageBox.Show("Select Polygon");
-                return;
-            }
-
-            // Get Path
-
-            double lat, lat_next;
-            double lon, lon_next;
-            double alt = 30;
-            double head;
-            int gimblemode = 0;
-            double gimblepitch = 0;
-            double curvesize = 0;
-            double rotdir = 0;
-            int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-            Models.Shape poly = _wpg.ShapeAt(poly_index);
-            LinkedList<PolyPoint> points = poly.points;
-            LinkedList<WayPoints> waypoints = new LinkedList<WayPoints>();
-            string path_name = poly.name;
-            string path_type = "PolyPath";
-            for (int i = 0; i < points.Count; i++)
-            {
-                lat = points.ElementAt(i).lat;
-                lon = points.ElementAt(i).lon;
-                if (i < (points.Count - 1))
-                {
-                    lat_next = points.ElementAt(i + 1).lat;
-                    lon_next = points.ElementAt(i + 1).lon;
-                    head = GPS.GPS_Bearing(lat, lon, lat_next, lon_next);
-                }
-                else
-                {
-                    lat_next = points.ElementAt(0).lat;
-                    lon_next = points.ElementAt(0).lon;
-                    head = GPS.GPS_Bearing(lat, lon, lat_next, lon_next);
-                }
-                _wp.Add_Waypoint_List(waypoints, lat, lon, alt, head, curvesize, rotdir, gimblemode, gimblepitch, actions);
-            }
-
-            // Add Path
-
-            _path.Add_Path(_wpg, _gmap, path_name, path_type, waypoints);
-
-        }
-        */
-        /*
-                private void btnKMLProcess_Click(object sender, EventArgs e)
-                {
-                    int gimblemode = 0;
-                    double gimblepitch = 0;
-                    double curvesize = 0;
-                    double rotdir = 0;
-                    int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-                    string path_name = txtKMLPathName.Text;
-                    if (path_name == "") path_name = Globals.kml_filename;
-
-                    LinkedList<WayPoints> new_list = new LinkedList<WayPoints>();
-
-                    // Generate Waypoints for each coordinate
-
-                    for (int i = 0; i < Globals.kml_point_count; i++)
-                    {
-                        double lat = Globals.kml_points[i, 0];
-                        double lon = Globals.kml_points[i, 1];
-                        double alt = Globals.kml_points[i, 2];
-                        double heading = 0.0;
-
-                        // Calculate Heading for each Waypoint
-                        if (chKLMPOI.Checked)
-                        {
-                            int poi_index = cmbKLMPOI.SelectedIndex;
-                            POIPoints tmp_point = _wpg.POIPointAt(poi_index);
-                            double poi_lat = tmp_point.lat;
-                            double poi_lon = tmp_point.lon;
-                            heading = GPS.GPS_Bearing(lat, lon, poi_lat, poi_lon);
-                            gimblemode = 2;
-                            double distance = GPS.GPS_Distance(lat, lon, poi_lat, poi_lon, Globals.gps_radius);
-                            gimblepitch = -GPS.RadiansToDegrees(Math.Atan(alt / distance));
-                            gimblemode = 2;
-                        }
-                        else {
-                            if (i != Globals.kml_point_count - 1)
-                            {
-                                double lat_next = Globals.kml_points[i + 1, 0];
-                                double lon_next = Globals.kml_points[i + 1, 1];
-                                heading = GPS.GPS_Bearing(lat, lon, lat_next, lon_next);
-                            }
-                        }
-                        _wp.Add_Waypoint_List(new_list, lat, lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, actions);
-                        //dgvWaypoints.Rows.Add(Globals.waypoint_count + i+1, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt));
-                    }
-
-                    // Save Path 
-
-                    if (radioKMLNew.Checked)
-                    {
-                        _path.Add_Path(_wpg, _gmap, path_name, "KML", new_list);
-                    }
-                    else
-                    {
-                        int index = cmbKMLReuse.SelectedIndex;
-                        if (index == -1)
-                        {
-                            MessageBox.Show("Select an existing Path");
-                            cmbKMLReuse.ResetText();
-                            return;
-                        }
-                        Models.Path path = _wpg.PathAt(index);
-                        string exist_type = path.type;
-                        if (exist_type == "KML")
-                        {
-                            _wpg.ChangePathWP(index, new_list);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Select an existing Path of the same type");
-                            cmbKMLReuse.ResetText();
-                            return;
-                        }
-                        _wpg.ChangePathWP(index, new_list);
-                        cmbKMLReuse.ResetText();
-                    }
-
-                    //Add_Path(path_name, "KML", new_list);
-                    Update_DGVPath();
-                }
-
-                private void btnClearRTBPath_Click(object sender, EventArgs e)
-                {
-                    rtbKMLRead.Clear();
-                }
-        */
+ 
         private void txtHelixStartAlt_TextChanged(object sender, EventArgs e)
         {
 
@@ -993,91 +588,6 @@ namespace Waypoint_Path_Generator
         {
 
         }
-
-        /*
-        private void dgvPaths_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int row = e.RowIndex;
-            if (row == -1) return;
-            int col = e.ColumnIndex;
-            if (col != -1)
-            {
-                Models.Path path = _wpg.PathAt(row);
-                int path_id = path.id;
-                string path_name = path.name;
-                string path_type = path.type;
-                LinkedList<WayPoints> waypoints = path.waypoints;
-                int wpcount = Globals.waypoint_list.Count();
-                int count = 0;
-                int path_wcount = waypoints.Count();
-                while (count < path_wcount)
-                {
-                    double lat = waypoints.ElementAt(count).lat;
-                    double lon = waypoints.ElementAt(count).lon;
-                    double alt = waypoints.ElementAt(count).alt;
-                    double head = waypoints.ElementAt(count).head;
-                    double curvesize = waypoints.ElementAt(count).curvesize;
-                    double rotdir = waypoints.ElementAt(count).rotationdir;
-                    int gimblemode = waypoints.ElementAt(count).gimblemode;
-                    double gimblepitch = waypoints.ElementAt(count).gimblepitch;
-                    int[,] actions = waypoints.ElementAt(count).actions;
-
-                    if (head < 0.0) head = head + 360.0;
-                    dgvWaypoints.Rows.Add(count + wpcount, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt), Convert.ToString(head), Convert.ToString(gimblemode), Convert.ToString(gimblepitch));
-                    Add_Waypoint(lat, lon, alt, head, curvesize, rotdir, gimblemode, gimblepitch, actions);
-                    count++;
-                }
-            }
-        }
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-            int row = e.RowIndex;
-            int col = e.ColumnIndex;
-            Models.Path path = _wpg.PathAt(row);
-
-            if (col != 4)
-            {
-
-                int path_id = path.id;
-                string path_name = path.name;
-                string path_type = path.type;
-                LinkedList<WayPoints> waypoints = path.waypoints;
-                int wpcount = Globals.waypoint_list.Count();
-                int count = 0;
-                int path_wcount = waypoints.Count();
-                while (count < path_wcount)
-                {
-                    double lat = waypoints.ElementAt(count).lat;
-                    double lon = waypoints.ElementAt(count).lon;
-                    double alt = waypoints.ElementAt(count).alt;
-                    double head = waypoints.ElementAt(count).head;
-                    double curvesize = waypoints.ElementAt(count).curvesize;
-                    double rotdir = waypoints.ElementAt(count).rotationdir;
-                    int gimblemode = waypoints.ElementAt(count).gimblemode;
-                    double gimblepitch = waypoints.ElementAt(count).gimblepitch;
-                    int[,] actions = waypoints.ElementAt(count).actions;
-
-                    if (head < 0.0) head = head + 360.0;
-                    dgvWaypoints.Rows.Add(count + wpcount, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt), Convert.ToString(head), Convert.ToString(gimblemode), Convert.ToString(gimblepitch));
-                    Add_Waypoint(lat, lon, alt, head, curvesize, rotdir, gimblemode, gimblepitch, actions);
-                    count++;
-                }
-            }
-            else
-            {
-                // Delete Path
-
-                _wpg.DeletePath(path);
-                RemovePath_GMapTree(path);
-                _gmap.Delete_gMapPath(path);
-                //GMAPTree.Update_GMapTree(_wpg, treGMap);;
-                Update_DGVPath();
-                //Fill_Path_Table();
-            }
-        }
-        */
 
         private void dgvManualPath_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
@@ -3544,7 +3054,6 @@ namespace Waypoint_Path_Generator
         {
             _gmap.ReDrawgMap();
             Globals.MouseDown = false;
-            txtMouseStatus.Text = "Up";
             //cntxtgMap.Close();
             //GMAPTree.Update_GMapTree(_wpg, treGMap);;
             Update_POI_Dgv();
@@ -3560,7 +3069,6 @@ namespace Waypoint_Path_Generator
             int x = e.X;
             int y = e.Y;
             Globals.MouseDown = true;
-            txtMouseStatus.Text = "Down";
             //cntxtgMap.Show(x,y);
         }
 
@@ -3829,6 +3337,8 @@ namespace Waypoint_Path_Generator
 
             if (Globals.MouseDown & button == "Left")
             {
+                // Move Waypoints
+
                 for (int i = 0; i < path_count; i++)
                 {
                     Models.Path path = _wpg.PathAt(i);
@@ -3845,6 +3355,18 @@ namespace Waypoint_Path_Generator
                         wpcount++;
                     }
 
+                }
+
+                // Move POIs
+
+                for (int i = 0; i < _wpg.POICount(); i++)
+                {
+                    POIPoints pnt = _wpg.POIPointAt(i);
+                    if (pnt.selected)
+                    {
+                        pnt.lat = pnt.lat + lat_delta;
+                        pnt.lon = pnt.lon + lon_delta;
+                    }
                 }
                 _gmap.ReDrawgMap();
                 return;
@@ -4805,6 +4327,11 @@ namespace Waypoint_Path_Generator
                     MessageBox.Show(str);
                 }
             }
+        }
+
+        private void txtMouseStatus_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

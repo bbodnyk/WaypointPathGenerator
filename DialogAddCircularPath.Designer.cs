@@ -53,11 +53,13 @@
             this.trkNumPoints = new System.Windows.Forms.TrackBar();
             this.trkstartangle = new System.Windows.Forms.TrackBar();
             this.trkendangle = new System.Windows.Forms.TrackBar();
+            this.trkAlt = new System.Windows.Forms.TrackBar();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkstartangle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkendangle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAlt)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAddCircPath
@@ -84,7 +86,7 @@
             // 
             this.txtDiaAddCircPathAlt.Location = new System.Drawing.Point(145, 129);
             this.txtDiaAddCircPathAlt.Name = "txtDiaAddCircPathAlt";
-            this.txtDiaAddCircPathAlt.Size = new System.Drawing.Size(100, 20);
+            this.txtDiaAddCircPathAlt.Size = new System.Drawing.Size(32, 20);
             this.txtDiaAddCircPathAlt.TabIndex = 2;
             this.txtDiaAddCircPathAlt.Text = "30";
             this.txtDiaAddCircPathAlt.TextChanged += new System.EventHandler(this.txtDiaAddCircPathAlt_TextChanged);
@@ -280,6 +282,7 @@
             this.trkRadius.Name = "trkRadius";
             this.trkRadius.Size = new System.Drawing.Size(104, 42);
             this.trkRadius.TabIndex = 71;
+            this.trkRadius.TickFrequency = 10;
             this.trkRadius.Value = 30;
             this.trkRadius.Scroll += new System.EventHandler(this.trkRadius_Scroll);
             // 
@@ -301,6 +304,7 @@
             this.trkstartangle.Name = "trkstartangle";
             this.trkstartangle.Size = new System.Drawing.Size(104, 42);
             this.trkstartangle.TabIndex = 73;
+            this.trkstartangle.TickFrequency = 45;
             this.trkstartangle.Scroll += new System.EventHandler(this.trkstartangle_Scroll);
             // 
             // trkendangle
@@ -311,14 +315,27 @@
             this.trkendangle.Name = "trkendangle";
             this.trkendangle.Size = new System.Drawing.Size(104, 42);
             this.trkendangle.TabIndex = 74;
+            this.trkendangle.TickFrequency = 45;
             this.trkendangle.Value = 360;
             this.trkendangle.Scroll += new System.EventHandler(this.trkendangle_Scroll);
+            // 
+            // trkAlt
+            // 
+            this.trkAlt.Location = new System.Drawing.Point(183, 129);
+            this.trkAlt.Maximum = 129;
+            this.trkAlt.Minimum = 5;
+            this.trkAlt.Name = "trkAlt";
+            this.trkAlt.Size = new System.Drawing.Size(104, 42);
+            this.trkAlt.TabIndex = 75;
+            this.trkAlt.Value = 5;
+            this.trkAlt.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // dialogAddCircularPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 455);
+            this.Controls.Add(this.trkAlt);
             this.Controls.Add(this.trkendangle);
             this.Controls.Add(this.trkstartangle);
             this.Controls.Add(this.trkNumPoints);
@@ -351,6 +368,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkstartangle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkendangle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkAlt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,5 +401,6 @@
         private System.Windows.Forms.TrackBar trkNumPoints;
         private System.Windows.Forms.TrackBar trkstartangle;
         private System.Windows.Forms.TrackBar trkendangle;
+        private System.Windows.Forms.TrackBar trkAlt;
     }
 }

@@ -216,6 +216,7 @@ namespace Waypoint_Path_Generator
 
         private void txtDiaAddCircPathAlt_TextChanged(object sender, EventArgs e)
         {
+            trkAlt.Value = Convert.ToInt16(txtDiaAddCircPathAlt.Text);
             buildCircPath();
         }
 
@@ -226,26 +227,31 @@ namespace Waypoint_Path_Generator
 
         private void txtDiaAddCircPathRadius_TextChanged(object sender, EventArgs e)
         {
+            trkRadius.Value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
             buildCircPath();
         }
 
         private void txtCircNumPoints_TextChanged(object sender, EventArgs e)
         {
+            trkNumPoints.Value = Convert.ToInt16(txtCircNumPoints.Text);
             buildCircPath();
         }
 
         private void txtCircStartAngle_TextChanged(object sender, EventArgs e)
         {
+            trkstartangle.Value = Convert.ToInt16(txtCircStartAngle.Text);
             buildCircPath();
         }
 
         private void txtCircEndAngle_TextChanged(object sender, EventArgs e)
         {
+            trkendangle.Value = Convert.ToInt16(txtCircSpan.Text);
             buildCircPath();
         }
 
         private void chkFullCircle_CheckedChanged(object sender, EventArgs e)
         {
+            txtCircSpan.Text = "360";
             buildCircPath();
         }
 
@@ -287,6 +293,11 @@ namespace Waypoint_Path_Generator
         private void label12_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            txtDiaAddCircPathAlt.Text = Convert.ToString(trkAlt.Value);
         }
     }
 }

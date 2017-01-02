@@ -227,36 +227,43 @@ namespace Waypoint_Path_Generator
 
         private void txtHelixStartAlt_TextChanged(object sender, EventArgs e)
         {
+            trkStartAlt.Value = Convert.ToInt16(txtHelixStartAlt.Text);
             buildHelicalPath();
         }
 
         private void txtHelixEndAlt_TextChanged(object sender, EventArgs e)
         {
+            trkEndAlt.Value = Convert.ToInt16(txtHelixEndAlt.Text);
             buildHelicalPath();
         }
 
         private void txtHelixStartRadius_TextChanged(object sender, EventArgs e)
         {
+            trkStartRad.Value = Convert.ToInt16(txtHelixStartRadius.Text);
             buildHelicalPath();
         }
 
         private void txtHelixEndRadius_TextChanged(object sender, EventArgs e)
         {
+            trkEndRad.Value = Convert.ToInt16(txtHelixEndRadius.Text);
             buildHelicalPath();
         }
 
         private void txtHelixStartAngle_TextChanged(object sender, EventArgs e)
         {
+            trkStartAngle.Value = Convert.ToInt16(txtHelixStartAngle.Text);
             buildHelicalPath();
         }
 
         private void txtHelixEndAngle_TextChanged(object sender, EventArgs e)
         {
+            trkHelixSpan.Value = Convert.ToInt16(txtHelixSpan.Text);
             buildHelicalPath();
         }
 
         private void txtHelixNumPoints_TextChanged(object sender, EventArgs e)
         {
+            trkNumPoints.Value = Convert.ToInt16(txtHelixNumPoints.Text);
             buildHelicalPath();
         }
 

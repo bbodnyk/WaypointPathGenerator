@@ -222,6 +222,7 @@
             this.trkStartAlt.Name = "trkStartAlt";
             this.trkStartAlt.Size = new System.Drawing.Size(104, 42);
             this.trkStartAlt.TabIndex = 79;
+            this.trkStartAlt.TickFrequency = 10;
             this.trkStartAlt.Value = 60;
             this.trkStartAlt.Scroll += new System.EventHandler(this.trkStartAlt_Scroll);
             // 
@@ -233,28 +234,31 @@
             this.trkEndAlt.Name = "trkEndAlt";
             this.trkEndAlt.Size = new System.Drawing.Size(104, 42);
             this.trkEndAlt.TabIndex = 80;
+            this.trkEndAlt.TickFrequency = 10;
             this.trkEndAlt.Value = 10;
             this.trkEndAlt.Scroll += new System.EventHandler(this.trkEndAlt_Scroll);
             // 
             // trkStartRad
             // 
             this.trkStartRad.Location = new System.Drawing.Point(103, 180);
-            this.trkStartRad.Maximum = 100;
+            this.trkStartRad.Maximum = 500;
             this.trkStartRad.Minimum = 3;
             this.trkStartRad.Name = "trkStartRad";
             this.trkStartRad.Size = new System.Drawing.Size(104, 42);
             this.trkStartRad.TabIndex = 81;
+            this.trkStartRad.TickFrequency = 10;
             this.trkStartRad.Value = 50;
             this.trkStartRad.Scroll += new System.EventHandler(this.trkStartRad_Scroll);
             // 
             // trkEndRad
             // 
             this.trkEndRad.Location = new System.Drawing.Point(249, 180);
-            this.trkEndRad.Maximum = 100;
+            this.trkEndRad.Maximum = 500;
             this.trkEndRad.Minimum = 3;
             this.trkEndRad.Name = "trkEndRad";
             this.trkEndRad.Size = new System.Drawing.Size(104, 42);
             this.trkEndRad.TabIndex = 82;
+            this.trkEndRad.TickFrequency = 10;
             this.trkEndRad.Value = 10;
             this.trkEndRad.Scroll += new System.EventHandler(this.trkEndRad_Scroll);
             // 
@@ -283,6 +287,7 @@
             this.trkStartAngle.Name = "trkStartAngle";
             this.trkStartAngle.Size = new System.Drawing.Size(104, 42);
             this.trkStartAngle.TabIndex = 85;
+            this.trkStartAngle.TickFrequency = 10;
             this.trkStartAngle.Scroll += new System.EventHandler(this.trkStartAngle_Scroll);
             // 
             // trkHelixSpan
@@ -293,6 +298,7 @@
             this.trkHelixSpan.Name = "trkHelixSpan";
             this.trkHelixSpan.Size = new System.Drawing.Size(104, 42);
             this.trkHelixSpan.TabIndex = 86;
+            this.trkHelixSpan.TickFrequency = 100;
             this.trkHelixSpan.Value = 360;
             this.trkHelixSpan.Scroll += new System.EventHandler(this.trkEndAngle_Scroll);
             // 
@@ -313,6 +319,7 @@
             this.trkNumPoints.Name = "trkNumPoints";
             this.trkNumPoints.Size = new System.Drawing.Size(104, 42);
             this.trkNumPoints.TabIndex = 90;
+            this.trkNumPoints.TickFrequency = 2;
             this.trkNumPoints.Value = 16;
             this.trkNumPoints.Scroll += new System.EventHandler(this.trkNumPoints_Scroll);
             // 

@@ -44,11 +44,25 @@ namespace Waypoint_Path_Generator
 
         private void btnAddPOI_Click(object sender, EventArgs e)
         {
+            // Get the POI Name
+
             string poi_name = txtAddPOIName.Text;
             if(poi_name == null | poi_name == "")
             {
                 MessageBox.Show("Enter a POI Name");
                 return;
+            }
+
+            // Make sure POI Name is Unique
+
+            for(int i = 0; i< _wpg.POICount(); i++)
+            {
+                POIPoints pnt = _wpg.POIPointAt(i);
+                if(poi_name == pnt.name)
+                {
+                    MessageBox.Show("Name previously used, Enter a unique name");
+                    return;
+                }
             }
 
             POIPoints poipoint = new POIPoints();

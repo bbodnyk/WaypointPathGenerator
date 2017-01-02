@@ -50,13 +50,17 @@
             this.trkHeading = new System.Windows.Forms.TrackBar();
             this.trkCurveSize = new System.Windows.Forms.TrackBar();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtWPIndex = new System.Windows.Forms.TextBox();
+            this.btnPrevWP = new System.Windows.Forms.Button();
+            this.btnNextWP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trkHeading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkCurveSize)).BeginInit();
             this.SuspendLayout();
             // 
             // txtwplat
             // 
-            this.txtwplat.Location = new System.Drawing.Point(87, 16);
+            this.txtwplat.Location = new System.Drawing.Point(86, 40);
             this.txtwplat.Name = "txtwplat";
             this.txtwplat.ReadOnly = true;
             this.txtwplat.Size = new System.Drawing.Size(100, 20);
@@ -64,7 +68,7 @@
             // 
             // txtwplon
             // 
-            this.txtwplon.Location = new System.Drawing.Point(87, 42);
+            this.txtwplon.Location = new System.Drawing.Point(86, 66);
             this.txtwplon.Name = "txtwplon";
             this.txtwplon.ReadOnly = true;
             this.txtwplon.Size = new System.Drawing.Size(100, 20);
@@ -73,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 19);
+            this.label1.Location = new System.Drawing.Point(32, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 2;
@@ -82,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 45);
+            this.label2.Location = new System.Drawing.Point(32, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
             this.label2.TabIndex = 3;
@@ -90,7 +94,7 @@
             // 
             // txtwpalt
             // 
-            this.txtwpalt.Location = new System.Drawing.Point(87, 68);
+            this.txtwpalt.Location = new System.Drawing.Point(86, 92);
             this.txtwpalt.Name = "txtwpalt";
             this.txtwpalt.Size = new System.Drawing.Size(100, 20);
             this.txtwpalt.TabIndex = 4;
@@ -99,7 +103,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 71);
+            this.label3.Location = new System.Drawing.Point(35, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 5;
@@ -107,7 +111,7 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(21, 342);
+            this.btnAccept.Location = new System.Drawing.Point(26, 384);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(103, 23);
             this.btnAccept.TabIndex = 6;
@@ -117,7 +121,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(185, 342);
+            this.btnCancel.Location = new System.Drawing.Point(190, 384);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -127,7 +131,7 @@
             // 
             // txtwphead
             // 
-            this.txtwphead.Location = new System.Drawing.Point(87, 94);
+            this.txtwphead.Location = new System.Drawing.Point(86, 118);
             this.txtwphead.Name = "txtwphead";
             this.txtwphead.Size = new System.Drawing.Size(37, 20);
             this.txtwphead.TabIndex = 8;
@@ -135,7 +139,7 @@
             // 
             // txtwpcurvesize
             // 
-            this.txtwpcurvesize.Location = new System.Drawing.Point(87, 129);
+            this.txtwpcurvesize.Location = new System.Drawing.Point(86, 153);
             this.txtwpcurvesize.Name = "txtwpcurvesize";
             this.txtwpcurvesize.Size = new System.Drawing.Size(37, 20);
             this.txtwpcurvesize.TabIndex = 9;
@@ -143,14 +147,14 @@
             // 
             // txtwprotdirection
             // 
-            this.txtwprotdirection.Location = new System.Drawing.Point(87, 164);
+            this.txtwprotdirection.Location = new System.Drawing.Point(86, 188);
             this.txtwprotdirection.Name = "txtwprotdirection";
             this.txtwprotdirection.Size = new System.Drawing.Size(100, 20);
             this.txtwprotdirection.TabIndex = 10;
             // 
             // txtwpgimblemode
             // 
-            this.txtwpgimblemode.Location = new System.Drawing.Point(87, 200);
+            this.txtwpgimblemode.Location = new System.Drawing.Point(86, 224);
             this.txtwpgimblemode.Name = "txtwpgimblemode";
             this.txtwpgimblemode.Size = new System.Drawing.Size(100, 20);
             this.txtwpgimblemode.TabIndex = 11;
@@ -158,7 +162,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 97);
+            this.label4.Location = new System.Drawing.Point(30, 121);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 12;
@@ -168,7 +172,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 132);
+            this.label5.Location = new System.Drawing.Point(19, 156);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 13;
@@ -176,7 +180,7 @@
             // 
             // txtgimblepitch
             // 
-            this.txtgimblepitch.Location = new System.Drawing.Point(87, 234);
+            this.txtgimblepitch.Location = new System.Drawing.Point(86, 258);
             this.txtgimblepitch.Name = "txtgimblepitch";
             this.txtgimblepitch.Size = new System.Drawing.Size(37, 20);
             this.txtgimblepitch.TabIndex = 14;
@@ -184,7 +188,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 167);
+            this.label6.Location = new System.Drawing.Point(14, 191);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 13);
             this.label6.TabIndex = 15;
@@ -193,7 +197,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 203);
+            this.label7.Location = new System.Drawing.Point(8, 227);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 13);
             this.label7.TabIndex = 16;
@@ -202,7 +206,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 237);
+            this.label8.Location = new System.Drawing.Point(8, 261);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 13);
             this.label8.TabIndex = 17;
@@ -211,14 +215,15 @@
             // cmbActions
             // 
             this.cmbActions.FormattingEnabled = true;
-            this.cmbActions.Location = new System.Drawing.Point(87, 270);
+            this.cmbActions.Location = new System.Drawing.Point(86, 294);
             this.cmbActions.Name = "cmbActions";
             this.cmbActions.Size = new System.Drawing.Size(121, 21);
             this.cmbActions.TabIndex = 18;
+            this.cmbActions.SelectedIndexChanged += new System.EventHandler(this.cmbActions_SelectedIndexChanged);
             // 
             // trkHeading
             // 
-            this.trkHeading.Location = new System.Drawing.Point(130, 94);
+            this.trkHeading.Location = new System.Drawing.Point(129, 118);
             this.trkHeading.Maximum = 360;
             this.trkHeading.Name = "trkHeading";
             this.trkHeading.Size = new System.Drawing.Size(104, 42);
@@ -227,7 +232,7 @@
             // 
             // trkCurveSize
             // 
-            this.trkCurveSize.Location = new System.Drawing.Point(130, 129);
+            this.trkCurveSize.Location = new System.Drawing.Point(129, 153);
             this.trkCurveSize.Maximum = 30;
             this.trkCurveSize.Name = "trkCurveSize";
             this.trkCurveSize.Size = new System.Drawing.Size(104, 42);
@@ -237,17 +242,58 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(31, 273);
+            this.label9.Location = new System.Drawing.Point(30, 297);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 13);
             this.label9.TabIndex = 21;
             this.label9.Text = "Actions";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(11, 12);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(66, 13);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "Waypoint ID";
+            // 
+            // txtWPIndex
+            // 
+            this.txtWPIndex.Location = new System.Drawing.Point(86, 9);
+            this.txtWPIndex.Name = "txtWPIndex";
+            this.txtWPIndex.ReadOnly = true;
+            this.txtWPIndex.Size = new System.Drawing.Size(100, 20);
+            this.txtWPIndex.TabIndex = 23;
+            // 
+            // btnPrevWP
+            // 
+            this.btnPrevWP.Location = new System.Drawing.Point(26, 327);
+            this.btnPrevWP.Name = "btnPrevWP";
+            this.btnPrevWP.Size = new System.Drawing.Size(103, 23);
+            this.btnPrevWP.TabIndex = 24;
+            this.btnPrevWP.Text = "Previous WP";
+            this.btnPrevWP.UseVisualStyleBackColor = true;
+            this.btnPrevWP.Click += new System.EventHandler(this.btnPrevWP_Click);
+            // 
+            // btnNextWP
+            // 
+            this.btnNextWP.Location = new System.Drawing.Point(145, 327);
+            this.btnNextWP.Name = "btnNextWP";
+            this.btnNextWP.Size = new System.Drawing.Size(88, 23);
+            this.btnNextWP.TabIndex = 25;
+            this.btnNextWP.Text = "Next WP";
+            this.btnNextWP.UseVisualStyleBackColor = true;
+            this.btnNextWP.Click += new System.EventHandler(this.btnNextWP_Click);
+            // 
             // DialogEditWP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 391);
+            this.ClientSize = new System.Drawing.Size(292, 434);
+            this.Controls.Add(this.btnNextWP);
+            this.Controls.Add(this.btnPrevWP);
+            this.Controls.Add(this.txtWPIndex);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtwprotdirection);
             this.Controls.Add(this.trkCurveSize);
@@ -273,6 +319,7 @@
             this.Name = "DialogEditWP";
             this.Text = "Edit Waypoint";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.DialogEditWP_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trkHeading)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkCurveSize)).EndInit();
             this.ResumeLayout(false);
@@ -304,5 +351,9 @@
         private System.Windows.Forms.TrackBar trkHeading;
         private System.Windows.Forms.TrackBar trkCurveSize;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtWPIndex;
+        private System.Windows.Forms.Button btnPrevWP;
+        private System.Windows.Forms.Button btnNextWP;
     }
 }

@@ -123,7 +123,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtMouseStatus = new System.Windows.Forms.TextBox();
             this.txtMouseLon = new System.Windows.Forms.TextBox();
             this.txtMouseLat = new System.Windows.Forms.TextBox();
             this.btngMapRedraw = new System.Windows.Forms.Button();
@@ -345,7 +344,7 @@
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 526);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 504);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -931,7 +930,6 @@
             this.tabGMap.Controls.Add(this.label5);
             this.tabGMap.Controls.Add(this.label4);
             this.tabGMap.Controls.Add(this.label3);
-            this.tabGMap.Controls.Add(this.txtMouseStatus);
             this.tabGMap.Controls.Add(this.txtMouseLon);
             this.tabGMap.Controls.Add(this.txtMouseLat);
             this.tabGMap.Controls.Add(this.btngMapRedraw);
@@ -1024,13 +1022,6 @@
             this.label3.Size = new System.Drawing.Size(55, 16);
             this.label3.TabIndex = 32;
             this.label3.Text = "Latitude";
-            // 
-            // txtMouseStatus
-            // 
-            this.txtMouseStatus.Location = new System.Drawing.Point(757, 58);
-            this.txtMouseStatus.Name = "txtMouseStatus";
-            this.txtMouseStatus.Size = new System.Drawing.Size(63, 22);
-            this.txtMouseStatus.TabIndex = 30;
             // 
             // txtMouseLon
             // 
@@ -2921,7 +2912,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectedPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectedPolygonToolStripMenuItem;
         private System.Windows.Forms.TabPage tabGMap;
-        private System.Windows.Forms.TextBox txtMouseStatus;
         private System.Windows.Forms.TextBox txtMouseLon;
         private System.Windows.Forms.TextBox txtMouseLat;
         private System.Windows.Forms.Button btngMapRedraw;
