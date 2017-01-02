@@ -391,10 +391,16 @@ namespace Waypoint_Path_Generator
             return _center;
         }
 
+        public void SetCenter(double lat, double lon)
+        {
+            PointLatLng pnt = new PointLatLng(lat, lon);
+            _mapcontrol.Position = pnt;
+        }
+
         public void Add_gMapPOI(POIPoints point)
         {
             string pnt_name = point.name;
-            _mapcontrol.Position = new global::GMap.NET.PointLatLng(point.lat, point.lon);
+            //_mapcontrol.Position = new global::GMap.NET.PointLatLng(point.lat, point.lon);
             GMapMarker marker = new GMarkerGoogle(
                 new PointLatLng(point.lat, point.lon),
                 GMarkerGoogleType.blue_pushpin);

@@ -2164,6 +2164,7 @@ namespace Waypoint_Path_Generator
             int index = cmbGMapProvider.SelectedIndex;
             _gmap = new GMAP(_wpg, gMapControl, index);
             _gmap.BuildgMap();
+            _gmap.SetCenter(Globals.map_center.Lat, Globals.map_center.Lng);
             //GMAPTree.Update_GMapTree(_wpg, treGMap);;
         }
 
