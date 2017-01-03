@@ -16,17 +16,20 @@ namespace Waypoint_Path_Generator
 
         private Waypoint_Path_Gen _wpg;
         private GMAP _gmap;
+        private Options _options;
         private TreeView _treeview;
         Models.Path _path = new Models.Path();
         WayPoints _wp = new WayPoints();
         int _current_path_index = -1;
 
-        public DialogPolyPerimPath(Waypoint_Path_Gen wpg, GMAP gmap, TreeView treeview)
+        public DialogPolyPerimPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, TreeView treeview)
         {
             _wpg = wpg;
             _gmap = gmap;
+            _options = options;
             _treeview = treeview;
             InitializeComponent();
+            txtAltPolyPath.Text = Convert.ToString(_options.def_altitude);
             cmbPolyPath.Items.Clear();
             for(int i = 0; i < _wpg.ShapeCount(); i++)
             {

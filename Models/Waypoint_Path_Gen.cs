@@ -463,7 +463,7 @@ namespace Waypoint_Path_Generator.Models
                 xml_writer.WriteStartElement("Config"); // Start of Config
                                                         //MessageBox.Show(Globals.default_location);
                 xml_writer.WriteElementString("Default_Location", Form1.Globals.default_location);
-                xml_writer.WriteElementString("Default_Altitude", Form1.Globals.default_altitude);
+                xml_writer.WriteElementString("Default_Altitude", Convert.ToString(_options.def_altitude));
                 xml_writer.WriteElementString("Out_CVS_Path", _options.def_csv_path);
                 xml_writer.WriteElementString("Out_KML_Path", _options.def_kml_path);
                 xml_writer.WriteElementString("Cam_Hor_Angle", Form1.Globals.default_cam_hor_ang);
@@ -609,13 +609,17 @@ namespace Waypoint_Path_Generator.Models
             foreach (XmlNode node in configlist)
             {
                 Form1.Globals.default_location = node.SelectSingleNode("Default_Location").InnerText;
-                Form1.Globals.default_altitude = node.SelectSingleNode("Default_Altitude").InnerText;
+                _options.def_altitude = Convert.ToDouble(node.SelectSingleNode("Default_Altitude").InnerText);
                 _options.def_csv_path = node.SelectSingleNode("Out_CVS_Path").InnerText;
                 _options.def_kml_path = node.SelectSingleNode("Out_KML_Path").InnerText;
                 Form1.Globals.default_cam_hor_ang = node.SelectSingleNode("Cam_Hor_Angle").InnerText;
                 Form1.Globals.default_cam_ver_ang = node.SelectSingleNode("Cam_Ver_Angle").InnerText;
+                _options.focal_angle_hor = Convert.ToDouble(Form1.Globals.default_cam_hor_ang);
+                _options.focal_angle_ver = Convert.ToDouble(Form1.Globals.default_cam_ver_ang);
                 Form1.Globals.default_cam_hor_over = node.SelectSingleNode("Cam_Hor_OverLap").InnerText;
                 Form1.Globals.default_cam_ver_over = node.SelectSingleNode("Cam_Ver_OverLap").InnerText;
+                _options.hor_overlap_percent = Convert.ToDouble(Form1.Globals.default_cam_hor_over);
+                _options.hor_overlap_percent = Convert.ToDouble(Form1.Globals.default_cam_ver_over);
                 _options.earth_radius = Convert.ToDouble(node.SelectSingleNode("Earth_Radius").InnerText);
             }
         }

@@ -510,6 +510,7 @@ namespace Waypoint_Path_Generator
                         }
                         else found = false;
                     }
+                    else found = false;
                 }
 
             } while (found);

@@ -101,7 +101,7 @@ namespace Waypoint_Path_Generator
             public static double mouse_down_lat;
             public static double mouse_down_lon;
             public static string default_location;
-            public static string default_altitude;
+            //public static string default_altitude;
             //public static string default_out_csv_file = "c:\\tmp\\waypoints.csv";
             //public static string default_out_kml_file = "c:\\tmp\\waypoints.kml";
             public static string default_cam_hor_ang = "81";
@@ -262,29 +262,21 @@ namespace Waypoint_Path_Generator
             Globals.UnitsMetric = false;
             lblAltitude.Text = "Altitude (ft)";
             lblElevation.Text = "Elevation (ft)";
-            lblImageLength.Text = "Image Length (ft)";
-            lblImageWidth.Text = "Image Width (ft)";
             txtElevation.Text = Convert.ToString(GPS.MetersToFeet(Convert.ToDouble(txtElevation.Text)));
             //txtImageLength.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageWidth.Text)));
             double alt = Convert.ToDouble(txtAltitude.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(81.0 / 2)) * alt));
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(66.0 / 2)) * alt));
-        }
+            }
 
         private void metricToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Globals.UnitsMetric = true;
             lblAltitude.Text = "Altitude (m)";
             lblElevation.Text = "Elevation (m)";
-            lblImageLength.Text = "Image Length (m)";
-            lblImageWidth.Text = "Image Width (m)";
             txtElevation.Text = Convert.ToString(GPS.FeetToMeters(Convert.ToDouble(txtElevation.Text)));
             //txtImageLength.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageLength.Text)));
             //txtImageWidth.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageWidth.Text)));         
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(81.0 / 2)) * Convert.ToDouble(txtAltitude.Text)));
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(66.0 / 2)) * Convert.ToDouble(txtAltitude.Text)));
-        }
+            }
 
 
 
@@ -295,21 +287,14 @@ namespace Waypoint_Path_Generator
 
         public void Update_GUI()
         {
-            string save = Globals.default_altitude;
             int index = cmbLocation.FindStringExact(Globals.default_location);
             cmbLocation.SelectedIndex = index;
-            txtAltitude.Text = save;
-            txtCamHorAngle.Text = Globals.default_cam_hor_ang;
-            txtCamVerAngle.Text = Globals.default_cam_ver_ang;
-            txtImageHorOverlap.Text = Globals.default_cam_hor_over;
-            txtImageVerOverlap.Text = Globals.default_cam_ver_over;
+            txtAltitude.Text = Convert.ToString(_options.def_altitude);
             txtEarthRadius.Text = Convert.ToString(_options.earth_radius);
-            double alt = Convert.ToDouble(txtAltitude.Text);
-            double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
-            double ver_ang = Convert.ToDouble(txtCamVerAngle.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(hor_ang / 2)) * alt));
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(ver_ang / 2)) * alt));
-        }
+            double alt = Convert.ToDouble(_options.def_altitude);
+            double hor_ang = _options.focal_angle_hor;
+            double ver_ang = _options.focal_angle_ver;
+            }
 
 
 
@@ -428,7 +413,7 @@ namespace Waypoint_Path_Generator
             MessageBox.Show(messageBoxCS.ToString(), "Message");
         }
 
-
+        /*
         private void txtCamHorAngle_TextChanged(object sender, EventArgs e)
         {
             double alt = Convert.ToDouble(txtAltitude.Text);
@@ -454,7 +439,7 @@ namespace Waypoint_Path_Generator
             txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(ver_ang / 2)) * alt));
             Globals.default_cam_ver_ang = txtCamVerAngle.Text;
         }
-
+        */
         private void txtElevation_TextChanged(object sender, EventArgs e)
         {
 
@@ -512,14 +497,7 @@ namespace Waypoint_Path_Generator
 
         private void txtAltitude_TextChanged(object sender, EventArgs e)
         {
-            Globals.default_altitude = txtAltitude.Text;
-            double alt = Convert.ToDouble(txtAltitude.Text);
-            double hor_ang = Convert.ToDouble(txtCamHorAngle.Text);
-            txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(hor_ang / 2)) * alt));
-
-            alt = Convert.ToDouble(txtAltitude.Text);
-            double ver_ang = Convert.ToDouble(txtCamVerAngle.Text);
-            txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(ver_ang / 2)) * alt));
+            _options.def_altitude = Convert.ToDouble(txtAltitude.Text);
         }
 
         private void rtbCircle_TextChanged(object sender, EventArgs e)
@@ -2603,7 +2581,7 @@ namespace Waypoint_Path_Generator
                 _wp.head = GPS.GPS_Bearing(lat_last, lon_last, lat, lon);
                 _wp.visible = true;
                 _wp.selected = false;
-                _wp.alt = 30;
+                _wp.alt = _options.def_altitude;
                 _wp.actions = actions;
                 wp_list.AddLast(_wp);
                 _path.waypoints = wp_list;
@@ -2776,7 +2754,7 @@ namespace Waypoint_Path_Generator
 
         private void addCircularPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -2790,11 +2768,9 @@ namespace Waypoint_Path_Generator
 
         private void addManualPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            double cam_length = Convert.ToDouble(txtImageLength.Text);
-            double cam_width = Convert.ToDouble(txtImageWidth.Text);
-            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon,
-                Convert.ToDouble(Globals.default_cam_hor_ang), Convert.ToDouble(Globals.default_cam_ver_ang),
-                Convert.ToDouble(Globals.default_cam_hor_over), Convert.ToDouble(Globals.default_cam_ver_over));
+            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon,
+                _options.focal_angle_hor, _options.focal_angle_hor,
+                _options.hor_overlap_percent, _options.hor_overlap_percent);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -2811,8 +2787,8 @@ namespace Waypoint_Path_Generator
             }
 
             DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon,
-                Convert.ToDouble(Globals.default_cam_hor_ang), Convert.ToDouble(Globals.default_cam_ver_ang),
-                Convert.ToDouble(Globals.default_cam_hor_over), Convert.ToDouble(Globals.default_cam_ver_over));
+                _options.focal_angle_hor, _options.focal_angle_ver,
+                _options.hor_overlap_percent, _options.ver_overlap_percent);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -2872,12 +2848,6 @@ namespace Waypoint_Path_Generator
 
         private void toolDeleteShape_Click(object sender, EventArgs e)
         {
-            for (int i = _wpg.ShapeCount() - 1; i >= 0; i--)
-            {
-                if (_wpg.ShapeAt(i).selected) _wpg.DeleteShape(_wpg.ShapeAt(i));
-            }
-            _gmap.ReDrawgMap();
-            GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void kMLPolygonToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2889,7 +2859,7 @@ namespace Waypoint_Path_Generator
 
         private void ToolAddPolyPerimPath_Click(object sender, EventArgs e)
         {
-            DialogPolyPerimPath dialog = new DialogPolyPerimPath(_wpg, _gmap, treGMap);
+            DialogPolyPerimPath dialog = new DialogPolyPerimPath(_wpg, _gmap, _options, treGMap);
             dialog.Show();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
@@ -3149,38 +3119,12 @@ namespace Waypoint_Path_Generator
             }
         }
 
-        // Delete Selected POI 
-
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            // Only 1 waypoint can be selected
-
-            int poi_count = _wpg.SelectedPOICount();
-            if (poi_count != 1)
-            {
-                MessageBox.Show("Select a single POI");
-                return;
-            }
-
-            // Get selected POI
-
-            for (int i = 0; i < _wpg.POICount(); i++)
-            {
-                if (_wpg.POIPointAt(i).selected)
-                {
-                    _wpg.POIPointDeleteAt(i);
-                    break;
-                }
-            }
-            GMAPTree.Update_GMapTree(_wpg, treGMap);
-            _gmap.ReDrawgMap();
-        }
-
+        
         private void toolAddManualPath_Click(object sender, EventArgs e)
         {
             _path = new Models.Path();
             Globals.path_active = true;
-            DialogManualPath dialog = new DialogManualPath(_wpg, _gmap, treGMap, _path, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            DialogManualPath dialog = new DialogManualPath(_wpg, _gmap, treGMap, _path, _options, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.Show();
         }
 
@@ -3509,6 +3453,117 @@ namespace Waypoint_Path_Generator
         private void txtMouseStatus_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        // Delete Selected POI 
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            // Only 1 waypoint can be selected
+
+            int poi_count = _wpg.SelectedPOICount();
+            if (poi_count != 1)
+            {
+                MessageBox.Show("Select a single POI");
+                return;
+            }
+
+            // Get selected POI
+
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                if (_wpg.POIPointAt(i).selected)
+                {
+                    _wpg.POIPointDeleteAt(i);
+                    break;
+                }
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void deleteAllPOIsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for(int i = _wpg.POICount() - 1; i > 0; i--)
+            {
+                _wpg.POIPointDeleteAt(i);
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void deleteAllPOIsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            for (int i = _wpg.POICount() - 1; i >= 0; i--)
+            {
+                _wpg.POIPointDeleteAt(i);
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void deleteSelectedPOIsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Only 1 waypoint can be selected
+
+            int poi_count = _wpg.SelectedPOICount();
+            if (poi_count != 1)
+            {
+                MessageBox.Show("Select a single POI");
+                return;
+            }
+
+            // Get selected POI
+
+            for (int i = _wpg.POICount()-1; i >= 0; i--)
+            {
+                if (_wpg.POIPointAt(i).selected)
+                {
+                    _wpg.POIPointDeleteAt(i);
+                }
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void deleteSelectedPolygonsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            for (int i = _wpg.ShapeCount()-1; i >= 0; i--)
+            {
+                if (_wpg.ShapeAt(i).selected)
+                {
+                    _wpg.DeleteShape(_wpg.ShapeAt(i));
+                }
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void deleteAllPolygonsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = _wpg.ShapeCount() - 1; i >= 0; i--)
+            {
+                    _wpg.DeleteShape(_wpg.ShapeAt(i));
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void deleteSelectedPathsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            for ( int i = _wpg.PathCount() - 1; i >= 0; i--)
+            {
+                if (_wpg.PathAt(i).selected) _wpg.DeletePath(_wpg.PathAt(i));
+            }
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void cameraToolStripMenu_Click(object sender, EventArgs e)
+        {
+            DialogCamera dialog = new DialogCamera(_options);
+            dialog.Show();
         }
     }
 }

@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10,
+            treeNode11});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,11 +68,15 @@
             this.toolUnselectAll = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSelectedPOIsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteAllPOIsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolDeleteWP = new System.Windows.Forms.ToolStripMenuItem();
             this.toolDeleteShape = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSelectedPolygonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteAllPolygonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.POI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAllPOIShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -222,22 +226,6 @@
             this.cmbAction1 = new System.Windows.Forms.ComboBox();
             this.label55 = new System.Windows.Forms.Label();
             this.cmbActionsList = new System.Windows.Forms.ComboBox();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.radioVideo = new System.Windows.Forms.RadioButton();
-            this.radioPhoto = new System.Windows.Forms.RadioButton();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtImageVerOverlap = new System.Windows.Forms.TextBox();
-            this.txtImageHorOverlap = new System.Windows.Forms.TextBox();
-            this.txtImageWidth = new System.Windows.Forms.TextBox();
-            this.txtImageLength = new System.Windows.Forms.TextBox();
-            this.txtCamVerAngle = new System.Windows.Forms.TextBox();
-            this.txtCamHorAngle = new System.Windows.Forms.TextBox();
-            this.lblImageWidth = new System.Windows.Forms.Label();
-            this.lblImageLength = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtEarthRadius = new System.Windows.Forms.TextBox();
             this.txtGPSRadius = new System.Windows.Forms.TextBox();
@@ -254,6 +242,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
+            this.cameraToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pOIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.circularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -262,7 +257,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).BeginInit();
             this.tabActions.SuspendLayout();
-            this.tabPage7.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabLocation.SuspendLayout();
             this.SuspendLayout();
@@ -518,20 +512,43 @@
             // 
             // toolStripMenuItem6
             // 
+            this.toolStripMenuItem6.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteSelectedPOIsToolStripMenuItem,
+            this.deleteAllPOIsToolStripMenuItem1});
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(203, 22);
-            this.toolStripMenuItem6.Text = "Delete Seleted POI";
-            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            this.toolStripMenuItem6.Text = "Delete  POI";
+            // 
+            // deleteSelectedPOIsToolStripMenuItem
+            // 
+            this.deleteSelectedPOIsToolStripMenuItem.Name = "deleteSelectedPOIsToolStripMenuItem";
+            this.deleteSelectedPOIsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.deleteSelectedPOIsToolStripMenuItem.Text = "Delete Selected POI";
+            this.deleteSelectedPOIsToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedPOIsToolStripMenuItem_Click);
+            // 
+            // deleteAllPOIsToolStripMenuItem1
+            // 
+            this.deleteAllPOIsToolStripMenuItem1.Name = "deleteAllPOIsToolStripMenuItem1";
+            this.deleteAllPOIsToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.deleteAllPOIsToolStripMenuItem1.Text = "Delete All POIs";
+            this.deleteAllPOIsToolStripMenuItem1.Click += new System.EventHandler(this.deleteAllPOIsToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allToolStripMenuItem,
-            this.deleteSelectedPathsToolStripMenuItem});
+            this.deleteSelectedPathsToolStripMenuItem,
+            this.allToolStripMenuItem});
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(203, 22);
-            this.toolStripMenuItem3.Text = "Delete Selected Path";
+            this.toolStripMenuItem3.Text = "Delete Path";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click_1);
+            // 
+            // deleteSelectedPathsToolStripMenuItem
+            // 
+            this.deleteSelectedPathsToolStripMenuItem.Name = "deleteSelectedPathsToolStripMenuItem";
+            this.deleteSelectedPathsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.deleteSelectedPathsToolStripMenuItem.Text = "Delete Selected Paths";
+            this.deleteSelectedPathsToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedPathsToolStripMenuItem_Click_1);
             // 
             // allToolStripMenuItem
             // 
@@ -539,13 +556,6 @@
             this.allToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.allToolStripMenuItem.Text = "Delete All Paths";
             this.allToolStripMenuItem.Click += new System.EventHandler(this.allToolStripMenuItem_Click);
-            // 
-            // deleteSelectedPathsToolStripMenuItem
-            // 
-            this.deleteSelectedPathsToolStripMenuItem.Name = "deleteSelectedPathsToolStripMenuItem";
-            this.deleteSelectedPathsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.deleteSelectedPathsToolStripMenuItem.Text = "Delete Selected Paths";
-            this.deleteSelectedPathsToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedPathsToolStripMenuItem_Click);
             // 
             // toolDeleteWP
             // 
@@ -556,10 +566,27 @@
             // 
             // toolDeleteShape
             // 
+            this.toolDeleteShape.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteSelectedPolygonsToolStripMenuItem,
+            this.deleteAllPolygonsToolStripMenuItem});
             this.toolDeleteShape.Name = "toolDeleteShape";
             this.toolDeleteShape.Size = new System.Drawing.Size(203, 22);
-            this.toolDeleteShape.Text = "Delete Selected Polygons";
+            this.toolDeleteShape.Text = "Delete Polygons";
             this.toolDeleteShape.Click += new System.EventHandler(this.toolDeleteShape_Click);
+            // 
+            // deleteSelectedPolygonsToolStripMenuItem
+            // 
+            this.deleteSelectedPolygonsToolStripMenuItem.Name = "deleteSelectedPolygonsToolStripMenuItem";
+            this.deleteSelectedPolygonsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.deleteSelectedPolygonsToolStripMenuItem.Text = "Delete Selected Polygons";
+            this.deleteSelectedPolygonsToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedPolygonsToolStripMenuItem_Click);
+            // 
+            // deleteAllPolygonsToolStripMenuItem
+            // 
+            this.deleteAllPolygonsToolStripMenuItem.Name = "deleteAllPolygonsToolStripMenuItem";
+            this.deleteAllPolygonsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.deleteAllPolygonsToolStripMenuItem.Text = "Delete All Polygons";
+            this.deleteAllPolygonsToolStripMenuItem.Click += new System.EventHandler(this.deleteAllPolygonsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -750,7 +777,10 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.cameraToolStripMenu,
+            this.actionsToolStripMenuItem,
+            this.insertToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(860, 24);
@@ -1012,16 +1042,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 97);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode9.Name = "POI";
+            treeNode9.Text = "POI";
+            treeNode10.Name = "Paths";
+            treeNode10.Text = "Paths";
+            treeNode11.Name = "Polygons";
+            treeNode11.Text = "Polygons";
+            treeNode12.Name = "GMap";
+            treeNode12.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode12});
             this.treGMap.Size = new System.Drawing.Size(121, 281);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -2012,181 +2042,6 @@
             this.cmbActionsList.TabIndex = 0;
             this.cmbActionsList.SelectedIndexChanged += new System.EventHandler(this.cmbActionsList_SelectedIndexChanged);
             // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.radioVideo);
-            this.tabPage7.Controls.Add(this.radioPhoto);
-            this.tabPage7.Controls.Add(this.label15);
-            this.tabPage7.Controls.Add(this.label14);
-            this.tabPage7.Controls.Add(this.txtImageVerOverlap);
-            this.tabPage7.Controls.Add(this.txtImageHorOverlap);
-            this.tabPage7.Controls.Add(this.txtImageWidth);
-            this.tabPage7.Controls.Add(this.txtImageLength);
-            this.tabPage7.Controls.Add(this.txtCamVerAngle);
-            this.tabPage7.Controls.Add(this.txtCamHorAngle);
-            this.tabPage7.Controls.Add(this.lblImageWidth);
-            this.tabPage7.Controls.Add(this.lblImageLength);
-            this.tabPage7.Controls.Add(this.label8);
-            this.tabPage7.Controls.Add(this.label7);
-            this.tabPage7.Controls.Add(this.label6);
-            this.tabPage7.Location = new System.Drawing.Point(4, 25);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(852, 902);
-            this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "Camera";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // radioVideo
-            // 
-            this.radioVideo.AutoSize = true;
-            this.radioVideo.Checked = true;
-            this.radioVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioVideo.Location = new System.Drawing.Point(426, 73);
-            this.radioVideo.Name = "radioVideo";
-            this.radioVideo.Size = new System.Drawing.Size(110, 20);
-            this.radioVideo.TabIndex = 35;
-            this.radioVideo.TabStop = true;
-            this.radioVideo.Text = "Video Mode";
-            this.radioVideo.UseVisualStyleBackColor = true;
-            // 
-            // radioPhoto
-            // 
-            this.radioPhoto.AutoSize = true;
-            this.radioPhoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioPhoto.Location = new System.Drawing.Point(299, 73);
-            this.radioPhoto.Name = "radioPhoto";
-            this.radioPhoto.Size = new System.Drawing.Size(109, 20);
-            this.radioPhoto.TabIndex = 34;
-            this.radioPhoto.Text = "Photo Mode";
-            this.radioPhoto.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(414, 250);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(133, 16);
-            this.label15.TabIndex = 33;
-            this.label15.Text = "Width Overlap (%)";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(260, 250);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(140, 16);
-            this.label14.TabIndex = 32;
-            this.label14.Text = "Length Overlap (%)";
-            // 
-            // txtImageVerOverlap
-            // 
-            this.txtImageVerOverlap.Location = new System.Drawing.Point(434, 269);
-            this.txtImageVerOverlap.Name = "txtImageVerOverlap";
-            this.txtImageVerOverlap.Size = new System.Drawing.Size(100, 22);
-            this.txtImageVerOverlap.TabIndex = 31;
-            this.txtImageVerOverlap.Text = "15.0";
-            this.txtImageVerOverlap.TextChanged += new System.EventHandler(this.txtImageVerOverlap_TextChanged);
-            this.txtImageVerOverlap.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textNumeric_KeyPress);
-            // 
-            // txtImageHorOverlap
-            // 
-            this.txtImageHorOverlap.Location = new System.Drawing.Point(273, 269);
-            this.txtImageHorOverlap.Name = "txtImageHorOverlap";
-            this.txtImageHorOverlap.Size = new System.Drawing.Size(100, 22);
-            this.txtImageHorOverlap.TabIndex = 30;
-            this.txtImageHorOverlap.Text = "25.0";
-            this.txtImageHorOverlap.TextChanged += new System.EventHandler(this.txtImageHorOverlap_TextChanged);
-            this.txtImageHorOverlap.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textNumeric_KeyPress);
-            // 
-            // txtImageWidth
-            // 
-            this.txtImageWidth.Location = new System.Drawing.Point(431, 197);
-            this.txtImageWidth.Name = "txtImageWidth";
-            this.txtImageWidth.ReadOnly = true;
-            this.txtImageWidth.Size = new System.Drawing.Size(100, 22);
-            this.txtImageWidth.TabIndex = 27;
-            // 
-            // txtImageLength
-            // 
-            this.txtImageLength.Location = new System.Drawing.Point(273, 197);
-            this.txtImageLength.Name = "txtImageLength";
-            this.txtImageLength.ReadOnly = true;
-            this.txtImageLength.Size = new System.Drawing.Size(100, 22);
-            this.txtImageLength.TabIndex = 26;
-            // 
-            // txtCamVerAngle
-            // 
-            this.txtCamVerAngle.Location = new System.Drawing.Point(426, 131);
-            this.txtCamVerAngle.Name = "txtCamVerAngle";
-            this.txtCamVerAngle.Size = new System.Drawing.Size(112, 22);
-            this.txtCamVerAngle.TabIndex = 23;
-            this.txtCamVerAngle.Text = "66";
-            this.txtCamVerAngle.TextChanged += new System.EventHandler(this.txtCamVerAngle_TextChanged);
-            this.txtCamVerAngle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textNumeric_KeyPress);
-            // 
-            // txtCamHorAngle
-            // 
-            this.txtCamHorAngle.Location = new System.Drawing.Point(270, 131);
-            this.txtCamHorAngle.Name = "txtCamHorAngle";
-            this.txtCamHorAngle.Size = new System.Drawing.Size(100, 22);
-            this.txtCamHorAngle.TabIndex = 22;
-            this.txtCamHorAngle.Text = "81";
-            this.txtCamHorAngle.TextChanged += new System.EventHandler(this.txtCamHorAngle_TextChanged);
-            this.txtCamHorAngle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textNumeric_KeyPress);
-            // 
-            // lblImageWidth
-            // 
-            this.lblImageWidth.AutoSize = true;
-            this.lblImageWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImageWidth.Location = new System.Drawing.Point(435, 181);
-            this.lblImageWidth.Name = "lblImageWidth";
-            this.lblImageWidth.Size = new System.Drawing.Size(99, 13);
-            this.lblImageWidth.TabIndex = 29;
-            this.lblImageWidth.Text = "Image Width (m)";
-            // 
-            // lblImageLength
-            // 
-            this.lblImageLength.AutoSize = true;
-            this.lblImageLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImageLength.Location = new System.Drawing.Point(275, 181);
-            this.lblImageLength.Name = "lblImageLength";
-            this.lblImageLength.Size = new System.Drawing.Size(98, 13);
-            this.lblImageLength.TabIndex = 28;
-            this.lblImageLength.Text = "Image Lenth (m)";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(270, 115);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 13);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "Horizontal Angle";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(443, 115);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(86, 13);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Vertical Angle";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(362, 34);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 24);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Camera";
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.txtEarthRadius);
@@ -2344,7 +2199,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabLocation.Controls.Add(this.tabPage1);
-            this.tabLocation.Controls.Add(this.tabPage7);
             this.tabLocation.Controls.Add(this.tabActions);
             this.tabLocation.Controls.Add(this.tabWayActions);
             this.tabLocation.Controls.Add(this.tabGMap);
@@ -2357,6 +2211,55 @@
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 2;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
+            // 
+            // cameraToolStripMenu
+            // 
+            this.cameraToolStripMenu.Name = "cameraToolStripMenu";
+            this.cameraToolStripMenu.Size = new System.Drawing.Size(56, 20);
+            this.cameraToolStripMenu.Text = "Camera";
+            this.cameraToolStripMenu.Click += new System.EventHandler(this.cameraToolStripMenu_Click);
+            // 
+            // actionsToolStripMenuItem
+            // 
+            this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.actionsToolStripMenuItem.Text = "Actions";
+            // 
+            // insertToolStripMenuItem
+            // 
+            this.insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pOIToolStripMenuItem,
+            this.pathToolStripMenuItem});
+            this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
+            this.insertToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.insertToolStripMenuItem.Text = "Insert";
+            // 
+            // pOIToolStripMenuItem
+            // 
+            this.pOIToolStripMenuItem.Name = "pOIToolStripMenuItem";
+            this.pOIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pOIToolStripMenuItem.Text = "POI";
+            // 
+            // pathToolStripMenuItem
+            // 
+            this.pathToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.circularToolStripMenuItem,
+            this.helicalToolStripMenuItem});
+            this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
+            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pathToolStripMenuItem.Text = "Path";
+            // 
+            // circularToolStripMenuItem
+            // 
+            this.circularToolStripMenuItem.Name = "circularToolStripMenuItem";
+            this.circularToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.circularToolStripMenuItem.Text = "Circular";
+            // 
+            // helicalToolStripMenuItem
+            // 
+            this.helicalToolStripMenuItem.Name = "helicalToolStripMenuItem";
+            this.helicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helicalToolStripMenuItem.Text = "Helical";
             // 
             // Form1
             // 
@@ -2382,8 +2285,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).EndInit();
             this.tabActions.ResumeLayout(false);
             this.tabActions.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabLocation.ResumeLayout(false);
@@ -2559,22 +2460,6 @@
         private System.Windows.Forms.ComboBox cmbAction1;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.ComboBox cmbActionsList;
-        private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.RadioButton radioVideo;
-        private System.Windows.Forms.RadioButton radioPhoto;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtImageVerOverlap;
-        private System.Windows.Forms.TextBox txtImageHorOverlap;
-        public System.Windows.Forms.TextBox txtImageWidth;
-        private System.Windows.Forms.TextBox txtImageLength;
-        private System.Windows.Forms.TextBox txtCamVerAngle;
-        private System.Windows.Forms.TextBox txtCamHorAngle;
-        private System.Windows.Forms.Label lblImageWidth;
-        private System.Windows.Forms.Label lblImageLength;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox txtEarthRadius;
         private System.Windows.Forms.TextBox txtGPSRadius;
@@ -2598,7 +2483,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem toolOutputPath;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteSelectedPathsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolAbout;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -2610,6 +2494,18 @@
         private System.Windows.Forms.ToolStripMenuItem selectedPathToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem selectedWaypointToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem selectedPolygonToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem deleteSelectedPOIsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteAllPOIsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem deleteSelectedPathsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteSelectedPolygonsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteAllPolygonsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem insertToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pOIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem circularToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helicalToolStripMenuItem;
     }
 }
 

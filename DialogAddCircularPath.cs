@@ -11,19 +11,22 @@ namespace Waypoint_Path_Generator
         private double _lon;
         private GMAP _gmap;
         private Waypoint_Path_Gen _wpg;
+        private Options _options;
         private WayPoints _wp;
         private Path _path;
         private int _current_path_index = -1;
 
-        public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, double lat, double lon)
+        public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, double lat, double lon)
         {
             _wp = new WayPoints();
             _path = new Path();
             _wpg = wpg;
             _gmap = gmap;
+            _options = options;
             _lat = lat;
             _lon = lon;
             InitializeComponent();
+            txtDiaAddCircPathAlt.Text = Convert.ToString(_options.def_altitude);
             buildCircPath();
             _current_path_index = _wpg.PathCount() - 1;
             // Fill POI combobox

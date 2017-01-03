@@ -16,18 +16,21 @@ namespace Waypoint_Path_Generator
         Waypoint_Path_Gen _wpg;
         GMAP _gmap;
         TreeView _treeview;
+        Options _options;
         double _lat;
         double _lon;
         Path _path;
         LinkedList<WayPoints> _wp_list;
         WayPoints _wp;
         double _alt;
+        bool _handler_off;
 
-        public DialogManualPath(Waypoint_Path_Gen wpg, GMAP gmap, TreeView treeview, Path path, double lat, double lon)
+        public DialogManualPath(Waypoint_Path_Gen wpg, GMAP gmap, TreeView treeview, Path path, Options options, double lat, double lon)
         {
             _wpg = wpg;
             _gmap = gmap;
             _treeview = treeview;
+            _options = options;
             _path = path;
             _lat = lat;
             _lon = lon;
@@ -38,7 +41,11 @@ namespace Waypoint_Path_Generator
 
             // Create new Path with a Single Waypoint
 
-            _alt = Convert.ToDouble(txtManualAltitude.Text);
+            _alt = _options.def_altitude;
+
+            _handler_off = true;
+            txtManualAltitude.Text = Convert.ToString(_alt);
+            _handler_off = false;
             string name = txtPathName.Text;
             _path.name = name; ;
             _path.type = "Manual";
@@ -109,6 +116,7 @@ namespace Waypoint_Path_Generator
 
         private void txtManualAltitude_TextChanged(object sender, EventArgs e)
         {
+            if (_handler_off) return;
             double alt = Convert.ToDouble(txtManualAltitude.Text);
             LinkedList<WayPoints> wp_list = _path.waypoints;
             for(int i=0; i < wp_list.Count; i++)

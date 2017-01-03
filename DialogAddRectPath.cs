@@ -19,6 +19,7 @@ namespace Waypoint_Path_Generator
         private Waypoint_Path_Gen _wpg;
         private WayPoints _wp;
         private Path _path;
+        private Options _options;
         private Shape _poly;
         private int _current_path_index = -1;
         private double _camera_angle_hor;
@@ -30,13 +31,14 @@ namespace Waypoint_Path_Generator
         private bool _video;
 
 
-        public DialogAddRectPath(Waypoint_Path_Gen wpg, GMAP gmap, double lat, double lon,
+        public DialogAddRectPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, double lat, double lon,
             double cam_ang_hor, double cam_ang_ver, double over_wid, double over_hgt)
         {
             _wp = new WayPoints();
             _path = new Path();
             _wpg = wpg;
             _gmap = gmap;
+            _options = options;
             _lat = lat;
             _lon = lon;
             _camera_angle_hor = cam_ang_hor;
@@ -47,7 +49,10 @@ namespace Waypoint_Path_Generator
 
             InitializeComponent();
 
-            
+            txtPathAlt.Text = Convert.ToString(_options.def_altitude);
+            trkRectAlt.Value = Convert.ToInt16(_options.def_altitude);
+
+
             BuildRectPath();
             _current_path_index = _wpg.PathCount() - 1;
             // Fill POI combobox
