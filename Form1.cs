@@ -2770,7 +2770,7 @@ namespace Waypoint_Path_Generator
         {
             DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon,
                 _options.focal_angle_hor, _options.focal_angle_hor,
-                _options.hor_overlap_percent, _options.hor_overlap_percent);
+                _options.hor_overlap_percent, _options.ver_overlap_percent);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }

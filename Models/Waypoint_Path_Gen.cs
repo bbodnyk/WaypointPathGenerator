@@ -619,7 +619,7 @@ namespace Waypoint_Path_Generator.Models
                 Form1.Globals.default_cam_hor_over = node.SelectSingleNode("Cam_Hor_OverLap").InnerText;
                 Form1.Globals.default_cam_ver_over = node.SelectSingleNode("Cam_Ver_OverLap").InnerText;
                 _options.hor_overlap_percent = Convert.ToDouble(Form1.Globals.default_cam_hor_over);
-                _options.hor_overlap_percent = Convert.ToDouble(Form1.Globals.default_cam_ver_over);
+                _options.ver_overlap_percent = Convert.ToDouble(Form1.Globals.default_cam_ver_over);
                 _options.earth_radius = Convert.ToDouble(node.SelectSingleNode("Earth_Radius").InnerText);
             }
         }
