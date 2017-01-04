@@ -3507,5 +3507,91 @@ namespace Waypoint_Path_Generator
             DialogCamera dialog = new DialogCamera(_options);
             dialog.Show();
         }
+
+        private void circularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.map_center = gMapControl.Position;
+            dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, Globals.map_center.Lat, Globals.map_center.Lng);
+            dialog.ShowDialog();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+        }
+
+        private void helicalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.map_center = gMapControl.Position;
+            DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, Globals.map_center.Lat, Globals.map_center.Lng);
+            dialog.ShowDialog();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void manualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _path = new Models.Path();
+            Globals.path_active = true;
+            Globals.map_center = gMapControl.Position;
+            DialogManualPath dialog = new DialogManualPath(_wpg, _gmap, treGMap, _path, _options, Globals.map_center.Lat, Globals.map_center.Lng);
+            dialog.Show();
+        }
+
+        private void rectangularToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.map_center = gMapControl.Position;
+            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.map_center.Lat, Globals.map_center.Lng,
+                _options.focal_angle_hor, _options.focal_angle_hor,
+                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            dialog.ShowDialog();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+        }
+
+        private void polygonGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make sure only one polygon is selected
+
+            int poly_count = _wpg.SelectedPolyCount();
+            if (poly_count != 1)
+            {
+                MessageBox.Show("Select a single Polygon");
+                return;
+            }
+
+            Globals.map_center = gMapControl.Position;
+            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, Globals.map_center.Lat, Globals.map_center.Lng,
+                _options.focal_angle_hor, _options.focal_angle_ver,
+                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            dialog.ShowDialog();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+        }
+
+        private void polygonPerimeterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogPolyPerimPath dialog = new DialogPolyPerimPath(_wpg, _gmap, _options, treGMap);
+            dialog.Show();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void kMLPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.map_center = gMapControl.Position;
+            DialogKMLPath dialog = new DialogKMLPath(_wpg, _gmap, treGMap, Globals.map_center.Lat, Globals.map_center.Lng);
+            dialog.Show();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void pOIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Globals.map_center = gMapControl.Position;
+            frmAddPOI form = new frmAddPOI(_wpg, _gmap, Globals.map_center.Lat, Globals.map_center.Lng);
+            form.ShowDialog();
+            _gmap.ReDrawgMap();
+            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            Update_POI_Dgv();
+        }
+
+        private void kMLPOlygonToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DialogKMLPolygon dialog = new DialogKMLPolygon(_wpg, _gmap, treGMap);
+            dialog.Show();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
     }
 }

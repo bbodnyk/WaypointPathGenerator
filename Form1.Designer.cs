@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode49,
+            treeNode50,
+            treeNode51});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -234,6 +234,13 @@
             this.label55 = new System.Windows.Forms.Label();
             this.cmbActionsList = new System.Windows.Forms.ComboBox();
             this.tabLocation = new System.Windows.Forms.TabControl();
+            this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rectangularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polygonGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polygonPerimeterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kMLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polygonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kMLPOlygonToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -899,7 +906,8 @@
             // 
             this.insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pOIToolStripMenuItem,
-            this.pathToolStripMenuItem});
+            this.pathToolStripMenuItem,
+            this.polygonToolStripMenuItem});
             this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
             this.insertToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.insertToolStripMenuItem.Text = "Insert";
@@ -907,29 +915,37 @@
             // pOIToolStripMenuItem
             // 
             this.pOIToolStripMenuItem.Name = "pOIToolStripMenuItem";
-            this.pOIToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.pOIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pOIToolStripMenuItem.Text = "POI";
+            this.pOIToolStripMenuItem.Click += new System.EventHandler(this.pOIToolStripMenuItem_Click);
             // 
             // pathToolStripMenuItem
             // 
             this.pathToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manualToolStripMenuItem,
             this.circularToolStripMenuItem,
-            this.helicalToolStripMenuItem});
+            this.helicalToolStripMenuItem,
+            this.rectangularToolStripMenuItem,
+            this.polygonGridToolStripMenuItem,
+            this.polygonPerimeterToolStripMenuItem,
+            this.kMLPathToolStripMenuItem});
             this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
-            this.pathToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pathToolStripMenuItem.Text = "Path";
             // 
             // circularToolStripMenuItem
             // 
             this.circularToolStripMenuItem.Name = "circularToolStripMenuItem";
-            this.circularToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.circularToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.circularToolStripMenuItem.Text = "Circular";
+            this.circularToolStripMenuItem.Click += new System.EventHandler(this.circularToolStripMenuItem_Click);
             // 
             // helicalToolStripMenuItem
             // 
             this.helicalToolStripMenuItem.Name = "helicalToolStripMenuItem";
-            this.helicalToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.helicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.helicalToolStripMenuItem.Text = "Helical";
+            this.helicalToolStripMenuItem.Click += new System.EventHandler(this.helicalToolStripMenuItem_Click);
             // 
             // openFileDialog2
             // 
@@ -1075,16 +1091,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 97);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode49.Name = "POI";
+            treeNode49.Text = "POI";
+            treeNode50.Name = "Paths";
+            treeNode50.Text = "Paths";
+            treeNode51.Name = "Polygons";
+            treeNode51.Text = "Polygons";
+            treeNode52.Name = "GMap";
+            treeNode52.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode52});
             this.treGMap.Size = new System.Drawing.Size(121, 281);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -2093,6 +2109,56 @@
             this.tabLocation.TabIndex = 2;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
             // 
+            // manualToolStripMenuItem
+            // 
+            this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
+            this.manualToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.manualToolStripMenuItem.Text = "Manual";
+            this.manualToolStripMenuItem.Click += new System.EventHandler(this.manualToolStripMenuItem_Click);
+            // 
+            // rectangularToolStripMenuItem
+            // 
+            this.rectangularToolStripMenuItem.Name = "rectangularToolStripMenuItem";
+            this.rectangularToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rectangularToolStripMenuItem.Text = "Rectangular";
+            this.rectangularToolStripMenuItem.Click += new System.EventHandler(this.rectangularToolStripMenuItem_Click);
+            // 
+            // polygonGridToolStripMenuItem
+            // 
+            this.polygonGridToolStripMenuItem.Name = "polygonGridToolStripMenuItem";
+            this.polygonGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.polygonGridToolStripMenuItem.Text = "Polygon Grid";
+            this.polygonGridToolStripMenuItem.Click += new System.EventHandler(this.polygonGridToolStripMenuItem_Click);
+            // 
+            // polygonPerimeterToolStripMenuItem
+            // 
+            this.polygonPerimeterToolStripMenuItem.Name = "polygonPerimeterToolStripMenuItem";
+            this.polygonPerimeterToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.polygonPerimeterToolStripMenuItem.Text = "Polygon Perimeter";
+            this.polygonPerimeterToolStripMenuItem.Click += new System.EventHandler(this.polygonPerimeterToolStripMenuItem_Click);
+            // 
+            // kMLPathToolStripMenuItem
+            // 
+            this.kMLPathToolStripMenuItem.Name = "kMLPathToolStripMenuItem";
+            this.kMLPathToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.kMLPathToolStripMenuItem.Text = "KML Path";
+            this.kMLPathToolStripMenuItem.Click += new System.EventHandler(this.kMLPathToolStripMenuItem_Click);
+            // 
+            // polygonToolStripMenuItem
+            // 
+            this.polygonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kMLPOlygonToolStripMenuItem1});
+            this.polygonToolStripMenuItem.Name = "polygonToolStripMenuItem";
+            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.polygonToolStripMenuItem.Text = "Polygon";
+            // 
+            // kMLPOlygonToolStripMenuItem1
+            // 
+            this.kMLPOlygonToolStripMenuItem1.Name = "kMLPOlygonToolStripMenuItem1";
+            this.kMLPOlygonToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.kMLPOlygonToolStripMenuItem1.Text = "KML Polygon";
+            this.kMLPOlygonToolStripMenuItem1.Click += new System.EventHandler(this.kMLPOlygonToolStripMenuItem1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2321,6 +2387,13 @@
         private System.Windows.Forms.ToolStripMenuItem pathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem circularToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manualToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rectangularToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polygonGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polygonPerimeterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kMLPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polygonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kMLPOlygonToolStripMenuItem1;
     }
 }
 
