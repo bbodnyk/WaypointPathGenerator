@@ -132,15 +132,6 @@ namespace Waypoint_Path_Generator
             _gmap = new GMAP(_wpg, gMapControl,0);
             _gmaptree = treGMap;
 
-            // Default Center
-
-            txtCenterLat.Text = "39.833333";
-            txtCenterLon.Text = " -98.583333";
-            //txtPOIAlt.Text = "5";
-            //txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(81.0 / 2)) * 30.0));
-            //txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(66.0 / 2)) * 30.0));
-            txtEarthRadius.Text = Convert.ToString(_options.earth_radius);
-
             // Read Config File
 
             if (!File.Exists(_options.def_xml_config_file)) _wpg.ReadPOI();
@@ -155,7 +146,6 @@ namespace Waypoint_Path_Generator
             // Update GUI Controls
 
             Update_POI_Dgv();
-            Update_POI_Cmb();
             Update_DGVPath();
             Update_Actioncmb();
             //Update_Shapecmb();
@@ -168,24 +158,7 @@ namespace Waypoint_Path_Generator
                 dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            if (_wpg.POICount() == 0)
-            {
-                POIPoints poipoint = new POIPoints();
-                //poipoint.name = txtLocationName.Text;
-                poipoint.name = "xxx";
-                poipoint.lat = Convert.ToDouble(txtCenterLat.Text);
-                poipoint.lon = Convert.ToDouble(txtCenterLat.Text);
-                poipoint.alt = Convert.ToDouble(txtCenterLat.Text);
-                poipoint.elev = Convert.ToDouble(txtElevation.Text);
-                poipoint.cam_alt = 5;
-                _wpg.AddPOI(poipoint);
-            }
-            else
-            {
-                //Update_POI_Cmb();
-            }
-
-            Globals.gps_radius = _options.earth_radius + Convert.ToDouble(txtElevation.Text) + Convert.ToDouble(txtAltitude.Text);
+            Globals.gps_radius = _options.earth_radius + _options.def_elevation + _options.def_altitude;
             Globals.ActionWaypoint_Handler = true;
             Globals.POIpoint_Handler = true;
             Globals.Shape_Handler = true;
@@ -228,8 +201,6 @@ namespace Waypoint_Path_Generator
 
             _gmap.BuildgMap();
             Globals.map_center = _gmap.GetCenter();
-            txtCenterLat.Text = Convert.ToString(Globals.map_center.Lat);
-            txtCenterLon.Text = Convert.ToString(Globals.map_center.Lng);
             GMAPTree.Update_GMapTree(_wpg, _gmaptree);
 
             // Activate Map Tab
@@ -260,22 +231,11 @@ namespace Waypoint_Path_Generator
         private void imperialToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Globals.UnitsMetric = false;
-            lblAltitude.Text = "Altitude (ft)";
-            lblElevation.Text = "Elevation (ft)";
-            txtElevation.Text = Convert.ToString(GPS.MetersToFeet(Convert.ToDouble(txtElevation.Text)));
-            //txtImageLength.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageLength.Text)));
-            //txtImageWidth.Text = Convert.ToString(MetersToFeet(Convert.ToDouble(txtImageWidth.Text)));
-            double alt = Convert.ToDouble(txtAltitude.Text);
             }
 
         private void metricToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Globals.UnitsMetric = true;
-            lblAltitude.Text = "Altitude (m)";
-            lblElevation.Text = "Elevation (m)";
-            txtElevation.Text = Convert.ToString(GPS.FeetToMeters(Convert.ToDouble(txtElevation.Text)));
-            //txtImageLength.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageLength.Text)));
-            //txtImageWidth.Text = Convert.ToString(FeetToMeters(Convert.ToDouble(txtImageWidth.Text)));         
+            Globals.UnitsMetric = true;       
             }
 
 
@@ -287,10 +247,6 @@ namespace Waypoint_Path_Generator
 
         public void Update_GUI()
         {
-            int index = cmbLocation.FindStringExact(Globals.default_location);
-            cmbLocation.SelectedIndex = index;
-            txtAltitude.Text = Convert.ToString(_options.def_altitude);
-            txtEarthRadius.Text = Convert.ToString(_options.earth_radius);
             double alt = Convert.ToDouble(_options.def_altitude);
             double hor_ang = _options.focal_angle_hor;
             double ver_ang = _options.focal_angle_ver;
@@ -493,11 +449,6 @@ namespace Waypoint_Path_Generator
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void txtAltitude_TextChanged(object sender, EventArgs e)
-        {
-            _options.def_altitude = Convert.ToDouble(txtAltitude.Text);
         }
 
         private void rtbCircle_TextChanged(object sender, EventArgs e)
@@ -781,12 +732,10 @@ namespace Waypoint_Path_Generator
             if (name == "tabPOI")
             {
                 Update_POI_Dgv();
-                Update_POI_Cmb();
             }
             if (name == "tabLocation")
             {
                 Update_POI_Dgv();
-                Update_POI_Cmb();
             }
 
         }
@@ -840,7 +789,7 @@ namespace Waypoint_Path_Generator
             double lat = waypoints.ElementAt(index).lat;
             double lon = waypoints.ElementAt(index).lon;
             double alt = waypoints.ElementAt(index).alt;
-            double elev = Convert.ToDouble(txtElevation.Text);
+            double elev = _options.def_elevation;
 
             POIPoints poipoint = new POIPoints();
             poipoint.name = txtPOIWPName.Text;
@@ -855,7 +804,6 @@ namespace Waypoint_Path_Generator
             _gmap.Add_gMapPOI(poipoint);
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             Update_POI_Dgv();
-            Update_POI_Cmb();
         }
 
         private void Update_POI_Dgv()
@@ -887,7 +835,7 @@ namespace Waypoint_Path_Generator
             }
             Globals.POIpoint_Handler = true;
         }
-
+        /*
         private void Update_POI_Cmb()
         {
             //cmbManPOI.Items.Clear();
@@ -908,7 +856,7 @@ namespace Waypoint_Path_Generator
             //cmbManPOI.SelectedIndex = 0;
             //cmbManLoc.SelectedIndex = 0;
         }
-
+        */
         private void label18_Click(object sender, EventArgs e)
         {
 
@@ -1113,12 +1061,12 @@ namespace Waypoint_Path_Generator
         }
 
 
-
+        /*
         private void cmbLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             string location = cmbLocation.SelectedItem.ToString();
 
-            /* Loop Thru POI to find location */
+            // Loop Thru POI to find location
 
             for (int i = 0; i < _wpg.POICount(); i++)
             {
@@ -1137,7 +1085,7 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
-
+*/
         private void lblAltitude_Click(object sender, EventArgs e)
         {
 
@@ -1189,7 +1137,6 @@ namespace Waypoint_Path_Generator
                 GMAPTree.Update_GMapTree(_wpg, treGMap);
                 _gmap.ReDrawgMap();
                 Update_POI_Dgv();
-                Update_POI_Cmb();
                 Update_DGVPath();
                 Update_Actioncmb();
                 //Update_Shapecmb();
@@ -1210,7 +1157,6 @@ namespace Waypoint_Path_Generator
             GMAPTree.Update_GMapTree(_wpg, treGMap);
             _gmap.ReDrawgMap();
             Update_POI_Dgv();
-            Update_POI_Cmb();
             Update_DGVPath();
             Update_Actioncmb();
             //Update_Shapecmb();
@@ -1917,7 +1863,6 @@ namespace Waypoint_Path_Generator
                 _wpg.POIPointDeleteAt(row);
                 //Globals.POIpoint_Handler = false;
                 Update_POI_Dgv();
-                Update_POI_Cmb();
             }
 
         }
@@ -2212,8 +2157,6 @@ namespace Waypoint_Path_Generator
             //cntxtgMap.Close();
             //GMAPTree.Update_GMapTree(_wpg, treGMap);;
             Update_POI_Dgv();
-            Update_POI_Cmb();
-
         }
 
         private void gMap_MouseDown(object sender, MouseEventArgs e)
@@ -2677,7 +2620,6 @@ namespace Waypoint_Path_Generator
             _gmap.ReDrawgMap();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             Update_POI_Dgv();
-            Update_POI_Cmb();
         }
 
         private void fontDialog1_Apply(object sender, EventArgs e)

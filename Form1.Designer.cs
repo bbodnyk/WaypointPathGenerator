@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,6 +118,13 @@
             this.cameraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cameraToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pOIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.circularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
@@ -226,29 +233,7 @@
             this.cmbAction1 = new System.Windows.Forms.ComboBox();
             this.label55 = new System.Windows.Forms.Label();
             this.cmbActionsList = new System.Windows.Forms.ComboBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.txtEarthRadius = new System.Windows.Forms.TextBox();
-            this.txtGPSRadius = new System.Windows.Forms.TextBox();
-            this.txtAltitude = new System.Windows.Forms.TextBox();
-            this.txtElevation = new System.Windows.Forms.TextBox();
-            this.txtCenterLon = new System.Windows.Forms.TextBox();
-            this.txtCenterLat = new System.Windows.Forms.TextBox();
-            this.lblEarthRadius = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
-            this.cmbLocation = new System.Windows.Forms.ComboBox();
-            this.lblAltitude = new System.Windows.Forms.Label();
-            this.lblElevation = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
-            this.cameraToolStripMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pOIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.circularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -257,7 +242,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).BeginInit();
             this.tabActions.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabLocation.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -898,6 +882,55 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // cameraToolStripMenu
+            // 
+            this.cameraToolStripMenu.Name = "cameraToolStripMenu";
+            this.cameraToolStripMenu.Size = new System.Drawing.Size(56, 20);
+            this.cameraToolStripMenu.Text = "Camera";
+            this.cameraToolStripMenu.Click += new System.EventHandler(this.cameraToolStripMenu_Click);
+            // 
+            // actionsToolStripMenuItem
+            // 
+            this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.actionsToolStripMenuItem.Text = "Actions";
+            // 
+            // insertToolStripMenuItem
+            // 
+            this.insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pOIToolStripMenuItem,
+            this.pathToolStripMenuItem});
+            this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
+            this.insertToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.insertToolStripMenuItem.Text = "Insert";
+            // 
+            // pOIToolStripMenuItem
+            // 
+            this.pOIToolStripMenuItem.Name = "pOIToolStripMenuItem";
+            this.pOIToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.pOIToolStripMenuItem.Text = "POI";
+            // 
+            // pathToolStripMenuItem
+            // 
+            this.pathToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.circularToolStripMenuItem,
+            this.helicalToolStripMenuItem});
+            this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
+            this.pathToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.pathToolStripMenuItem.Text = "Path";
+            // 
+            // circularToolStripMenuItem
+            // 
+            this.circularToolStripMenuItem.Name = "circularToolStripMenuItem";
+            this.circularToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.circularToolStripMenuItem.Text = "Circular";
+            // 
+            // helicalToolStripMenuItem
+            // 
+            this.helicalToolStripMenuItem.Name = "helicalToolStripMenuItem";
+            this.helicalToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.helicalToolStripMenuItem.Text = "Helical";
+            // 
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
@@ -1042,16 +1075,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 97);
             this.treGMap.Name = "treGMap";
-            treeNode9.Name = "POI";
-            treeNode9.Text = "POI";
-            treeNode10.Name = "Paths";
-            treeNode10.Text = "Paths";
-            treeNode11.Name = "Polygons";
-            treeNode11.Text = "Polygons";
-            treeNode12.Name = "GMap";
-            treeNode12.Text = "Objects";
+            treeNode1.Name = "POI";
+            treeNode1.Text = "POI";
+            treeNode2.Name = "Paths";
+            treeNode2.Text = "Paths";
+            treeNode3.Name = "Polygons";
+            treeNode3.Text = "Polygons";
+            treeNode4.Name = "GMap";
+            treeNode4.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12});
+            treeNode4});
             this.treGMap.Size = new System.Drawing.Size(121, 281);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -2042,166 +2075,14 @@
             this.cmbActionsList.TabIndex = 0;
             this.cmbActionsList.SelectedIndexChanged += new System.EventHandler(this.cmbActionsList_SelectedIndexChanged);
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.txtEarthRadius);
-            this.tabPage1.Controls.Add(this.txtGPSRadius);
-            this.tabPage1.Controls.Add(this.txtAltitude);
-            this.tabPage1.Controls.Add(this.txtElevation);
-            this.tabPage1.Controls.Add(this.txtCenterLon);
-            this.tabPage1.Controls.Add(this.txtCenterLat);
-            this.tabPage1.Controls.Add(this.lblEarthRadius);
-            this.tabPage1.Controls.Add(this.label54);
-            this.tabPage1.Controls.Add(this.label51);
-            this.tabPage1.Controls.Add(this.cmbLocation);
-            this.tabPage1.Controls.Add(this.lblAltitude);
-            this.tabPage1.Controls.Add(this.lblElevation);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(852, 902);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Location";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
-            // 
-            // txtEarthRadius
-            // 
-            this.txtEarthRadius.Location = new System.Drawing.Point(354, 230);
-            this.txtEarthRadius.Name = "txtEarthRadius";
-            this.txtEarthRadius.Size = new System.Drawing.Size(100, 22);
-            this.txtEarthRadius.TabIndex = 25;
-            // 
-            // txtGPSRadius
-            // 
-            this.txtGPSRadius.Location = new System.Drawing.Point(354, 263);
-            this.txtGPSRadius.Name = "txtGPSRadius";
-            this.txtGPSRadius.ReadOnly = true;
-            this.txtGPSRadius.Size = new System.Drawing.Size(100, 22);
-            this.txtGPSRadius.TabIndex = 22;
-            this.txtGPSRadius.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textPosNumeric_KeyPress);
-            // 
-            // txtAltitude
-            // 
-            this.txtAltitude.Location = new System.Drawing.Point(354, 192);
-            this.txtAltitude.Name = "txtAltitude";
-            this.txtAltitude.Size = new System.Drawing.Size(100, 22);
-            this.txtAltitude.TabIndex = 6;
-            this.txtAltitude.TextChanged += new System.EventHandler(this.txtAltitude_TextChanged);
-            this.txtAltitude.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textPosNumeric_KeyPress);
-            // 
-            // txtElevation
-            // 
-            this.txtElevation.Location = new System.Drawing.Point(354, 154);
-            this.txtElevation.Name = "txtElevation";
-            this.txtElevation.ReadOnly = true;
-            this.txtElevation.Size = new System.Drawing.Size(100, 22);
-            this.txtElevation.TabIndex = 4;
-            this.txtElevation.TextChanged += new System.EventHandler(this.txtElevation_TextChanged);
-            this.txtElevation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textPosNumeric_KeyPress);
-            // 
-            // txtCenterLon
-            // 
-            this.txtCenterLon.Location = new System.Drawing.Point(354, 117);
-            this.txtCenterLon.Name = "txtCenterLon";
-            this.txtCenterLon.ReadOnly = true;
-            this.txtCenterLon.Size = new System.Drawing.Size(100, 22);
-            this.txtCenterLon.TabIndex = 2;
-            // 
-            // txtCenterLat
-            // 
-            this.txtCenterLat.Location = new System.Drawing.Point(354, 80);
-            this.txtCenterLat.Name = "txtCenterLat";
-            this.txtCenterLat.ReadOnly = true;
-            this.txtCenterLat.Size = new System.Drawing.Size(100, 22);
-            this.txtCenterLat.TabIndex = 0;
-            // 
-            // lblEarthRadius
-            // 
-            this.lblEarthRadius.AutoSize = true;
-            this.lblEarthRadius.Location = new System.Drawing.Point(244, 230);
-            this.lblEarthRadius.Name = "lblEarthRadius";
-            this.lblEarthRadius.Size = new System.Drawing.Size(104, 16);
-            this.lblEarthRadius.TabIndex = 24;
-            this.lblEarthRadius.Text = "Earth Radius(m)";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(244, 266);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(104, 16);
-            this.label54.TabIndex = 23;
-            this.label54.Text = "GPS Radius (m)";
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(239, 43);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(109, 16);
-            this.label51.TabIndex = 21;
-            this.label51.Text = "Saved Locations";
-            // 
-            // cmbLocation
-            // 
-            this.cmbLocation.FormattingEnabled = true;
-            this.cmbLocation.Location = new System.Drawing.Point(354, 40);
-            this.cmbLocation.Name = "cmbLocation";
-            this.cmbLocation.Size = new System.Drawing.Size(250, 24);
-            this.cmbLocation.TabIndex = 20;
-            this.cmbLocation.SelectedIndexChanged += new System.EventHandler(this.cmbLocation_SelectedIndexChanged);
-            // 
-            // lblAltitude
-            // 
-            this.lblAltitude.AutoSize = true;
-            this.lblAltitude.Location = new System.Drawing.Point(274, 195);
-            this.lblAltitude.Name = "lblAltitude";
-            this.lblAltitude.Size = new System.Drawing.Size(74, 16);
-            this.lblAltitude.TabIndex = 7;
-            this.lblAltitude.Text = "Altitude (m)";
-            this.lblAltitude.Click += new System.EventHandler(this.lblAltitude_Click);
-            // 
-            // lblElevation
-            // 
-            this.lblElevation.AutoSize = true;
-            this.lblElevation.Location = new System.Drawing.Point(262, 157);
-            this.lblElevation.Name = "lblElevation";
-            this.lblElevation.Size = new System.Drawing.Size(86, 16);
-            this.lblElevation.TabIndex = 5;
-            this.lblElevation.Text = "Elevation (m)";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(281, 117);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Longitude";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(293, 80);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Latitude";
-            // 
             // tabLocation
             // 
             this.tabLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabLocation.Controls.Add(this.tabPage1);
+            this.tabLocation.Controls.Add(this.tabGMap);
             this.tabLocation.Controls.Add(this.tabActions);
             this.tabLocation.Controls.Add(this.tabWayActions);
-            this.tabLocation.Controls.Add(this.tabGMap);
             this.tabLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabLocation.Location = new System.Drawing.Point(0, 70);
             this.tabLocation.Multiline = true;
@@ -2211,55 +2092,6 @@
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 2;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
-            // 
-            // cameraToolStripMenu
-            // 
-            this.cameraToolStripMenu.Name = "cameraToolStripMenu";
-            this.cameraToolStripMenu.Size = new System.Drawing.Size(56, 20);
-            this.cameraToolStripMenu.Text = "Camera";
-            this.cameraToolStripMenu.Click += new System.EventHandler(this.cameraToolStripMenu_Click);
-            // 
-            // actionsToolStripMenuItem
-            // 
-            this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
-            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.actionsToolStripMenuItem.Text = "Actions";
-            // 
-            // insertToolStripMenuItem
-            // 
-            this.insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pOIToolStripMenuItem,
-            this.pathToolStripMenuItem});
-            this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
-            this.insertToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.insertToolStripMenuItem.Text = "Insert";
-            // 
-            // pOIToolStripMenuItem
-            // 
-            this.pOIToolStripMenuItem.Name = "pOIToolStripMenuItem";
-            this.pOIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pOIToolStripMenuItem.Text = "POI";
-            // 
-            // pathToolStripMenuItem
-            // 
-            this.pathToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.circularToolStripMenuItem,
-            this.helicalToolStripMenuItem});
-            this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
-            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.pathToolStripMenuItem.Text = "Path";
-            // 
-            // circularToolStripMenuItem
-            // 
-            this.circularToolStripMenuItem.Name = "circularToolStripMenuItem";
-            this.circularToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.circularToolStripMenuItem.Text = "Circular";
-            // 
-            // helicalToolStripMenuItem
-            // 
-            this.helicalToolStripMenuItem.Name = "helicalToolStripMenuItem";
-            this.helicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.helicalToolStripMenuItem.Text = "Helical";
             // 
             // Form1
             // 
@@ -2285,8 +2117,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).EndInit();
             this.tabActions.ResumeLayout(false);
             this.tabActions.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabLocation.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2460,21 +2290,6 @@
         private System.Windows.Forms.ComboBox cmbAction1;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.ComboBox cmbActionsList;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TextBox txtEarthRadius;
-        private System.Windows.Forms.TextBox txtGPSRadius;
-        public System.Windows.Forms.TextBox txtAltitude;
-        public System.Windows.Forms.TextBox txtElevation;
-        private System.Windows.Forms.TextBox txtCenterLon;
-        private System.Windows.Forms.TextBox txtCenterLat;
-        private System.Windows.Forms.Label lblEarthRadius;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.ComboBox cmbLocation;
-        private System.Windows.Forms.Label lblAltitude;
-        private System.Windows.Forms.Label lblElevation;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabLocation;
         private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
