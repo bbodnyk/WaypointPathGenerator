@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode57,
-            treeNode58,
-            treeNode59});
+            System.Windows.Forms.TreeNode treeNode101 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode102 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode103 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode104 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode101,
+            treeNode102,
+            treeNode103});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,7 +100,6 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolToggleCenter = new System.Windows.Forms.ToolStripMenuItem();
             this.toolReDrawgMap = new System.Windows.Forms.ToolStripMenuItem();
-            this.label9 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -140,46 +139,6 @@
             this.treGMap = new System.Windows.Forms.TreeView();
             this.label109 = new System.Windows.Forms.Label();
             this.cmbGMapProvider = new System.Windows.Forms.ComboBox();
-            this.tabWayActions = new System.Windows.Forms.TabPage();
-            this.btnCreatePOIWP = new System.Windows.Forms.Button();
-            this.label101 = new System.Windows.Forms.Label();
-            this.txtPOIWPName = new System.Windows.Forms.TextBox();
-            this.txtPOIWP = new System.Windows.Forms.TextBox();
-            this.txtWPEnd = new System.Windows.Forms.TextBox();
-            this.txtWPStart = new System.Windows.Forms.TextBox();
-            this.label100 = new System.Windows.Forms.Label();
-            this.label99 = new System.Windows.Forms.Label();
-            this.label98 = new System.Windows.Forms.Label();
-            this.btnApplyAction = new System.Windows.Forms.Button();
-            this.label74 = new System.Windows.Forms.Label();
-            this.label73 = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
-            this.cmbActionsWaypoints = new System.Windows.Forms.ComboBox();
-            this.dgvActionsWaypoints = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label49 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.dgvActionsPath = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabLocation = new System.Windows.Forms.TabControl();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectangularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -188,13 +147,36 @@
             this.kMLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.polygonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kMLPOlygonToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pOIPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pathPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polygonPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pathWaypointPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkMapScale)).BeginInit();
-            this.tabWayActions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).BeginInit();
             this.tabLocation.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -335,7 +317,7 @@
             this.selectedWaypointToolStripMenuItem});
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(203, 22);
-            this.toolStripMenuItem5.Text = "Edit Attributes";
+            this.toolStripMenuItem5.Text = "Edit Properties";
             // 
             // selectedPOIToolStripMenuItem
             // 
@@ -685,17 +667,6 @@
             this.toolReDrawgMap.Text = "Redraw Map";
             this.toolReDrawgMap.Click += new System.EventHandler(this.toolReDrawgMap_Click);
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(229, 30);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(379, 37);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Waypoint Path Generator";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -717,7 +688,8 @@
             this.toolStripMenuItem1,
             this.cameraToolStripMenu,
             this.actionsToolStripMenuItem,
-            this.insertToolStripMenuItem});
+            this.insertToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(860, 24);
@@ -921,7 +893,7 @@
             this.tabGMap.Controls.Add(this.cmbGMapProvider);
             this.tabGMap.Location = new System.Drawing.Point(4, 25);
             this.tabGMap.Name = "tabGMap";
-            this.tabGMap.Size = new System.Drawing.Size(852, 902);
+            this.tabGMap.Size = new System.Drawing.Size(852, 945);
             this.tabGMap.TabIndex = 16;
             this.tabGMap.Text = "Path Preview";
             this.tabGMap.UseVisualStyleBackColor = true;
@@ -953,7 +925,7 @@
             this.gMapControl.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(680, 647);
+            this.gMapControl.Size = new System.Drawing.Size(680, 690);
             this.gMapControl.TabIndex = 14;
             this.gMapControl.Zoom = 13D;
             this.gMapControl.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gMap_OnMarkerClick);
@@ -1038,16 +1010,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 97);
             this.treGMap.Name = "treGMap";
-            treeNode57.Name = "POI";
-            treeNode57.Text = "POI";
-            treeNode58.Name = "Paths";
-            treeNode58.Text = "Paths";
-            treeNode59.Name = "Polygons";
-            treeNode59.Text = "Polygons";
-            treeNode60.Name = "GMap";
-            treeNode60.Text = "Objects";
+            treeNode101.Name = "POI";
+            treeNode101.Text = "POI";
+            treeNode102.Name = "Paths";
+            treeNode102.Text = "Paths";
+            treeNode103.Name = "Polygons";
+            treeNode103.Text = "Polygons";
+            treeNode104.Name = "GMap";
+            treeNode104.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode60});
+            treeNode104});
             this.treGMap.Size = new System.Drawing.Size(121, 281);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1080,367 +1052,18 @@
             this.cmbGMapProvider.Text = "Bing Satellite";
             this.cmbGMapProvider.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // tabWayActions
-            // 
-            this.tabWayActions.Controls.Add(this.btnCreatePOIWP);
-            this.tabWayActions.Controls.Add(this.label101);
-            this.tabWayActions.Controls.Add(this.txtPOIWPName);
-            this.tabWayActions.Controls.Add(this.txtPOIWP);
-            this.tabWayActions.Controls.Add(this.txtWPEnd);
-            this.tabWayActions.Controls.Add(this.txtWPStart);
-            this.tabWayActions.Controls.Add(this.label100);
-            this.tabWayActions.Controls.Add(this.label99);
-            this.tabWayActions.Controls.Add(this.label98);
-            this.tabWayActions.Controls.Add(this.btnApplyAction);
-            this.tabWayActions.Controls.Add(this.label74);
-            this.tabWayActions.Controls.Add(this.label73);
-            this.tabWayActions.Controls.Add(this.label72);
-            this.tabWayActions.Controls.Add(this.cmbActionsWaypoints);
-            this.tabWayActions.Controls.Add(this.dgvActionsWaypoints);
-            this.tabWayActions.Controls.Add(this.label49);
-            this.tabWayActions.Controls.Add(this.label50);
-            this.tabWayActions.Controls.Add(this.dgvActionsPath);
-            this.tabWayActions.Location = new System.Drawing.Point(4, 25);
-            this.tabWayActions.Name = "tabWayActions";
-            this.tabWayActions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWayActions.Size = new System.Drawing.Size(852, 902);
-            this.tabWayActions.TabIndex = 8;
-            this.tabWayActions.Text = "Edit Segment Waypoints";
-            this.tabWayActions.UseVisualStyleBackColor = true;
-            this.tabWayActions.Click += new System.EventHandler(this.tabActions_Click);
-            // 
-            // btnCreatePOIWP
-            // 
-            this.btnCreatePOIWP.Location = new System.Drawing.Point(311, 705);
-            this.btnCreatePOIWP.Name = "btnCreatePOIWP";
-            this.btnCreatePOIWP.Size = new System.Drawing.Size(160, 23);
-            this.btnCreatePOIWP.TabIndex = 30;
-            this.btnCreatePOIWP.Text = "Create POI";
-            this.btnCreatePOIWP.UseVisualStyleBackColor = true;
-            this.btnCreatePOIWP.Click += new System.EventHandler(this.btnCreatePOIWP_Click);
-            // 
-            // label101
-            // 
-            this.label101.AutoSize = true;
-            this.label101.Location = new System.Drawing.Point(307, 668);
-            this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(70, 16);
-            this.label101.TabIndex = 29;
-            this.label101.Text = "POI Name";
-            // 
-            // txtPOIWPName
-            // 
-            this.txtPOIWPName.Location = new System.Drawing.Point(383, 665);
-            this.txtPOIWPName.Name = "txtPOIWPName";
-            this.txtPOIWPName.Size = new System.Drawing.Size(100, 22);
-            this.txtPOIWPName.TabIndex = 28;
-            // 
-            // txtPOIWP
-            // 
-            this.txtPOIWP.Location = new System.Drawing.Point(383, 625);
-            this.txtPOIWP.Name = "txtPOIWP";
-            this.txtPOIWP.Size = new System.Drawing.Size(100, 22);
-            this.txtPOIWP.TabIndex = 26;
-            // 
-            // txtWPEnd
-            // 
-            this.txtWPEnd.Location = new System.Drawing.Point(562, 545);
-            this.txtWPEnd.Name = "txtWPEnd";
-            this.txtWPEnd.Size = new System.Drawing.Size(100, 22);
-            this.txtWPEnd.TabIndex = 21;
-            this.txtWPEnd.Text = "0";
-            this.txtWPEnd.TextChanged += new System.EventHandler(this.textBox2_TextChanged_2);
-            this.txtWPEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textInteger_KeyPress);
-            // 
-            // txtWPStart
-            // 
-            this.txtWPStart.Location = new System.Drawing.Point(383, 545);
-            this.txtWPStart.Name = "txtWPStart";
-            this.txtWPStart.Size = new System.Drawing.Size(100, 22);
-            this.txtWPStart.TabIndex = 20;
-            this.txtWPStart.Text = "0";
-            this.txtWPStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textInteger_KeyPress);
-            // 
-            // label100
-            // 
-            this.label100.AutoSize = true;
-            this.label100.Location = new System.Drawing.Point(307, 628);
-            this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(65, 16);
-            this.label100.TabIndex = 27;
-            this.label100.Text = "Waypoint";
-            // 
-            // label99
-            // 
-            this.label99.AutoSize = true;
-            this.label99.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label99.Location = new System.Drawing.Point(294, 589);
-            this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(218, 20);
-            this.label99.TabIndex = 25;
-            this.label99.Text = "Create POI from Waypoint";
-            // 
-            // label98
-            // 
-            this.label98.AutoSize = true;
-            this.label98.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label98.Location = new System.Drawing.Point(294, 499);
-            this.label98.Name = "label98";
-            this.label98.Size = new System.Drawing.Size(227, 20);
-            this.label98.TabIndex = 24;
-            this.label98.Text = "Apply Actions to Waypoints";
-            // 
-            // btnApplyAction
-            // 
-            this.btnApplyAction.Location = new System.Drawing.Point(697, 546);
-            this.btnApplyAction.Name = "btnApplyAction";
-            this.btnApplyAction.Size = new System.Drawing.Size(75, 23);
-            this.btnApplyAction.TabIndex = 23;
-            this.btnApplyAction.Text = "Apply";
-            this.btnApplyAction.UseVisualStyleBackColor = true;
-            this.btnApplyAction.Click += new System.EventHandler(this.btnApplyAction_Click);
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(493, 551);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(57, 16);
-            this.label74.TabIndex = 22;
-            this.label74.Text = "End WP";
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(317, 548);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(60, 16);
-            this.label73.TabIndex = 19;
-            this.label73.Text = "Start WP";
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(56, 547);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(83, 16);
-            this.label72.TabIndex = 18;
-            this.label72.Text = "Apply Action";
-            // 
-            // cmbActionsWaypoints
-            // 
-            this.cmbActionsWaypoints.FormattingEnabled = true;
-            this.cmbActionsWaypoints.Location = new System.Drawing.Point(143, 545);
-            this.cmbActionsWaypoints.Name = "cmbActionsWaypoints";
-            this.cmbActionsWaypoints.Size = new System.Drawing.Size(170, 24);
-            this.cmbActionsWaypoints.TabIndex = 17;
-            this.cmbActionsWaypoints.SelectedIndexChanged += new System.EventHandler(this.cmbActionsWaypoints_SelectedIndexChanged);
-            // 
-            // dgvActionsWaypoints
-            // 
-            this.dgvActionsWaypoints.AllowDrop = true;
-            this.dgvActionsWaypoints.AllowUserToAddRows = false;
-            this.dgvActionsWaypoints.AllowUserToResizeRows = false;
-            this.dgvActionsWaypoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvActionsWaypoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.Column8,
-            this.Column9,
-            this.dataGridViewTextBoxColumn16,
-            this.dataGridViewTextBoxColumn17,
-            this.Column10,
-            this.Column11,
-            this.Column12,
-            this.Column13,
-            this.Column14,
-            this.Column15,
-            this.Column16,
-            this.Column17});
-            this.dgvActionsWaypoints.Location = new System.Drawing.Point(36, 208);
-            this.dgvActionsWaypoints.Name = "dgvActionsWaypoints";
-            this.dgvActionsWaypoints.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvActionsWaypoints.Size = new System.Drawing.Size(746, 249);
-            this.dgvActionsWaypoints.TabIndex = 16;
-            this.dgvActionsWaypoints.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvActionsWaypoints_CellValidating);
-            this.dgvActionsWaypoints.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWayActionsPath_CellValueChanged);
-            this.dgvActionsWaypoints.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvActionsWaypoints_RowsRemoved);
-            this.dgvActionsWaypoints.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dgvActionsWaypoints_MouseUp);
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Waypoint";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            this.dataGridViewTextBoxColumn11.Width = 75;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Latitude";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Longitude";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "Altitude";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Heading";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "Curve Size";
-            this.Column8.Name = "Column8";
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "Rotation Dir";
-            this.Column9.Name = "Column9";
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "Gimble Mode";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.HeaderText = "Gimble Pitch";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Action Type 1";
-            this.Column10.Name = "Column10";
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Action Param 1";
-            this.Column11.Name = "Column11";
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "Action Type 2";
-            this.Column12.Name = "Column12";
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "Action Param 2";
-            this.Column13.Name = "Column13";
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "Action Type 3";
-            this.Column14.Name = "Column14";
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "Action Param 3";
-            this.Column15.Name = "Column15";
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "Action Type 4";
-            this.Column16.Name = "Column16";
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "Action Param 4";
-            this.Column17.Name = "Column17";
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.Location = new System.Drawing.Point(306, 8);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(165, 24);
-            this.label49.TabIndex = 15;
-            this.label49.Text = "Generated Paths";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.Location = new System.Drawing.Point(333, 181);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(106, 24);
-            this.label50.TabIndex = 14;
-            this.label50.Text = "Waypoints";
-            this.label50.Click += new System.EventHandler(this.label50_Click);
-            // 
-            // dgvActionsPath
-            // 
-            this.dgvActionsPath.AllowUserToAddRows = false;
-            this.dgvActionsPath.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvActionsPath.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9});
-            this.dgvActionsPath.Location = new System.Drawing.Point(127, 35);
-            this.dgvActionsPath.Name = "dgvActionsPath";
-            this.dgvActionsPath.Size = new System.Drawing.Size(519, 127);
-            this.dgvActionsPath.TabIndex = 12;
-            this.dgvActionsPath.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActionsPath_CellClick);
-            this.dgvActionsPath.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActionsPath_CellValueChanged);
-            this.dgvActionsPath.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvActionsPath_RowsRemoved);
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Path";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn6.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn7.Width = 250;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Type";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn9.HeaderText = "WP Count";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn9.Width = 73;
-            // 
             // tabLocation
             // 
             this.tabLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabLocation.Controls.Add(this.tabGMap);
-            this.tabLocation.Controls.Add(this.tabWayActions);
             this.tabLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabLocation.Location = new System.Drawing.Point(0, 70);
+            this.tabLocation.Location = new System.Drawing.Point(0, 27);
             this.tabLocation.Multiline = true;
             this.tabLocation.Name = "tabLocation";
             this.tabLocation.SelectedIndex = 0;
-            this.tabLocation.Size = new System.Drawing.Size(860, 931);
+            this.tabLocation.Size = new System.Drawing.Size(860, 974);
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 2;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
@@ -1495,12 +1118,169 @@
             this.kMLPOlygonToolStripMenuItem1.Text = "KML Polygon";
             this.kMLPOlygonToolStripMenuItem1.Click += new System.EventHandler(this.kMLPOlygonToolStripMenuItem1_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pOIPropertiesToolStripMenuItem,
+            this.pathPropertiesToolStripMenuItem,
+            this.polygonPropertiesToolStripMenuItem,
+            this.pathWaypointPropertiesToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // pOIPropertiesToolStripMenuItem
+            // 
+            this.pOIPropertiesToolStripMenuItem.Name = "pOIPropertiesToolStripMenuItem";
+            this.pOIPropertiesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.pOIPropertiesToolStripMenuItem.Text = "POI Properties";
+            this.pOIPropertiesToolStripMenuItem.Click += new System.EventHandler(this.pOIPropertiesToolStripMenuItem_Click);
+            // 
+            // pathPropertiesToolStripMenuItem
+            // 
+            this.pathPropertiesToolStripMenuItem.Name = "pathPropertiesToolStripMenuItem";
+            this.pathPropertiesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.pathPropertiesToolStripMenuItem.Text = "Path Properties";
+            this.pathPropertiesToolStripMenuItem.Click += new System.EventHandler(this.pathPropertiesToolStripMenuItem_Click);
+            // 
+            // polygonPropertiesToolStripMenuItem
+            // 
+            this.polygonPropertiesToolStripMenuItem.Name = "polygonPropertiesToolStripMenuItem";
+            this.polygonPropertiesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.polygonPropertiesToolStripMenuItem.Text = "Polygon Properties";
+            this.polygonPropertiesToolStripMenuItem.Click += new System.EventHandler(this.polygonPropertiesToolStripMenuItem_Click);
+            // 
+            // pathWaypointPropertiesToolStripMenuItem
+            // 
+            this.pathWaypointPropertiesToolStripMenuItem.Name = "pathWaypointPropertiesToolStripMenuItem";
+            this.pathWaypointPropertiesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.pathWaypointPropertiesToolStripMenuItem.Text = "Path Waypoint Properties";
+            this.pathWaypointPropertiesToolStripMenuItem.Click += new System.EventHandler(this.pathWaypointPropertiesToolStripMenuItem_Click);
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn9.HeaderText = "WP Count";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Type";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            this.dataGridViewTextBoxColumn8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn7.Width = 250;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Path";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn6.Width = 50;
+            // 
+            // Column17
+            // 
+            this.Column17.HeaderText = "Action Param 4";
+            this.Column17.Name = "Column17";
+            // 
+            // Column16
+            // 
+            this.Column16.HeaderText = "Action Type 4";
+            this.Column16.Name = "Column16";
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "Action Param 3";
+            this.Column15.Name = "Column15";
+            // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "Action Type 3";
+            this.Column14.Name = "Column14";
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "Action Param 2";
+            this.Column13.Name = "Column13";
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "Action Type 2";
+            this.Column12.Name = "Column12";
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "Action Param 1";
+            this.Column11.Name = "Column11";
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Action Type 1";
+            this.Column10.Name = "Column10";
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "Gimble Pitch";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "Gimble Mode";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Rotation Dir";
+            this.Column9.Name = "Column9";
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Curve Size";
+            this.Column8.Name = "Column8";
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "Heading";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.HeaderText = "Altitude";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "Longitude";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Latitude";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Waypoint";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            this.dataGridViewTextBoxColumn11.Width = 75;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(860, 872);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.tabLocation);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1513,10 +1293,6 @@
             this.tabGMap.ResumeLayout(false);
             this.tabGMap.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkMapScale)).EndInit();
-            this.tabWayActions.ResumeLayout(false);
-            this.tabWayActions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvActionsPath)).EndInit();
             this.tabLocation.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1524,7 +1300,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -1597,46 +1372,6 @@
         private System.Windows.Forms.Label label109;
         private System.Windows.Forms.ComboBox cmbGMapProvider;
         private GMap.NET.WindowsForms.GMapControl gMapControl;
-        private System.Windows.Forms.TabPage tabWayActions;
-        private System.Windows.Forms.Button btnCreatePOIWP;
-        private System.Windows.Forms.Label label101;
-        private System.Windows.Forms.TextBox txtPOIWPName;
-        private System.Windows.Forms.TextBox txtPOIWP;
-        private System.Windows.Forms.TextBox txtWPEnd;
-        private System.Windows.Forms.TextBox txtWPStart;
-        private System.Windows.Forms.Label label100;
-        private System.Windows.Forms.Label label99;
-        private System.Windows.Forms.Label label98;
-        private System.Windows.Forms.Button btnApplyAction;
-        private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.ComboBox cmbActionsWaypoints;
-        private System.Windows.Forms.DataGridView dgvActionsWaypoints;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.DataGridView dgvActionsPath;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.TabControl tabLocation;
         private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
@@ -1675,6 +1410,32 @@
         private System.Windows.Forms.ToolStripMenuItem kMLPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem polygonToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kMLPOlygonToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pOIPropertiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pathPropertiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem polygonPropertiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pathWaypointPropertiesToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
     }
 }
 

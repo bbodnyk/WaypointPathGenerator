@@ -26,7 +26,7 @@ namespace Waypoint_Path_Generator
         int _current_path_index;
         double[,] _kml_points = new double[1000, 4];
         int _kml_point_count = 0;
-        string _kml_filename;
+        string _kml_filename = null;
 
         public DialogKMLPath(Waypoint_Path_Gen wpg, GMAP gmap,TreeView treeview, double lat, double lon)
         {

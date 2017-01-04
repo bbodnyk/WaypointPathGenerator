@@ -146,17 +146,9 @@ namespace Waypoint_Path_Generator
             // Update GUI Controls
 
             Update_POI_Dgv();
-            Update_DGVPath();
-            Update_Actioncmb();
+            //Update_Actioncmb();
             //Update_Shapecmb();
             Update_GUI();
-
-            // Set Waypoint dgv to be unsortable
-
-            foreach (DataGridViewColumn dgvc in dgvActionsWaypoints.Columns)
-            {
-                dgvc.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
 
             Globals.gps_radius = _options.earth_radius + _options.def_elevation + _options.def_altitude;
             Globals.ActionWaypoint_Handler = true;
@@ -474,6 +466,7 @@ namespace Waypoint_Path_Generator
 
         }
 
+        /*
         private void dgvActionsWaypoints_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             if (Globals.ActionWaypoint_Handler)
@@ -542,7 +535,8 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
-
+        */
+        /*
         private void dgvActionsPath_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             if (Globals.Path_Handler)
@@ -561,7 +555,7 @@ namespace Waypoint_Path_Generator
                 //pdate_GMapTree();
             }
         }
-
+        */
         private void dgvPaths_RowsRemoved_1(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             if (Globals.Path_Handler)
@@ -571,8 +565,7 @@ namespace Waypoint_Path_Generator
                 _wpg.DeletePath(path);
                 RemovePath_GMapTree(path);
                 _gmap.Delete_gMapPath(path);
-                //GMAPTree.Update_GMapTree(_wpg, treGMap);;
-                Update_DGVPath();
+                //GMAPTree.Update_GMapTree(_wpg, treGMap);
             }
         }
 
@@ -587,11 +580,10 @@ namespace Waypoint_Path_Generator
                 //RemovePath_GMapTree(path);
                 _gmap.Delete_gMapPath(path);
                 //GMAPTree.Update_GMapTree(_wpg, treGMap);;
-                Update_DGVPath();
                 _gmap.ReDrawgMap();
             }
         }
-
+        /*
         private void Update_DGVPath()
         {
             int path_count = _wpg.PathCount();
@@ -626,7 +618,7 @@ namespace Waypoint_Path_Generator
             dgvActionsPath.ClearSelection();
             Globals.Path_Handler = true;
         }
-
+        */
         private void RemovePOI_GMapTree(int index)
         {
             int trecnt = treGMap.Nodes[0].Nodes[0].Nodes.Count;
@@ -654,7 +646,7 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
- 
+ /*
         private void Update_Actioncmb()
         {
             int count = _wpg.ActionCount();
@@ -673,7 +665,7 @@ namespace Waypoint_Path_Generator
             }
             //cmbActionsList.SelectedIndex = 0;
         }
-
+*/
         private void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
             string name = e.TabPage.Name;
@@ -724,7 +716,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
- 
+ /*
         private void btnCreatePOIWP_Click(object sender, EventArgs e)
         {
             int index = Convert.ToInt16(txtPOIWP.Text);
@@ -750,7 +742,7 @@ namespace Waypoint_Path_Generator
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
             Update_POI_Dgv();
         }
-
+*/
         private void Update_POI_Dgv()
         {
             Button button = new Button();
@@ -811,7 +803,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-
+        /*
         private void dgvActionsPath_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -853,7 +845,7 @@ namespace Waypoint_Path_Generator
             }
             Globals.ActionWaypoint_Handler = true;
         }
-
+        */
         private void label50_Click(object sender, EventArgs e)
         {
 
@@ -902,7 +894,7 @@ namespace Waypoint_Path_Generator
             }
 
         }
- 
+ /*
         private void dgvActionsPath_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -946,7 +938,7 @@ namespace Waypoint_Path_Generator
                 count++;
                 if (count == row + 1)
                 {
-                    /* Create new wp */
+                    // Create new wp
 
                     new_wp.lat = node.Value.lat;
                     new_wp.lon = node.Value.lon;
@@ -958,7 +950,7 @@ namespace Waypoint_Path_Generator
                     new_wp.gimblepitch = node.Value.gimblepitch;
                     new_wp.actions = node.Value.actions;
 
-                    /* Modify value of new_wp */
+                    // Modify value of new_wp
 
                     if (col == 1) new_wp.lat = cell_value;
                     if (col == 2) new_wp.lon = cell_value;
@@ -973,7 +965,7 @@ namespace Waypoint_Path_Generator
                     //if (col == 11) new_wp.actions[1, 0] = Convert.ToInt16(cell_value);
                     //if (col == 12) new_wp.actions[1, 1] = Convert.ToInt16(cell_value);
 
-                    /* Action Changed */
+                    // Action Changed
 
                     if (col > 8)
                     {
@@ -996,7 +988,7 @@ namespace Waypoint_Path_Generator
                 node = next_node;
             }
         }
-
+*/
         private bool Odd(int val)
         {
             int vald2 = val / 2;
@@ -1082,9 +1074,6 @@ namespace Waypoint_Path_Generator
                 GMAPTree.Update_GMapTree(_wpg, treGMap);
                 _gmap.ReDrawgMap();
                 Update_POI_Dgv();
-                Update_DGVPath();
-                Update_Actioncmb();
-                //Update_Shapecmb();
                 Update_GUI();
             }
         }
@@ -1102,9 +1091,6 @@ namespace Waypoint_Path_Generator
             GMAPTree.Update_GMapTree(_wpg, treGMap);
             _gmap.ReDrawgMap();
             Update_POI_Dgv();
-            Update_DGVPath();
-            Update_Actioncmb();
-            //Update_Shapecmb();
             Update_GUI();
         }
 
@@ -1247,7 +1233,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-
+        /*
         private void btnApplyAction_Click(object sender, EventArgs e)
         {
             string text;
@@ -1349,7 +1335,7 @@ namespace Waypoint_Path_Generator
                 count++;
             }
         }
-
+        */
         private void textBox2_TextChanged_2(object sender, EventArgs e)
         {
 
@@ -1826,7 +1812,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
- 
+ /*
         private void dgvActionsWaypoints_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             int row = e.RowIndex;
@@ -1941,7 +1927,7 @@ namespace Waypoint_Path_Generator
 
             }
         }
-  
+  */
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -3543,6 +3529,89 @@ namespace Waypoint_Path_Generator
         {
             DialogActions dialog = new DialogActions(_wpg);
             dialog.Show();
+        }
+
+        private void pOIPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int poi_count = _wpg.SelectedPOICount();
+            if (poi_count != 1)
+            {
+                MessageBox.Show("Select a single POI");
+                return;
+            }
+            // Get Selected POI index
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                if (_wpg.POIPointAt(i).selected)
+                {
+                    DialogEditPOI dialog = new DialogEditPOI(_wpg, _gmap, treGMap, i);
+                    dialog.Show();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                    _gmap.ReDrawgMap();
+                }
+            }
+        }
+
+        private void pathPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount();
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected)
+                {
+                    DialogEditPath dialog = new DialogEditPath(_wpg, _gmap, treGMap, i);
+                    dialog.Show();
+                }
+            }
+        }
+
+        private void polygonPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int poly_count = _wpg.SelectedPolyCount();
+            if (poly_count != 1)
+            {
+                MessageBox.Show("Select a single Polygon");
+                return;
+            }
+            for (int i = 0; i < _wpg.ShapeCount(); i++)
+            {
+                if (_wpg.ShapeAt(i).selected)
+                {
+                    DialogEditPolygon dialog = new DialogEditPolygon(_wpg, _gmap, treGMap, i);
+                    dialog.Show();
+                }
+            }
+        }
+
+        private void pathWaypointPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount();
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected)
+                {
+                    Models.Path path = _wpg.PathAt(i);
+                    DialogEditWPActions dialog = new DialogEditWPActions(_wpg, _gmap, path);
+                    dialog.Show();
+                }
+            }
+        }
+
+        private void dgvActionsPath_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
