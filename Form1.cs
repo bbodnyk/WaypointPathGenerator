@@ -164,39 +164,6 @@ namespace Waypoint_Path_Generator
             Globals.Shape_Handler = true;
             Globals.ManWp_Handler = true;
 
-            // Set Actions
-
-            cmbAction1.SelectedIndex = 0;
-            cmbAction2.SelectedIndex = 0;
-            cmbAction3.SelectedIndex = 0;
-            cmbAction4.SelectedIndex = 0;
-            cmbAction5.SelectedIndex = 0;
-            cmbAction6.SelectedIndex = 0;
-            cmbAction7.SelectedIndex = 0;
-            cmbAction8.SelectedIndex = 0;
-            cmbAction9.SelectedIndex = 0;
-            cmbAction10.SelectedIndex = 0;
-            cmbAction11.SelectedIndex = 0;
-            cmbAction12.SelectedIndex = 0;
-            cmbAction13.SelectedIndex = 0;
-            cmbAction14.SelectedIndex = 0;
-            cmbAction15.SelectedIndex = 0;
-            txtActionParam1.Text = "-1";
-            txtActionParam2.Text = "-1";
-            txtActionParam3.Text = "-1";
-            txtActionParam4.Text = "-1";
-            txtActionParam5.Text = "-1";
-            txtActionParam6.Text = "-1";
-            txtActionParam7.Text = "-1";
-            txtActionParam8.Text = "-1";
-            txtActionParam9.Text = "-1";
-            txtActionParam10.Text = "-1";
-            txtActionParam11.Text = "-1";
-            txtActionParam12.Text = "-1";
-            txtActionParam13.Text = "-1";
-            txtActionParam14.Text = "-1";
-            txtActionParam15.Text = "-1";
-
             // Build GMap
 
             _gmap.BuildgMap();
@@ -693,7 +660,7 @@ namespace Waypoint_Path_Generator
             int count = _wpg.ActionCount();
             Models.Action action;
             string name;
-            cmbActionsList.Items.Clear();
+            //cmbActionsList.Items.Clear();
             cmbActionsWaypoints.Items.Clear();
 
             for (int i = 0; i < count; i++)
@@ -701,7 +668,7 @@ namespace Waypoint_Path_Generator
                 action = _wpg.ActionAt(i);
                 name = action.name;
 
-                cmbActionsList.Items.Add(name);
+                //cmbActionsList.Items.Add(name);
                 cmbActionsWaypoints.Items.Add(name);
             }
             //cmbActionsList.SelectedIndex = 0;
@@ -716,28 +683,6 @@ namespace Waypoint_Path_Generator
                 GMAPTree.Update_GMapTree(_wpg, treGMap);
                 _gmap.ReDrawgMap();
             }
-
-            if (name == "tabGrid")
-            {
-                //Update_Shapecmb();
-            }
-
-            if (name == "tabActions")
-            {
-                Update_Actioncmb();
-                cmbActionsList.SelectedIndex = 0;
-            }
-
-            
-            if (name == "tabPOI")
-            {
-                Update_POI_Dgv();
-            }
-            if (name == "tabLocation")
-            {
-                Update_POI_Dgv();
-            }
-
         }
 
         private void tabPage6_Click(object sender, EventArgs e)
@@ -1172,7 +1117,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-
+        /*
         private void btnClearActionsGUI_Click(object sender, EventArgs e)
         {
             txtNewActionName.Text = "";
@@ -1297,7 +1242,7 @@ namespace Waypoint_Path_Generator
             Update_Actioncmb();
             cmbActionsList.SelectedIndex = 0;
         }
-
+        */
         private void cmbActionsWaypoints_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -3592,6 +3537,12 @@ namespace Waypoint_Path_Generator
             DialogKMLPolygon dialog = new DialogKMLPolygon(_wpg, _gmap, treGMap);
             dialog.Show();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void actionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogActions dialog = new DialogActions(_wpg);
+            dialog.Show();
         }
     }
 }

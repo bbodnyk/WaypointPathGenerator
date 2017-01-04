@@ -192,6 +192,12 @@
     <Compile Include="DialogCamera.Designer.cs">
       <DependentUpon>DialogCamera.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogActions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogActions.Designer.cs">
+      <DependentUpon>DialogActions.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogManualPath.resx">
       <DependentUpon>DialogManualPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogActions.resx">
+      <DependentUpon>DialogActions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
