@@ -553,10 +553,31 @@ namespace Waypoint_Path_Generator.Models
                 for (int i = 0; i < path_list.Count; i++)
                 {
                     xml_writer.WriteStartElement("Path"); // Start of Path
-                    name = path_list.ElementAt(i).name;
-                    string path_type = path_list.ElementAt(i).type;
+                    Path path = path_list.ElementAt(i);
+                    name = path.name;
+                    string path_type = path.type;
                     xml_writer.WriteElementString("Name", name);
                     xml_writer.WriteElementString("Type", path_type);
+                    // Path GUI Configuration
+                    if (path_type == "Circular")
+                    {
+                        CircularGUI gui = path.circgui;
+                        xml_writer.WriteStartElement("GUI"); // Start of Gui
+                        xml_writer.WriteElementString("CW", Convert.ToString(gui.CW));
+                        xml_writer.WriteElementString("Name", gui.name);
+                        xml_writer.WriteElementString("Lat", Convert.ToString(gui.lat));
+                        xml_writer.WriteElementString("Lon", Convert.ToString(gui.lon));
+                        xml_writer.WriteElementString("Altitude", Convert.ToString(gui.altitude));
+                        xml_writer.WriteElementString("Radius", Convert.ToString(gui.radius));
+                        xml_writer.WriteElementString("NumPoints", Convert.ToString(gui.numpoints));
+                        xml_writer.WriteElementString("FullCircle", Convert.ToString(gui.fullcirc));
+                        xml_writer.WriteElementString("StartAngle", Convert.ToString(gui.start_angle));
+                        xml_writer.WriteElementString("CircleSpan", Convert.ToString(gui.circ_span));
+                        xml_writer.WriteElementString("StartEnd", Convert.ToString(gui.startend));
+                        xml_writer.WriteElementString("POIMode", Convert.ToString(gui.poimode));
+                        xml_writer.WriteElementString("POIName", gui.poiname);
+                        xml_writer.WriteEndElement(); // End of GUI
+                    }
                     //xml_writer.WriteStartElement("Waypoint_List"); // Start of Waypoint List
                     LinkedList<WayPoints> waypoint = path_list.ElementAt(i).waypoints;
                     for (int j = 0; j < waypoint.Count; j++)
@@ -687,8 +708,30 @@ namespace Waypoint_Path_Generator.Models
             {
 
                 Models.Path path = new Models.Path();
+                
                 path.name = path_node.SelectSingleNode("Name").InnerText;
                 path.type = path_node.SelectSingleNode("Type").InnerText;
+                if (path.type == "Circular")
+                {
+                    CircularGUI gui = new CircularGUI();
+                    XmlNodeList GUI_node = path_node.SelectNodes("./GUI");
+                    foreach (XmlNode node in GUI_node) {
+                        gui.CW = Convert.ToBoolean(node.SelectSingleNode("CW").InnerText);
+                        gui.name = node.SelectSingleNode("Name").InnerText;
+                        gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
+                        gui.lon = Convert.ToDouble(node.SelectSingleNode("Lon").InnerText);
+                        gui.altitude = Convert.ToDouble(node.SelectSingleNode("Altitude").InnerText);
+                        gui.radius = Convert.ToDouble(node.SelectSingleNode("Radius").InnerText);
+                        gui.numpoints = Convert.ToInt16(node.SelectSingleNode("NumPoints").InnerText);
+                        gui.fullcirc = Convert.ToBoolean(node.SelectSingleNode("FullCircle").InnerText);
+                        gui.start_angle = Convert.ToDouble(node.SelectSingleNode("StartAngle").InnerText);
+                        gui.circ_span = Convert.ToDouble(node.SelectSingleNode("CircleSpan").InnerText);
+                        gui.startend = Convert.ToBoolean(node.SelectSingleNode("StartEnd").InnerText);
+                        gui.poimode = Convert.ToBoolean(node.SelectSingleNode("POIMode").InnerText);
+                        gui.poiname = node.SelectSingleNode("POIName").InnerText;
+                    }
+                    path.circgui = gui;
+                }
                 path.selected = false;
                 path.visible = false;
                 LinkedList<WayPoints> way_list = new LinkedList<WayPoints>();

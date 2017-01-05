@@ -2627,7 +2627,8 @@ namespace Waypoint_Path_Generator
 
         private void addCircularPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            Models.Path path = null;
+            dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -3441,10 +3442,11 @@ namespace Waypoint_Path_Generator
 
         private void circularToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Models.Path path = null;
             Globals.map_center = gMapControl.Position;
-            dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, Globals.map_center.Lat, Globals.map_center.Lng);
+            dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
             dialog.ShowDialog();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void helicalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3612,6 +3614,28 @@ namespace Waypoint_Path_Generator
         private void dgvActionsPath_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void circularPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount();
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected)
+                {
+                    Models.Path path = _wpg.PathAt(i);
+                    Globals.map_center = gMapControl.Position;
+                    dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+                    dialog.ShowDialog();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                }
+            }
         }
     }
 }

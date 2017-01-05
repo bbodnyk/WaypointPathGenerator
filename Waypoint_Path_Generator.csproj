@@ -207,6 +207,7 @@
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
+    <Compile Include="Models\CircularGUI.cs" />
     <Compile Include="Models\Options.cs" />
     <Compile Include="Models\Waypoint_Path_Gen.cs" />
     <Compile Include="Models\Action.cs" />

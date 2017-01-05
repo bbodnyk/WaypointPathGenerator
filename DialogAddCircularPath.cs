@@ -16,10 +16,11 @@ namespace Waypoint_Path_Generator
         private Path _path;
         private int _current_path_index = -1;
 
-        public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, double lat, double lon)
+        public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, Path path, double lat, double lon)
         {
             _wp = new WayPoints();
-            _path = new Path();
+
+            
             _wpg = wpg;
             _gmap = gmap;
             _options = options;
@@ -27,14 +28,36 @@ namespace Waypoint_Path_Generator
             _lon = lon;
             InitializeComponent();
             txtDiaAddCircPathAlt.Text = Convert.ToString(_options.def_altitude);
-            buildCircPath();
             _current_path_index = _wpg.PathCount() - 1;
             // Fill POI combobox
             cmbCircPOI.Items.Clear();
-            for(int i = 0; i < _wpg.POICount(); i++)
+            cmbCircPOI.Items.Add("");
+            for (int i = 0; i < _wpg.POICount(); i++)
             {
                 cmbCircPOI.Items.Add(_wpg.POIPointAt(i).name);
             }
+            if (path == null)
+            {
+                _path = new Path();
+            }
+            else
+            {
+                _path = path;
+                CircularGUI gui = _path.circgui;
+                txtDiaAddCircPathName.Text = gui.name;
+                _lat = gui.lat;
+                _lon = gui.lon;
+                txtDiaAddCircPathAlt.Text = Convert.ToString(gui.altitude);
+                txtDiaAddCircPathRadius.Text = Convert.ToString(gui.radius);                
+                txtCircNumPoints.Text = Convert.ToString(gui.numpoints);
+                chkFullCircle.Checked = gui.fullcirc;
+                txtCircStartAngle.Text = Convert.ToString(gui.start_angle);
+                txtCircSpan.Text = Convert.ToString(gui.circ_span);
+                chkCircHome.Checked = gui.startend;
+                chkCircPOI.Checked = gui.poimode;
+                cmbCircPOI.SelectedText = gui.poiname;
+            }
+            buildCircPath();
         }
 
         private void bnCancelAddCircPath_Click(object sender, EventArgs e)
@@ -46,8 +69,28 @@ namespace Waypoint_Path_Generator
 
         private void btnAddCircPath_Click(object sender, EventArgs e)
         {
-            //buildCircPath();
-            //_gmaptree.Update_GMapTree(_wpg, _treeview);
+            double altitude = Convert.ToDouble(txtDiaAddCircPathAlt.Text);
+            double circle_radius = Convert.ToDouble(txtDiaAddCircPathRadius.Text);
+            double start_angle = Convert.ToDouble(txtCircStartAngle.Text);
+            double circle_span = Convert.ToDouble(txtCircSpan.Text);
+            int circle_num_points = Convert.ToInt16(txtCircNumPoints.Text);
+            bool startend = chkCircHome.Checked;
+            _path = _wpg.PathAt(_current_path_index);
+            CircularGUI gui = new CircularGUI();
+            gui.CW = startend;
+            gui.name = txtDiaAddCircPathName.Text;
+            gui.lat = _lat;
+            gui.lon = _lon;
+            gui.altitude = altitude;
+            gui.radius = circle_radius;
+            gui.numpoints = circle_num_points;
+            gui.fullcirc = chkFullCircle.Checked;
+            gui.start_angle = start_angle;
+            gui.circ_span = circle_span;
+            gui.startend = startend;
+            gui.poimode = chkCircPOI.Checked;
+            gui.poiname = cmbCircPOI.GetItemText(cmbCircPOI.SelectedItem);
+            _path.circgui = gui;
             this.Close();
         }
         
@@ -301,6 +344,11 @@ namespace Waypoint_Path_Generator
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             txtDiaAddCircPathAlt.Text = Convert.ToString(trkAlt.Value);
+        }
+
+        private void dialogAddCircularPath_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

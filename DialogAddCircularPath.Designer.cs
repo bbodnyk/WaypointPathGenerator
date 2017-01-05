@@ -362,6 +362,7 @@
             this.Name = "dialogAddCircularPath";
             this.Text = "Add Circular Path";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.dialogAddCircularPath_FormClosed);
+            this.Load += new System.EventHandler(this.dialogAddCircularPath_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius)).EndInit();
