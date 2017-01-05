@@ -15,6 +15,7 @@ namespace Waypoint_Path_Generator
         private WayPoints _wp;
         private Path _path;
         private int _current_path_index = -1;
+        private bool redefine;
 
         public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, Path path, double lat, double lon)
         {
@@ -38,6 +39,7 @@ namespace Waypoint_Path_Generator
             }
             if (path == null)
             {
+                redefine = false;
                 _path = new Path();
             }
             else
@@ -56,13 +58,14 @@ namespace Waypoint_Path_Generator
                 chkCircHome.Checked = gui.startend;
                 chkCircPOI.Checked = gui.poimode;
                 cmbCircPOI.SelectedText = gui.poiname;
+                redefine = true;
             }
             buildCircPath();
         }
 
         private void bnCancelAddCircPath_Click(object sender, EventArgs e)
         {
-            if (_current_path_index != -1) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
+            if (_current_path_index != -1 & !redefine) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
             _gmap.ReDrawgMap();
             this.Close();
         }
