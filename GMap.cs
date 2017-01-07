@@ -305,6 +305,7 @@ namespace Waypoint_Path_Generator
             {
                 Models.Path path = _wpg.PathAt(i);
                 bool path_visible = path.visible;
+                bool path_selected = path.selected;
                 string name = path.name;
                 LinkedList<WayPoints> wplist = path.waypoints;
                 int wpcount = wplist.Count;
@@ -313,10 +314,9 @@ namespace Waypoint_Path_Generator
                 int count = 0;
                 foreach (WayPoints wp in wplist)
                 {
-                    bool selected = wp.selected;
                     points.Add(new PointLatLng(wp.lat, wp.lon));
                     GMapMarker marker;
-                    if (selected)
+                    if (path_selected | wp.selected)
                     {
                         _drone_image = _drone_image_selected;
                         _drone_image = RotateImage(_drone_image_selected, wp.head);

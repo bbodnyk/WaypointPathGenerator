@@ -14,8 +14,8 @@ namespace Waypoint_Path_Generator
         private Options _options;
         private WayPoints _wp;
         private Path _path;
-        private int _current_path_index = -1;
-        private bool redefine;
+        private bool _first_pass;
+        private bool _new_path;
 
         public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, Path path, double lat, double lon)
         {
@@ -34,10 +34,9 @@ namespace Waypoint_Path_Generator
             // Setup Dialog GUI
 
             txtDiaAddCircPathAlt.Text = Convert.ToString(_options.def_altitude);
-            //_current_path_index = _wpg.PathCount() - 1;
-            // Fill POI combobox
             cmbCircPOI.Items.Clear();
             cmbCircPOI.Items.Add("");
+            int cmbindex = -1;
             for (int i = 0; i < _wpg.POICount(); i++)
             {
                 cmbCircPOI.Items.Add(_wpg.POIPointAt(i).name);
@@ -47,13 +46,15 @@ namespace Waypoint_Path_Generator
 
             if (path == null)
             {
-                redefine = false;
+                _new_path = true;
+                _first_pass = true;
                 _path = new Path();
             }
             else
             {
+                _new_path = false;
                 _path = path;
-                _current_path_index = _wpg.PathIndex(_path);
+                _path.selected = false;
                 CircularGUI gui = _path.circgui;
                 txtDiaAddCircPathName.Text = gui.name;
                 _lat = gui.lat;
@@ -66,15 +67,20 @@ namespace Waypoint_Path_Generator
                 txtCircSpan.Text = Convert.ToString(gui.circ_span);
                 chkCircHome.Checked = gui.startend;
                 chkCircPOI.Checked = gui.poimode;
-                cmbCircPOI.SelectedText = gui.poiname;
-                redefine = true;
+                int index = cmbCircPOI.Items.IndexOf(gui.poiname);
+                cmbCircPOI.SelectedIndex = index;
+                _first_pass = true;
             }
+
+
+
+
             buildCircPath();
         }
 
         private void bnCancelAddCircPath_Click(object sender, EventArgs e)
         {
-            if (_current_path_index != -1 & !redefine) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
+            if (_new_path) _wpg.DeletePath(_path);
             _gmap.ReDrawgMap();
             this.Close();
         }
@@ -87,7 +93,6 @@ namespace Waypoint_Path_Generator
             double circle_span = Convert.ToDouble(txtCircSpan.Text);
             int circle_num_points = Convert.ToInt16(txtCircNumPoints.Text);
             bool startend = chkCircHome.Checked;
-            _path = _wpg.PathAt(_current_path_index);
             CircularGUI gui = new CircularGUI();
             gui.CW = startend;
             gui.name = txtDiaAddCircPathName.Text;
@@ -103,6 +108,8 @@ namespace Waypoint_Path_Generator
             gui.poimode = chkCircPOI.Checked;
             gui.poiname = cmbCircPOI.GetItemText(cmbCircPOI.SelectedItem);
             _path.circgui = gui;
+            _path.selected = true;
+            _gmap.ReDrawgMap();
             this.Close();
         }
         
@@ -223,39 +230,24 @@ namespace Waypoint_Path_Generator
 
             // Save Path
 
-            if(_current_path_index != -1)
+            if( _new_path )
             {
-                _wpg.DeletePath(_wpg.PathAt(_current_path_index));
-            }
-            string path_name = txtDiaAddCircPathName.Text;
-            if (path_name == "") path_name = "Untitled - Circular";
-            _path.Add_Path(_wpg, _gmap, path_name, "Circular", new_list);
-            int index = _wpg.PathCount()-1;
-            _current_path_index = index;
+                // Create new path
 
-            Models.Path path = _wpg.PathAt(index);
-            string exist_type = path.type;
-            bool exist_select = path.selected;
-            bool exist_visible = path.visible;
-            /*
-            if (exist_type == "Circular")
+                string path_name = txtDiaAddCircPathName.Text;
+                if (path_name == "") path_name = "Untitled - Circular";
+                _path.Add_Path(_wpg, _gmap, path_name, "Circular", new_list);
+                _path = _wpg.PathAt(_wpg.PathCount() - 1);
+                _path.visible = true;
+                _path.selected = false;
+                _new_path = false;
+            } else
             {
-                _wpg.ChangePathWP(index, new_list);
-                string pathname = path.name;
-                int id = path.id;
-                string type = path.type;
-                _gmap.Delete_gMapPath(path);
-                Models.Path newpath = new Models.Path();
-                newpath.name = pathname;
-                newpath.id = id;
-                newpath.type = type;
-                newpath.selected = exist_select;
-                newpath.visible = exist_visible;
-                newpath.waypoints = new_list;
-                _gmap.Add_gMapPath(path, false);
+                // Replace Path Waypoints
+
+                _wpg.ChangePathWP(_wpg.PathIndex(_path), new_list);
             }
-            */
-            _current_path_index = _wpg.PathIndex(path);
+
             _gmap.ReDrawgMap();
             //_wpg.ChangePathWP(index, new_list);
             //cmbCircReuse.ResetText();
@@ -271,7 +263,7 @@ namespace Waypoint_Path_Generator
 
         private void cmbCircPOI_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            buildCircPath();
         }
 
         private void txtDiaAddCircPathAlt_TextChanged(object sender, EventArgs e)
