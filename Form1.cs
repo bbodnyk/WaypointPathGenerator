@@ -2643,9 +2643,7 @@ namespace Waypoint_Path_Generator
 
         private void addManualPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon,
-                _options.focal_angle_hor, _options.focal_angle_hor,
-                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -3471,9 +3469,7 @@ namespace Waypoint_Path_Generator
         private void rectangularToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Globals.map_center = gMapControl.Position;
-            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.map_center.Lat, Globals.map_center.Lng,
-                _options.focal_angle_hor, _options.focal_angle_hor,
-                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.map_center.Lat, Globals.map_center.Lng);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }

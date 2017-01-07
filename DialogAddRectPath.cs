@@ -31,8 +31,7 @@ namespace Waypoint_Path_Generator
         private bool _video;
 
 
-        public DialogAddRectPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, double lat, double lon,
-            double cam_ang_hor, double cam_ang_ver, double over_wid, double over_hgt)
+        public DialogAddRectPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, double lat, double lon)
         {
             _wp = new WayPoints();
             _path = new Path();
@@ -41,10 +40,12 @@ namespace Waypoint_Path_Generator
             _options = options;
             _lat = lat;
             _lon = lon;
-            _camera_angle_hor = cam_ang_hor;
-            _camera_angle_ver = cam_ang_ver;
-            _overlap_width = over_wid;
-            _overlap_height = over_hgt;
+            _camera_angle_hor = _options.focal_angle_hor;
+            _camera_angle_ver = _options.focal_angle_ver;
+            //_overlap_width = over_wid;
+            //_overlap_height = over_hgt;
+            _overlap_width = _options.hor_overlap_percent;
+            _overlap_height = _options.ver_overlap_percent;
             _poly = new Shape();
 
             InitializeComponent();
@@ -282,6 +283,7 @@ namespace Waypoint_Path_Generator
 
             double new_lat, new_lon;
 
+            
             for (int i = 0; i < 4; i++)
             {
 
@@ -295,7 +297,7 @@ namespace Waypoint_Path_Generator
                 polypnt[i, 0] = new_lat;
                 polypnt[i, 1] = new_lon;
             }
-
+            
             // Generate Rectangle Polygon
 
             
@@ -317,11 +319,7 @@ namespace Waypoint_Path_Generator
             shape_points.AddLast(pnt);
             _poly.points = shape_points;
 
-            
-            
-
-
-            /* Get Direction Flags */
+            // Get Direction Flags
 
             double drone_heading = 90.0;
             int ver_dir_flag = 1;
@@ -338,6 +336,7 @@ namespace Waypoint_Path_Generator
             double lon_tmp;
             double row_increment = _camera_width * (1.0 - hor_overlap);
             int num_rows = Convert.ToInt16(box_height / row_increment);
+            box_rotate = 0.0;
 
             // Create Waypoints
 
@@ -518,8 +517,8 @@ namespace Waypoint_Path_Generator
             }
 
 
-            /* Rotate WayPoints about Center */
-            
+            // Rotate WayPoints about Center
+         
             int count = 0;
             double lat, lon, alt, head, bearing, distance;
             double lat_first = lat_center;
@@ -595,7 +594,7 @@ namespace Waypoint_Path_Generator
                 wp.lon = lon_home;
                 new_list.AddLast(wp);
             }
-
+            
             // Save Path
 
             if (_current_path_index != -1)

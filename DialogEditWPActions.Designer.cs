@@ -290,6 +290,7 @@
             this.Controls.Add(this.label50);
             this.Name = "DialogEditWPActions";
             this.Text = "Edit WayPoint Actions";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.DialogEditWPActions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).EndInit();
             this.ResumeLayout(false);
