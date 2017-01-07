@@ -136,6 +136,8 @@
             this.pathPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.polygonPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pathWaypointPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redefineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.circularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
@@ -173,8 +175,7 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.redefineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.circularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helicalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -958,6 +959,22 @@
             this.pathWaypointPropertiesToolStripMenuItem.Text = "Path Waypoint Properties";
             this.pathWaypointPropertiesToolStripMenuItem.Click += new System.EventHandler(this.pathWaypointPropertiesToolStripMenuItem_Click);
             // 
+            // redefineToolStripMenuItem
+            // 
+            this.redefineToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.circularPathToolStripMenuItem,
+            this.helicalPathToolStripMenuItem});
+            this.redefineToolStripMenuItem.Name = "redefineToolStripMenuItem";
+            this.redefineToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.redefineToolStripMenuItem.Text = "Redefine";
+            // 
+            // circularPathToolStripMenuItem
+            // 
+            this.circularPathToolStripMenuItem.Name = "circularPathToolStripMenuItem";
+            this.circularPathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.circularPathToolStripMenuItem.Text = "Circular Path";
+            this.circularPathToolStripMenuItem.Click += new System.EventHandler(this.circularPathToolStripMenuItem_Click);
+            // 
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
@@ -1279,20 +1296,12 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
             // 
-            // redefineToolStripMenuItem
+            // helicalPathToolStripMenuItem
             // 
-            this.redefineToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.circularPathToolStripMenuItem});
-            this.redefineToolStripMenuItem.Name = "redefineToolStripMenuItem";
-            this.redefineToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.redefineToolStripMenuItem.Text = "Redefine";
-            // 
-            // circularPathToolStripMenuItem
-            // 
-            this.circularPathToolStripMenuItem.Name = "circularPathToolStripMenuItem";
-            this.circularPathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.circularPathToolStripMenuItem.Text = "Circular Path";
-            this.circularPathToolStripMenuItem.Click += new System.EventHandler(this.circularPathToolStripMenuItem_Click);
+            this.helicalPathToolStripMenuItem.Name = "helicalPathToolStripMenuItem";
+            this.helicalPathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helicalPathToolStripMenuItem.Text = "Helical Path";
+            this.helicalPathToolStripMenuItem.Click += new System.EventHandler(this.helicalPathToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1456,6 +1465,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.ToolStripMenuItem redefineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem circularPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helicalPathToolStripMenuItem;
     }
 }
 

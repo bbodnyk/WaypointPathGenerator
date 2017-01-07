@@ -2635,7 +2635,8 @@ namespace Waypoint_Path_Generator
 
         private void addHelicalPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            Models.Path path = null;
+            DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
@@ -2909,7 +2910,7 @@ namespace Waypoint_Path_Generator
 
         private void toolReversePath_Click(object sender, EventArgs e)
         {
-            int path_count = _wpg.SelectedPathCount();
+            int path_count = _wpg.SelectedPathCount("");
             if (path_count != 1)
             {
                 MessageBox.Show("One and only one path can be selected to reverse");
@@ -2955,7 +2956,7 @@ namespace Waypoint_Path_Generator
 
         private void selectedPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int path_count = _wpg.SelectedPathCount();
+            int path_count = _wpg.SelectedPathCount("");
             if (path_count != 1)
             {
                 MessageBox.Show("Select a single Path");
@@ -3089,7 +3090,7 @@ namespace Waypoint_Path_Generator
         {
             // Make sure only one path is selected
 
-            int path_count = _wpg.SelectedPathCount();
+            int path_count = _wpg.SelectedPathCount("");
             if (path_count != 1)
             {
                 MessageBox.Show("Select a single Path");
@@ -3207,7 +3208,7 @@ namespace Waypoint_Path_Generator
         {
             // Make sure only one path is selected
 
-            int path_count = _wpg.SelectedPathCount();
+            int path_count = _wpg.SelectedPathCount("");
             if (path_count != 1)
             {
                 MessageBox.Show("Select a single Path");
@@ -3451,8 +3452,9 @@ namespace Waypoint_Path_Generator
 
         private void helicalToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Models.Path path = null;
             Globals.map_center = gMapControl.Position;
-            DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, Globals.map_center.Lat, Globals.map_center.Lng);
+            DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, path, Globals.map_center.Lat, Globals.map_center.Lng);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
@@ -3556,7 +3558,7 @@ namespace Waypoint_Path_Generator
 
         private void pathPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int path_count = _wpg.SelectedPathCount();
+            int path_count = _wpg.SelectedPathCount("");
             if (path_count != 1)
             {
                 MessageBox.Show("Select a single Path");
@@ -3593,7 +3595,7 @@ namespace Waypoint_Path_Generator
 
         private void pathWaypointPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int path_count = _wpg.SelectedPathCount();
+            int path_count = _wpg.SelectedPathCount("");
             if (path_count != 1)
             {
                 MessageBox.Show("Select a single Path");
@@ -3618,20 +3620,42 @@ namespace Waypoint_Path_Generator
 
         private void circularPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int path_count = _wpg.SelectedPathCount();
+            int path_count = _wpg.SelectedPathCount("Circular");
             if (path_count != 1)
             {
-                MessageBox.Show("Select a single Path");
+                MessageBox.Show("Select a single Circular Path");
                 return;
             }
             // Get Selected Path index
             for (int i = 0; i < _wpg.PathCount(); i++)
             {
-                if (_wpg.PathAt(i).selected)
+                if (_wpg.PathAt(i).selected & _wpg.PathAt(i).type == "Circular")
                 {
                     Models.Path path = _wpg.PathAt(i);
                     Globals.map_center = gMapControl.Position;
                     dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+                    dialog.ShowDialog();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                }
+            }
+        }
+
+        private void helicalPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount("Helical");
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Helical Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected & _wpg.PathAt(i).type == "Helical")
+                {
+                    Models.Path path = _wpg.PathAt(i);
+                    Globals.map_center = gMapControl.Position;
+                    DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, path, Globals.map_center.Lat, Globals.map_center.Lng);
                     dialog.ShowDialog();
                     GMAPTree.Update_GMapTree(_wpg, treGMap);
                 }

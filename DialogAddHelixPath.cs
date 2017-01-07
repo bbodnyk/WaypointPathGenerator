@@ -21,11 +21,11 @@ namespace Waypoint_Path_Generator
         private WayPoints _wp;
         private Path _path;
         private int _current_path_index = -1;
+        private bool _redefine = false;
 
-        public DialogAddHelixPath(Waypoint_Path_Gen wpg, GMAP gmap, double lat, double lon)
+        public DialogAddHelixPath(Waypoint_Path_Gen wpg, GMAP gmap, Path path, double lat, double lon)
         {
             _wp = new WayPoints();
-            _path = new Path();
             _wpg = wpg;
             _gmap = gmap;
             _lat = lat;
@@ -33,9 +33,38 @@ namespace Waypoint_Path_Generator
 
             InitializeComponent();
 
+            if (path == null)
+            {
+                _redefine = false;
+                _path = new Path();
+                _path.visible = true;
+                _current_path_index = -1;
+            }
+            else
+            {
+                _redefine = true;
+                _path = path;
+                _current_path_index = _wpg.PathIndex(path);
+                HelicalGUI gui = _path.helixgui;
+                txtAddHelixPathName.Text = gui.name;
+                _lat = gui.lat;
+                _lon = gui.lon;
+                txtHelixStartAlt.Text = Convert.ToString(gui.start_alt);
+                txtHelixEndAlt.Text = Convert.ToString(gui.end_alt);
+                txtHelixStartRadius.Text = Convert.ToString(gui.start_rad);
+                txtHelixEndRadius.Text = Convert.ToString(gui.end_rad);
+                txtHelixStartAngle.Text = Convert.ToString(gui.start_angle);
+                txtHelixSpan.Text = Convert.ToString(gui.helix_span);
+                txtHelixNumPoints.Text = Convert.ToString(gui.num_points);
+                chkHelicalHome.Checked = gui.startend;
+                chkHelixPOI.Checked = gui.poimode;
+                cmbHelixPOI.SelectedText = gui.poiname;
+            }
+
             buildHelicalPath();
 
-            _current_path_index = _wpg.PathCount() - 1;
+            _gmap.ReDrawgMap();
+            //_current_path_index = _wpg.PathCount() - 1;
             cmbHelixPOI.Items.Clear();
             for (int i = 0; i < _wpg.POICount(); i++)
             {
@@ -45,7 +74,7 @@ namespace Waypoint_Path_Generator
 
         private void bnCancelAddCircPath_Click(object sender, EventArgs e)
         {
-            if (_current_path_index != -1) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
+            if (_current_path_index != -1 & !_redefine) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
             _gmap.ReDrawgMap();
             this.Close();
         }
@@ -181,6 +210,24 @@ namespace Waypoint_Path_Generator
 
             // Save Path
 
+            if (_current_path_index == -1)
+            {
+                string path_name = txtAddHelixPathName.Text;
+                if (path_name == "") path_name = "Untitled - Helical";
+                _path.Add_Path(_wpg, _gmap, path_name, "Helical", new_list);
+                _current_path_index = _wpg.PathCount() - 1;
+                Models.Path newpath = _wpg.PathAt(_current_path_index);
+                newpath.visible = true;
+                newpath.selected = true;
+            } else
+            {
+                _wpg.ChangePathWP(_current_path_index, new_list);
+                Models.Path path = _wpg.PathAt(_current_path_index);
+                _gmap.Delete_gMapPath(path);
+                _gmap.Add_gMapPath(path, false);
+            }
+
+            /*
             if (_current_path_index != -1)
             {
                 _wpg.DeletePath(_wpg.PathAt(_current_path_index));
@@ -190,8 +237,8 @@ namespace Waypoint_Path_Generator
             _path.Add_Path(_wpg, _gmap, path_name, "Helical", new_list);
             int index = _wpg.PathCount() - 1;
             _current_path_index = index;
-
             Models.Path path = _wpg.PathAt(index);
+            _path = path;
             string exist_type = path.type;
             bool exist_select = path.selected;
             bool exist_visible = path.visible;
@@ -211,6 +258,7 @@ namespace Waypoint_Path_Generator
                 newpath.waypoints = new_list;
                 _gmap.Add_gMapPath(path, false);
             }
+            */
 
             _gmap.ReDrawgMap();
             //_wpg.ChangePathWP(index, new_list);
@@ -222,6 +270,26 @@ namespace Waypoint_Path_Generator
 
         private void btnAddHelixPath_Click(object sender, EventArgs e)
         {
+            Models.Path path = _wpg.PathAt(_current_path_index);
+            //_gmap.Delete_gMapPath(path);
+            //_gmap.Add_gMapPath(path, false);
+            HelicalGUI gui = new HelicalGUI();
+            gui.CW = radioCW.Checked;
+            gui.name = txtAddHelixPathName.Text;
+            gui.lat = _lat;
+            gui.lon = _lon;
+            gui.start_alt = Convert.ToDouble(txtHelixStartAlt.Text);
+            gui.end_alt = Convert.ToDouble(txtHelixEndAlt.Text);
+            gui.start_rad = Convert.ToDouble(txtHelixStartRadius.Text);
+            gui.end_rad = Convert.ToDouble(txtHelixEndRadius.Text);
+            gui.start_angle = Convert.ToDouble(txtHelixStartAngle.Text);
+            gui.helix_span = Convert.ToDouble(txtHelixSpan.Text);
+            gui.num_points = Convert.ToInt16(txtHelixNumPoints.Text);
+            gui.startend = chkHelicalHome.Checked;
+            gui.poimode = chkHelixPOI.Checked;
+            gui.poiname = cmbHelixPOI.GetItemText(cmbHelixPOI.SelectedItem);
+            path.helixgui = gui;
+            _gmap.ReDrawgMap();
             this.Close();
         }
 
@@ -285,6 +353,11 @@ namespace Waypoint_Path_Generator
         private void radioCW_CheckedChanged(object sender, EventArgs e)
         {
             buildHelicalPath();
+        }
+
+        private void DialogAddHelixPath_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

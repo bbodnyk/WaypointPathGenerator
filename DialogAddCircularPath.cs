@@ -19,17 +19,22 @@ namespace Waypoint_Path_Generator
 
         public dialogAddCircularPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, Path path, double lat, double lon)
         {
-            _wp = new WayPoints();
-
-            
+            // Save arguments
+            _wp = new WayPoints();          
             _wpg = wpg;
             _gmap = gmap;
             _options = options;
             _lat = lat;
             _lon = lon;
+
+            // Initialize Dialog
+
             InitializeComponent();
+
+            // Setup Dialog GUI
+
             txtDiaAddCircPathAlt.Text = Convert.ToString(_options.def_altitude);
-            _current_path_index = _wpg.PathCount() - 1;
+            //_current_path_index = _wpg.PathCount() - 1;
             // Fill POI combobox
             cmbCircPOI.Items.Clear();
             cmbCircPOI.Items.Add("");
@@ -37,6 +42,9 @@ namespace Waypoint_Path_Generator
             {
                 cmbCircPOI.Items.Add(_wpg.POIPointAt(i).name);
             }
+
+            // See if new path
+
             if (path == null)
             {
                 redefine = false;
@@ -45,6 +53,7 @@ namespace Waypoint_Path_Generator
             else
             {
                 _path = path;
+                _current_path_index = _wpg.PathIndex(_path);
                 CircularGUI gui = _path.circgui;
                 txtDiaAddCircPathName.Text = gui.name;
                 _lat = gui.lat;
@@ -228,6 +237,7 @@ namespace Waypoint_Path_Generator
             string exist_type = path.type;
             bool exist_select = path.selected;
             bool exist_visible = path.visible;
+            /*
             if (exist_type == "Circular")
             {
                 _wpg.ChangePathWP(index, new_list);
@@ -244,7 +254,8 @@ namespace Waypoint_Path_Generator
                 newpath.waypoints = new_list;
                 _gmap.Add_gMapPath(path, false);
             }
-            
+            */
+            _current_path_index = _wpg.PathIndex(path);
             _gmap.ReDrawgMap();
             //_wpg.ChangePathWP(index, new_list);
             //cmbCircReuse.ResetText();

@@ -170,6 +170,19 @@ namespace Waypoint_Path_Generator.Models
             path_list.Clear();
         }
 
+        public int PathIndex(Path path)
+        {
+            string name = path.name;
+            for(int i = 0; i < path_list.Count(); i++)
+            {
+                if(name == PathAt(i).name)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         public Models.Path PathAt(int index)
         {
             return path_list.ElementAt(index);
@@ -558,7 +571,9 @@ namespace Waypoint_Path_Generator.Models
                     string path_type = path.type;
                     xml_writer.WriteElementString("Name", name);
                     xml_writer.WriteElementString("Type", path_type);
+
                     // Path GUI Configuration
+
                     if (path_type == "Circular")
                     {
                         CircularGUI gui = path.circgui;
@@ -578,6 +593,28 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteElementString("POIName", gui.poiname);
                         xml_writer.WriteEndElement(); // End of GUI
                     }
+
+                    if (path_type == "Helical")
+                    {
+                        HelicalGUI gui = path.helixgui;
+                        xml_writer.WriteStartElement("GUI"); // Start of Gui
+                        xml_writer.WriteElementString("CW", Convert.ToString(gui.CW));
+                        xml_writer.WriteElementString("Name", gui.name);
+                        xml_writer.WriteElementString("Lat", Convert.ToString(gui.lat));
+                        xml_writer.WriteElementString("Lon", Convert.ToString(gui.lon));
+                        xml_writer.WriteElementString("StartAltitude", Convert.ToString(gui.start_alt));
+                        xml_writer.WriteElementString("EndAltitude", Convert.ToString(gui.end_alt));
+                        xml_writer.WriteElementString("StartRadius", Convert.ToString(gui.start_rad));
+                        xml_writer.WriteElementString("EndRadius", Convert.ToString(gui.end_rad));
+                        xml_writer.WriteElementString("StartAngle", Convert.ToString(gui.start_angle));
+                        xml_writer.WriteElementString("HelixSpan", Convert.ToString(gui.helix_span));
+                        xml_writer.WriteElementString("NumPoints", Convert.ToString(gui.num_points));
+                        xml_writer.WriteElementString("StartEnd", Convert.ToString(gui.startend));
+                        xml_writer.WriteElementString("POIMode", Convert.ToString(gui.poimode));
+                        xml_writer.WriteElementString("POIName", gui.poiname);
+                        xml_writer.WriteEndElement(); // End of GUI
+                    }
+
                     //xml_writer.WriteStartElement("Waypoint_List"); // Start of Waypoint List
                     LinkedList<WayPoints> waypoint = path_list.ElementAt(i).waypoints;
                     for (int j = 0; j < waypoint.Count; j++)
@@ -731,6 +768,30 @@ namespace Waypoint_Path_Generator.Models
                         gui.poiname = node.SelectSingleNode("POIName").InnerText;
                     }
                     path.circgui = gui;
+                }
+
+                if (path.type == "Helical")
+                {
+                    HelicalGUI gui = new HelicalGUI();
+                    XmlNodeList GUI_node = path_node.SelectNodes("./GUI");
+                    foreach (XmlNode node in GUI_node)
+                    {
+                        gui.CW = Convert.ToBoolean(node.SelectSingleNode("CW").InnerText);
+                        gui.name = node.SelectSingleNode("Name").InnerText;
+                        gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
+                        gui.lon = Convert.ToDouble(node.SelectSingleNode("Lon").InnerText);
+                        gui.start_alt = Convert.ToDouble(node.SelectSingleNode("StartAltitude").InnerText);
+                        gui.end_alt = Convert.ToDouble(node.SelectSingleNode("EndAltitude").InnerText);
+                        gui.start_rad = Convert.ToDouble(node.SelectSingleNode("StartRadius").InnerText);
+                        gui.end_rad = Convert.ToDouble(node.SelectSingleNode("EndRadius").InnerText);
+                        gui.start_angle = Convert.ToDouble(node.SelectSingleNode("StartAngle").InnerText);
+                        gui.helix_span = Convert.ToDouble(node.SelectSingleNode("HelixSpan").InnerText);
+                        gui.num_points = Convert.ToInt16(node.SelectSingleNode("NumPoints").InnerText);
+                        gui.startend = Convert.ToBoolean(node.SelectSingleNode("StartEnd").InnerText);
+                        gui.poimode = Convert.ToBoolean(node.SelectSingleNode("POIMode").InnerText);
+                        gui.poiname = node.SelectSingleNode("POIName").InnerText;
+                    }
+                    path.helixgui = gui;
                 }
                 path.selected = false;
                 path.visible = false;
@@ -886,12 +947,21 @@ namespace Waypoint_Path_Generator.Models
             return count;
         }
 
-        public int SelectedPathCount()
+        public int SelectedPathCount(string type)
         {
             int count = 0;
-            for (int i = 0; i < PathCount(); i++)
+            if (type == "")
             {
-                if (PathAt(i).selected) count++;
+                for (int i = 0; i < PathCount(); i++)
+                {
+                    if (PathAt(i).selected ) count++;
+                }
+            } else
+            {
+                for (int i = 0; i < PathCount(); i++)
+                {
+                    if (PathAt(i).selected & PathAt(i).type == type) count++;
+                }
             }
             return count;
         }

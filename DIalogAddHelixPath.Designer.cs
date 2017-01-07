@@ -428,6 +428,7 @@
             this.Controls.Add(this.btnAddHelixPath);
             this.Name = "DialogAddHelixPath";
             this.Text = "Add Helical Path";
+            this.Load += new System.EventHandler(this.DialogAddHelixPath_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkStartAlt)).EndInit();
