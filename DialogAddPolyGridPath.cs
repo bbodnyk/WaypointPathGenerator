@@ -36,6 +36,7 @@ namespace Waypoint_Path_Generator
         private GMAP _gmap;
         private WayPoints _wp;
         private Path _path;
+        private Options _options;
         private int _poly_index;
         private double _lat;
         private double _lon;
@@ -47,19 +48,19 @@ namespace Waypoint_Path_Generator
         private double _camera_height;
         private int _current_path_index = -1;
 
-        public DialogAddPolyGridPath(Waypoint_Path_Gen wpg, GMAP gmap, double lat, double lon,
-            double cam_ang_hor, double cam_ang_ver, double over_wid, double over_hgt)
+        public DialogAddPolyGridPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, double lat, double lon)
         {
             _wpg = wpg;
             _gmap = gmap;
             _wp = new WayPoints();
             _path = new Path();
+            _options = options;
             _lat = lat;
             _lon = lon;
-            _cam_ang_hor = cam_ang_hor;
-            _cam_ang_ver = cam_ang_ver;
-            _over_wid = over_wid;
-            _over_hgt = over_hgt;
+            _cam_ang_hor = _options.focal_angle_hor;
+            _cam_ang_ver = _options.focal_angle_ver;
+            _over_wid = _options.hor_overlap_percent;
+            _over_hgt = _options.ver_overlap_percent;
 
             InitializeComponent();
             

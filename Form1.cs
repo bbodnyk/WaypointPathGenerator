@@ -2659,9 +2659,7 @@ namespace Waypoint_Path_Generator
                 return;
             }
 
-            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon,
-                _options.focal_angle_hor, _options.focal_angle_ver,
-                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -3486,9 +3484,7 @@ namespace Waypoint_Path_Generator
             }
 
             Globals.map_center = gMapControl.Position;
-            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, Globals.map_center.Lat, Globals.map_center.Lng,
-                _options.focal_angle_hor, _options.focal_angle_ver,
-                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, Globals.map_center.Lat, Globals.map_center.Lng);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
