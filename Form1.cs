@@ -2630,7 +2630,7 @@ namespace Waypoint_Path_Generator
             Models.Path path = null;
             dialogAddCircularPath dialog = new dialogAddCircularPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void addHelicalPathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2645,7 +2645,7 @@ namespace Waypoint_Path_Generator
         {
             DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void addPolygonGridPathToolStripMenuItem_Click(object sender, EventArgs e)

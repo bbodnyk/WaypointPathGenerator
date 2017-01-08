@@ -54,6 +54,7 @@
             this.trkstartangle = new System.Windows.Forms.TrackBar();
             this.trkendangle = new System.Windows.Forms.TrackBar();
             this.trkAlt = new System.Windows.Forms.TrackBar();
+            this.rtbText = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).BeginInit();
@@ -330,11 +331,20 @@
             this.trkAlt.Value = 5;
             this.trkAlt.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
+            // rtbText
+            // 
+            this.rtbText.Location = new System.Drawing.Point(25, 432);
+            this.rtbText.Name = "rtbText";
+            this.rtbText.Size = new System.Drawing.Size(310, 262);
+            this.rtbText.TabIndex = 76;
+            this.rtbText.Text = "";
+            // 
             // dialogAddCircularPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 455);
+            this.ClientSize = new System.Drawing.Size(347, 706);
+            this.Controls.Add(this.rtbText);
             this.Controls.Add(this.trkAlt);
             this.Controls.Add(this.trkendangle);
             this.Controls.Add(this.trkstartangle);
@@ -403,5 +413,6 @@
         private System.Windows.Forms.TrackBar trkstartangle;
         private System.Windows.Forms.TrackBar trkendangle;
         private System.Windows.Forms.TrackBar trkAlt;
+        private System.Windows.Forms.RichTextBox rtbText;
     }
 }
