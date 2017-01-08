@@ -43,19 +43,16 @@ namespace Waypoint_Path_Generator
                 cmbCircPOI.Items.Add(_wpg.POIPointAt(i).name);
             }
 
-            rtbText.Clear();
-            rtbText.AppendText("DialogAddCircularPath - ");
-
             // See if new path
 
             if (path == null)
             {
-                rtbText.AppendText("New Path\n\n");
                 _new_path = true;
                 _first_pass = true;
                 _path = new Path();
                 _current_path_index = -1;
                 _path.visible = true;
+                _path.selected = false;
                 double altitude = Convert.ToDouble(txtDiaAddCircPathAlt.Text);
                 double circle_radius = Convert.ToDouble(txtDiaAddCircPathRadius.Text);
                 double start_angle = Convert.ToDouble(txtCircStartAngle.Text);
@@ -81,7 +78,6 @@ namespace Waypoint_Path_Generator
             else
             {
                 _build = false;
-                rtbText.AppendText("Old Path\n\n");
                 _new_path = false;
                 _path = path;
                 _path.selected = false;
@@ -138,7 +134,7 @@ namespace Waypoint_Path_Generator
             gui.poimode = chkCircPOI.Checked;
             gui.poiname = cmbCircPOI.GetItemText(cmbCircPOI.SelectedItem);
             _path.circgui = gui;
-            _path.selected = true;
+            _path.selected = false;
             _path.visible = true;
             _gmap.ReDrawgMap();
             this.Close();
@@ -269,7 +265,6 @@ namespace Waypoint_Path_Generator
                 if (path_name == "") path_name = "Untitled - Circular";
                 _path.Add_Path(_wpg, _gmap, path_name, "Circular", new_list);
                 _current_path_index = _wpg.PathCount() - 1;
-                rtbText.AppendText("New Path Added - path index :" + Convert.ToString(_current_path_index) + "\n");
                 _first_pass = false;
                 //Models.Path newpath = _wpg.PathAt(_current_path_index);
                 //newpath.visible = true;
@@ -277,7 +272,6 @@ namespace Waypoint_Path_Generator
             }
             else
             {
-                rtbText.AppendText("Path Updated - path index :" + Convert.ToString(_current_path_index) + "\n");
                 _wpg.ChangePathWP(_current_path_index, new_list);
                 //Models.Path path = _wpg.PathAt(_current_path_index);
                 //_gmap.Delete_gMapPath(path);
@@ -286,7 +280,7 @@ namespace Waypoint_Path_Generator
 
             _path = _wpg.PathAt(_current_path_index);
             _path.visible = true;
-            _path.selected = true;
+            _path.selected = false;
             //_gmap.BuildgMap();
             _gmap.ReDrawgMap();
         }

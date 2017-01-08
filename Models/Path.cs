@@ -16,6 +16,7 @@ namespace Waypoint_Path_Generator.Models
         public bool visible;
         public CircularGUI circgui;
         public HelicalGUI helixgui;
+        public RectanglarGUI rectanglegui;
 
         private Waypoint_Path_Gen _wpg;
         private GMAP _gmap;

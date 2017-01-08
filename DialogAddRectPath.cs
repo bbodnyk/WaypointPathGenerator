@@ -124,7 +124,7 @@ namespace Waypoint_Path_Generator
         {
             txtGridWidth.Text = Convert.ToString(trkRectWidth.Value);
         }
-
+        
         private void btnCancelAddRectPath_Click(object sender, EventArgs e)
         {
             if (_current_path_index != -1) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
@@ -643,9 +643,22 @@ namespace Waypoint_Path_Generator
             double conversion = 3.280839;
             return (feet / conversion);
         }
-
+        
         private void btnAddRectPath_Click(object sender, EventArgs e)
         {
+            Path path = _wpg.PathAt(_current_path_index);
+            RectanglarGUI gui = new RectanglarGUI();
+            gui.name = path.name;
+            gui.video = radioVideo.Checked;
+            gui.startend = chkRectHome.Checked;
+            gui.altitude = Convert.ToDouble(txtPathAlt.Text);
+            gui.heading = Convert.ToDouble(txtGridRotation.Text);
+            gui.length = Convert.ToDouble(txtGridLength.Text);
+            gui.width = Convert.ToDouble(txtGridWidth.Text);
+            gui.single = chkOnePass.Checked;
+            gui.poimode = chkRectCamPOI.Checked;
+            gui.poiname = cmbRectCamPOI.SelectedText;
+            path.rectanglegui = gui;
             _gmap.Delete_gMapPoly(_poly);
             this.Close();
         }

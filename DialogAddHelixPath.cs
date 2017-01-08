@@ -22,6 +22,7 @@ namespace Waypoint_Path_Generator
         private Path _path;
         private int _current_path_index = -1;
         private bool _redefine = false;
+        private bool _build;
 
         public DialogAddHelixPath(Waypoint_Path_Gen wpg, GMAP gmap, Path path, double lat, double lon)
         {
@@ -39,9 +40,11 @@ namespace Waypoint_Path_Generator
                 _path = new Path();
                 _path.visible = true;
                 _current_path_index = -1;
+                _build = true;
             }
             else
             {
+                _build = false;
                 _redefine = true;
                 _path = path;
                 _current_path_index = _wpg.PathIndex(path);
@@ -59,6 +62,8 @@ namespace Waypoint_Path_Generator
                 chkHelicalHome.Checked = gui.startend;
                 chkHelixPOI.Checked = gui.poimode;
                 cmbHelixPOI.SelectedText = gui.poiname;
+                _build = true;
+                _path.selected = false;
             }
 
             buildHelicalPath();
@@ -116,6 +121,8 @@ namespace Waypoint_Path_Generator
 
         private void buildHelicalPath()
         {
+            if (!_build) return;
+
             bool startend = chkHelicalHome.Checked;
             double lat_home = _lat;
             double lon_home = _lon;
@@ -218,7 +225,7 @@ namespace Waypoint_Path_Generator
                 _current_path_index = _wpg.PathCount() - 1;
                 Models.Path newpath = _wpg.PathAt(_current_path_index);
                 newpath.visible = true;
-                newpath.selected = true;
+                newpath.selected = false;
             } else
             {
                 _wpg.ChangePathWP(_current_path_index, new_list);

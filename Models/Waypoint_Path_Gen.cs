@@ -615,6 +615,23 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteEndElement(); // End of GUI
                     }
 
+                    if (path_type == "Rectangular")
+                    {
+                        RectanglarGUI gui = path.rectanglegui;
+                        xml_writer.WriteStartElement("GUI"); // Start of Gui
+                        xml_writer.WriteElementString("Name", gui.name);
+                        xml_writer.WriteElementString("Video", Convert.ToString(gui.video));
+                        xml_writer.WriteElementString("StartEnd", Convert.ToString(gui.startend));
+                        xml_writer.WriteElementString("Altitude", Convert.ToString(gui.altitude));
+                        xml_writer.WriteElementString("Heading", Convert.ToString(gui.heading));
+                        xml_writer.WriteElementString("Length", Convert.ToString(gui.length));
+                        xml_writer.WriteElementString("Width", Convert.ToString(gui.width));
+                        xml_writer.WriteElementString("SinglePath", Convert.ToString(gui.single));
+                        xml_writer.WriteElementString("POIMode", Convert.ToString(gui.poimode));
+                        xml_writer.WriteElementString("POIName", gui.poiname);
+                        xml_writer.WriteEndElement(); // End of GUI
+                    }
+
                     //xml_writer.WriteStartElement("Waypoint_List"); // Start of Waypoint List
                     LinkedList<WayPoints> waypoint = path_list.ElementAt(i).waypoints;
                     for (int j = 0; j < waypoint.Count; j++)
@@ -793,6 +810,27 @@ namespace Waypoint_Path_Generator.Models
                     }
                     path.helixgui = gui;
                 }
+
+                if (path.type == "Rectangular")
+                {
+                    RectanglarGUI gui = new RectanglarGUI();
+                    XmlNodeList GUI_node = path_node.SelectNodes("./GUI");
+                    foreach(XmlNode node in GUI_node)
+                    {
+                        gui.name = node.SelectSingleNode("Name").InnerText;
+                        gui.video = Convert.ToBoolean(node.SelectSingleNode("Video").InnerText);
+                        gui.startend = Convert.ToBoolean(node.SelectSingleNode("StartEnd").InnerText);
+                        gui.altitude = Convert.ToDouble(node.SelectSingleNode("Altitude").InnerText);
+                        gui.heading = Convert.ToDouble(node.SelectSingleNode("Heading").InnerText);
+                        gui.length = Convert.ToDouble(node.SelectSingleNode("Length").InnerText);
+                        gui.width = Convert.ToDouble(node.SelectSingleNode("Width").InnerText);
+                        gui.single = Convert.ToBoolean(node.SelectSingleNode("SinglePath").InnerText);
+                        gui.poimode = Convert.ToBoolean(node.SelectSingleNode("POIMode").InnerText);
+                        gui.poiname = node.SelectSingleNode("POIName").InnerText;
+                    }
+                    path.rectanglegui = gui;
+                }
+
                 path.selected = false;
                 path.visible = false;
                 LinkedList<WayPoints> way_list = new LinkedList<WayPoints>();
