@@ -8,6 +8,7 @@ namespace Waypoint_Path_Generator.Models
 {
     public class POIPoints
     {
+        public int internal_id;
         public string name;
         public double lat, lon, alt;
         public double elev, cam_alt;

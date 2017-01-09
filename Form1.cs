@@ -2643,7 +2643,8 @@ namespace Waypoint_Path_Generator
 
         private void addManualPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            Models.Path path = null;
+            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
@@ -2776,7 +2777,7 @@ namespace Waypoint_Path_Generator
             GMAPTree.Update_GMapTree(_wpg, treGMap);
             _gmap.ReDrawgMap();
         }
-
+        
         private void toolJoinPaths_Click(object sender, EventArgs e)
         {
             // Make Sure on two way points are selected
@@ -3240,6 +3241,7 @@ namespace Waypoint_Path_Generator
                 dist = dist + GPS.GPS_Distance(lat1, lon1, lat2, lon2, Globals.gps_radius);
             }
             string str = "Path Properties\n\n";
+            str = str + "Internal Id : " + Convert.ToString(path.internal_id) + "\n";
             str = str + "Name : " + path.name + "\n";
             str = str + "Type : " + path.type + "\n";           
             str = str + "Waypoint Count : " + Convert.ToString(wp_list.Count) + "\n";
@@ -3469,7 +3471,8 @@ namespace Waypoint_Path_Generator
         private void rectangularToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Globals.map_center = gMapControl.Position;
-            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, Globals.map_center.Lat, Globals.map_center.Lng);
+            Models.Path path = null;
+            DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -3657,5 +3660,290 @@ namespace Waypoint_Path_Generator
                 }
             }
         }
+
+        private void deleteOriginalPathsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make Sure on two way points are selected
+            int count = _wpg.SelectedWPCount();
+            if (count != 2)
+            {
+                MessageBox.Show("Two Way Points must be Selected");
+                return;
+            }
+            // Get selected Waypoints
+            count = 0;
+            int path_id1 = -1;
+            int path_id2 = -1;
+            int wp_count1 = 0;
+            int wp_count2 = 0;
+            int wp_index1 = -1;
+            int wp_index2 = -1;
+            LinkedList<WayPoints> wp_list;
+            Models.Path path;
+
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                path = _wpg.PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    WayPoints wp = wp_list.ElementAt(j);
+                    if (wp.selected)
+                    {
+                        if (count == 0)
+                        {
+                            path_id1 = i;
+                            wp_index1 = j;
+                            wp_count1 = wp_list.Count;
+                            count++;
+                        }
+                        else
+                        {
+                            path_id2 = i;
+                            wp_index2 = j;
+                            wp_count2 = wp_list.Count;
+                            count++;
+                        }
+                    }
+                }
+            }
+            // Make sure selected waypoints are end waypoints
+            if (wp_index1 != 0 & wp_index1 != wp_count1 - 1)
+            {
+                MessageBox.Show("Selected Waypoints must be end Waypoints");
+                return;
+            }
+            if (wp_index2 != 0 & wp_index2 != wp_count2 - 1)
+            {
+                MessageBox.Show("Selected Waypoints must be end Waypoints");
+                return;
+            }
+            // Valid Waypoints - Join paths
+
+
+            wp_list = new LinkedList<WayPoints>();
+
+            // Copy first path waypoints
+            Models.Path path1 = _wpg.PathAt(path_id1);
+            string name1 = path1.name;
+            LinkedList<WayPoints> wp_old_list = path1.waypoints;
+            WayPoints wp_old;
+
+            if (wp_index1 != 0)
+            {
+                for (int i = 0; i < wp_count1; i++)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+            else
+            {
+                for (int i = wp_count1 - 1; i >= 0; i--)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+
+            // Copy second path waypoints
+            Models.Path path2 = _wpg.PathAt(path_id2);
+            string name2 = path2.name;
+            wp_old_list = path2.waypoints;
+
+            if (wp_index2 == 0)
+            {
+                for (int i = 0; i < wp_count2; i++)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+            else
+            {
+                for (int i = wp_count2 - 1; i >= 0; i--)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+            // Create Path
+            string new_name = name1 + " - " + name2;
+            Models.Path new_path = new Models.Path();
+            _path.Add_Path(_wpg, _gmap, new_name, "Combined", wp_list);
+
+            // Delete original Path
+
+            _wpg.DeletePath(path1);
+            _wpg.DeletePath(path2);
+            _wpg.UnselectAll();
+
+            // Redraw map
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void keepOriginalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make Sure on two way points are selected
+            int count = _wpg.SelectedWPCount();
+            if (count != 2)
+            {
+                MessageBox.Show("Two Way Points must be Selected");
+                return;
+            }
+            // Get selected Waypoints
+            count = 0;
+            int path_id1 = -1;
+            int path_id2 = -1;
+            int wp_count1 = 0;
+            int wp_count2 = 0;
+            int wp_index1 = -1;
+            int wp_index2 = -1;
+            LinkedList<WayPoints> wp_list;
+            Models.Path path;
+
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                path = _wpg.PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    WayPoints wp = wp_list.ElementAt(j);
+                    if (wp.selected)
+                    {
+                        if (count == 0)
+                        {
+                            path_id1 = i;
+                            wp_index1 = j;
+                            wp_count1 = wp_list.Count;
+                            count++;
+                        }
+                        else
+                        {
+                            path_id2 = i;
+                            wp_index2 = j;
+                            wp_count2 = wp_list.Count;
+                            count++;
+                        }
+                    }
+                }
+            }
+            // Make sure selected waypoints are end waypoints
+            if (wp_index1 != 0 & wp_index1 != wp_count1 - 1)
+            {
+                MessageBox.Show("Selected Waypoints must be end Waypoints");
+                return;
+            }
+            if (wp_index2 != 0 & wp_index2 != wp_count2 - 1)
+            {
+                MessageBox.Show("Selected Waypoints must be end Waypoints");
+                return;
+            }
+            // Valid Waypoints - Join paths
+
+
+            wp_list = new LinkedList<WayPoints>();
+
+            // Copy first path waypoints
+            Models.Path path1 = _wpg.PathAt(path_id1);
+            string name1 = path1.name;
+            LinkedList<WayPoints> wp_old_list = path1.waypoints;
+            WayPoints wp_old;
+
+            if (wp_index1 != 0)
+            {
+                for (int i = 0; i < wp_count1; i++)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+            else
+            {
+                for (int i = wp_count1 - 1; i >= 0; i--)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+
+            // Copy second path waypoints
+            Models.Path path2 = _wpg.PathAt(path_id2);
+            string name2 = path2.name;
+            wp_old_list = path2.waypoints;
+
+            if (wp_index2 == 0)
+            {
+                for (int i = 0; i < wp_count2; i++)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+            else
+            {
+                for (int i = wp_count2 - 1; i >= 0; i--)
+                {
+                    wp_old = wp_old_list.ElementAt(i);
+                    WayPoints wp = new WayPoints();
+                    wp = wp_old;
+                    wp_list.AddLast(wp);
+                }
+            }
+            // Create Path
+            string new_name = name1 + " - " + name2;
+            Models.Path new_path = new Models.Path();
+            _path.Add_Path(_wpg, _gmap, new_name, "Combined", wp_list);
+            _wpg.UnselectAll();
+
+            // Redraw map
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            _gmap.ReDrawgMap();
+        }
+
+        private void rectangularPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount("Rectangular");
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Circular Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected & _wpg.PathAt(i).type == "Rectangular")
+                {
+                    Models.Path path = _wpg.PathAt(i);
+                    Globals.map_center = gMapControl.Position;
+                    DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+                    dialog.ShowDialog();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                }
+            }
+        }
+
+        /*
+private void toolJoinPaths_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+    */
     }
 }

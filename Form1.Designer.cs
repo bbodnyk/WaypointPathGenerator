@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode17,
+            treeNode18,
+            treeNode19});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -138,6 +138,7 @@
             this.pathWaypointPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redefineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helicalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
@@ -175,7 +176,9 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.helicalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.keepOriginalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteOriginalPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rectangularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -380,10 +383,12 @@
             // 
             // toolJoinPaths
             // 
+            this.toolJoinPaths.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.keepOriginalToolStripMenuItem,
+            this.deleteOriginalPathsToolStripMenuItem});
             this.toolJoinPaths.Name = "toolJoinPaths";
             this.toolJoinPaths.Size = new System.Drawing.Size(203, 22);
             this.toolJoinPaths.Text = "Join Paths";
-            this.toolJoinPaths.Click += new System.EventHandler(this.toolJoinPaths_Click);
             // 
             // toolSplitatWP
             // 
@@ -963,7 +968,8 @@
             // 
             this.redefineToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.circularPathToolStripMenuItem,
-            this.helicalPathToolStripMenuItem});
+            this.helicalPathToolStripMenuItem,
+            this.rectangularPathToolStripMenuItem});
             this.redefineToolStripMenuItem.Name = "redefineToolStripMenuItem";
             this.redefineToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
             this.redefineToolStripMenuItem.Text = "Redefine";
@@ -971,9 +977,16 @@
             // circularPathToolStripMenuItem
             // 
             this.circularPathToolStripMenuItem.Name = "circularPathToolStripMenuItem";
-            this.circularPathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.circularPathToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.circularPathToolStripMenuItem.Text = "Circular Path";
             this.circularPathToolStripMenuItem.Click += new System.EventHandler(this.circularPathToolStripMenuItem_Click);
+            // 
+            // helicalPathToolStripMenuItem
+            // 
+            this.helicalPathToolStripMenuItem.Name = "helicalPathToolStripMenuItem";
+            this.helicalPathToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.helicalPathToolStripMenuItem.Text = "Helical Path";
+            this.helicalPathToolStripMenuItem.Click += new System.EventHandler(this.helicalPathToolStripMenuItem_Click);
             // 
             // openFileDialog2
             // 
@@ -1119,16 +1132,16 @@
             this.treGMap.CheckBoxes = true;
             this.treGMap.Location = new System.Drawing.Point(8, 97);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode17.Name = "POI";
+            treeNode17.Text = "POI";
+            treeNode18.Name = "Paths";
+            treeNode18.Text = "Paths";
+            treeNode19.Name = "Polygons";
+            treeNode19.Text = "Polygons";
+            treeNode20.Name = "GMap";
+            treeNode20.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode20});
             this.treGMap.Size = new System.Drawing.Size(121, 281);
             this.treGMap.TabIndex = 24;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1296,12 +1309,26 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
             // 
-            // helicalPathToolStripMenuItem
+            // keepOriginalToolStripMenuItem
             // 
-            this.helicalPathToolStripMenuItem.Name = "helicalPathToolStripMenuItem";
-            this.helicalPathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.helicalPathToolStripMenuItem.Text = "Helical Path";
-            this.helicalPathToolStripMenuItem.Click += new System.EventHandler(this.helicalPathToolStripMenuItem_Click);
+            this.keepOriginalToolStripMenuItem.Name = "keepOriginalToolStripMenuItem";
+            this.keepOriginalToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.keepOriginalToolStripMenuItem.Text = "Keep Original Paths";
+            this.keepOriginalToolStripMenuItem.Click += new System.EventHandler(this.keepOriginalToolStripMenuItem_Click);
+            // 
+            // deleteOriginalPathsToolStripMenuItem
+            // 
+            this.deleteOriginalPathsToolStripMenuItem.Name = "deleteOriginalPathsToolStripMenuItem";
+            this.deleteOriginalPathsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.deleteOriginalPathsToolStripMenuItem.Text = "Delete Original Paths";
+            this.deleteOriginalPathsToolStripMenuItem.Click += new System.EventHandler(this.deleteOriginalPathsToolStripMenuItem_Click);
+            // 
+            // rectangularPathToolStripMenuItem
+            // 
+            this.rectangularPathToolStripMenuItem.Name = "rectangularPathToolStripMenuItem";
+            this.rectangularPathToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.rectangularPathToolStripMenuItem.Text = "Rectangular Path";
+            this.rectangularPathToolStripMenuItem.Click += new System.EventHandler(this.rectangularPathToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1466,6 +1493,9 @@
         private System.Windows.Forms.ToolStripMenuItem redefineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem circularPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helicalPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem keepOriginalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteOriginalPathsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rectangularPathToolStripMenuItem;
     }
 }
 

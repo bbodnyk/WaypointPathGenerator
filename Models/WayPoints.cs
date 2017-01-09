@@ -6,6 +6,7 @@ namespace Waypoint_Path_Generator.Models
 {
     public class WayPoints
     {
+
         public double lat, lon, alt, head, curvesize, rotationdir;
         public int gimblemode;
         public double gimblepitch;

@@ -9,6 +9,7 @@ namespace Waypoint_Path_Generator.Models
     public class Path
     {
         public int id;
+        public int internal_id;
         public string name;
         public string type;
         public LinkedList<WayPoints> waypoints;

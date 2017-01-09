@@ -16,6 +16,7 @@ namespace Waypoint_Path_Generator.Models
 
     public class Waypoint_Path_Gen
     {
+        static int _internal_id;
         static LinkedList<POIPoints> poi_list;
         static LinkedList<Models.Path> path_list;
         static LinkedList<Models.Action> action_list;
@@ -24,11 +25,18 @@ namespace Waypoint_Path_Generator.Models
 
         public Waypoint_Path_Gen(Options options)
         {
+            _internal_id = 990;
             _options = options;
             poi_list = new LinkedList<POIPoints>();
             path_list = new LinkedList<Models.Path>();
             action_list = new LinkedList<Models.Action>();
             shape_list = new LinkedList<WpgShape>();
+        }
+
+        private int next_internal_id()
+        {
+            _internal_id = _internal_id + 10;
+            return _internal_id;
         }
 
         public void AddShape(WpgShape poly)
@@ -147,6 +155,7 @@ namespace Waypoint_Path_Generator.Models
 
         public void AddPath(Models.Path path)
         {
+            path.internal_id = next_internal_id();
             path_list.AddLast(path);
         }
 
@@ -181,6 +190,19 @@ namespace Waypoint_Path_Generator.Models
                 }
             }
             return -1;
+        }
+
+        public Models.Path PathIntId(int id)
+        {
+            for (int i = 0; i < path_list.Count(); i++)
+            {
+                if (id == PathAt(i).internal_id)
+                {
+                    return path_list.ElementAt(i);
+                }
+            }
+
+            return null;
         }
 
         public Models.Path PathAt(int index)
@@ -218,6 +240,23 @@ namespace Waypoint_Path_Generator.Models
                 node = next_node;
             }
             */
+        }
+
+        public void ChangePathWPIntId(int intid, LinkedList<WayPoints> wp_list)
+        {
+            Path path;
+            for( int i = 0; i < path_list.Count; i++)
+            {
+                path = path_list.ElementAt(i);
+                if (path.internal_id == intid)
+                {
+                    path.waypoints = wp_list;
+                    return;
+                }
+            }
+
+            //path_list.ElementAt(index).waypoints = wp_list;
+            
         }
         public void ChangePathName(int index, string name)
         {

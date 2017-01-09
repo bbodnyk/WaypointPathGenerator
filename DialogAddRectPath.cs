@@ -21,7 +21,7 @@ namespace Waypoint_Path_Generator
         private Path _path;
         private Options _options;
         private Shape _poly;
-        private int _current_path_index = -1;
+        private int _current_intid;
         private double _camera_angle_hor;
         private double _camera_angle_ver;
         private double _camera_width;
@@ -29,12 +29,14 @@ namespace Waypoint_Path_Generator
         private double _overlap_width;
         private double _overlap_height;
         private bool _video;
+        private bool _new_path;
+        private bool _first_pass;
+        private bool _build;
 
 
-        public DialogAddRectPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, double lat, double lon)
+        public DialogAddRectPath(Waypoint_Path_Gen wpg, GMAP gmap,  Options options, Path path, double lat, double lon)
         {
             _wp = new WayPoints();
-            _path = new Path();
             _wpg = wpg;
             _gmap = gmap;
             _options = options;
@@ -50,19 +52,47 @@ namespace Waypoint_Path_Generator
 
             InitializeComponent();
 
-            txtPathAlt.Text = Convert.ToString(_options.def_altitude);
-            trkRectAlt.Value = Convert.ToInt16(_options.def_altitude);
-
-
-            BuildRectPath();
-            _current_path_index = _wpg.PathCount() - 1;
             // Fill POI combobox
             cmbRectCamPOI.Items.Clear();
             for (int i = 0; i < _wpg.POICount(); i++)
             {
                 cmbRectCamPOI.Items.Add(_wpg.POIPointAt(i).name);
             }
-            
+
+            // New or Redefine Path
+
+            if ( path == null )
+            {
+                _new_path = true;
+                _first_pass = true;
+                _path = new Path();
+                _path.visible = true;
+                _path.selected = false;
+                _build = true;
+                txtPathAlt.Text = Convert.ToString(_options.def_altitude);
+                trkRectAlt.Value = Convert.ToInt16(_options.def_altitude);
+            } else
+            {
+                _new_path = false;
+                _path = path;
+                _current_intid = path.internal_id;
+                RectanglarGUI gui = _path.rectanglegui;
+                _build = false;
+                txtRectPathName.Text = gui.name;
+                radioVideo.Checked = Convert.ToBoolean(gui.video);
+                chkRectHome.Checked = Convert.ToBoolean(gui.startend);
+                txtPathAlt.Text = Convert.ToString(gui.altitude);
+                txtGridRotation.Text = Convert.ToString(gui.heading);
+                txtGridLength.Text = Convert.ToString(gui.length);
+                txtGridWidth.Text = Convert.ToString(gui.width);
+                chkOnePass.Checked = Convert.ToBoolean(gui.single);
+                chkRectCamPOI.Checked = Convert.ToBoolean(gui.poimode);
+                int index = cmbRectCamPOI.Items.IndexOf(gui.poiname);
+                cmbRectCamPOI.SelectedIndex = index;
+                _build = true;
+            }
+            _build = true;
+            BuildRectPath();
         }
 
         private void DialogAddRectPath_Load(object sender, EventArgs e)
@@ -77,6 +107,7 @@ namespace Waypoint_Path_Generator
 
         private void txtGridLength_TextChanged(object sender, EventArgs e)
         {
+            trkRectLength.Value = Convert.ToInt16(txtGridLength.Text);
             BuildRectPath();
         }
 
@@ -102,11 +133,13 @@ namespace Waypoint_Path_Generator
 
         private void txtGridWidth_TextChanged(object sender, EventArgs e)
         {
+            trkRectWidth.Value = Convert.ToInt16(txtGridWidth.Text);
             BuildRectPath();
         }
 
         private void txtGridRotation_TextChanged(object sender, EventArgs e)
         {
+            trkRectHeading.Value = Convert.ToInt16(txtGridRotation.Text);
             BuildRectPath();
         }
 
@@ -127,13 +160,15 @@ namespace Waypoint_Path_Generator
         
         private void btnCancelAddRectPath_Click(object sender, EventArgs e)
         {
-            if (_current_path_index != -1) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
+            //if (_current_path_index != -1) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
             _gmap.ReDrawgMap();
             this.Close();
         }
 
         private void BuildRectPath()
         {
+
+            if (!_build) return;
 
             // Get center position
 
@@ -594,38 +629,24 @@ namespace Waypoint_Path_Generator
                 wp.lon = lon_home;
                 new_list.AddLast(wp);
             }
-            
+
             // Save Path
 
-            if (_current_path_index != -1)
+            if (_new_path & _first_pass)
             {
-                _wpg.DeletePath(_wpg.PathAt(_current_path_index));
+                path_name = txtRectPathName.Text;
+                if (path_name == "") path_name = "Untitled - Rectangular";
+                _path.Add_Path(_wpg, _gmap, path_name, "Rectangular", new_list);
+                Path newpath = _wpg.PathAt(_wpg.PathCount() - 1);
+                _current_intid = newpath.internal_id;
+                _first_pass = false;
             }
-           
-            if (path_name == "") path_name = "Untitled - Rectangular";
-            _path.Add_Path(_wpg, _gmap, path_name, "Rectangular", new_list);
-            int index = _wpg.PathCount() - 1;
-            _current_path_index = index;
-
-            Models.Path path = _wpg.PathAt(index);
-            string exist_type = path.type;
-            bool exist_select = path.selected;
-            bool exist_visible = path.visible;
-            if (exist_type == "Rectangular")
+            else
             {
-                _wpg.ChangePathWP(index, new_list);
-                string pathname = path.name;
-                int id = path.id;
-                string type = path.type;
-                _gmap.Delete_gMapPath(path);
-                Models.Path newpath = new Models.Path();
-                newpath.name = pathname;
-                newpath.id = id;
-                newpath.type = type;
-                newpath.selected = exist_select;
-                newpath.visible = exist_visible;
-                newpath.waypoints = new_list;
-                _gmap.Add_gMapPath(path, false);
+                _wpg.ChangePathWPIntId(_current_intid, new_list);
+                //Models.Path path = _wpg.PathAt(_current_path_index);
+                //_gmap.Delete_gMapPath(path);
+                //_gmap.Add_gMapPath(path, false);
             }
 
             _gmap.ReDrawgMap();
@@ -646,7 +667,8 @@ namespace Waypoint_Path_Generator
         
         private void btnAddRectPath_Click(object sender, EventArgs e)
         {
-            Path path = _wpg.PathAt(_current_path_index);
+
+            Path path = _wpg.PathIntId(_current_intid);
             RectanglarGUI gui = new RectanglarGUI();
             gui.name = path.name;
             gui.video = radioVideo.Checked;
@@ -700,6 +722,7 @@ namespace Waypoint_Path_Generator
 
         private void txtPathAlt_TextChanged(object sender, EventArgs e)
         {
+            trkRectAlt.Value = Convert.ToInt16(txtPathAlt.Text);
             BuildRectPath();
         }
 
