@@ -36,7 +36,10 @@ namespace Waypoint_Path_Generator
         private GMAP _gmap;
         private WayPoints _wp;
         private Path _path;
+        private Options _options;
+        private Shape _poly;
         private int _poly_index;
+        private int _poly_intid;
         private double _lat;
         private double _lon;
         private double _cam_ang_hor;
@@ -45,21 +48,23 @@ namespace Waypoint_Path_Generator
         private double _over_hgt;
         private double _camera_width;
         private double _camera_height;
-        private int _current_path_index = -1;
+        private int _current_intid;
+        private bool _new_path;
+        private bool _first_pass;
+        private bool _build;
 
-        public DialogAddPolyGridPath(Waypoint_Path_Gen wpg, GMAP gmap, double lat, double lon,
-            double cam_ang_hor, double cam_ang_ver, double over_wid, double over_hgt)
+        public DialogAddPolyGridPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, Path path, double lat, double lon)
         {
             _wpg = wpg;
             _gmap = gmap;
+            _options = options;
             _wp = new WayPoints();
-            _path = new Path();
             _lat = lat;
             _lon = lon;
-            _cam_ang_hor = cam_ang_hor;
-            _cam_ang_ver = cam_ang_ver;
-            _over_wid = over_wid;
-            _over_hgt = over_hgt;
+            _cam_ang_hor = _options.focal_angle_hor;
+            _cam_ang_ver = _options.focal_angle_ver;
+            _over_wid = _options.hor_overlap_percent;
+            _over_hgt = _options.ver_overlap_percent;
 
             InitializeComponent();
             
@@ -72,22 +77,54 @@ namespace Waypoint_Path_Generator
                 if (_wpg.ShapeAt(i).selected)
                 {
                     _poly_index = i;
+                    _poly_intid = _wpg.ShapeAt(i).internal_id;
+                    _poly = _wpg.ShapeAt(i);
+                    _poly.visible = true;
                     break;
                 }
             }
-            
+
+            if (path == null)
+            {
+                _new_path = true;
+                _first_pass = true;
+                _path = new Path();
+                _path.visible = true;
+                _path.selected = false;
+                _build = false;
+                txtGridAlt.Text = Convert.ToString(_options.def_altitude);
+                _build = true;
+            }
+            else
+            {
+                _new_path = false;
+                _path = path;
+                _path.selected = false;
+                _current_intid = path.internal_id;
+                _build = false;
+                PolygonGridGUI gui = _path.polygridgui;
+                txtPolyPathName.Text = gui.name;
+                radioVideo.Checked = gui.video;
+                chkRectHome.Checked = gui.startend;
+                txtGridAlt.Text = Convert.ToString(gui.altitude);
+                txtHeading.Text = Convert.ToString(gui.heading);
+                _poly_intid = gui.poly_internal_id;
+                _poly = _wpg.ShapeWithId(_poly_intid);
+                _poly.visible = true;
+                _build = true;
+            }
             BuildPolyGridPath();
-            _current_path_index = _wpg.PathCount() - 1;
         }
  
         private void txtGridAlt_TextChanged_1(object sender, EventArgs e)
         {
+            trkAltitude.Value = Convert.ToInt16(txtGridAlt.Text);
             BuildPolyGridPath();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (_current_path_index != -1) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
+            if (_new_path) _wpg.DeletePath(_path);
             _gmap.ReDrawgMap();
             this.Close();
         }
@@ -100,6 +137,8 @@ namespace Waypoint_Path_Generator
         private void BuildPolyGridPath()
         {
 
+            if (!_build) return;
+            
             // Polygon Search Grid
             //
 
@@ -120,7 +159,7 @@ namespace Waypoint_Path_Generator
             }
             LinkedList<PolyPoint> points = new LinkedList<PolyPoint>();
             PolyPoint point = new PolyPoint();
-            Models.Shape poly = _wpg.ShapeAt(_poly_index);
+            Models.Shape poly = _wpg.ShapeWithId(_poly_intid);
             rtbPoly.Clear();
             rtbPoly.AppendText("Polygon : " + poly.name+"\n");
 
@@ -293,7 +332,6 @@ namespace Waypoint_Path_Generator
                             leg_count++;
                             firstpnt = true;
                         }
-
                     }
                 }
             }
@@ -309,38 +347,25 @@ namespace Waypoint_Path_Generator
 
             // Save Path
 
-            if (_current_path_index != -1)
+            // Save Path
+
+            if (_new_path & _first_pass)
             {
-                _wpg.DeletePath(_wpg.PathAt(_current_path_index));
+                String path_name = txtPolyPathName.Text;
+                if (path_name == "") path_name = "Untitled - Polygon";
+                _path.Add_Path(_wpg, _gmap, path_name, "Polygon", new_list);
+                _path = _wpg.PathAt(_wpg.PathCount() - 1);
+                _current_intid = _path.internal_id;
+                _first_pass = false;
             }
-
-            string path_name = txtPolyPathName.Text;
-            if (path_name == "") path_name = "Untitled - Polygon";
-            _path.Add_Path(_wpg, _gmap, path_name, "Polygon", new_list);
-            int index = _wpg.PathCount() - 1;
-            _current_path_index = index;
-
-            Models.Path path = _wpg.PathAt(index);
-            string exist_type = path.type;
-            bool exist_select = path.selected;
-            bool exist_visible = path.visible;
-            if (exist_type == "Polygon")
+            else
             {
-                _wpg.ChangePathWP(index, new_list);
-                string pathname = path.name;
-                int id = path.id;
-                string type = path.type;
-                _gmap.Delete_gMapPath(path);
-                Models.Path newpath = new Models.Path();
-                newpath.name = pathname;
-                newpath.id = id;
-                newpath.type = type;
-                newpath.selected = exist_select;
-                newpath.visible = exist_visible;
-                newpath.waypoints = new_list;
-                _gmap.Add_gMapPath(path, true);
+                _wpg.ChangePathWPIntId(_current_intid, new_list);
+                //Models.Path path = _wpg.PathAt(_current_path_index);
+                //_gmap.Delete_gMapPath(path);
+                //_gmap.Add_gMapPath(path, false);
             }
-
+            _poly.visible = true;
             _gmap.ReDrawgMap();
         }
 
@@ -356,6 +381,7 @@ namespace Waypoint_Path_Generator
 
         private void txtHeading_TextChanged(object sender, EventArgs e)
         {
+            trkHeading.Value = Convert.ToInt16(txtHeading.Text);
             BuildPolyGridPath();
         }
 
@@ -366,6 +392,18 @@ namespace Waypoint_Path_Generator
 
         private void btnAddPath_Click(object sender, EventArgs e)
         {
+            Path path = _wpg.PathIntId(_current_intid);
+            PolygonGridGUI gui = new PolygonGridGUI();
+            gui.name = txtPolyPathName.Text;
+            gui.video = radioVideo.Checked;
+            gui.startend = chkRectHome.Checked;
+            gui.altitude = Convert.ToDouble(txtGridAlt.Text);
+            gui.heading = Convert.ToDouble(txtHeading.Text);
+            gui.polyname = _wpg.ShapeWithId(_poly_intid).name;
+            gui.poly_internal_id = _poly_intid;
+            path.polygridgui = gui;
+            _poly.visible = false;
+            _poly.selected = false;
             this.Close();
         }
 

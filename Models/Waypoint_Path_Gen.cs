@@ -41,12 +41,32 @@ namespace Waypoint_Path_Generator.Models
 
         public void AddShape(WpgShape poly)
         {
+            poly.internal_id = next_internal_id();
+            shape_list.AddLast(poly);
+        }
+
+        public void AddShapeId(int id, WpgShape poly)
+        {
+            poly.internal_id = id;
+            if (id > _internal_id) _internal_id = id;
             shape_list.AddLast(poly);
         }
 
         public void DeleteShape(WpgShape poly)
         {
             shape_list.Remove(poly);
+        }
+
+        public Models.Shape ShapeWithId(int id)
+        {
+            for( int i=0; i< shape_list.Count(); i++)
+            {
+                if (shape_list.ElementAt(i).internal_id == id)
+                {
+                    return shape_list.ElementAt(i);
+                }
+            }
+            return  null;
         }
 
         public Models.Shape ShapeAt(int index)
@@ -159,6 +179,12 @@ namespace Waypoint_Path_Generator.Models
             path_list.AddLast(path);
         }
 
+        public void AddPathId(int id, Models.Path path)
+        {
+            path.internal_id = id;
+            if (id > _internal_id) _internal_id = id;
+            path_list.AddLast(path);
+        }
         public void DeletePath(Models.Path path)
         {
             path_list.Remove(path);
@@ -213,33 +239,6 @@ namespace Waypoint_Path_Generator.Models
         public void ChangePathWP(int index, LinkedList<WayPoints> wp_list)
         {
             path_list.ElementAt(index).waypoints = wp_list;
-            /*
-            Models.Path path = path_list.ElementAt(index);
-            Models.Path new_path = new Models.Path();
-            new_path.name = path.name;
-            new_path.type = path.type;
-            new_path.selected = path.selected;
-            new_path.visible = path.visible;
-            new_path.waypoints = wp_list;
-
-            int path_count = path_list.Count;
-            int count = 0;
-            LinkedListNode<Models.Path> node = path_list.First;
-            LinkedListNode<Models.Path> next_node;
-            while (node != null)
-            {
-                next_node = node.Next;
-                if (count == index)
-                {
-                    path_list.AddBefore(node, new_path);
-                    next_node = node.Next;
-                    path_list.Remove(node);
-                    break;
-                }
-                count++;
-                node = next_node;
-            }
-            */
         }
 
         public void ChangePathWPIntId(int intid, LinkedList<WayPoints> wp_list)
@@ -256,7 +255,6 @@ namespace Waypoint_Path_Generator.Models
             }
 
             //path_list.ElementAt(index).waypoints = wp_list;
-            
         }
         public void ChangePathName(int index, string name)
         {
@@ -463,6 +461,14 @@ namespace Waypoint_Path_Generator.Models
 
         public void AddPOI(POIPoints poipoint)
         {
+            poipoint.internal_id = next_internal_id();
+            poi_list.AddLast(poipoint);
+        }
+
+        public void AddPOIId(int id, POIPoints poipoint)
+        {
+            poipoint.internal_id = id;
+            if (id > _internal_id) _internal_id = id;
             poi_list.AddLast(poipoint);
         }
 
@@ -497,7 +503,7 @@ namespace Waypoint_Path_Generator.Models
         {
             string name;
             double lat, lon, alt, elev, cam_alt, head, rotdir, gimble_pitch, curvesize;
-            int gimble_mode;
+            int gimble_mode, int_id;
             int[,] actions;
             Models.Action action;
 
@@ -531,12 +537,14 @@ namespace Waypoint_Path_Generator.Models
                 {
                     xml_writer.WriteStartElement("POI"); // Start of POI
                     name = poi_list.ElementAt(i).name;
+                    int_id = poi_list.ElementAt(i).internal_id;
                     lat = poi_list.ElementAt(i).lat;
                     lon = poi_list.ElementAt(i).lon;
                     elev = poi_list.ElementAt(i).elev;
                     alt = poi_list.ElementAt(i).alt;
                     cam_alt = poi_list.ElementAt(i).cam_alt;
-                    xml_writer.WriteElementString("Id", name);
+                    xml_writer.WriteElementString("Name", name);
+                    xml_writer.WriteElementString("InternalId", Convert.ToString(int_id));
                     xml_writer.WriteElementString("Lat", Convert.ToString(lat));
                     xml_writer.WriteElementString("Lon", Convert.ToString(lon));
                     xml_writer.WriteElementString("Elev", Convert.ToString(elev));
@@ -581,8 +589,10 @@ namespace Waypoint_Path_Generator.Models
                     for (int i = 0; i < shape_list.Count(); i++)
                     {
                         shape = shape_list.ElementAt(i);
+                        int_id = shape.internal_id;
                         xml_writer.WriteStartElement("Polygon"); // Start of Polygon
                         xml_writer.WriteElementString("Name", shape.name);
+                        xml_writer.WriteElementString("InternalId", Convert.ToString(int_id));
                         LinkedList<PolyPoint> points = shape.points;
                         xml_writer.WriteStartElement("Vertex_List"); // Start of Vertex List
                         for (int j = 0; j < points.Count; j++)
@@ -606,10 +616,12 @@ namespace Waypoint_Path_Generator.Models
                 {
                     xml_writer.WriteStartElement("Path"); // Start of Path
                     Path path = path_list.ElementAt(i);
+                    int_id = path.internal_id;
                     name = path.name;
                     string path_type = path.type;
                     xml_writer.WriteElementString("Name", name);
                     xml_writer.WriteElementString("Type", path_type);
+                    xml_writer.WriteElementString("InternalId", Convert.ToString(int_id));
 
                     // Path GUI Configuration
 
@@ -668,6 +680,20 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteElementString("SinglePath", Convert.ToString(gui.single));
                         xml_writer.WriteElementString("POIMode", Convert.ToString(gui.poimode));
                         xml_writer.WriteElementString("POIName", gui.poiname);
+                        xml_writer.WriteEndElement(); // End of GUI
+                    }
+
+                    if (path_type == "Polygon")
+                    {
+                        PolygonGridGUI gui = path.polygridgui;
+                        xml_writer.WriteStartElement("GUI"); // Start of Gui
+                        xml_writer.WriteElementString("Name", gui.name);
+                        xml_writer.WriteElementString("Video", Convert.ToString(gui.video));
+                        xml_writer.WriteElementString("StartEnd", Convert.ToString(gui.startend));
+                        xml_writer.WriteElementString("Altitude", Convert.ToString(gui.altitude));
+                        xml_writer.WriteElementString("Heading", Convert.ToString(gui.heading));
+                        xml_writer.WriteElementString("PolyName", gui.polyname);
+                        xml_writer.WriteElementString("Poly_IntID", Convert.ToString(gui.poly_internal_id));
                         xml_writer.WriteEndElement(); // End of GUI
                     }
 
@@ -756,6 +782,7 @@ namespace Waypoint_Path_Generator.Models
             {
                 Models.Shape shape = new Models.Shape();
                 shape.name = shape_node.SelectSingleNode("Name").InnerText;
+                shape.internal_id = Convert.ToInt16(shape_node.SelectSingleNode("InternalId").InnerText);
                 dialog_text = dialog_text + "Shape : " + shape.name + "\n";
                 LinkedList<PolyPoint> polypoints = new LinkedList<PolyPoint>();
                 XmlNodeList vertex_nodes = shape_node.SelectNodes("./Vertex_List/Vertex");
@@ -775,7 +802,7 @@ namespace Waypoint_Path_Generator.Models
                 }
 
                 shape.points = polypoints;
-                AddShape(shape);
+                AddShapeId(shape.internal_id, shape);
                 //MessageBox.Show(Convert.ToString(polypoints.Count), "xxx");
             }
 
@@ -804,6 +831,8 @@ namespace Waypoint_Path_Generator.Models
                 
                 path.name = path_node.SelectSingleNode("Name").InnerText;
                 path.type = path_node.SelectSingleNode("Type").InnerText;
+                path.internal_id = Convert.ToInt16(path_node.SelectSingleNode("InternalId").InnerText);
+
                 if (path.type == "Circular")
                 {
                     CircularGUI gui = new CircularGUI();
@@ -870,6 +899,23 @@ namespace Waypoint_Path_Generator.Models
                     path.rectanglegui = gui;
                 }
 
+                if (path.type == "Polygon")
+                {
+                    PolygonGridGUI gui = new PolygonGridGUI();
+                    XmlNodeList GUI_node = path_node.SelectNodes("./GUI");
+                    foreach (XmlNode node in GUI_node)
+                    {
+                        gui.name = node.SelectSingleNode("Name").InnerText;
+                        gui.video = Convert.ToBoolean(node.SelectSingleNode("Video").InnerText);
+                        gui.startend = Convert.ToBoolean(node.SelectSingleNode("StartEnd").InnerText);
+                        gui.altitude = Convert.ToDouble(node.SelectSingleNode("Altitude").InnerText);
+                        gui.heading = Convert.ToDouble(node.SelectSingleNode("Heading").InnerText);
+                        gui.polyname = node.SelectSingleNode("PolyName").InnerText;
+                        gui.poly_internal_id = Convert.ToInt16(node.SelectSingleNode("Poly_IntID").InnerText);
+                    }
+                    path.polygridgui = gui;
+                }
+
                 path.selected = false;
                 path.visible = false;
                 LinkedList<WayPoints> way_list = new LinkedList<WayPoints>();
@@ -920,7 +966,7 @@ namespace Waypoint_Path_Generator.Models
                 }
                 //MessageBox.Show(dialog_text, "xxx");
                 path.waypoints = way_list;
-                AddPath(path);
+                AddPathId(path.internal_id, path);
                 path_count++;
             }
 
@@ -971,7 +1017,8 @@ namespace Waypoint_Path_Generator.Models
             foreach (XmlNode node in nodelist)
             {
                 POIPoints point = new POIPoints();
-                point.name = node.SelectSingleNode("Id").InnerText;
+                point.name = node.SelectSingleNode("Name").InnerText;
+                point.internal_id = Convert.ToInt16(node.SelectSingleNode("InternalId").InnerText);
                 point.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
                 point.lon = Convert.ToDouble(node.SelectSingleNode("Lon").InnerText);
                 point.elev = Convert.ToDouble(node.SelectSingleNode("Elev").InnerText);
@@ -979,7 +1026,7 @@ namespace Waypoint_Path_Generator.Models
                 point.cam_alt = Convert.ToDouble(node.SelectSingleNode("Cam_Alt").InnerText);
                 point.selected = false;
                 point.visible = false;
-                AddPOI(point);
+                AddPOIId(point.internal_id, point);
             }
         }
 

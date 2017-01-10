@@ -342,6 +342,7 @@
             this.radioVideo.TabStop = true;
             this.radioVideo.Text = "Video Mode";
             this.radioVideo.UseVisualStyleBackColor = true;
+            this.radioVideo.CheckedChanged += new System.EventHandler(this.radioVideo_CheckedChanged);
             // 
             // radioPhoto
             // 

@@ -75,6 +75,7 @@ namespace Waypoint_Path_Generator
             {
                 _new_path = false;
                 _path = path;
+                _path.selected = false;
                 _current_intid = path.internal_id;
                 RectanglarGUI gui = _path.rectanglegui;
                 _build = false;
@@ -732,6 +733,11 @@ namespace Waypoint_Path_Generator
         }
 
         private void radioPhoto_CheckedChanged(object sender, EventArgs e)
+        {
+            BuildRectPath();
+        }
+
+        private void radioVideo_CheckedChanged(object sender, EventArgs e)
         {
             BuildRectPath();
         }

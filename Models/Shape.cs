@@ -8,6 +8,7 @@ namespace Waypoint_Path_Generator.Models
 {
     public class Shape
     {
+        public int internal_id;
         public string name;
         public LinkedList<PolyPoint> points;
         public bool selected;

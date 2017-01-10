@@ -2660,9 +2660,8 @@ namespace Waypoint_Path_Generator
                 return;
             }
 
-            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon,
-                _options.focal_angle_hor, _options.focal_angle_ver,
-                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            Models.Path path = null;
+            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -3317,6 +3316,7 @@ namespace Waypoint_Path_Generator
                 {
                     Models.Shape shape = _wpg.ShapeAt(i);
                     string str = "Polygon Properties\n\n";
+                    str = str + "Internal ID : " + Convert.ToString(shape.internal_id) + "\n";
                     str = str + "Name : " + shape.name + "\n";
                     int count = shape.points.Count - 1;
                     str = str + "Number Points : " + Convert.ToString(count) + "\n";
@@ -3489,9 +3489,8 @@ namespace Waypoint_Path_Generator
             }
 
             Globals.map_center = gMapControl.Position;
-            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, Globals.map_center.Lat, Globals.map_center.Lng,
-                _options.focal_angle_hor, _options.focal_angle_ver,
-                _options.hor_overlap_percent, _options.ver_overlap_percent);
+            Models.Path path = null;
+            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
             dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap); ;
         }
@@ -3921,7 +3920,7 @@ namespace Waypoint_Path_Generator
             int path_count = _wpg.SelectedPathCount("Rectangular");
             if (path_count != 1)
             {
-                MessageBox.Show("Select a single Circular Path");
+                MessageBox.Show("Select a single Rectangular Path");
                 return;
             }
             // Get Selected Path index
@@ -3938,12 +3937,36 @@ namespace Waypoint_Path_Generator
             }
         }
 
-        /*
-private void toolJoinPaths_Click(object sender, EventArgs e)
+        private void polygonGridPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-        }
+            int path_count = _wpg.SelectedPathCount("Polygon");
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Polygon Grid Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected & _wpg.PathAt(i).type == "Polygon")
+                {
+                    // Make sure path polygon still exists
 
-    */
+                    Models.Path path = _wpg.PathAt(i);
+                    PolygonGridGUI gui = path.polygridgui;
+                    int poly_id = gui.poly_internal_id;
+                    Models.Shape poly = _wpg.ShapeWithId(poly_id);
+                    if(poly == null)
+                    {
+                        MessageBox.Show("Polygon no longer exists");
+                        return;
+                    }
+                    Globals.map_center = gMapControl.Position;
+                    DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+                    dialog.ShowDialog();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                }
+            }
+        }
     }
 }

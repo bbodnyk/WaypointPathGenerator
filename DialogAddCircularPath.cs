@@ -14,7 +14,7 @@ namespace Waypoint_Path_Generator
         private Options _options;
         private WayPoints _wp;
         private Path _path;
-        private int _current_path_index;
+        //private int _current_path_index;
         private bool _first_pass;
         private bool _new_path;
         private bool _build = true;
@@ -50,7 +50,7 @@ namespace Waypoint_Path_Generator
                 _new_path = true;
                 _first_pass = true;
                 _path = new Path();
-                _current_path_index = -1;
+                //_current_path_index = -1;
                 _path.visible = true;
                 _path.selected = false;
                 double altitude = Convert.ToDouble(txtDiaAddCircPathAlt.Text);
@@ -82,7 +82,7 @@ namespace Waypoint_Path_Generator
                 _path = path;
                 _path.selected = false;
                 _path.visible = true;
-                _current_path_index = _path.id;
+                //_current_path_index = _path.id;
                 CircularGUI gui = _path.circgui;
                 txtDiaAddCircPathName.Text = gui.name;
                 _lat = gui.lat;
@@ -118,7 +118,6 @@ namespace Waypoint_Path_Generator
             double circle_span = Convert.ToDouble(txtCircSpan.Text);
             int circle_num_points = Convert.ToInt16(txtCircNumPoints.Text);
             bool startend = chkCircHome.Checked;
-            _path = _wpg.PathAt(_current_path_index);
             CircularGUI gui = new CircularGUI();
             gui.CW = startend;
             gui.name = txtDiaAddCircPathName.Text;
@@ -264,7 +263,7 @@ namespace Waypoint_Path_Generator
                 string path_name = txtDiaAddCircPathName.Text;
                 if (path_name == "") path_name = "Untitled - Circular";
                 _path.Add_Path(_wpg, _gmap, path_name, "Circular", new_list);
-                _current_path_index = _wpg.PathCount() - 1;
+                _path = _wpg.PathAt(_wpg.PathCount() - 1);
                 _first_pass = false;
                 //Models.Path newpath = _wpg.PathAt(_current_path_index);
                 //newpath.visible = true;
@@ -272,13 +271,12 @@ namespace Waypoint_Path_Generator
             }
             else
             {
-                _wpg.ChangePathWP(_current_path_index, new_list);
+                _path.waypoints = new_list;
+                //_wpg.ChangePathWP(_path, new_list);
                 //Models.Path path = _wpg.PathAt(_current_path_index);
                 //_gmap.Delete_gMapPath(path);
                 //_gmap.Add_gMapPath(path, false);
             }
-
-            _path = _wpg.PathAt(_current_path_index);
             _path.visible = true;
             _path.selected = false;
             //_gmap.BuildgMap();
