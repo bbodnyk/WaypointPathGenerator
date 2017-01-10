@@ -221,6 +221,8 @@ namespace Waypoint_Path_Generator
             
             if (full_circle) angle_increment = 360.0 / circle_num_points;
             if (radioCCW.Checked) angle_increment = -angle_increment;
+            int num_points = circle_num_points;
+            if (!full_circle) num_points++;
             do
             {
                 circ_lat = GPS.GPS_Lat_BearDist(lat_center, lon_center, angle, circle_radius, Form1.Globals.gps_radius);
@@ -247,7 +249,7 @@ namespace Waypoint_Path_Generator
                 angle = angle + angle_increment;
                 count++;
 
-            } while (count < circle_num_points);
+            } while (count < num_points );
 
             if (full_circle) _wp.Add_Waypoint_List(new_list, start_lat, start_lon, altitude, start_head, curvesize, rotdir, gimblemode, gimplepitch, actions); ;
 
