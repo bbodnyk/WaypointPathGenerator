@@ -296,10 +296,29 @@ namespace Waypoint_Path_Generator
             buildCircPath();
         }
 
+        private void txtDiaAddCircPathAlt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToInt16(txtDiaAddCircPathAlt.Text);
+                if (value < trkAlt.Minimum)
+                {
+                    txtDiaAddCircPathAlt.Text = Convert.ToString(trkAlt.Minimum);
+                }
+                if (value > trkAlt.Maximum)
+                {
+                    txtDiaAddCircPathAlt.Text = Convert.ToString(trkAlt.Maximum);
+                }
+                value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+                trkAlt.Value = Convert.ToInt16(value);
+                buildCircPath();
+            }
+        }
+
         private void txtDiaAddCircPathAlt_TextChanged(object sender, EventArgs e)
         {
-            trkAlt.Value = Convert.ToInt16(txtDiaAddCircPathAlt.Text);
-            buildCircPath();
+            //trkAlt.Value = Convert.ToInt16(txtDiaAddCircPathAlt.Text);
+            //buildCircPath();
         }
 
         private void txtDiaAddCircPathName_TextChanged(object sender, EventArgs e)
@@ -307,10 +326,29 @@ namespace Waypoint_Path_Generator
             buildCircPath();
         }
 
+        private void txtDiaAddCircPathRadius_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+                if (value < trkRadius.Minimum)
+                {
+                    txtDiaAddCircPathRadius.Text = Convert.ToString(trkRadius.Minimum);
+                }
+                if (value > trkRadius.Maximum)
+                {
+                    txtDiaAddCircPathRadius.Text = Convert.ToString(trkRadius.Maximum);
+                }
+                value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+                trkRadius.Value = Convert.ToInt16(value);
+                buildCircPath();
+            }
+        }
+
         private void txtDiaAddCircPathRadius_TextChanged(object sender, EventArgs e)
         {
-            trkRadius.Value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
-            buildCircPath();
+            //trkRadius.Value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+            //buildCircPath();
         }
 
         private void txtCircNumPoints_TextChanged(object sender, EventArgs e)
@@ -355,6 +393,7 @@ namespace Waypoint_Path_Generator
         private void trkRadius_Scroll(object sender, EventArgs e)
         {
             txtDiaAddCircPathRadius.Text = Convert.ToString(trkRadius.Value);
+            buildCircPath();
         }
 
         private void trkNumPoints_Scroll(object sender, EventArgs e)
@@ -380,12 +419,15 @@ namespace Waypoint_Path_Generator
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             txtDiaAddCircPathAlt.Text = Convert.ToString(trkAlt.Value);
+            buildCircPath();
         }
 
         private void dialogAddCircularPath_Load(object sender, EventArgs e)
         {
 
         }
+
+        
     }
 }
 

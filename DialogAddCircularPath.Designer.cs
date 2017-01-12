@@ -90,6 +90,7 @@
             this.txtDiaAddCircPathAlt.TabIndex = 2;
             this.txtDiaAddCircPathAlt.Text = "30";
             this.txtDiaAddCircPathAlt.TextChanged += new System.EventHandler(this.txtDiaAddCircPathAlt_TextChanged);
+            this.txtDiaAddCircPathAlt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDiaAddCircPathAlt_KeyDown);
             // 
             // label1
             // 
@@ -109,6 +110,7 @@
             this.txtDiaAddCircPathRadius.TabIndex = 4;
             this.txtDiaAddCircPathRadius.Text = "30";
             this.txtDiaAddCircPathRadius.TextChanged += new System.EventHandler(this.txtDiaAddCircPathRadius_TextChanged);
+            this.txtDiaAddCircPathRadius.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDiaAddCircPathRadius_KeyDown);
             // 
             // label2
             // 
@@ -278,7 +280,7 @@
             // 
             this.trkRadius.Location = new System.Drawing.Point(183, 165);
             this.trkRadius.Maximum = 500;
-            this.trkRadius.Minimum = 1;
+            this.trkRadius.Minimum = 5;
             this.trkRadius.Name = "trkRadius";
             this.trkRadius.Size = new System.Drawing.Size(104, 42);
             this.trkRadius.TabIndex = 71;
@@ -327,6 +329,7 @@
             this.trkAlt.Name = "trkAlt";
             this.trkAlt.Size = new System.Drawing.Size(104, 42);
             this.trkAlt.TabIndex = 75;
+            this.trkAlt.TickFrequency = 10;
             this.trkAlt.Value = 5;
             this.trkAlt.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 

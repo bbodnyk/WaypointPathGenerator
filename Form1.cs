@@ -3194,6 +3194,7 @@ namespace Waypoint_Path_Generator
             POIPoints poi = _wpg.POIPointAt(i);
             string str = "POI Properties\n\n";
             str = str + "Name : " + poi.name + "\n";
+            str = str + "Internal ID : " + Convert.ToString(poi.internal_id) + "\n";
             str = str + "Lat : " + Convert.ToString(poi.lat) + "\n";
             str = str + "Lon : " + Convert.ToString(poi.lon) + "\n";
             str = str + "Elevation : " + Convert.ToString(poi.elev) + "\n";
