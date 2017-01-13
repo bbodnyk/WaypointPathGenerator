@@ -9,6 +9,7 @@ namespace Waypoint_Path_Generator.Models
     public class Action
     {
         public string name;
+        public int internal_id;
         public int[,] actions;
     }
 }

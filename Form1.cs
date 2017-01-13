@@ -1103,239 +1103,13 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        /*
-        private void btnClearActionsGUI_Click(object sender, EventArgs e)
-        {
-            txtNewActionName.Text = "";
-            cmbAction1.SelectedIndex = 0;
-            cmbAction2.SelectedIndex = 0;
-            cmbAction3.SelectedIndex = 0;
-            cmbAction4.SelectedIndex = 0;
-            cmbAction5.SelectedIndex = 0;
-            cmbAction6.SelectedIndex = 0;
-            cmbAction7.SelectedIndex = 0;
-            cmbAction8.SelectedIndex = 0;
-            cmbAction9.SelectedIndex = 0;
-            cmbAction10.SelectedIndex = 0;
-            cmbAction11.SelectedIndex = 0;
-            cmbAction12.SelectedIndex = 0;
-            cmbAction13.SelectedIndex = 0;
-            cmbAction14.SelectedIndex = 0;
-            cmbAction15.SelectedIndex = 0;
-            txtActionParam1.Text = "-1";
-            txtActionParam2.Text = "-1";
-            txtActionParam3.Text = "-1";
-            txtActionParam4.Text = "-1";
-            txtActionParam5.Text = "-1";
-            txtActionParam6.Text = "-1";
-            txtActionParam7.Text = "-1";
-            txtActionParam8.Text = "-1";
-            txtActionParam9.Text = "-1";
-            txtActionParam10.Text = "-1";
-            txtActionParam11.Text = "-1";
-            txtActionParam12.Text = "-1";
-            txtActionParam13.Text = "-1";
-            txtActionParam14.Text = "-1";
-            txtActionParam15.Text = "-1";
-        }
+ 
 
-        private void cmbActionsList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int index = cmbActionsList.SelectedIndex;
-            Models.Action action = _wpg.ActionAt(index);
-            string name = action.name;
-            int[,] actions = action.actions;
-            txtNewActionName.Text = name;
-
-            cmbAction1.SelectedIndex = actions[0, 0] + 1;
-            txtActionParam1.Text = Convert.ToString(actions[0, 1]);
-            cmbAction2.SelectedIndex = actions[1, 0] + 1;
-            txtActionParam2.Text = Convert.ToString(actions[1, 1]);
-            cmbAction3.SelectedIndex = actions[2, 0] + 1;
-            txtActionParam3.Text = Convert.ToString(actions[2, 1]);
-            cmbAction4.SelectedIndex = actions[3, 0] + 1;
-            txtActionParam4.Text = Convert.ToString(actions[3, 1]);
-            cmbAction5.SelectedIndex = actions[4, 0] + 1;
-            txtActionParam5.Text = Convert.ToString(actions[4, 1]);
-            cmbAction6.SelectedIndex = actions[5, 0] + 1;
-            txtActionParam6.Text = Convert.ToString(actions[5, 1]);
-            cmbAction7.SelectedIndex = actions[6, 0] + 1;
-            txtActionParam7.Text = Convert.ToString(actions[6, 1]);
-            cmbAction8.SelectedIndex = actions[7, 0] + 1;
-            txtActionParam8.Text = Convert.ToString(actions[7, 1]);
-            cmbAction9.SelectedIndex = actions[8, 0] + 1;
-            txtActionParam9.Text = Convert.ToString(actions[8, 1]);
-            cmbAction10.SelectedIndex = actions[9, 0] + 1;
-            txtActionParam10.Text = Convert.ToString(actions[9, 1]);
-            cmbAction11.SelectedIndex = actions[10, 0] + 1;
-            txtActionParam11.Text = Convert.ToString(actions[10, 1]);
-            cmbAction12.SelectedIndex = actions[11, 0] + 1;
-            txtActionParam12.Text = Convert.ToString(actions[11, 1]);
-            cmbAction13.SelectedIndex = actions[12, 0] + 1;
-            txtActionParam13.Text = Convert.ToString(actions[12, 1]);
-            cmbAction14.SelectedIndex = actions[13, 0] + 1;
-            txtActionParam14.Text = Convert.ToString(actions[13, 1]);
-            cmbAction15.SelectedIndex = actions[14, 0] + 1;
-            txtActionParam15.Text = Convert.ToString(actions[14, 1]);
-        }
-
-        private void btnSaveAction_Click(object sender, EventArgs e)
-        {
-            int[,] actions = new int[15, 2];
-
-            actions[0, 0] = cmbAction1.SelectedIndex - 1;
-            actions[0, 1] = Convert.ToInt16(txtActionParam1.Text);
-            actions[1, 0] = cmbAction2.SelectedIndex - 1;
-            actions[1, 1] = Convert.ToInt16(txtActionParam2.Text);
-            actions[2, 0] = cmbAction3.SelectedIndex - 1;
-            actions[2, 1] = Convert.ToInt16(txtActionParam3.Text);
-            actions[3, 0] = cmbAction4.SelectedIndex - 1;
-            actions[3, 1] = Convert.ToInt16(txtActionParam4.Text);
-            actions[4, 0] = cmbAction5.SelectedIndex - 1;
-            actions[4, 1] = Convert.ToInt16(txtActionParam5.Text);
-            actions[5, 0] = cmbAction6.SelectedIndex - 1;
-            actions[5, 1] = Convert.ToInt16(txtActionParam6.Text);
-            actions[6, 0] = cmbAction7.SelectedIndex - 1;
-            actions[6, 1] = Convert.ToInt16(txtActionParam7.Text);
-            actions[7, 0] = cmbAction8.SelectedIndex - 1;
-            actions[7, 1] = Convert.ToInt16(txtActionParam8.Text);
-            actions[8, 0] = cmbAction9.SelectedIndex - 1;
-            actions[8, 1] = Convert.ToInt16(txtActionParam9.Text);
-            actions[9, 0] = cmbAction10.SelectedIndex - 1;
-            actions[9, 1] = Convert.ToInt16(txtActionParam10.Text);
-            actions[10, 0] = cmbAction11.SelectedIndex - 1;
-            actions[10, 1] = Convert.ToInt16(txtActionParam11.Text);
-            actions[11, 0] = cmbAction12.SelectedIndex - 1;
-            actions[11, 1] = Convert.ToInt16(txtActionParam12.Text);
-            actions[12, 0] = cmbAction13.SelectedIndex - 1;
-            actions[12, 1] = Convert.ToInt16(txtActionParam13.Text);
-            actions[13, 0] = cmbAction14.SelectedIndex - 1;
-            actions[13, 1] = Convert.ToInt16(txtActionParam14.Text);
-            actions[14, 0] = cmbAction15.SelectedIndex - 1;
-            actions[14, 1] = Convert.ToInt16(txtActionParam15.Text);
-
-            Models.Action action = new Models.Action();
-            action.name = txtNewActionName.Text;
-            action.actions = actions;
-            _wpg.AddAction(action);
-            Update_Actioncmb();
-        }
-
-        private void btnDelectAction_Click(object sender, EventArgs e)
-        {
-            string name = txtNewActionName.Text;
-            _wpg.DeleteAction(name);
-            Update_Actioncmb();
-            cmbActionsList.SelectedIndex = 0;
-        }
-        */
         private void cmbActionsWaypoints_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        /*
-        private void btnApplyAction_Click(object sender, EventArgs e)
-        {
-            string text;
-            // Get action to Apply
-            int index = cmbActionsWaypoints.SelectedIndex;
-            if (index == -1)
-            {
-                MessageBox.Show("No Action Selected ...", "Apply Actions");
-                return;
-            }
-            int path_id = Globals.ActionsPath;
-            if (path_id == -1)
-            {
-                MessageBox.Show("No Path Selected ...", "Apply Actions");
-                return;
-            }
-            Models.Path path = _wpg.PathAt(path_id);
-            LinkedList<WayPoints> waypoints = path.waypoints;
-
-            int wpcount = waypoints.Count();
-
-            // Get start and End waypoints
-
-            int wp_start = Convert.ToInt16(txtWPStart.Text);
-            int wp_end = Convert.ToInt16(txtWPEnd.Text);
-            bool err = false;
-            if (wp_start < 0 | wp_end < 0) err = true;
-            if (wp_start > wpcount - 1 | wp_end > wpcount - 1) err = true;
-            if (wp_start > wp_end & wp_end != 0) err = true;
-            if (err)
-            {
-                text = "Error in start and end Way point.\n";
-                MessageBox.Show(text, "Apply Actions");
-                return;
-            }
-
-            Models.Action action = _wpg.ActionAt(index);
-            string name = action.name;
-            int[,] actions = action.actions;
-
-            LinkedListNode<WayPoints> node = waypoints.First;
-            LinkedListNode<WayPoints> nextnode;
-            int count = 0;
-            while (node != null)
-            {
-                nextnode = node.Next;
-                if (count >= wp_start & count <= wp_end)
-                {
-                    WayPoints wppoint = new WayPoints();
-                    wppoint.lat = node.Value.lat;
-                    wppoint.lon = node.Value.lon;
-                    wppoint.alt = node.Value.alt;
-                    wppoint.head = node.Value.head;
-                    wppoint.curvesize = node.Value.curvesize;
-                    wppoint.rotationdir = node.Value.rotationdir;
-                    wppoint.gimblemode = node.Value.gimblemode;
-                    wppoint.gimblepitch = node.Value.gimblepitch;
-                    wppoint.actions = actions;
-                    waypoints.AddBefore(node, wppoint);
-                    waypoints.Remove(node);
-                }
-                count++;
-                node = nextnode;
-            }
-
-            // Clear for next round
-
-            txtWPStart.Text = "0";
-            txtWPEnd.Text = "0";
-            cmbActionsWaypoints.SelectedIndex = 0;
-
-            // Redo dgv
-
-            Globals.ActionWaypoint_Handler = false;
-            dgvActionsWaypoints.Rows.Clear();
-            Globals.ActionWaypoint_Handler = true;
-            int wp_count = waypoints.Count;
-            count = 0;
-            int path_wcount = waypoints.Count();
-            while (count < path_wcount)
-            {
-                double lat = waypoints.ElementAt(count).lat;
-                double lon = waypoints.ElementAt(count).lon;
-                double alt = waypoints.ElementAt(count).alt;
-                double head = waypoints.ElementAt(count).head;
-                int gimblemode = waypoints.ElementAt(count).gimblemode;
-                double gimblepitch = waypoints.ElementAt(count).gimblepitch;
-                double curvesize = waypoints.ElementAt(count).curvesize;
-                double rotdir = waypoints.ElementAt(count).rotationdir;
-                int[,] wpactions = waypoints.ElementAt(count).actions;
-                if (head < 0.0) head = head + 360.0;
-                dgvActionsWaypoints.Rows.Add(count, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt), Convert.ToString(head),
-                    Convert.ToString(curvesize), Convert.ToString(rotdir), Convert.ToString(gimblemode), Convert.ToString(gimblepitch)
-                    , Convert.ToString(wpactions[0, 0]), Convert.ToString(wpactions[0, 1])
-                    , Convert.ToString(wpactions[1, 0]), Convert.ToString(wpactions[1, 1])
-                    , Convert.ToString(wpactions[2, 0]), Convert.ToString(wpactions[2, 1])
-                    , Convert.ToString(wpactions[3, 0]), Convert.ToString(wpactions[3, 1])
-                    );
-                count++;
-            }
-        }
-        */
+ 
         private void textBox2_TextChanged_2(object sender, EventArgs e)
         {
 
@@ -1812,122 +1586,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
- /*
-        private void dgvActionsWaypoints_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            int row = e.RowIndex;
-            int col = e.ColumnIndex;
-            double num;
-            dgvActionsWaypoints.Rows[e.RowIndex].ErrorText = String.Empty;
-            // Check for value empty
-            if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
-            {
-
-                dgvActionsWaypoints.Rows[e.RowIndex].ErrorText =
-                    "Value must not be empty";
-                e.Cancel = true;
-                return;
-            }
-            String text = e.FormattedValue.ToString();
-            // Check Cols 1 thru the end for numeric values
-            if (col >= 1)
-            {
-                if (!double.TryParse(text, out num))
-                {
-                    dgvActionsWaypoints.Rows[e.RowIndex].ErrorText =
-                    "Value must be numeric";
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            num = Convert.ToDouble(text);
-            // Check Columns for positive values
-            if (col == 3 | col == 5)
-            {
-                if (num < 0)
-                {
-                    dgvActionsWaypoints.Rows[e.RowIndex].ErrorText =
-                    "Value must be positive";
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            // Check Gimble Mode, -1,0,1,2,3,4,5
-            if (col == 7)
-            {
-                int intval;
-                if (!int.TryParse(text, out intval))
-                {
-                    dgvActionsWaypoints.Rows[e.RowIndex].ErrorText =
-                    "Value must be integer 0 or 2";
-                    e.Cancel = true;
-                    return;
-                }
-                if (intval != 0 & intval != 2)
-                {
-                    dgvActionsWaypoints.Rows[e.RowIndex].ErrorText =
-                    "Value must be integer 0 or 2";
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            // Check Gimble Pitch
-            if (col == 8)
-            {
-                if (num > 15.0 | num < -90.0)
-                {
-                    dgvActionsWaypoints.Rows[e.RowIndex].ErrorText =
-                    "Pitch must be between -90 and 15";
-                    e.Cancel = true;
-                    return;
-                }
-            }
-        }
  
-        private void dgvActionsWaypoints_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (Globals.ActionWaypoint_Handler)
-            {
-                Models.Path path = _wpg.PathAt(Globals.ActionsPath);
-                LinkedList<WayPoints> waypoints = path.waypoints;
-                int wpcount = waypoints.Count;
-                if (dgvActionsWaypoints.AreAllCellsSelected(true))
-                {
-                    txtWPStart.Text = "0";
-                    txtWPEnd.Text = Convert.ToString(wpcount - 1);
-                    txtPOIWP.Text = "0";
-                    txtPOIWPName.Text = "WP - 0";
-                    return;
-                }
-                int row_start = 1000;
-                int row_end = -1;
-                int count = dgvActionsWaypoints.SelectedRows.Count;
-                if (count == 1)
-                {
-                    int index = dgvActionsWaypoints.SelectedRows[0].Index;
-                    txtWPStart.Text = Convert.ToString(index);
-                    txtPOIWP.Text = Convert.ToString(index);
-                    txtPOIWPName.Text = "WP - " + Convert.ToString(index);
-                    txtWPEnd.Text = Convert.ToString(index);
-                    return;
-                }
-                if (count > 0)
-                {
-                    for (int i = 0; i < count; i++)
-                    {
-                        int index = dgvActionsWaypoints.SelectedRows[i].Index;
-                        if (index < row_start) row_start = index;
-                        if (index > row_end) row_end = index;
-                    }
-                    txtWPStart.Text = Convert.ToString(row_start);
-                    txtPOIWP.Text = Convert.ToString(row_start);
-                    txtPOIWPName.Text = "WP - " + Convert.ToString(row_start);
-                    txtWPEnd.Text = Convert.ToString(row_end);
-                }
-
-            }
-        }
-  */
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -2214,6 +1873,13 @@ namespace Waypoint_Path_Generator
             }
         }
 
+        private void treGMap_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode node = e.Node;
+            int index = e.Node.Index;
+            MessageBox.Show("text of node is : " + e.Node.Text + ", Index is " + Convert.ToString(index));
+        }
+
         private void treGMap_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (!Globals.TreView_Handler) return;
@@ -2479,10 +2145,7 @@ namespace Waypoint_Path_Generator
             //GMAPTree.Update_GMapTree(_wpg, treGMap);;
         }
 
-        private void treGMap_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
+        
 
         private void gMap_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -3285,11 +2948,13 @@ namespace Waypoint_Path_Generator
             }
 
             path = _wpg.PathAt(path_id);
+            
             wp_list = path.waypoints;
             wp = wp_list.ElementAt(wp_index);
 
             string str = "Waypoint Properties\n\n";
             str = str + "Path : " + path.name + "\n";
+            str = str + "Path Int Id: " + Convert.ToString(path.internal_id) + "\n";
             str = str + "Waypoint Count : " + Convert.ToString(wp_list.Count) + "\n\n";
             str = str + "Waypoint ID : " + Convert.ToString(wp_index) + "\n";
             str = str + "Latitude : " + TrimTo(Convert.ToString(wp.lat),6) + "\n";

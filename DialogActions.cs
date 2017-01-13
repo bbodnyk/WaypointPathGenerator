@@ -74,6 +74,7 @@ namespace Waypoint_Path_Generator
             string name = action.name;
             int[,] actions = action.actions;
             txtNewActionName.Text = name;
+            txtActionID.Text = Convert.ToString(action.internal_id);
 
             cmbAction1.SelectedIndex = actions[0, 0] + 1;
             txtActionParam1.Text = Convert.ToString(actions[0, 1]);
@@ -214,6 +215,21 @@ namespace Waypoint_Path_Generator
             action.actions = actions;
             _wpg.AddAction(action);
             Update_Actioncmb();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label70_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DialogActions_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

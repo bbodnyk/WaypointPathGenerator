@@ -86,6 +86,7 @@ namespace Waypoint_Path_Generator.Models
 
         public void AddAction(Models.Action action)
         {
+            action.internal_id = next_internal_id();
             action_list.AddLast(action);
         }
 

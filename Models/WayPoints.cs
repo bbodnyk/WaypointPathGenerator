@@ -13,6 +13,7 @@ namespace Waypoint_Path_Generator.Models
         public int[,] actions;
         public bool selected;
         public bool visible;
+        public int path_int_id;
         public GMap.NET.WindowsForms.GMapMarker marker;
 
         public void Insert_Waypoint_List( Waypoint_Path_Gen wpg, double lat, double lon, bool before)
@@ -41,6 +42,7 @@ namespace Waypoint_Path_Generator.Models
                         wp_new.actions = node.Value.actions;
                         wp_new.selected = true;
                         wp_new.visible = true;
+                        wp_new.path_int_id = path.internal_id;
 
                         if (before) wp_list.AddBefore(node, wp_new);
                         else wp_list.AddAfter(node, wp_new);
@@ -55,25 +57,7 @@ namespace Waypoint_Path_Generator.Models
 
             
         }
-        /*
-        int count = 0;
-        LinkedListNode<POIPoints> node = poi_list.First;
-        LinkedListNode<POIPoints> next_node;
-        while (node != null)
-        {
-            next_node = node.Next;
-            if (count == index)
-            {
 
-                poi_list.AddBefore(node, pnt);
-                next_node = node.Next;
-                poi_list.Remove(node);
-                break;
-            }
-            count++;
-            node = next_node;
-        }
-        */
         public void Add_Waypoint_List(LinkedList<WayPoints> list, double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int[,] actions)
         {
             WayPoints waypoint = new WayPoints();
