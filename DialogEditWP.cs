@@ -40,11 +40,18 @@ namespace Waypoint_Path_Generator
             txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
             trkHeading.Value = Convert.ToInt16(_wp.head);
             trkCurveSize.Value = Convert.ToInt16(_wp.curvesize);
-            for(int i = 0; i < _wpg.ActionCount(); i++)
+            int actionid = _wp.action_id;
+            Models.Action wpaction = _wpg.ActionWithId(_wp.action_id);
+            string name = wpaction.name;
+            int current_action_index = -1;
+
+            for (int i = 0; i < _wpg.ActionCount(); i++)
             {
                 cmbActions.Items.Add(_wpg.ActionAt(i).name);
+                if (name == _wpg.ActionAt(i).name) current_action_index = i;
             }
-            cmbActions.SelectedIndex = 0;
+            if (current_action_index == -1) current_action_index = 0;
+            cmbActions.SelectedIndex = current_action_index;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -68,8 +75,7 @@ namespace Waypoint_Path_Generator
             int action_id = cmbActions.SelectedIndex;
             Models.Action action = _wpg.ActionAt(action_id);
             string name = action.name;
-            int[,] actions = action.actions;
-            _wp.actions = actions;
+            _wp.action_id = action.internal_id;
             _gmap.ReDrawgMap();
             this.Close();
         }
@@ -125,8 +131,7 @@ namespace Waypoint_Path_Generator
             int action_id = cmbActions.SelectedIndex;
             Models.Action action = _wpg.ActionAt(action_id);
             string name = action.name;
-            int[,] actions = action.actions;
-            _wp.actions = actions;
+            _wp.action_id = action.internal_id;
             _wp.selected = false;
 
             // Go tp previous wp
@@ -145,8 +150,16 @@ namespace Waypoint_Path_Generator
             txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
             trkHeading.Value = Convert.ToInt16(_wp.head);
             trkCurveSize.Value = Convert.ToInt16(_wp.curvesize);
-            _wp.selected = true;
+            Models.Action wpaction = _wpg.ActionWithId(_wp.action_id);
+            int current_action_index = -1;
 
+            for (int i = 0; i < _wpg.ActionCount(); i++)
+            {
+                if (wpaction.name == _wpg.ActionAt(i).name) current_action_index = i;
+            }
+            if (current_action_index == -1) current_action_index = 0;
+            cmbActions.SelectedIndex = current_action_index;
+            _wp.selected = true;
             _gmap.ReDrawgMap();
         }
 
@@ -164,7 +177,7 @@ namespace Waypoint_Path_Generator
             Models.Action action = _wpg.ActionAt(action_id);
             string name = action.name;
             int[,] actions = action.actions;
-            _wp.actions = actions;
+            _wp.action_id = action.internal_id;
             _wp.selected = false;
 
             // Go to next wp
@@ -183,6 +196,15 @@ namespace Waypoint_Path_Generator
             txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
             trkHeading.Value = Convert.ToInt16(_wp.head);
             trkCurveSize.Value = Convert.ToInt16(_wp.curvesize);
+            Models.Action wpaction = _wpg.ActionWithId(_wp.action_id);
+            int current_action_index = -1;
+
+            for (int i = 0; i < _wpg.ActionCount(); i++)
+            {
+                if (wpaction.name == _wpg.ActionAt(i).name) current_action_index = i;
+            }
+            if (current_action_index == -1) current_action_index = 0;
+            cmbActions.SelectedIndex = current_action_index;
             _wp.selected = true;
 
             _gmap.ReDrawgMap();

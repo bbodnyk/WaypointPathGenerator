@@ -137,9 +137,9 @@ namespace Waypoint_Path_Generator
             double helix_start_angle = Convert.ToDouble(txtHelixStartAngle.Text);
             double helix_span = Convert.ToDouble(txtHelixSpan.Text);
             int helix_num_points = Convert.ToInt16(txtHelixNumPoints.Text);
-            int[,] no_actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-            int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-
+            Models.Action action = _wpg.GetAction("No Action");
+            int no_actions_id = action.internal_id;
+            int actions_id = no_actions_id;
             double cw = 1.0;
             if (radioCCW.Checked) cw = -1.0;
 
@@ -180,7 +180,7 @@ namespace Waypoint_Path_Generator
             double rotdir = 0;
             if (startend)
             {
-                _wp.Add_Waypoint_List(new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, no_actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, no_actions_id);
             }
             do
             {
@@ -205,7 +205,7 @@ namespace Waypoint_Path_Generator
                     if (radioCCW.Checked) heading = GPS.Mod_Angle(heading + 180.0);
                 }
 
-                _wp.Add_Waypoint_List(new_list, circ_lat, circ_lon, helix_altitude, heading, curvesize, rotdir, gimblemode, gimplepitch, actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, circ_lat, circ_lon, helix_altitude, heading, curvesize, rotdir, gimblemode, gimplepitch, actions_id);
 
                 angle = angle + angle_increment;
                 count++;
@@ -214,7 +214,7 @@ namespace Waypoint_Path_Generator
 
             if (startend)
             {
-                _wp.Add_Waypoint_List(new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, no_actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, no_actions_id);
             }
 
             // Save Path

@@ -101,9 +101,33 @@ namespace Waypoint_Path_Generator.Models
             }
         }
 
+        public Action GetAction(string name)
+        {
+            for(int i = 0; i < action_list.Count; i++)
+            {
+                if (action_list.ElementAt(i).name == name)
+                {
+                    return action_list.ElementAt(i);
+                }
+            }
+            return action_list.ElementAt(0);
+        }
+
         public int ActionCount()
         {
             return action_list.Count();
+        }
+
+        public Action ActionWithId(int id)
+        {
+            for (int i = 0; i < action_list.Count; i++)
+            {
+                if (action_list.ElementAt(i).internal_id == id)
+                {
+                    return action_list.ElementAt(i);
+                }
+            }
+            return action_list.ElementAt(0);
         }
 
         public Action ActionAt(int index)
@@ -506,6 +530,7 @@ namespace Waypoint_Path_Generator.Models
             double lat, lon, alt, elev, cam_alt, head, rotdir, gimble_pitch, curvesize;
             int gimble_mode, int_id;
             int[,] actions;
+            int action_id;
             Models.Action action;
 
             // Generate XML
@@ -563,8 +588,11 @@ namespace Waypoint_Path_Generator.Models
                     action = action_list.ElementAt(i);
                     name = action.name;
                     actions = action.actions;
+                    string action_id_str = Convert.ToString(action.internal_id);
                     xml_writer.WriteStartElement("WP_Action"); // Start of Action
                     xml_writer.WriteElementString("Name", name);
+                    xml_writer.WriteElementString("IntID", action_id_str);
+
                     xml_writer.WriteStartElement("Action_List"); // Start of Element Action List
                     for (int k = 0; k < 15; k++)
                     {
@@ -711,7 +739,7 @@ namespace Waypoint_Path_Generator.Models
                         curvesize = waypoint.ElementAt(j).curvesize;
                         gimble_mode = waypoint.ElementAt(j).gimblemode;
                         gimble_pitch = waypoint.ElementAt(j).gimblepitch;
-                        actions = waypoint.ElementAt(j).actions;
+                        action_id = waypoint.ElementAt(j).action_id;
                         xml_writer.WriteElementString("Lat", Convert.ToString(lat));
                         xml_writer.WriteElementString("Lon", Convert.ToString(lon));
                         xml_writer.WriteElementString("Alt", Convert.ToString(alt));
@@ -720,7 +748,9 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteElementString("RotationDir", Convert.ToString(curvesize));
                         xml_writer.WriteElementString("GimbleMode", Convert.ToString(gimble_mode));
                         xml_writer.WriteElementString("GimblePitch", Convert.ToString(gimble_pitch));
-                        //xml_writer.WriteStartElement("Action_List"); // Start of Action List
+                        xml_writer.WriteElementString("ActionID", Convert.ToString(action_id));
+
+                        /*
                         for (int k = 0; k < 15; k++)
                         {
                             xml_writer.WriteStartElement("Action"); // Start of Action
@@ -728,7 +758,8 @@ namespace Waypoint_Path_Generator.Models
                             xml_writer.WriteElementString("Param", Convert.ToString(actions[k, 1]));
                             xml_writer.WriteEndElement(); // End of Action
                         }
-                        //xml_writer.WriteEndElement(); // End of Action List
+                        */
+
                         xml_writer.WriteEndElement(); // End of Waypoint
                     }
 
@@ -939,28 +970,7 @@ namespace Waypoint_Path_Generator.Models
                     waypoint.rotationdir = Convert.ToDouble(wp_node.SelectSingleNode("RotationDir").InnerText);
                     waypoint.gimblemode = Convert.ToInt16(wp_node.SelectSingleNode("GimbleMode").InnerText);
                     waypoint.gimblepitch = Convert.ToDouble(wp_node.SelectSingleNode("GimblePitch").InnerText);
-
-                    XmlNodeList action_nodes = wp_node.SelectNodes("./Action");
-                    int action_count = action_nodes.Count;
-                    dialog_text = dialog_text + "Waypoint : " + Convert.ToString(way_count) + "\n";
-                    dialog_text = dialog_text + "Action Count : " + Convert.ToString(action_count) + "\n";
-
-                    int[,] actions_arr = new int[100, 2];
-                    int i = 0;
-                    int act_type, act_param;
-                    foreach (XmlNode act_node in action_nodes)
-                    {
-
-                        act_type = Convert.ToInt16(act_node.SelectSingleNode("Type").InnerText);
-                        act_param = Convert.ToInt16(act_node.SelectSingleNode("Param").InnerText);
-                        dialog_text = dialog_text + "Action Count : " + Convert.ToString(i);
-                        dialog_text = dialog_text + ", Action Type : " + Convert.ToString(act_type);
-                        dialog_text = dialog_text + ", Action Param : " + Convert.ToString(act_param) + "\n";
-                        actions_arr[i, 0] = act_type;
-                        actions_arr[i, 1] = act_param;
-                        i++;
-                    }
-                    waypoint.actions = actions_arr;
+                    waypoint.action_id = Convert.ToInt16(wp_node.SelectSingleNode("ActionID").InnerText);
 
                     way_list.AddLast(waypoint);
                     way_count++;
@@ -985,6 +995,7 @@ namespace Waypoint_Path_Generator.Models
                 //string text;
                 Models.Action action = new Models.Action();
                 action.name = top_action_node.SelectSingleNode("Name").InnerText;
+                action.internal_id = Convert.ToInt16(top_action_node.SelectSingleNode("IntID").InnerText);
                 //text = "Name : " + action.name + "\n\n";
                 XmlNodeList action_list = top_action_node.SelectNodes("./Action_List/Action");
                 int[,] array = new int[15, 2];

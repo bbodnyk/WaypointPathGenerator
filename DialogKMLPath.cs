@@ -166,7 +166,8 @@ namespace Waypoint_Path_Generator
             double gimblepitch = 0;
             double curvesize = 0;
             double rotdir = 0;
-            int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
+            Models.Action action = _wpg.GetAction("No Action");
+            int action_id = action.internal_id;
 
             LinkedList<WayPoints> new_list = new LinkedList<WayPoints>();
 
@@ -209,7 +210,7 @@ namespace Waypoint_Path_Generator
                         heading = GPS.GPS_Bearing(lat, lon, lat_next, lon_next);
                     }
                 }
-                _wp.Add_Waypoint_List(new_list, lat, lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat, lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, action_id);
                 //dgvWaypoints.Rows.Add(Globals.waypoint_count + i+1, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt));
             }
 

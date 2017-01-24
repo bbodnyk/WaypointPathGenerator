@@ -23,6 +23,7 @@ namespace Waypoint_Path_Generator
         LinkedList<WayPoints> _wp_list;
         WayPoints _wp;
         double _alt;
+        int _action_id;
         bool _handler_off;
 
         public DialogManualPath(Waypoint_Path_Gen wpg, GMAP gmap, TreeView treeview, Path path, Options options, double lat, double lon)
@@ -34,7 +35,8 @@ namespace Waypoint_Path_Generator
             _path = path;
             _lat = lat;
             _lon = lon;
-            int[,] _actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
+            Models.Action action = _wpg.GetAction("No Action");
+            _action_id = action.internal_id;
             
 
             InitializeComponent();
@@ -59,7 +61,7 @@ namespace Waypoint_Path_Generator
             _wp.selected = false;
             _wp.head = 0;
             _wp.alt = _alt;
-            _wp.actions = _actions;
+            _wp.action_id = _action_id;
             _wp_list.AddLast(_wp);
             _wp_list.AddLast(_wp);
             _path.waypoints = _wp_list;

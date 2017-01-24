@@ -170,9 +170,11 @@ namespace Waypoint_Path_Generator
             double lat_min = 1000.0;
             double lon_min = 1000.0;
             //LinkedList<WayPoints> new_list = new LinkedList<WayPoints>();
-            int[,] no_actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-            int[,] pict_actions = new int[,] { { 0, 2000 }, { 1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
-
+            Models.Action action = _wpg.GetAction("No Action");
+            int no_action_id = action.internal_id;
+            int video_action_id = no_action_id;
+            action = _wpg.GetAction("Pause/Take Picture");
+            int pict_action_id = action.internal_id;
 
             for (int i = 0; i < poly_count; i++)
             {
@@ -291,7 +293,7 @@ namespace Waypoint_Path_Generator
 
             if (startend)
             {
-                _wp.Add_Waypoint_List(new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, no_actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, no_action_id);
             }
 
             for (int i = 1; i < path_count; i++)
@@ -328,7 +330,7 @@ namespace Waypoint_Path_Generator
                                 heading = GPS.GPS_Bearing(lat1, lon1, lat, lon);
                                 firstleg = false;
                             }
-                            _wp.Add_Leg_List(new_list, lat1, lon1, lat, lon, altitude, heading, 0, 0, 0, 0, pict_actions, video, _camera_height, _over_hgt);
+                            _wp.Add_Leg_List(_wpg, new_list, lat1, lon1, lat, lon, altitude, heading, 0, 0, 0, 0, video_action_id, pict_action_id, video, _camera_height, _over_hgt);
                             leg_count++;
                             firstpnt = true;
                         }
@@ -338,7 +340,7 @@ namespace Waypoint_Path_Generator
 
             if (startend)
             {
-                _wp.Add_Waypoint_List(new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, no_actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, no_action_id);
             }
 
             rtbPoly.AppendText("Leg Count :" + Convert.ToString(leg_count) + "\n");

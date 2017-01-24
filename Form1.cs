@@ -138,9 +138,9 @@ namespace Waypoint_Path_Generator
             else {
                 _wpg.ReadXml_Config(_options.def_xml_config_file);
                 _wpg.ReadXml_POI(_options.def_xml_config_file);
-                _wpg.ReadXml_Path(_options.def_xml_config_file);
                 _wpg.ReadXml_Actions(_options.def_xml_config_file);
                 _wpg.ReadXml_Polygon(_options.def_xml_config_file);
+                _wpg.ReadXml_Path(_options.def_xml_config_file);
             }
 
             // Update GUI Controls
@@ -288,7 +288,7 @@ namespace Waypoint_Path_Generator
             return ang;
         }
 
-        private void Add_Waypoint(double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int[,] actions)
+        private void Add_Waypoint(double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int action_id)
         {
             WayPoints waypoint = new WayPoints();
             waypoint.lat = lat;
@@ -299,11 +299,11 @@ namespace Waypoint_Path_Generator
             waypoint.rotationdir = rotdir;
             waypoint.gimblemode = gimblemode;
             waypoint.gimblepitch = gimblepitch;
-            waypoint.actions = actions;
+            waypoint.action_id = action_id;
             Globals.waypoint_list.AddLast(waypoint);
         }
 
-        public void Add_Man_Waypoint(double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int[,] actions)
+        public void Add_Man_Waypoint(double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int action_id)
         {
             WayPoints waypoint = new WayPoints();
             waypoint.lat = lat;
@@ -314,7 +314,7 @@ namespace Waypoint_Path_Generator
             waypoint.rotationdir = rotdir;
             waypoint.gimblemode = gimblemode;
             waypoint.gimblepitch = gimblepitch;
-            waypoint.actions = actions;
+            waypoint.action_id = action_id;
             Globals.manpoint_list.AddLast(waypoint);
             Globals.manpoint_count++;
         }
@@ -1068,11 +1068,12 @@ namespace Waypoint_Path_Generator
                 string filename = openFileDialog.FileName;
                 _wpg.ReadXml_Config(filename);
                 _wpg.ReadXml_POI(filename);
-                _wpg.ReadXml_Path(filename);
                 _wpg.ReadXml_Actions(filename);
                 _wpg.ReadXml_Polygon(filename);
+                _wpg.ReadXml_Path(filename);
                 GMAPTree.Update_GMapTree(_wpg, treGMap);
-                _gmap.ReDrawgMap();
+                _gmap.BuildgMap();
+                //_gmap.ReDrawgMap();
                 Update_POI_Dgv();
                 Update_GUI();
             }
@@ -2009,7 +2010,7 @@ namespace Waypoint_Path_Generator
 
         private void gMap_MouseMove(object sender, MouseEventArgs e)
         {
-            int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
+            //int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
             double old_lat = Convert.ToDouble(txtMouseLat.Text);
             double old_lon = Convert.ToDouble(txtMouseLon.Text);
             txtMouseLat.Text = Convert.ToString(gMapControl.FromLocalToLatLng(e.X, e.Y).Lat);
@@ -2115,6 +2116,7 @@ namespace Waypoint_Path_Generator
                 WayPoints wp_last = wp_list.Last();
                 double lat_last = wp_last.lat;
                 double lon_last = wp_last.lon;
+                int action_id = wp_last.action_id;
                 _wp = new WayPoints();
                 _wp.lat = lat;
                 _wp.lon = lon;
@@ -2122,7 +2124,7 @@ namespace Waypoint_Path_Generator
                 _wp.visible = true;
                 _wp.selected = false;
                 _wp.alt = _options.def_altitude;
-                _wp.actions = actions;
+                _wp.action_id = action_id;
                 wp_list.AddLast(_wp);
                 _path.waypoints = wp_list;
                 _gmap.ReDrawgMap();
@@ -2951,7 +2953,7 @@ namespace Waypoint_Path_Generator
             
             wp_list = path.waypoints;
             wp = wp_list.ElementAt(wp_index);
-
+            string action_name = _wpg.ActionWithId(wp.action_id).name;
             string str = "Waypoint Properties\n\n";
             str = str + "Path : " + path.name + "\n";
             str = str + "Path Int Id: " + Convert.ToString(path.internal_id) + "\n";
@@ -2965,6 +2967,7 @@ namespace Waypoint_Path_Generator
             str = str + "Rotation Dir : " + Convert.ToString(wp.rotationdir) + "\n";
             str = str + "Gimble Mode : " + Convert.ToString(wp.gimblemode) + "\n";
             str = str + "Gimble Pitch : " + Convert.ToString(wp.gimblepitch) + "\n";
+            str = str + "Action : " + action_name + "\n";
             MessageBox.Show(str);
         }
 

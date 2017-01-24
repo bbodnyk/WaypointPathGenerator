@@ -37,6 +37,8 @@
             this.label72 = new System.Windows.Forms.Label();
             this.cmbActionsWaypoints = new System.Windows.Forms.ComboBox();
             this.dgvActionsWaypoints = new System.Windows.Forms.DataGridView();
+            this.label50 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,16 +48,7 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label50 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.Action = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvActionsWaypoints)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,15 +139,8 @@
             this.Column9,
             this.dataGridViewTextBoxColumn16,
             this.dataGridViewTextBoxColumn17,
-            this.Column10,
-            this.Column11,
-            this.Column12,
-            this.Column13,
-            this.Column14,
-            this.Column15,
-            this.Column16,
-            this.Column17});
-            this.dgvActionsWaypoints.Location = new System.Drawing.Point(28, 45);
+            this.Action});
+            this.dgvActionsWaypoints.Location = new System.Drawing.Point(18, 29);
             this.dgvActionsWaypoints.Name = "dgvActionsWaypoints";
             this.dgvActionsWaypoints.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvActionsWaypoints.Size = new System.Drawing.Size(746, 249);
@@ -162,6 +148,26 @@
             this.dgvActionsWaypoints.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvActionsWaypoints_CellValidating);
             this.dgvActionsWaypoints.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvActionsWaypoints_CellValueChanged);
             this.dgvActionsWaypoints.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dgvActionsWaypoints_MouseUp);
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label50.Location = new System.Drawing.Point(325, 18);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(106, 24);
+            this.label50.TabIndex = 25;
+            this.label50.Text = "Waypoints";
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(312, 431);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(132, 23);
+            this.btnClose.TabIndex = 35;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -212,65 +218,10 @@
             this.dataGridViewTextBoxColumn17.HeaderText = "Gimble Pitch";
             this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             // 
-            // Column10
+            // Action
             // 
-            this.Column10.HeaderText = "Action Type 1";
-            this.Column10.Name = "Column10";
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Action Param 1";
-            this.Column11.Name = "Column11";
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "Action Type 2";
-            this.Column12.Name = "Column12";
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "Action Param 2";
-            this.Column13.Name = "Column13";
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "Action Type 3";
-            this.Column14.Name = "Column14";
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "Action Param 3";
-            this.Column15.Name = "Column15";
-            // 
-            // Column16
-            // 
-            this.Column16.HeaderText = "Action Type 4";
-            this.Column16.Name = "Column16";
-            // 
-            // Column17
-            // 
-            this.Column17.HeaderText = "Action Param 4";
-            this.Column17.Name = "Column17";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label50.Location = new System.Drawing.Point(325, 18);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(106, 24);
-            this.label50.TabIndex = 25;
-            this.label50.Text = "Waypoints";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(312, 431);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(132, 23);
-            this.btnClose.TabIndex = 35;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.Action.HeaderText = "Action";
+            this.Action.Name = "Action";
             // 
             // DialogEditWPActions
             // 
@@ -309,6 +260,8 @@
         private System.Windows.Forms.Label label72;
         private System.Windows.Forms.ComboBox cmbActionsWaypoints;
         private System.Windows.Forms.DataGridView dgvActionsWaypoints;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
@@ -318,15 +271,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Action;
     }
 }

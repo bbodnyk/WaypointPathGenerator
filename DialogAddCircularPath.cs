@@ -100,6 +100,9 @@ namespace Waypoint_Path_Generator
                 _first_pass = false;
                 _build = true;
             }
+            trkAlt.Value = Convert.ToInt16(txtDiaAddCircPathAlt.Text);
+            trkRadius.Value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+            trkNumPoints.Value = Convert.ToInt16(txtCircNumPoints.Text);
             buildCircPath();
         }
 
@@ -172,7 +175,10 @@ namespace Waypoint_Path_Generator
             double circle_span = Convert.ToDouble(txtCircSpan.Text);
             int circle_num_points = Convert.ToInt16(txtCircNumPoints.Text);
             bool startend = chkCircHome.Checked;
-            int[,] no_actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
+            Models.Action action = _wpg.GetAction("No Action");
+            int no_action_id = action.internal_id;
+            int action_id = no_action_id;
+
             int[,] actions = new int[,] { { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 }, { -1, 0 } };
 
             // Get Camera Location
@@ -203,7 +209,7 @@ namespace Waypoint_Path_Generator
             if (startend)
             {
 
-                _wp.Add_Waypoint_List(new_list, lat_home, lon_home, altitude, 0.0, curvesize, rotdir, 0, 0.0, no_actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, 0.0, curvesize, rotdir, 0, 0.0, no_action_id);
 
             }
             int count = 0;
@@ -244,18 +250,18 @@ namespace Waypoint_Path_Generator
 
                 if (count == 0) { start_lat = circ_lat; start_lon = circ_lon; start_head = heading; }
 
-                _wp.Add_Waypoint_List(new_list, circ_lat, circ_lon, altitude, heading, curvesize, rotdir, gimblemode, gimplepitch, actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, circ_lat, circ_lon, altitude, heading, curvesize, rotdir, gimblemode, gimplepitch, action_id);
 
                 angle = angle + angle_increment;
                 count++;
 
             } while (count < num_points );
 
-            if (full_circle) _wp.Add_Waypoint_List(new_list, start_lat, start_lon, altitude, start_head, curvesize, rotdir, gimblemode, gimplepitch, actions); ;
+            if (full_circle) _wp.Add_Waypoint_List(_wpg, new_list, start_lat, start_lon, altitude, start_head, curvesize, rotdir, gimblemode, gimplepitch, action_id); ;
 
             if (startend)
             {
-                _wp.Add_Waypoint_List(new_list, lat_home, lon_home, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, no_actions);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, no_action_id);
             }
 
             // Save Path

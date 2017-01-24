@@ -48,15 +48,13 @@ namespace Waypoint_Path_Generator
                 double gimblepitch = waypoints.ElementAt(count).gimblepitch;
                 double curvesize = waypoints.ElementAt(count).curvesize;
                 double rotdir = waypoints.ElementAt(count).rotationdir;
-                int[,] actions = waypoints.ElementAt(count).actions;
+                Models.Action action = _wpg.ActionWithId(waypoints.ElementAt(count).action_id);
+                string action_name = action.name;
                 if (head < 0.0) head = head + 360.0;
-                dgvActionsWaypoints.Rows.Add(count, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt), Convert.ToString(head),
-                    Convert.ToString(curvesize), Convert.ToString(rotdir), Convert.ToString(gimblemode), Convert.ToString(gimblepitch)
-                    , Convert.ToString(actions[0, 0]), Convert.ToString(actions[0, 1])
-                    , Convert.ToString(actions[1, 0]), Convert.ToString(actions[1, 1])
-                    , Convert.ToString(actions[2, 0]), Convert.ToString(actions[2, 1])
-                    , Convert.ToString(actions[3, 0]), Convert.ToString(actions[3, 1])
-                    );
+                dgvActionsWaypoints.Rows.Add(count, Convert.ToString(lat), Convert.ToString(lon),
+                    Convert.ToString(alt), Convert.ToString(head),
+                    Convert.ToString(curvesize), Convert.ToString(rotdir),
+                    Convert.ToString(gimblemode), Convert.ToString(gimblepitch), action_name);
                 count++;
             }
             foreach (DataGridViewColumn dgvc in dgvActionsWaypoints.Columns)
@@ -108,7 +106,7 @@ namespace Waypoint_Path_Generator
                     new_wp.rotationdir = node.Value.rotationdir;
                     new_wp.gimblemode = node.Value.gimblemode;
                     new_wp.gimblepitch = node.Value.gimblepitch;
-                    new_wp.actions = node.Value.actions;
+                    new_wp.action_id = node.Value.action_id;
 
                     /* Modify value of new_wp */
 
@@ -125,8 +123,9 @@ namespace Waypoint_Path_Generator
                     //if (col == 11) new_wp.actions[1, 0] = Convert.ToInt16(cell_value);
                     //if (col == 12) new_wp.actions[1, 1] = Convert.ToInt16(cell_value);
 
-                    /* Action Changed */
+                    // Action Changed
 
+                    /*
                     if (col > 8)
                     {
                         int[,] actions = new int[15, 2];
@@ -140,7 +139,7 @@ namespace Waypoint_Path_Generator
                         else actions[action_id, 1] = Convert.ToInt16(cell_value);
                         new_wp.actions = actions;
                     }
-
+                    */
                     waypoints.AddBefore(node, new_wp);
                     waypoints.Remove(node);
                 }
@@ -246,7 +245,7 @@ namespace Waypoint_Path_Generator
 
             Models.Action action = _wpg.ActionAt(index);
             string name = action.name;
-            int[,] actions = action.actions;
+            int action_id = action.internal_id;
 
             LinkedListNode<WayPoints> node = waypoints.First;
             LinkedListNode<WayPoints> nextnode;
@@ -265,7 +264,7 @@ namespace Waypoint_Path_Generator
                     wppoint.rotationdir = node.Value.rotationdir;
                     wppoint.gimblemode = node.Value.gimblemode;
                     wppoint.gimblepitch = node.Value.gimblepitch;
-                    wppoint.actions = actions;
+                    wppoint.action_id = action_id;
                     waypoints.AddBefore(node, wppoint);
                     waypoints.Remove(node);
                 }
@@ -297,15 +296,14 @@ namespace Waypoint_Path_Generator
                 double gimblepitch = waypoints.ElementAt(count).gimblepitch;
                 double curvesize = waypoints.ElementAt(count).curvesize;
                 double rotdir = waypoints.ElementAt(count).rotationdir;
-                int[,] wpactions = waypoints.ElementAt(count).actions;
+                action = _wpg.ActionWithId(waypoints.ElementAt(count).action_id);
+                string action_name = action.name;
                 if (head < 0.0) head = head + 360.0;
-                dgvActionsWaypoints.Rows.Add(count, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt), Convert.ToString(head),
-                    Convert.ToString(curvesize), Convert.ToString(rotdir), Convert.ToString(gimblemode), Convert.ToString(gimblepitch)
-                    , Convert.ToString(wpactions[0, 0]), Convert.ToString(wpactions[0, 1])
-                    , Convert.ToString(wpactions[1, 0]), Convert.ToString(wpactions[1, 1])
-                    , Convert.ToString(wpactions[2, 0]), Convert.ToString(wpactions[2, 1])
-                    , Convert.ToString(wpactions[3, 0]), Convert.ToString(wpactions[3, 1])
-                    );
+                dgvActionsWaypoints.Rows.Add(count, Convert.ToString(lat), Convert.ToString(lon),
+                    Convert.ToString(alt), Convert.ToString(head),
+                    Convert.ToString(curvesize), Convert.ToString(rotdir),
+                    Convert.ToString(gimblemode), Convert.ToString(gimblepitch),
+                    action_name);
                 count++;
             }
         }

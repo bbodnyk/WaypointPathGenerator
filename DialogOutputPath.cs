@@ -71,11 +71,17 @@ namespace Waypoint_Path_Generator
                     str = str + ", " + Convert.ToString(rotationdir);
                     str = str + ", " + Convert.ToString(gimblemode);
                     str = str + ", " + Convert.ToString(gimblepitch);
+                    int actionid = point.action_id;
+                    Models.Action pnt_action = _wpg.ActionWithId(actionid);
+
+
+                    
                     for (int i = 0; i < 15; i++)
                     {
-                        str = str + ", " + Convert.ToString(point.actions[i, 0]);
-                        str = str + ", " + Convert.ToString(point.actions[i, 1]);
+                        str = str + ", " + Convert.ToString(pnt_action.actions[i, 0]);
+                        str = str + ", " + Convert.ToString(pnt_action.actions[i, 1]);
                     }
+                    
                     str = str + "\r\n";
                     pcount++;
 
