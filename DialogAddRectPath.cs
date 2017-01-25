@@ -81,6 +81,7 @@ namespace Waypoint_Path_Generator
                 _build = false;
                 txtRectPathName.Text = gui.name;
                 radioVideo.Checked = Convert.ToBoolean(gui.video);
+                radioPhoto.Checked = !Convert.ToBoolean(gui.video);
                 chkRectHome.Checked = Convert.ToBoolean(gui.startend);
                 txtPathAlt.Text = Convert.ToString(gui.altitude);
                 txtGridRotation.Text = Convert.ToString(gui.heading);

@@ -105,6 +105,7 @@ namespace Waypoint_Path_Generator
                 PolygonGridGUI gui = _path.polygridgui;
                 txtPolyPathName.Text = gui.name;
                 radioVideo.Checked = gui.video;
+                radioPhoto.Checked = !gui.video;
                 chkRectHome.Checked = gui.startend;
                 txtGridAlt.Text = Convert.ToString(gui.altitude);
                 txtHeading.Text = Convert.ToString(gui.heading);
