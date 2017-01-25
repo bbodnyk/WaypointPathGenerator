@@ -110,8 +110,7 @@ namespace Waypoint_Path_Generator
                 double image_len;
                 double image_wid;
 
-                image_len = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_hor / 2)) * 30.0);
-                image_wid = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_ver / 2)) * 30.0);
+                
                 double alt;
                 double bear;
                 string location_name = txtKMLPath.Text;
@@ -163,8 +162,8 @@ namespace Waypoint_Path_Generator
 
                     //image_len = 25;
                     //image_wid = 50;
-                    double diag_ang = GPS.RadiansToDegrees(Math.Atan(image_len / image_wid));
-                    double diag_len = Math.Sqrt((image_len * image_len) + (image_wid * image_wid));
+                    double diag_ang;
+                    double diag_len;
                     double gps_radius;
 
                     for (int i = 0; i < wp_list.Count; i++)
@@ -188,6 +187,10 @@ namespace Waypoint_Path_Generator
                         lat = point.lat;
                         lon = point.lon;
                         alt = point.alt;
+                        image_len = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_hor / 2)) * alt);
+                        image_wid = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_ver / 2)) * alt);
+                        diag_ang = GPS.RadiansToDegrees(Math.Atan(image_len / image_wid));
+                        diag_len = Math.Sqrt((image_len * image_len) + (image_wid * image_wid));
                         gps_radius = _options.earth_radius + _options.def_elevation + alt;
                         alt = 2;
                         bear = point.head;
