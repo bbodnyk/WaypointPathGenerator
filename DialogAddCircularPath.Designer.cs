@@ -164,15 +164,16 @@
             this.txtCircNumPoints.TabIndex = 59;
             this.txtCircNumPoints.Text = "16";
             this.txtCircNumPoints.TextChanged += new System.EventHandler(this.txtCircNumPoints_TextChanged);
+            this.txtCircNumPoints.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCircNumPoints_KeyDown);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(24, 203);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(109, 13);
+            this.label13.Size = new System.Drawing.Size(106, 13);
             this.label13.TabIndex = 58;
-            this.label13.Text = "Number of Waypoints";
+            this.label13.Text = "Number of Segments";
             // 
             // chkFullCircle
             // 
@@ -215,6 +216,7 @@
             this.txtCircSpan.TabIndex = 62;
             this.txtCircSpan.Text = "360.0";
             this.txtCircSpan.TextChanged += new System.EventHandler(this.txtCircEndAngle_TextChanged);
+            this.txtCircSpan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCircSpan_KeyDown);
             // 
             // txtCircStartAngle
             // 
@@ -224,6 +226,7 @@
             this.txtCircStartAngle.TabIndex = 61;
             this.txtCircStartAngle.Text = "0.0";
             this.txtCircStartAngle.TextChanged += new System.EventHandler(this.txtCircStartAngle_TextChanged);
+            this.txtCircStartAngle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCircStartAngle_KeyDown);
             // 
             // chkCircHome
             // 

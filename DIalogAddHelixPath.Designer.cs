@@ -168,6 +168,7 @@
             this.txtHelixEndRadius.TabIndex = 76;
             this.txtHelixEndRadius.Text = "10";
             this.txtHelixEndRadius.TextChanged += new System.EventHandler(this.txtHelixEndRadius_TextChanged);
+            this.txtHelixEndRadius.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHelixEndRadius_KeyDown);
             // 
             // txtHelixStartRadius
             // 
@@ -177,6 +178,7 @@
             this.txtHelixStartRadius.TabIndex = 75;
             this.txtHelixStartRadius.Text = "50";
             this.txtHelixStartRadius.TextChanged += new System.EventHandler(this.txtHelixStartRadius_TextChanged);
+            this.txtHelixStartRadius.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHelixStartRadius_KeyDown);
             // 
             // label20
             // 
@@ -204,6 +206,7 @@
             this.txtHelixEndAlt.TabIndex = 72;
             this.txtHelixEndAlt.Text = "10";
             this.txtHelixEndAlt.TextChanged += new System.EventHandler(this.txtHelixEndAlt_TextChanged);
+            this.txtHelixEndAlt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHelixEndAlt_KeyDown);
             // 
             // txtHelixStartAlt
             // 
@@ -213,6 +216,7 @@
             this.txtHelixStartAlt.TabIndex = 71;
             this.txtHelixStartAlt.Text = "60";
             this.txtHelixStartAlt.TextChanged += new System.EventHandler(this.txtHelixStartAlt_TextChanged);
+            this.txtHelixStartAlt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHelixStartAlt_KeyDown);
             // 
             // trkStartAlt
             // 
@@ -357,6 +361,7 @@
             this.cmbHelixPOI.Name = "cmbHelixPOI";
             this.cmbHelixPOI.Size = new System.Drawing.Size(176, 21);
             this.cmbHelixPOI.TabIndex = 92;
+            this.cmbHelixPOI.SelectedIndexChanged += new System.EventHandler(this.cmbHelixPOI_SelectedIndexChanged);
             // 
             // chkHelixPOI
             // 

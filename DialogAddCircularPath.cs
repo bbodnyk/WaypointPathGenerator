@@ -363,6 +363,63 @@ namespace Waypoint_Path_Generator
             buildCircPath();
         }
 
+        private void txtCircNumPoints_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToInt16(txtCircNumPoints.Text);
+                if (value < trkNumPoints.Minimum)
+                {
+                    txtCircNumPoints.Text = Convert.ToString(trkNumPoints.Minimum);
+                }
+                if (value > trkNumPoints.Maximum)
+                {
+                    txtCircNumPoints.Text = Convert.ToString(trkNumPoints.Maximum);
+                }
+                value = Convert.ToInt16(txtCircNumPoints.Text);
+                trkNumPoints.Value = Convert.ToInt16(value);
+                buildCircPath();
+            }
+        }
+
+        private void txtCircStartAngle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToInt16(txtCircStartAngle.Text);
+                if (value < trkstartangle.Minimum)
+                {
+                    txtCircStartAngle.Text = Convert.ToString(trkstartangle.Minimum);
+                }
+                if (value > trkstartangle.Maximum)
+                {
+                    txtCircStartAngle.Text = Convert.ToString(trkstartangle.Maximum);
+                }
+                value = Convert.ToInt16(txtCircStartAngle.Text);
+                trkstartangle.Value = Convert.ToInt16(value);
+                buildCircPath();
+            }
+        }
+
+        private void txtCircSpan_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToInt16(txtCircSpan.Text);
+                if (value < trkendangle.Minimum)
+                {
+                    txtCircSpan.Text = Convert.ToString(trkendangle.Minimum);
+                }
+                if (value > trkendangle.Maximum)
+                {
+                    txtCircSpan.Text = Convert.ToString(trkendangle.Maximum);
+                }
+                value = Convert.ToInt16(txtCircSpan.Text);
+                trkendangle.Value = Convert.ToInt16(value);
+                buildCircPath();
+            }
+        }
+
         private void txtCircStartAngle_TextChanged(object sender, EventArgs e)
         {
             trkstartangle.Value = Convert.ToInt16(txtCircStartAngle.Text);
@@ -433,7 +490,7 @@ namespace Waypoint_Path_Generator
 
         }
 
-        
+       
     }
 }
 
