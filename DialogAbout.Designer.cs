@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -41,15 +42,29 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Waypoint Path Generator";
             // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(62, 59);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(161, 20);
+            this.lblVersion.TabIndex = 1;
+            this.lblVersion.Text = "Version x.x - xxxxxxxxx";
+            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblVersion.Click += new System.EventHandler(this.lblVersion_Click);
+            // 
             // DialogAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 187);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.label1);
             this.Name = "DialogAbout";
             this.Text = "About Waypoint Path Generator";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.DialogAbout_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -58,5 +73,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblVersion;
     }
 }

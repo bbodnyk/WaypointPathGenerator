@@ -16,5 +16,15 @@ namespace Waypoint_Path_Generator
         {
             InitializeComponent();
         }
+
+        private void DialogAbout_Load(object sender, EventArgs e)
+        {
+            lblVersion.Text = "Version 1.0 - 25c501cc";
+        }
+
+        private void lblVersion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
