@@ -722,6 +722,7 @@
             this.Controls.Add(this.cmbActionsList);
             this.Name = "DialogActions";
             this.Text = "Waypoint Actions";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.DialogActions_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

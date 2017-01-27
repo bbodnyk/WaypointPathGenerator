@@ -306,7 +306,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtDiaAddCircPathAlt.Text);
+                double value = Convert.ToDouble(txtDiaAddCircPathAlt.Text);
                 if (value < trkAlt.Minimum)
                 {
                     txtDiaAddCircPathAlt.Text = Convert.ToString(trkAlt.Minimum);
@@ -315,7 +315,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtDiaAddCircPathAlt.Text = Convert.ToString(trkAlt.Maximum);
                 }
-                value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+                value = Convert.ToDouble(txtDiaAddCircPathAlt.Text);
                 trkAlt.Value = Convert.ToInt16(value);
                 buildCircPath();
             }
@@ -336,7 +336,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+                double value = Convert.ToDouble(txtDiaAddCircPathRadius.Text);
                 if (value < trkRadius.Minimum)
                 {
                     txtDiaAddCircPathRadius.Text = Convert.ToString(trkRadius.Minimum);
@@ -345,7 +345,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtDiaAddCircPathRadius.Text = Convert.ToString(trkRadius.Maximum);
                 }
-                value = Convert.ToInt16(txtDiaAddCircPathRadius.Text);
+                value = Convert.ToDouble(txtDiaAddCircPathRadius.Text);
                 trkRadius.Value = Convert.ToInt16(value);
                 buildCircPath();
             }
@@ -367,7 +367,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtCircNumPoints.Text);
+                double value = Convert.ToDouble(txtCircNumPoints.Text);
                 if (value < trkNumPoints.Minimum)
                 {
                     txtCircNumPoints.Text = Convert.ToString(trkNumPoints.Minimum);
@@ -376,7 +376,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtCircNumPoints.Text = Convert.ToString(trkNumPoints.Maximum);
                 }
-                value = Convert.ToInt16(txtCircNumPoints.Text);
+                value = Convert.ToDouble(txtCircNumPoints.Text);
                 trkNumPoints.Value = Convert.ToInt16(value);
                 buildCircPath();
             }
@@ -386,7 +386,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtCircStartAngle.Text);
+                double value = Convert.ToDouble(txtCircStartAngle.Text);
                 if (value < trkstartangle.Minimum)
                 {
                     txtCircStartAngle.Text = Convert.ToString(trkstartangle.Minimum);
@@ -395,7 +395,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtCircStartAngle.Text = Convert.ToString(trkstartangle.Maximum);
                 }
-                value = Convert.ToInt16(txtCircStartAngle.Text);
+                value = Convert.ToDouble(txtCircStartAngle.Text);
                 trkstartangle.Value = Convert.ToInt16(value);
                 buildCircPath();
             }
@@ -405,7 +405,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtCircSpan.Text);
+                double value = Convert.ToDouble(txtCircSpan.Text);
                 if (value < trkendangle.Minimum)
                 {
                     txtCircSpan.Text = Convert.ToString(trkendangle.Minimum);
@@ -414,7 +414,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtCircSpan.Text = Convert.ToString(trkendangle.Maximum);
                 }
-                value = Convert.ToInt16(txtCircSpan.Text);
+                value = Convert.ToDouble(txtCircSpan.Text);
                 trkendangle.Value = Convert.ToInt16(value);
                 buildCircPath();
             }
@@ -422,8 +422,8 @@ namespace Waypoint_Path_Generator
 
         private void txtCircStartAngle_TextChanged(object sender, EventArgs e)
         {
-            trkstartangle.Value = Convert.ToInt16(txtCircStartAngle.Text);
-            buildCircPath();
+            //trkstartangle.Value = Convert.ToInt16(txtCircStartAngle.Text);
+            //buildCircPath();
         }
 
         private void txtCircEndAngle_TextChanged(object sender, EventArgs e)

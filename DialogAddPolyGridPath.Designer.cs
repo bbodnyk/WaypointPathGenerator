@@ -96,6 +96,7 @@
             this.txtGridAlt.TabIndex = 22;
             this.txtGridAlt.Text = "30";
             this.txtGridAlt.TextChanged += new System.EventHandler(this.txtGridAlt_TextChanged_1);
+            this.txtGridAlt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGridAlt_KeyDown);
             // 
             // trkAltitude
             // 
@@ -117,6 +118,7 @@
             this.txtHeading.TabIndex = 81;
             this.txtHeading.Text = "0";
             this.txtHeading.TextChanged += new System.EventHandler(this.txtHeading_TextChanged);
+            this.txtHeading.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHeading_KeyDown);
             // 
             // trkHeading
             // 

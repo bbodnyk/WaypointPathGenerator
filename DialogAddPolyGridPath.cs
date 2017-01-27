@@ -116,7 +116,26 @@ namespace Waypoint_Path_Generator
             }
             BuildPolyGridPath();
         }
- 
+
+        private void txtGridAlt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToDouble(txtGridAlt.Text);
+                if (value < trkAltitude.Minimum)
+                {
+                    txtGridAlt.Text = Convert.ToString(trkAltitude.Minimum);
+                }
+                if (value > trkAltitude.Maximum)
+                {
+                    txtGridAlt.Text = Convert.ToString(trkAltitude.Maximum);
+                }
+                value = Convert.ToDouble(txtGridAlt.Text);
+                trkAltitude.Value = Convert.ToInt16(value);
+                BuildPolyGridPath();
+            }
+        }
+
         private void txtGridAlt_TextChanged_1(object sender, EventArgs e)
         {
             trkAltitude.Value = Convert.ToInt16(txtGridAlt.Text);
@@ -382,6 +401,25 @@ namespace Waypoint_Path_Generator
             txtHeading.Text = Convert.ToString(trkHeading.Value);
         }
 
+        private void txtHeading_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToDouble(txtHeading.Text);
+                if (value < trkHeading.Minimum)
+                {
+                    txtHeading.Text = Convert.ToString(trkHeading.Minimum);
+                }
+                if (value > trkAltitude.Maximum)
+                {
+                    txtHeading.Text = Convert.ToString(trkHeading.Maximum);
+                }
+                value = Convert.ToDouble(txtHeading.Text);
+                trkHeading.Value = Convert.ToInt16(value);
+                BuildPolyGridPath();
+            }
+        }
+
         private void txtHeading_TextChanged(object sender, EventArgs e)
         {
             trkHeading.Value = Convert.ToInt16(txtHeading.Text);
@@ -414,6 +452,8 @@ namespace Waypoint_Path_Generator
         {
             BuildPolyGridPath();
         }
+
+        
     }
 }
 

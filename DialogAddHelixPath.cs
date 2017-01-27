@@ -301,7 +301,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtHelixStartAlt.Text);
+                double value = Convert.ToDouble(txtHelixStartAlt.Text);
                 if (value < trkStartAlt.Minimum)
                 {
                     txtHelixStartAlt.Text = Convert.ToString(trkStartAlt.Minimum);
@@ -310,7 +310,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtHelixStartAlt.Text = Convert.ToString(trkStartAlt.Maximum);
                 }
-                value = Convert.ToInt16(txtHelixStartAlt.Text);
+                value = Convert.ToDouble(txtHelixStartAlt.Text);
                 trkStartAlt.Value = Convert.ToInt16(value);
                 buildHelicalPath();
             }
@@ -321,7 +321,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtHelixEndAlt.Text);
+                double value = Convert.ToDouble(txtHelixEndAlt.Text);
                 if (value < trkEndAlt.Minimum)
                 {
                     txtHelixEndAlt.Text = Convert.ToString(trkEndAlt.Minimum);
@@ -330,7 +330,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtHelixEndAlt.Text = Convert.ToString(trkEndAlt.Maximum);
                 }
-                value = Convert.ToInt16(txtHelixEndAlt.Text);
+                value = Convert.ToDouble(txtHelixEndAlt.Text);
                 trkEndAlt.Value = Convert.ToInt16(value);
                 buildHelicalPath();
             }
@@ -364,7 +364,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtHelixStartRadius.Text);
+                double value = Convert.ToDouble(txtHelixStartRadius.Text);
                 if (value < trkStartRad.Minimum)
                 {
                     txtHelixStartRadius.Text = Convert.ToString(trkStartRad.Minimum);
@@ -373,7 +373,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtHelixStartRadius.Text = Convert.ToString(trkStartRad.Maximum);
                 }
-                value = Convert.ToInt16(txtHelixStartRadius.Text);
+                value = Convert.ToDouble(txtHelixStartRadius.Text);
                 trkStartRad.Value = Convert.ToInt16(value);
                 buildHelicalPath();
             }
@@ -383,7 +383,7 @@ namespace Waypoint_Path_Generator
         {
             if (e.KeyValue == Convert.ToChar(Keys.Enter))
             {
-                double value = Convert.ToInt16(txtHelixEndRadius.Text);
+                double value = Convert.ToDouble(txtHelixEndRadius.Text);
                 if (value < trkEndRad.Minimum)
                 {
                     txtHelixEndRadius.Text = Convert.ToString(trkEndRad.Minimum);
@@ -392,7 +392,7 @@ namespace Waypoint_Path_Generator
                 {
                     txtHelixEndRadius.Text = Convert.ToString(trkEndRad.Maximum);
                 }
-                value = Convert.ToInt16(txtHelixEndRadius.Text);
+                value = Convert.ToDouble(txtHelixEndRadius.Text);
                 trkEndRad.Value = Convert.ToInt16(value);
                 buildHelicalPath();
             }
