@@ -75,6 +75,8 @@ namespace Waypoint_Path_Generator
             int[,] actions = action.actions;
             txtNewActionName.Text = name;
             txtActionID.Text = Convert.ToString(action.internal_id);
+            if (action.locked) { radioLocked.Checked = true; radioUnlocked.Checked = false; }
+            else { radioLocked.Checked = false; radioUnlocked.Checked = true; }
 
             cmbAction1.SelectedIndex = actions[0, 0] + 1;
             txtActionParam1.Text = Convert.ToString(actions[0, 1]);
@@ -213,6 +215,7 @@ namespace Waypoint_Path_Generator
             Models.Action action = new Models.Action();
             action.name = txtNewActionName.Text;
             action.actions = actions;
+            action.locked = radioLocked.Checked;
             _wpg.AddAction(action);
             Update_Actioncmb();
         }

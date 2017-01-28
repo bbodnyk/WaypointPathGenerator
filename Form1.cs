@@ -121,6 +121,7 @@ namespace Waypoint_Path_Generator
             // Other CLasses
 
             _options = new Options();
+            _options.def_altitude = 30;
             _wp = new WayPoints();
             _path = new Models.Path();
             // Create data structure
@@ -136,14 +137,30 @@ namespace Waypoint_Path_Generator
 
             // Read Config File
 
-            if (!File.Exists(_options.def_xml_config_file)) _wpg.ReadPOI();
-            else {
+            
+            if (File.Exists(_options.def_xml_config_file))
+            {
                 _wpg.ReadXml_Config(_options.def_xml_config_file);
                 _wpg.ReadXml_POI(_options.def_xml_config_file);
                 _wpg.ReadXml_Actions(_options.def_xml_config_file);
                 _wpg.ReadXml_Polygon(_options.def_xml_config_file);
                 _wpg.ReadXml_Path(_options.def_xml_config_file);
+            } else
+            {
+                POIPoints point = new POIPoints();
+                point.name = "Home";
+                point.lat = 39.833;
+                point.lon = -98.583;
+                point.alt = 30;
+                point.elev = 1920;
+                point.cam_alt = 5;
+                point.selected = false;
+                point.visible = true;
+                _wpg.AddPOI(point);
+                _wpg.WriteXml(_options.def_xml_config_file);
+
             }
+            
 
             // Update GUI Controls
 
@@ -2192,10 +2209,12 @@ namespace Waypoint_Path_Generator
             Globals.map_center = gMapControl.Position;
         }
 
+        /*
         private void gMap_Load(object sender, EventArgs e)
         {
             //Globals.map_center = gMap.Position;
         }
+        */
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {

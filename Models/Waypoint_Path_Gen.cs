@@ -10,6 +10,7 @@ using System.Xml;
 using SharpKml.Dom;
 
 using WpgShape = Waypoint_Path_Generator.Models.Shape;
+using System.Windows.Forms;
 
 namespace Waypoint_Path_Generator.Models
 {
@@ -97,7 +98,13 @@ namespace Waypoint_Path_Generator.Models
             for (int i = 0; i < count; i++)
             {
                 action = action_list.ElementAt(i);
-                if (name == action.name) { action_list.Remove(action); return; }
+                if (name == action.name)
+                {
+                    if (!action.locked)
+                    { action_list.Remove(action); return; }
+
+                    else { MessageBox.Show("Can not delete a Locked Action."); return; }
+                }
             }
         }
 
@@ -592,6 +599,8 @@ namespace Waypoint_Path_Generator.Models
                     xml_writer.WriteStartElement("WP_Action"); // Start of Action
                     xml_writer.WriteElementString("Name", name);
                     xml_writer.WriteElementString("IntID", action_id_str);
+                    if(action.locked) xml_writer.WriteElementString("Locked", "true");
+                    else xml_writer.WriteElementString("Locked", "false");
 
                     xml_writer.WriteStartElement("Action_List"); // Start of Element Action List
                     for (int k = 0; k < 15; k++)
@@ -996,6 +1005,7 @@ namespace Waypoint_Path_Generator.Models
                 Models.Action action = new Models.Action();
                 action.name = top_action_node.SelectSingleNode("Name").InnerText;
                 action.internal_id = Convert.ToInt16(top_action_node.SelectSingleNode("IntID").InnerText);
+                action.locked = Convert.ToBoolean(top_action_node.SelectSingleNode("Locked").InnerText);
                 //text = "Name : " + action.name + "\n\n";
                 XmlNodeList action_list = top_action_node.SelectNodes("./Action_List/Action");
                 int[,] array = new int[15, 2];

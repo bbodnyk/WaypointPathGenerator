@@ -11,5 +11,6 @@ namespace Waypoint_Path_Generator.Models
         public string name;
         public int internal_id;
         public int[,] actions;
+        public bool locked;
     }
 }
