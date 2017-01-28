@@ -399,14 +399,14 @@ namespace Waypoint_Path_Generator
         }
         private void txtHelixStartAngle_TextChanged(object sender, EventArgs e)
         {
-            //trkStartAngle.Value = Convert.ToInt16(txtHelixStartAngle.Text);
-            //buildHelicalPath();
+            trkStartAngle.Value = Convert.ToInt16(txtHelixStartAngle.Text);
+            buildHelicalPath();
         }
 
         private void txtHelixEndAngle_TextChanged(object sender, EventArgs e)
         {
-            //trkHelixSpan.Value = Convert.ToInt16(txtHelixSpan.Text);
-            //buildHelicalPath();
+            trkHelixSpan.Value = Convert.ToInt16(txtHelixSpan.Text);
+            buildHelicalPath();
         }
 
         private void txtHelixNumPoints_TextChanged(object sender, EventArgs e)
