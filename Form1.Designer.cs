@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6,
+            treeNode7});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,6 +183,7 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mathamaticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -867,7 +868,7 @@
             // pOIToolStripMenuItem
             // 
             this.pOIToolStripMenuItem.Name = "pOIToolStripMenuItem";
-            this.pOIToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.pOIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pOIToolStripMenuItem.Text = "POI";
             this.pOIToolStripMenuItem.Click += new System.EventHandler(this.pOIToolStripMenuItem_Click);
             // 
@@ -880,9 +881,10 @@
             this.rectangularToolStripMenuItem,
             this.polygonGridToolStripMenuItem,
             this.polygonPerimeterToolStripMenuItem,
-            this.kMLPathToolStripMenuItem});
+            this.kMLPathToolStripMenuItem,
+            this.mathamaticalToolStripMenuItem});
             this.pathToolStripMenuItem.Name = "pathToolStripMenuItem";
-            this.pathToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.pathToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pathToolStripMenuItem.Text = "Path";
             // 
             // manualToolStripMenuItem
@@ -939,7 +941,7 @@
             this.polygonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kMLPOlygonToolStripMenuItem1});
             this.polygonToolStripMenuItem.Name = "polygonToolStripMenuItem";
-            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.polygonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.polygonToolStripMenuItem.Text = "Polygon";
             // 
             // kMLPOlygonToolStripMenuItem1
@@ -1087,16 +1089,16 @@
             this.treGMap.Dock = System.Windows.Forms.DockStyle.Left;
             this.treGMap.Location = new System.Drawing.Point(0, 0);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode5.Name = "POI";
+            treeNode5.Text = "POI";
+            treeNode6.Name = "Paths";
+            treeNode6.Text = "Paths";
+            treeNode7.Name = "Polygons";
+            treeNode7.Text = "Polygons";
+            treeNode8.Name = "GMap";
+            treeNode8.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode8});
             this.treGMap.Size = new System.Drawing.Size(159, 634);
             this.treGMap.TabIndex = 25;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1384,6 +1386,13 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
             // 
+            // mathamaticalToolStripMenuItem
+            // 
+            this.mathamaticalToolStripMenuItem.Name = "mathamaticalToolStripMenuItem";
+            this.mathamaticalToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.mathamaticalToolStripMenuItem.Text = "Mathamatical";
+            this.mathamaticalToolStripMenuItem.Click += new System.EventHandler(this.mathamaticalToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1562,6 +1571,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtMouseLon;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripMenuItem mathamaticalToolStripMenuItem;
     }
 }
 

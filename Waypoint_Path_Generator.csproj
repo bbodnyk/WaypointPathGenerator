@@ -204,6 +204,12 @@
     <Compile Include="DialogEditWPActions.Designer.cs">
       <DependentUpon>DialogEditWPActions.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogAddMathPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogAddMathPath.Designer.cs">
+      <DependentUpon>DialogAddMathPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -235,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DIalogAddHelixPath.resx">
       <DependentUpon>DialogAddHelixPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogAddMathPath.resx">
+      <DependentUpon>DialogAddMathPath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DialogAddPolyGridPath.resx">
       <DependentUpon>DialogAddPolyGridPath.cs</DependentUpon>

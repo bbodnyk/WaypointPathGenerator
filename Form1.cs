@@ -3684,5 +3684,12 @@ namespace Waypoint_Path_Generator
         {
             panel2.Height = Convert.ToInt16(this.Size.Height)-185;
         }
+
+        private void mathamaticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Models.Path path = new Models.Path();
+            DialogAddMathPath dialog = new DialogAddMathPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+            dialog.ShowDialog();
+        }
     }
 }
