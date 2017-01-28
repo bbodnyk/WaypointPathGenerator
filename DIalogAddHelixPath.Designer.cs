@@ -335,6 +335,7 @@
             this.txtHelixNumPoints.TabIndex = 89;
             this.txtHelixNumPoints.Text = "16";
             this.txtHelixNumPoints.TextChanged += new System.EventHandler(this.txtHelixNumPoints_TextChanged);
+            this.txtHelixNumPoints.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHelixNumPoints_KeyDown);
             // 
             // label13
             // 

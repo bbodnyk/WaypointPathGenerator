@@ -95,6 +95,7 @@ namespace Waypoint_Path_Generator
         private void trkEndRad_Scroll(object sender, EventArgs e)
         {
             txtHelixEndRadius.Text = Convert.ToString(trkEndRad.Value);
+            buildHelicalPath();
         }
 
         private void trkEndAlt_Scroll(object sender, EventArgs e)
@@ -105,6 +106,7 @@ namespace Waypoint_Path_Generator
         private void trkStartRad_Scroll(object sender, EventArgs e)
         {
             txtHelixStartRadius.Text = Convert.ToString(trkStartRad.Value);
+            buildHelicalPath();
         }
 
         private void trkStartAngle_Scroll(object sender, EventArgs e)
@@ -117,10 +119,7 @@ namespace Waypoint_Path_Generator
             txtHelixSpan.Text = Convert.ToString(trkHelixSpan.Value);
         }
 
-        private void trkNumPoints_Scroll(object sender, EventArgs e)
-        {
-            txtHelixNumPoints.Text = Convert.ToString(trkNumPoints.Value);
-        }
+        
 
         private void buildHelicalPath()
         {
@@ -350,14 +349,14 @@ namespace Waypoint_Path_Generator
 
         private void txtHelixStartRadius_TextChanged(object sender, EventArgs e)
         {
-            trkStartRad.Value = Convert.ToInt16(txtHelixStartRadius.Text);
-            buildHelicalPath();
+            //trkStartRad.Value = Convert.ToInt16(txtHelixStartRadius.Text);
+            //buildHelicalPath();
         }
 
         private void txtHelixEndRadius_TextChanged(object sender, EventArgs e)
         {
-            trkEndRad.Value = Convert.ToInt16(txtHelixEndRadius.Text);
-            buildHelicalPath();
+            //trkEndRad.Value = Convert.ToInt16(txtHelixEndRadius.Text);
+            //buildHelicalPath();
         }
 
         private void txtHelixStartRadius_KeyDown(object sender, KeyEventArgs e)
@@ -409,10 +408,34 @@ namespace Waypoint_Path_Generator
             buildHelicalPath();
         }
 
+        private void txtHelixNumPoints_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == Convert.ToChar(Keys.Enter))
+            {
+                double value = Convert.ToDouble(txtHelixNumPoints.Text);
+                if (value < trkNumPoints.Minimum)
+                {
+                    txtHelixNumPoints.Text = Convert.ToString(trkNumPoints.Minimum);
+                }
+                if (value > trkNumPoints.Maximum)
+                {
+                    txtHelixNumPoints.Text = Convert.ToString(trkNumPoints.Maximum);
+                }
+                value = Convert.ToDouble(txtHelixNumPoints.Text);
+                trkNumPoints.Value = Convert.ToInt16(value);
+                buildHelicalPath();
+            }
+        }
+
+        private void trkNumPoints_Scroll(object sender, EventArgs e)
+        {
+            txtHelixNumPoints.Text = Convert.ToString(trkNumPoints.Value);
+            buildHelicalPath();
+        }
         private void txtHelixNumPoints_TextChanged(object sender, EventArgs e)
         {
-            trkNumPoints.Value = Convert.ToInt16(txtHelixNumPoints.Text);
-            buildHelicalPath();
+            //trkNumPoints.Value = Convert.ToInt16(txtHelixNumPoints.Text);
+            //buildHelicalPath();
         }
 
         private void chkHelicalHome_CheckedChanged(object sender, EventArgs e)
@@ -445,7 +468,7 @@ namespace Waypoint_Path_Generator
             buildHelicalPath();
         }
 
-
+        
     }
 }
 
