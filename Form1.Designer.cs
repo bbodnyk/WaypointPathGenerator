@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6,
+            treeNode7});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,8 +183,6 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtFormWidth = new System.Windows.Forms.TextBox();
-            this.txtFormHeight = new System.Windows.Forms.TextBox();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -1089,16 +1087,16 @@
             this.treGMap.Dock = System.Windows.Forms.DockStyle.Left;
             this.treGMap.Location = new System.Drawing.Point(0, 0);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode5.Name = "POI";
+            treeNode5.Text = "POI";
+            treeNode6.Name = "Paths";
+            treeNode6.Text = "Paths";
+            treeNode7.Name = "Polygons";
+            treeNode7.Text = "Polygons";
+            treeNode8.Name = "GMap";
+            treeNode8.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode8});
             this.treGMap.Size = new System.Drawing.Size(159, 634);
             this.treGMap.TabIndex = 25;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1142,8 +1140,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.txtFormHeight);
-            this.panel1.Controls.Add(this.txtFormWidth);
             this.panel1.Controls.Add(this.cmbGMapProvider);
             this.panel1.Controls.Add(this.label109);
             this.panel1.Controls.Add(this.trkMapScale);
@@ -1170,7 +1166,7 @@
             "Google China Satellite",
             "ArcGIS Topological",
             "YahooSatellite"});
-            this.cmbGMapProvider.Location = new System.Drawing.Point(448, 12);
+            this.cmbGMapProvider.Location = new System.Drawing.Point(324, 12);
             this.cmbGMapProvider.Name = "cmbGMapProvider";
             this.cmbGMapProvider.Size = new System.Drawing.Size(215, 24);
             this.cmbGMapProvider.TabIndex = 15;
@@ -1180,7 +1176,7 @@
             // label109
             // 
             this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(342, 15);
+            this.label109.Location = new System.Drawing.Point(218, 15);
             this.label109.Name = "label109";
             this.label109.Size = new System.Drawing.Size(89, 16);
             this.label109.TabIndex = 16;
@@ -1188,7 +1184,7 @@
             // 
             // trkMapScale
             // 
-            this.trkMapScale.Location = new System.Drawing.Point(667, 53);
+            this.trkMapScale.Location = new System.Drawing.Point(543, 53);
             this.trkMapScale.Maximum = 24;
             this.trkMapScale.Minimum = 1;
             this.trkMapScale.Name = "trkMapScale";
@@ -1199,7 +1195,7 @@
             // 
             // btngMapRedraw
             // 
-            this.btngMapRedraw.Location = new System.Drawing.Point(693, 12);
+            this.btngMapRedraw.Location = new System.Drawing.Point(569, 12);
             this.btngMapRedraw.Name = "btngMapRedraw";
             this.btngMapRedraw.Size = new System.Drawing.Size(137, 23);
             this.btngMapRedraw.TabIndex = 27;
@@ -1210,7 +1206,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(618, 56);
+            this.label5.Location = new System.Drawing.Point(494, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 16);
             this.label5.TabIndex = 34;
@@ -1218,7 +1214,7 @@
             // 
             // txtMouseLat
             // 
-            this.txtMouseLat.Location = new System.Drawing.Point(312, 53);
+            this.txtMouseLat.Location = new System.Drawing.Point(188, 53);
             this.txtMouseLat.Name = "txtMouseLat";
             this.txtMouseLat.Size = new System.Drawing.Size(100, 22);
             this.txtMouseLat.TabIndex = 25;
@@ -1227,7 +1223,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(428, 56);
+            this.label4.Location = new System.Drawing.Point(304, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 16);
             this.label4.TabIndex = 33;
@@ -1236,7 +1232,7 @@
             // 
             // txtMouseLon
             // 
-            this.txtMouseLon.Location = new System.Drawing.Point(501, 53);
+            this.txtMouseLon.Location = new System.Drawing.Point(377, 53);
             this.txtMouseLon.Name = "txtMouseLon";
             this.txtMouseLon.Size = new System.Drawing.Size(100, 22);
             this.txtMouseLon.TabIndex = 26;
@@ -1246,7 +1242,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(244, 56);
+            this.label3.Location = new System.Drawing.Point(120, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 16);
             this.label3.TabIndex = 32;
@@ -1386,20 +1382,6 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
-            // 
-            // txtFormWidth
-            // 
-            this.txtFormWidth.Location = new System.Drawing.Point(8, 9);
-            this.txtFormWidth.Name = "txtFormWidth";
-            this.txtFormWidth.Size = new System.Drawing.Size(153, 22);
-            this.txtFormWidth.TabIndex = 36;
-            // 
-            // txtFormHeight
-            // 
-            this.txtFormHeight.Location = new System.Drawing.Point(8, 37);
-            this.txtFormHeight.Name = "txtFormHeight";
-            this.txtFormHeight.Size = new System.Drawing.Size(153, 22);
-            this.txtFormHeight.TabIndex = 37;
             // 
             // Form1
             // 
@@ -1579,8 +1561,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtMouseLon;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtFormWidth;
-        private System.Windows.Forms.TextBox txtFormHeight;
     }
 }
 

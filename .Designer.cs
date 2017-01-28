@@ -36,7 +36,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtAddPOICamAlt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblAddPOI = new System.Windows.Forms.Label();
             this.txtAddPOIElev = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -113,15 +112,6 @@
             this.label3.Text = "Camera Altitude";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // lblAddPOI
-            // 
-            this.lblAddPOI.AutoSize = true;
-            this.lblAddPOI.Location = new System.Drawing.Point(116, 9);
-            this.lblAddPOI.Name = "lblAddPOI";
-            this.lblAddPOI.Size = new System.Drawing.Size(35, 13);
-            this.lblAddPOI.TabIndex = 8;
-            this.lblAddPOI.Text = "label4";
-            // 
             // txtAddPOIElev
             // 
             this.txtAddPOIElev.Location = new System.Drawing.Point(119, 65);
@@ -146,7 +136,6 @@
             this.ClientSize = new System.Drawing.Size(284, 211);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtAddPOIElev);
-            this.Controls.Add(this.lblAddPOI);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAddPOICamAlt);
             this.Controls.Add(this.label2);
@@ -174,7 +163,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtAddPOICamAlt;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblAddPOI;
         private System.Windows.Forms.TextBox txtAddPOIElev;
         private System.Windows.Forms.Label label4;
     }

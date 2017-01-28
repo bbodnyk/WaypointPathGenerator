@@ -29,7 +29,6 @@ namespace Waypoint_Path_Generator
             _wpg = wpg;
             _gmap = gmap;
             InitializeComponent();
-            lblAddPOI.Text = "Location : " + Convert.ToString(lat) + ", " + Convert.ToString(lon);
             txtAddPOIAlt.Text = "30";
             txtAddPOICamAlt.Text = "5";
             txtAddPOIElev.Text = "150";
