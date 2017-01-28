@@ -44,6 +44,17 @@ namespace Waypoint_Path_Generator
 
         private void txtAlt_TextChanged(object sender, EventArgs e)
         {
+
+            double value = Convert.ToDouble(txtAlt.Text);
+            if (value < trkAltitude.Minimum)
+            {
+                txtAlt.Text = Convert.ToString(trkAltitude.Minimum);
+            }
+            if (value > trkAltitude.Maximum)
+            {
+                txtAlt.Text = Convert.ToString(trkAltitude.Maximum);
+            }
+
             _options.def_altitude = Convert.ToDouble(txtAlt.Text);
             trkAltitude.Value = Convert.ToInt16(_options.def_altitude);
             txtImageLength.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_hor / 2)) * _options.def_altitude));

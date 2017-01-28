@@ -129,8 +129,10 @@ namespace Waypoint_Path_Generator
 
             // Create new GMap
 
+            gMapControl.AutoSize = true;
             _gmap = new GMAP(_wpg, gMapControl,0);
             _gmaptree = treGMap;
+            
 
             // Read Config File
 
@@ -161,10 +163,11 @@ namespace Waypoint_Path_Generator
             _gmap.BuildgMap();
             Globals.map_center = _gmap.GetCenter();
             GMAPTree.Update_GMapTree(_wpg, _gmaptree);
+            _gmaptree.ExpandAll();
 
             // Activate Map Tab
 
-            tabLocation.SelectedIndex = 5;
+            //tabLocation.SelectedIndex = 5;
 
         }
 
@@ -3636,6 +3639,31 @@ namespace Waypoint_Path_Generator
                     GMAPTree.Update_GMapTree(_wpg, treGMap);
                 }
             }
+        }
+
+        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void gMapControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            _gmaptree.Width = splitContainer1.Panel1.Size.Width;
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            panel2.Height = Convert.ToInt16(this.Size.Height)-185;
         }
     }
 }

@@ -71,6 +71,7 @@ namespace Waypoint_Path_Generator
             //_mapcontrol.MapProvider = global::GMap.NET.MapProviders.BingSatelliteMapProvider.Instance;
             global::GMap.NET.GMaps.Instance.Mode = global::GMap.NET.AccessMode.ServerOnly;
             _mapcontrol.DragButton = MouseButtons.Middle;
+            _mapcontrol.AutoSize = true;
             //_mapcontrol.ShowCenter = false;
             _overmarkers = new GMapOverlay("markers");
             _overroutes = new GMapOverlay("routes");

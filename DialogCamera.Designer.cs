@@ -191,12 +191,12 @@
             // 
             this.trkAltitude.Location = new System.Drawing.Point(184, 44);
             this.trkAltitude.Maximum = 129;
-            this.trkAltitude.Minimum = 1;
+            this.trkAltitude.Minimum = 5;
             this.trkAltitude.Name = "trkAltitude";
             this.trkAltitude.Size = new System.Drawing.Size(121, 42);
             this.trkAltitude.TabIndex = 49;
             this.trkAltitude.TickFrequency = 10;
-            this.trkAltitude.Value = 1;
+            this.trkAltitude.Value = 5;
             this.trkAltitude.Scroll += new System.EventHandler(this.trkAltitude_Scroll);
             // 
             // label2

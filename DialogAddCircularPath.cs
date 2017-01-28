@@ -422,8 +422,8 @@ namespace Waypoint_Path_Generator
 
         private void txtCircStartAngle_TextChanged(object sender, EventArgs e)
         {
-            //trkstartangle.Value = Convert.ToInt16(txtCircStartAngle.Text);
-            //buildCircPath();
+            trkstartangle.Value = Convert.ToInt16(txtCircStartAngle.Text);
+            buildCircPath();
         }
 
         private void txtCircEndAngle_TextChanged(object sender, EventArgs e)

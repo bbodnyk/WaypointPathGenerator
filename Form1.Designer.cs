@@ -142,21 +142,25 @@
             this.circularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helicalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectangularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.polygonGridPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.tabGMap = new System.Windows.Forms.TabPage();
-            this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
-            this.trkMapScale = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtMouseLon = new System.Windows.Forms.TextBox();
-            this.txtMouseLat = new System.Windows.Forms.TextBox();
-            this.btngMapRedraw = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treGMap = new System.Windows.Forms.TreeView();
-            this.label109 = new System.Windows.Forms.Label();
+            this.gMapControl = new GMap.NET.WindowsForms.GMapControl();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.cmbGMapProvider = new System.Windows.Forms.ComboBox();
+            this.label109 = new System.Windows.Forms.Label();
+            this.trkMapScale = new System.Windows.Forms.TrackBar();
+            this.btngMapRedraw = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtMouseLat = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtMouseLon = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -179,10 +183,17 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.polygonGridPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtFormWidth = new System.Windows.Forms.TextBox();
+            this.txtFormHeight = new System.Windows.Forms.TextBox();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkMapScale)).BeginInit();
             this.tabLocation.SuspendLayout();
             this.SuspendLayout();
@@ -1011,6 +1022,13 @@
             this.rectangularPathToolStripMenuItem.Text = "Rectangular Path";
             this.rectangularPathToolStripMenuItem.Click += new System.EventHandler(this.rectangularPathToolStripMenuItem_Click);
             // 
+            // polygonGridPathToolStripMenuItem
+            // 
+            this.polygonGridPathToolStripMenuItem.Name = "polygonGridPathToolStripMenuItem";
+            this.polygonGridPathToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.polygonGridPathToolStripMenuItem.Text = "Polygon Grid Path";
+            this.polygonGridPathToolStripMenuItem.Click += new System.EventHandler(this.polygonGridPathToolStripMenuItem_Click);
+            // 
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
@@ -1025,24 +1043,65 @@
             // 
             // tabGMap
             // 
-            this.tabGMap.Controls.Add(this.gMapControl);
-            this.tabGMap.Controls.Add(this.trkMapScale);
-            this.tabGMap.Controls.Add(this.label5);
-            this.tabGMap.Controls.Add(this.label4);
-            this.tabGMap.Controls.Add(this.label3);
-            this.tabGMap.Controls.Add(this.txtMouseLon);
-            this.tabGMap.Controls.Add(this.txtMouseLat);
-            this.tabGMap.Controls.Add(this.btngMapRedraw);
-            this.tabGMap.Controls.Add(this.treGMap);
-            this.tabGMap.Controls.Add(this.label109);
-            this.tabGMap.Controls.Add(this.cmbGMapProvider);
+            this.tabGMap.Controls.Add(this.panel2);
+            this.tabGMap.Controls.Add(this.panel1);
             this.tabGMap.Location = new System.Drawing.Point(4, 25);
             this.tabGMap.Name = "tabGMap";
-            this.tabGMap.Size = new System.Drawing.Size(852, 945);
+            this.tabGMap.Size = new System.Drawing.Size(852, 868);
             this.tabGMap.TabIndex = 16;
             this.tabGMap.Text = "Path Preview";
             this.tabGMap.UseVisualStyleBackColor = true;
             this.tabGMap.Click += new System.EventHandler(this.tabGMap_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel2.Controls.Add(this.splitContainer1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 106);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(852, 638);
+            this.panel2.TabIndex = 38;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.treGMap);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.gMapControl);
+            this.splitContainer1.Size = new System.Drawing.Size(852, 638);
+            this.splitContainer1.SplitterDistance = 166;
+            this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
+            // 
+            // treGMap
+            // 
+            this.treGMap.CheckBoxes = true;
+            this.treGMap.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treGMap.Location = new System.Drawing.Point(0, 0);
+            this.treGMap.Name = "treGMap";
+            treeNode1.Name = "POI";
+            treeNode1.Text = "POI";
+            treeNode2.Name = "Paths";
+            treeNode2.Text = "Paths";
+            treeNode3.Name = "Polygons";
+            treeNode3.Text = "Polygons";
+            treeNode4.Name = "GMap";
+            treeNode4.Text = "Objects";
+            this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            this.treGMap.Size = new System.Drawing.Size(159, 634);
+            this.treGMap.TabIndex = 25;
+            this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
             // 
             // gMapControl
             // 
@@ -1057,7 +1116,7 @@
             this.gMapControl.GrayScaleMode = false;
             this.gMapControl.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl.LevelsKeepInMemmory = 5;
-            this.gMapControl.Location = new System.Drawing.Point(140, 97);
+            this.gMapControl.Location = new System.Drawing.Point(-5, -2);
             this.gMapControl.MarkersEnabled = true;
             this.gMapControl.MaxZoom = 18;
             this.gMapControl.MinZoom = 2;
@@ -1070,114 +1129,35 @@
             this.gMapControl.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(680, 690);
-            this.gMapControl.TabIndex = 14;
+            this.gMapControl.Size = new System.Drawing.Size(685, 638);
+            this.gMapControl.TabIndex = 16;
             this.gMapControl.Zoom = 13D;
             this.gMapControl.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gMap_OnMarkerClick);
             this.gMapControl.OnPolygonClick += new GMap.NET.WindowsForms.PolygonClick(this.gMap_OnPolygonClick);
             this.gMapControl.OnRouteClick += new GMap.NET.WindowsForms.RouteClick(this.gMap_OnRouteClick);
             this.gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMap_OnMapDrag);
-            this.gMapControl.Load += new System.EventHandler(this.gMap_Load);
-            this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
-            this.gMapControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseDoubleClick);
             this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseDown);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseMove);
             this.gMapControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseUp);
             // 
-            // trkMapScale
+            // panel1
             // 
-            this.trkMapScale.Location = new System.Drawing.Point(560, 58);
-            this.trkMapScale.Maximum = 24;
-            this.trkMapScale.Minimum = 1;
-            this.trkMapScale.Name = "trkMapScale";
-            this.trkMapScale.Size = new System.Drawing.Size(104, 42);
-            this.trkMapScale.TabIndex = 35;
-            this.trkMapScale.Value = 10;
-            this.trkMapScale.Scroll += new System.EventHandler(this.trkMapScale_Scroll);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(511, 61);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 16);
-            this.label5.TabIndex = 34;
-            this.label5.Text = "Scale";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(321, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 16);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Longitude";
-            this.label4.Click += new System.EventHandler(this.label4_Click_1);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(137, 61);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 16);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Latitude";
-            // 
-            // txtMouseLon
-            // 
-            this.txtMouseLon.Location = new System.Drawing.Point(394, 58);
-            this.txtMouseLon.Name = "txtMouseLon";
-            this.txtMouseLon.Size = new System.Drawing.Size(100, 22);
-            this.txtMouseLon.TabIndex = 26;
-            this.txtMouseLon.Text = "0.0";
-            this.txtMouseLon.TextChanged += new System.EventHandler(this.txtMouseLon_TextChanged);
-            // 
-            // txtMouseLat
-            // 
-            this.txtMouseLat.Location = new System.Drawing.Point(205, 58);
-            this.txtMouseLat.Name = "txtMouseLat";
-            this.txtMouseLat.Size = new System.Drawing.Size(100, 22);
-            this.txtMouseLat.TabIndex = 25;
-            this.txtMouseLat.Text = "0.0";
-            // 
-            // btngMapRedraw
-            // 
-            this.btngMapRedraw.Location = new System.Drawing.Point(586, 17);
-            this.btngMapRedraw.Name = "btngMapRedraw";
-            this.btngMapRedraw.Size = new System.Drawing.Size(137, 23);
-            this.btngMapRedraw.TabIndex = 27;
-            this.btngMapRedraw.Text = "Redraw Map";
-            this.btngMapRedraw.UseVisualStyleBackColor = true;
-            this.btngMapRedraw.Click += new System.EventHandler(this.btngMapRedraw_Click);
-            // 
-            // treGMap
-            // 
-            this.treGMap.CheckBoxes = true;
-            this.treGMap.Location = new System.Drawing.Point(8, 97);
-            this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
-            this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            this.treGMap.Size = new System.Drawing.Size(121, 281);
-            this.treGMap.TabIndex = 24;
-            this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
-            this.treGMap.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterSelect);
-            // 
-            // label109
-            // 
-            this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(235, 20);
-            this.label109.Name = "label109";
-            this.label109.Size = new System.Drawing.Size(89, 16);
-            this.label109.TabIndex = 16;
-            this.label109.Text = "Map Provider";
+            this.panel1.Controls.Add(this.txtFormHeight);
+            this.panel1.Controls.Add(this.txtFormWidth);
+            this.panel1.Controls.Add(this.cmbGMapProvider);
+            this.panel1.Controls.Add(this.label109);
+            this.panel1.Controls.Add(this.trkMapScale);
+            this.panel1.Controls.Add(this.btngMapRedraw);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.txtMouseLat);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.txtMouseLon);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(852, 106);
+            this.panel1.TabIndex = 37;
             // 
             // cmbGMapProvider
             // 
@@ -1190,12 +1170,87 @@
             "Google China Satellite",
             "ArcGIS Topological",
             "YahooSatellite"});
-            this.cmbGMapProvider.Location = new System.Drawing.Point(341, 17);
+            this.cmbGMapProvider.Location = new System.Drawing.Point(448, 12);
             this.cmbGMapProvider.Name = "cmbGMapProvider";
             this.cmbGMapProvider.Size = new System.Drawing.Size(215, 24);
             this.cmbGMapProvider.TabIndex = 15;
             this.cmbGMapProvider.Text = "Bing Satellite";
             this.cmbGMapProvider.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label109
+            // 
+            this.label109.AutoSize = true;
+            this.label109.Location = new System.Drawing.Point(342, 15);
+            this.label109.Name = "label109";
+            this.label109.Size = new System.Drawing.Size(89, 16);
+            this.label109.TabIndex = 16;
+            this.label109.Text = "Map Provider";
+            // 
+            // trkMapScale
+            // 
+            this.trkMapScale.Location = new System.Drawing.Point(667, 53);
+            this.trkMapScale.Maximum = 24;
+            this.trkMapScale.Minimum = 1;
+            this.trkMapScale.Name = "trkMapScale";
+            this.trkMapScale.Size = new System.Drawing.Size(104, 42);
+            this.trkMapScale.TabIndex = 35;
+            this.trkMapScale.Value = 10;
+            this.trkMapScale.Scroll += new System.EventHandler(this.trkMapScale_Scroll);
+            // 
+            // btngMapRedraw
+            // 
+            this.btngMapRedraw.Location = new System.Drawing.Point(693, 12);
+            this.btngMapRedraw.Name = "btngMapRedraw";
+            this.btngMapRedraw.Size = new System.Drawing.Size(137, 23);
+            this.btngMapRedraw.TabIndex = 27;
+            this.btngMapRedraw.Text = "Redraw Map";
+            this.btngMapRedraw.UseVisualStyleBackColor = true;
+            this.btngMapRedraw.Click += new System.EventHandler(this.btngMapRedraw_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(618, 56);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 16);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "Scale";
+            // 
+            // txtMouseLat
+            // 
+            this.txtMouseLat.Location = new System.Drawing.Point(312, 53);
+            this.txtMouseLat.Name = "txtMouseLat";
+            this.txtMouseLat.Size = new System.Drawing.Size(100, 22);
+            this.txtMouseLat.TabIndex = 25;
+            this.txtMouseLat.Text = "0.0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(428, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 16);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "Longitude";
+            this.label4.Click += new System.EventHandler(this.label4_Click_1);
+            // 
+            // txtMouseLon
+            // 
+            this.txtMouseLon.Location = new System.Drawing.Point(501, 53);
+            this.txtMouseLon.Name = "txtMouseLon";
+            this.txtMouseLon.Size = new System.Drawing.Size(100, 22);
+            this.txtMouseLon.TabIndex = 26;
+            this.txtMouseLon.Text = "0.0";
+            this.txtMouseLon.TextChanged += new System.EventHandler(this.txtMouseLon_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(244, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 16);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Latitude";
             // 
             // tabLocation
             // 
@@ -1208,7 +1263,7 @@
             this.tabLocation.Multiline = true;
             this.tabLocation.Name = "tabLocation";
             this.tabLocation.SelectedIndex = 0;
-            this.tabLocation.Size = new System.Drawing.Size(860, 974);
+            this.tabLocation.Size = new System.Drawing.Size(860, 897);
             this.tabLocation.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabLocation.TabIndex = 2;
             this.tabLocation.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
@@ -1332,29 +1387,44 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
             // 
-            // polygonGridPathToolStripMenuItem
+            // txtFormWidth
             // 
-            this.polygonGridPathToolStripMenuItem.Name = "polygonGridPathToolStripMenuItem";
-            this.polygonGridPathToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.polygonGridPathToolStripMenuItem.Text = "Polygon Grid Path";
-            this.polygonGridPathToolStripMenuItem.Click += new System.EventHandler(this.polygonGridPathToolStripMenuItem_Click);
+            this.txtFormWidth.Location = new System.Drawing.Point(8, 9);
+            this.txtFormWidth.Name = "txtFormWidth";
+            this.txtFormWidth.Size = new System.Drawing.Size(153, 22);
+            this.txtFormWidth.TabIndex = 36;
+            // 
+            // txtFormHeight
+            // 
+            this.txtFormHeight.Location = new System.Drawing.Point(8, 37);
+            this.txtFormHeight.Name = "txtFormHeight";
+            this.txtFormHeight.Size = new System.Drawing.Size(153, 22);
+            this.txtFormHeight.TabIndex = 37;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(860, 872);
+            this.ClientSize = new System.Drawing.Size(860, 795);
             this.Controls.Add(this.tabLocation);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Waypoint Path Generator";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.cntxtgMap.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabGMap.ResumeLayout(false);
-            this.tabGMap.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkMapScale)).EndInit();
             this.tabLocation.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1428,13 +1498,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectedPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectedPolygonToolStripMenuItem;
         private System.Windows.Forms.TabPage tabGMap;
-        private System.Windows.Forms.TextBox txtMouseLon;
-        private System.Windows.Forms.TextBox txtMouseLat;
-        private System.Windows.Forms.Button btngMapRedraw;
-        private System.Windows.Forms.TreeView treGMap;
-        private System.Windows.Forms.Label label109;
-        private System.Windows.Forms.ComboBox cmbGMapProvider;
-        private GMap.NET.WindowsForms.GMapControl gMapControl;
         private System.Windows.Forms.TabControl tabLocation;
         private System.Windows.Forms.ToolStripMenuItem cameraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
@@ -1444,10 +1507,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolOutputPath;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolAbout;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TrackBar trkMapScale;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem selectedPOIToolStripMenuItem1;
@@ -1506,6 +1565,22 @@
         private System.Windows.Forms.ToolStripMenuItem deleteOriginalPathsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rectangularPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem polygonGridPathToolStripMenuItem;
+        private System.Windows.Forms.TreeView treGMap;
+        private GMap.NET.WindowsForms.GMapControl gMapControl;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cmbGMapProvider;
+        private System.Windows.Forms.Label label109;
+        private System.Windows.Forms.TrackBar trkMapScale;
+        private System.Windows.Forms.Button btngMapRedraw;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtMouseLat;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtMouseLon;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtFormWidth;
+        private System.Windows.Forms.TextBox txtFormHeight;
     }
 }
 
