@@ -122,6 +122,7 @@ namespace Waypoint_Path_Generator
         {
             if (!_build) return;
 
+            double dist, bearing;
             double altitude = trkAlt1.Value;
             double size = trkSize.Value;
             int numpnt = trkNumPoints.Value;
@@ -157,12 +158,14 @@ namespace Waypoint_Path_Generator
                 double xval = -size / 2;
                 double xinc = size / numpnt;
                 double yval, angle, distance;
-                double new_lat, new_lon, scale_x, scale_y; ;
+                double new_lat, new_lon, scale_x, scale_y, rot_lat, rot_lon;
                 Models.Action action = _wpg.GetAction("No Action");
                 int no_action_id = action.internal_id;
 
                 for (int i=0;i <= numpnt; i++)
                 {
+                    // Calculate lat & lon
+
                     yval = (xval * xval );
                     distance = Math.Sqrt((xval * xval) + (yval*yval));
                     angle = GPS.RadiansToDegrees(Math.Atan(yval / xval));
@@ -170,13 +173,17 @@ namespace Waypoint_Path_Generator
                     scale_y = yval / scaley;
                     new_lat = _lat + (scale_y / lat_degree);
                     new_lon = _lon + (scale_x / lon_degree);
-                    //new_lat = GPS.GPS_Lat_BearDist(_lat, _lon, angle, distance, gps_radius);
-                    //new_lon = GPS.GPS_Lon_BearDist(_lat, _lon, new_lat, angle, distance, gps_radius);
-                    
-                    //rtbMathPath.AppendText("X/Y : " + Convert.ToString(xval) + ", " + Convert.ToString(yval) + "\n");
-                    //rtbMathPath.AppendText("Dist/Angle : " + Convert.ToString(distance) + ", " + Convert.ToString(angle) + "\n");
-                    rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(new_lat) + ", " + Convert.ToString(new_lon) + "\n");
-                    _wp.Add_Waypoint_List(_wpg, wplist, new_lat, new_lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+
+                    // Rotate Points
+
+                    bearing = GPS.GPS_Bearing(_lat, _lon, new_lat, new_lon);
+                    dist = GPS.GPS_Distance(_lat, _lon, new_lat, new_lon, gps_radius);
+                    angle = Convert.ToDouble(trkAngle.Value);
+                    rot_lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + angle, dist, gps_radius);
+                    rot_lon = GPS.GPS_Lon_BearDist(_lat, _lon, rot_lat, bearing + angle, dist, gps_radius);
+
+                    rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(rot_lat) + ", " + Convert.ToString(rot_lon) + "\n");
+                    _wp.Add_Waypoint_List(_wpg, wplist, rot_lat, rot_lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
                     xval = xval + xinc;
                 }
 

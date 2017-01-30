@@ -96,7 +96,6 @@
             this.trkAngle.Size = new System.Drawing.Size(104, 42);
             this.trkAngle.TabIndex = 3;
             this.trkAngle.TickFrequency = 10;
-            this.trkAngle.Value = 180;
             this.trkAngle.Scroll += new System.EventHandler(this.trkAngle_Scroll);
             // 
             // lbltrkAngleValue
