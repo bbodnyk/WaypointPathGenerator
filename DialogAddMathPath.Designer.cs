@@ -277,7 +277,7 @@
             this.Controls.Add(this.btnAddPath);
             this.Controls.Add(this.cmbPathType);
             this.Name = "DialogAddMathPath";
-            this.Text = "Form2";
+            this.Text = "Mathamatical Path";
             this.Load += new System.EventHandler(this.DialogAddMathPath_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trkAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).EndInit();

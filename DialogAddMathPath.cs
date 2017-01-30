@@ -115,6 +115,20 @@ namespace Waypoint_Path_Generator
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string pathtype = cmbPathType.Text;
+            string str;
+            if(pathtype == "Parabolic")
+            {
+                str = "Path Type - Parabolic\n\n";
+                str = str + "Altitude - Altitude of part\n";
+                str = str + "Size - Width across ends of parabola\n";
+                str = str + "Angle - Rotation of parabola\n";
+                str = str + "Radius - n/a\n";
+                str = str + "Num Points - Number of points\n";
+                str = str + "Scale X - Scale parabola width\n";
+                str = str + "Scale Y - Scale parabola height\n";
+                MessageBox.Show(str);
+            }
             buildPath();
         }
 
