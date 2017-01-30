@@ -11,7 +11,8 @@ namespace Waypoint_Path_Generator.Models
         public string name;
         public string path_type;
         public double size;
-        public double angle;
+        public double rot_angle;
+        public double start_angle;
         public double radius;
         public double altitude;
         public int numpnts;
@@ -19,5 +20,9 @@ namespace Waypoint_Path_Generator.Models
         public double scaley;
         public double lat;
         public double lon;
+        public double a;
+        public double b;
+        public double c;
+        public double d;
     }
 }

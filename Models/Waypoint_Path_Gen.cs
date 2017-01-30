@@ -742,7 +742,8 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteElementString("Name", gui.name);
                         xml_writer.WriteElementString("PathType", gui.path_type);
                         xml_writer.WriteElementString("Size", Convert.ToString(gui.size));
-                        xml_writer.WriteElementString("Angle", Convert.ToString(gui.angle));
+                        xml_writer.WriteElementString("RotAngle", Convert.ToString(gui.rot_angle));
+                        xml_writer.WriteElementString("StartAngle", Convert.ToString(gui.start_angle));
                         xml_writer.WriteElementString("Radius", Convert.ToString(gui.radius));
                         xml_writer.WriteElementString("Altitude", Convert.ToString(gui.altitude));
                         xml_writer.WriteElementString("NumPoints", Convert.ToString(gui.numpnts));
@@ -984,7 +985,8 @@ namespace Waypoint_Path_Generator.Models
                         gui.name = node.SelectSingleNode("Name").InnerText;
                         gui.path_type = node.SelectSingleNode("PathType").InnerText;
                         gui.size = Convert.ToDouble(node.SelectSingleNode("Size").InnerText);
-                        gui.angle = Convert.ToDouble(node.SelectSingleNode("Angle").InnerText);
+                        gui.rot_angle = Convert.ToDouble(node.SelectSingleNode("RotAngle").InnerText);
+                        gui.start_angle = Convert.ToDouble(node.SelectSingleNode("StartAngle").InnerText);
                         gui.radius = Convert.ToDouble(node.SelectSingleNode("Radius").InnerText);
                         gui.altitude = Convert.ToDouble(node.SelectSingleNode("Altitude").InnerText);
                         gui.numpnts = Convert.ToInt16(node.SelectSingleNode("NumPoints").InnerText);

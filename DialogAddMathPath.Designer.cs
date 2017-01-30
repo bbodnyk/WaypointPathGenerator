@@ -48,12 +48,15 @@
             this.txtScaleY = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.trkStartAngle = new System.Windows.Forms.TrackBar();
+            this.lblStartAngle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trkAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkStartAngle)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbPathType
@@ -61,7 +64,12 @@
             this.cmbPathType.FormattingEnabled = true;
             this.cmbPathType.Items.AddRange(new object[] {
             "",
-            "Parabolic"});
+            "Parabolic",
+            "Cubic",
+            "Trisectrix",
+            "Botanic-1",
+            "Botanic-2",
+            "Strophoid"});
             this.cmbPathType.Location = new System.Drawing.Point(90, 48);
             this.cmbPathType.Name = "cmbPathType";
             this.cmbPathType.Size = new System.Drawing.Size(121, 21);
@@ -70,7 +78,7 @@
             // 
             // btnAddPath
             // 
-            this.btnAddPath.Location = new System.Drawing.Point(6, 531);
+            this.btnAddPath.Location = new System.Drawing.Point(12, 579);
             this.btnAddPath.Name = "btnAddPath";
             this.btnAddPath.Size = new System.Drawing.Size(75, 23);
             this.btnAddPath.TabIndex = 1;
@@ -80,7 +88,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(199, 531);
+            this.btnCancel.Location = new System.Drawing.Point(205, 579);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -101,27 +109,27 @@
             // lbltrkAngleValue
             // 
             this.lbltrkAngleValue.AutoSize = true;
-            this.lbltrkAngleValue.Location = new System.Drawing.Point(53, 176);
+            this.lbltrkAngleValue.Location = new System.Drawing.Point(9, 176);
             this.lbltrkAngleValue.Name = "lbltrkAngleValue";
             this.lbltrkAngleValue.Size = new System.Drawing.Size(35, 13);
             this.lbltrkAngleValue.TabIndex = 4;
             this.lbltrkAngleValue.Text = "label1";
-            this.lbltrkAngleValue.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lbltrkAngleValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lbltrkAngleValue.Click += new System.EventHandler(this.lbltrkValue_Click);
             // 
             // lbltrkNumPoints
             // 
             this.lbltrkNumPoints.AutoSize = true;
-            this.lbltrkNumPoints.Location = new System.Drawing.Point(50, 213);
+            this.lbltrkNumPoints.Location = new System.Drawing.Point(9, 268);
             this.lbltrkNumPoints.Name = "lbltrkNumPoints";
             this.lbltrkNumPoints.Size = new System.Drawing.Size(35, 13);
             this.lbltrkNumPoints.TabIndex = 5;
             this.lbltrkNumPoints.Text = "label1";
-            this.lbltrkNumPoints.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbltrkNumPoints.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // trkNumPoints
             // 
-            this.trkNumPoints.Location = new System.Drawing.Point(94, 213);
+            this.trkNumPoints.Location = new System.Drawing.Point(90, 268);
             this.trkNumPoints.Maximum = 64;
             this.trkNumPoints.Minimum = 3;
             this.trkNumPoints.Name = "trkNumPoints";
@@ -146,15 +154,17 @@
             // lbltrkAlt1
             // 
             this.lbltrkAlt1.AutoSize = true;
-            this.lbltrkAlt1.Location = new System.Drawing.Point(50, 97);
+            this.lbltrkAlt1.Location = new System.Drawing.Point(9, 97);
             this.lbltrkAlt1.Name = "lbltrkAlt1";
             this.lbltrkAlt1.Size = new System.Drawing.Size(35, 13);
             this.lbltrkAlt1.TabIndex = 8;
             this.lbltrkAlt1.Text = "label1";
+            this.lbltrkAlt1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbltrkAlt1.Click += new System.EventHandler(this.lbltrkAlt1_Click);
             // 
             // rtbMathPath
             // 
-            this.rtbMathPath.Location = new System.Drawing.Point(6, 373);
+            this.rtbMathPath.Location = new System.Drawing.Point(12, 421);
             this.rtbMathPath.Name = "rtbMathPath";
             this.rtbMathPath.Size = new System.Drawing.Size(268, 143);
             this.rtbMathPath.TabIndex = 9;
@@ -175,11 +185,12 @@
             // lbltrkSize
             // 
             this.lbltrkSize.AutoSize = true;
-            this.lbltrkSize.Location = new System.Drawing.Point(53, 135);
+            this.lbltrkSize.Location = new System.Drawing.Point(9, 135);
             this.lbltrkSize.Name = "lbltrkSize";
             this.lbltrkSize.Size = new System.Drawing.Size(35, 13);
             this.lbltrkSize.TabIndex = 11;
             this.lbltrkSize.Text = "label1";
+            this.lbltrkSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lbltrkSize.Click += new System.EventHandler(this.lbltrkSize_Click);
             // 
             // txtPathName
@@ -200,14 +211,14 @@
             // 
             // txtScaleX
             // 
-            this.txtScaleX.Location = new System.Drawing.Point(89, 261);
+            this.txtScaleX.Location = new System.Drawing.Point(85, 316);
             this.txtScaleX.Name = "txtScaleX";
             this.txtScaleX.Size = new System.Drawing.Size(41, 20);
             this.txtScaleX.TabIndex = 14;
             // 
             // trkScaleX
             // 
-            this.trkScaleX.Location = new System.Drawing.Point(137, 261);
+            this.trkScaleX.Location = new System.Drawing.Point(133, 316);
             this.trkScaleX.Minimum = 1;
             this.trkScaleX.Name = "trkScaleX";
             this.trkScaleX.Size = new System.Drawing.Size(104, 42);
@@ -217,7 +228,7 @@
             // 
             // trkScaleY
             // 
-            this.trkScaleY.Location = new System.Drawing.Point(137, 309);
+            this.trkScaleY.Location = new System.Drawing.Point(139, 362);
             this.trkScaleY.Maximum = 100;
             this.trkScaleY.Minimum = 1;
             this.trkScaleY.Name = "trkScaleY";
@@ -228,7 +239,7 @@
             // 
             // txtScaleY
             // 
-            this.txtScaleY.Location = new System.Drawing.Point(89, 309);
+            this.txtScaleY.Location = new System.Drawing.Point(85, 364);
             this.txtScaleY.Name = "txtScaleY";
             this.txtScaleY.Size = new System.Drawing.Size(41, 20);
             this.txtScaleY.TabIndex = 16;
@@ -236,7 +247,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 264);
+            this.label2.Location = new System.Drawing.Point(40, 319);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 18;
@@ -245,17 +256,38 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 312);
+            this.label3.Location = new System.Drawing.Point(42, 367);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 19;
             this.label3.Text = "Y Scale";
+            // 
+            // trkStartAngle
+            // 
+            this.trkStartAngle.Location = new System.Drawing.Point(94, 224);
+            this.trkStartAngle.Maximum = 360;
+            this.trkStartAngle.Name = "trkStartAngle";
+            this.trkStartAngle.Size = new System.Drawing.Size(104, 42);
+            this.trkStartAngle.TabIndex = 20;
+            this.trkStartAngle.Scroll += new System.EventHandler(this.trkStartAngle_Scroll);
+            // 
+            // lblStartAngle
+            // 
+            this.lblStartAngle.AutoSize = true;
+            this.lblStartAngle.Location = new System.Drawing.Point(9, 224);
+            this.lblStartAngle.Name = "lblStartAngle";
+            this.lblStartAngle.Size = new System.Drawing.Size(35, 13);
+            this.lblStartAngle.TabIndex = 21;
+            this.lblStartAngle.Text = "label4";
+            this.lblStartAngle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DialogAddMathPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 611);
+            this.Controls.Add(this.lblStartAngle);
+            this.Controls.Add(this.trkStartAngle);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.trkScaleY);
@@ -285,6 +317,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkStartAngle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,5 +345,7 @@
         private System.Windows.Forms.TextBox txtScaleY;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar trkStartAngle;
+        private System.Windows.Forms.Label lblStartAngle;
     }
 }
