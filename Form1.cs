@@ -3060,7 +3060,7 @@ namespace Waypoint_Path_Generator
 
         private void deleteAllPOIsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            for (int i = _wpg.POICount() - 1; i >= 0; i--)
+            for (int i = _wpg.POICount() - 1; i > 0; i--)
             {
                 _wpg.POIPointDeleteAt(i);
             }
@@ -3081,7 +3081,7 @@ namespace Waypoint_Path_Generator
 
             // Get selected POI
 
-            for (int i = _wpg.POICount()-1; i >= 0; i--)
+            for (int i = _wpg.POICount()-1; i > 0; i--)
             {
                 if (_wpg.POIPointAt(i).selected)
                 {
@@ -3687,9 +3687,32 @@ namespace Waypoint_Path_Generator
 
         private void mathamaticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Models.Path path = new Models.Path();
+            Models.Path path = null;
             DialogAddMathPath dialog = new DialogAddMathPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
             dialog.ShowDialog();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void mathamaticalPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount("Mathamatical");
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Mathamatical Path");
+                return;
+            }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected & _wpg.PathAt(i).type == "Mathamatical")
+                {
+                    Models.Path path = _wpg.PathAt(i);
+                    Globals.map_center = gMapControl.Position;
+                    DialogAddMathPath dialog = new DialogAddMathPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+                    dialog.ShowDialog();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                }
+            }
         }
     }
 }

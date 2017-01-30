@@ -19,6 +19,7 @@ namespace Waypoint_Path_Generator.Models
         public HelicalGUI helixgui;
         public RectanglarGUI rectanglegui;
         public PolygonGridGUI polygridgui;
+        public MathGUI mathgui;
 
         private Waypoint_Path_Gen _wpg;
         private GMAP _gmap;

@@ -214,6 +214,7 @@
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
     <Compile Include="Models\CircularGUI.cs" />
+    <Compile Include="Models\MathGUI.cs" />
     <Compile Include="Models\PolygonGridGUI.cs" />
     <Compile Include="Models\RectanglarGUI.cs" />
     <Compile Include="Models\HelicalGUI.cs" />

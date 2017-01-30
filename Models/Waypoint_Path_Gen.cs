@@ -735,6 +735,24 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteEndElement(); // End of GUI
                     }
 
+                    if (path_type == "Mathamatical")
+                    {
+                        MathGUI gui = path.mathgui;
+                        xml_writer.WriteStartElement("GUI"); // Start of Gui
+                        xml_writer.WriteElementString("Name", gui.name);
+                        xml_writer.WriteElementString("PathType", gui.path_type);
+                        xml_writer.WriteElementString("Size", Convert.ToString(gui.size));
+                        xml_writer.WriteElementString("Angle", Convert.ToString(gui.angle));
+                        xml_writer.WriteElementString("Radius", Convert.ToString(gui.radius));
+                        xml_writer.WriteElementString("Altitude", Convert.ToString(gui.altitude));
+                        xml_writer.WriteElementString("NumPoints", Convert.ToString(gui.numpnts));
+                        xml_writer.WriteElementString("ScaleX", Convert.ToString(gui.scalex));
+                        xml_writer.WriteElementString("ScaleY", Convert.ToString(gui.scaley));
+                        xml_writer.WriteElementString("Lat", Convert.ToString(gui.lat));
+                        xml_writer.WriteElementString("Lon", Convert.ToString(gui.lon));
+                        xml_writer.WriteEndElement(); // End of GUI
+                    }
+
                     //xml_writer.WriteStartElement("Waypoint_List"); // Start of Waypoint List
                     LinkedList<WayPoints> waypoint = path_list.ElementAt(i).waypoints;
                     for (int j = 0; j < waypoint.Count; j++)
@@ -955,6 +973,27 @@ namespace Waypoint_Path_Generator.Models
                         gui.poly_internal_id = Convert.ToInt16(node.SelectSingleNode("Poly_IntID").InnerText);
                     }
                     path.polygridgui = gui;
+                }
+
+                if (path.type == "Mathamatical")
+                {
+                    MathGUI gui = new MathGUI();
+                    XmlNodeList GUI_node = path_node.SelectNodes("./GUI");
+                    foreach (XmlNode node in GUI_node)
+                    {
+                        gui.name = node.SelectSingleNode("Name").InnerText;
+                        gui.path_type = node.SelectSingleNode("PathType").InnerText;
+                        gui.size = Convert.ToDouble(node.SelectSingleNode("Size").InnerText);
+                        gui.angle = Convert.ToDouble(node.SelectSingleNode("Angle").InnerText);
+                        gui.radius = Convert.ToDouble(node.SelectSingleNode("Radius").InnerText);
+                        gui.altitude = Convert.ToDouble(node.SelectSingleNode("Altitude").InnerText);
+                        gui.numpnts = Convert.ToInt16(node.SelectSingleNode("NumPoints").InnerText);
+                        gui.scalex = Convert.ToDouble(node.SelectSingleNode("ScaleX").InnerText);
+                        gui.scaley = Convert.ToDouble(node.SelectSingleNode("ScaleY").InnerText);
+                        gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
+                        gui.lon = Convert.ToDouble(node.SelectSingleNode("Lon").InnerText);
+                    }
+                    path.mathgui = gui;                   
                 }
 
                 path.selected = false;
