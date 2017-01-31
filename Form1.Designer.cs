@@ -144,6 +144,7 @@
             this.helicalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectangularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.polygonGridPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mathamaticalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
@@ -184,7 +185,6 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mathamaticalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -1038,6 +1038,13 @@
             this.polygonGridPathToolStripMenuItem.Text = "Polygon Grid Path";
             this.polygonGridPathToolStripMenuItem.Click += new System.EventHandler(this.polygonGridPathToolStripMenuItem_Click);
             // 
+            // mathamaticalPathToolStripMenuItem
+            // 
+            this.mathamaticalPathToolStripMenuItem.Name = "mathamaticalPathToolStripMenuItem";
+            this.mathamaticalPathToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.mathamaticalPathToolStripMenuItem.Text = "Mathamatical Path";
+            this.mathamaticalPathToolStripMenuItem.Click += new System.EventHandler(this.mathamaticalPathToolStripMenuItem_Click);
+            // 
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
@@ -1394,13 +1401,6 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
-            // 
-            // mathamaticalPathToolStripMenuItem
-            // 
-            this.mathamaticalPathToolStripMenuItem.Name = "mathamaticalPathToolStripMenuItem";
-            this.mathamaticalPathToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.mathamaticalPathToolStripMenuItem.Text = "Mathamatical Path";
-            this.mathamaticalPathToolStripMenuItem.Click += new System.EventHandler(this.mathamaticalPathToolStripMenuItem_Click);
             // 
             // Form1
             // 

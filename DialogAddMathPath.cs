@@ -40,6 +40,14 @@ namespace Waypoint_Path_Generator
             _lon = lon;
 
             InitializeComponent();
+            // Fill POI combobox
+
+            cmbPOI.Items.Clear();
+            cmbPOI.Items.Add("");
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                cmbPOI.Items.Add(_wpg.POIPointAt(i).name);
+            }
 
             // New or Old Path
 
@@ -91,6 +99,8 @@ namespace Waypoint_Path_Generator
             lbltrkSize.Text = "Size : " + Convert.ToString(trkSize.Value);
             lbltrkSize.Text = "Size : " + Convert.ToString(trkSize.Value);
             lblStartAngle.Text = "Start Angle : " + Convert.ToString(trkStartAngle.Value);
+            lblRadius1.Text = "Major Radius : " + Convert.ToString(trkRadius1.Value);
+            lblRadius1.Text = "Minor Radius : " + Convert.ToString(trkRadius2.Value);
             txtScaleX.Text = Convert.ToString(trkScaleX.Value);
             txtScaleY.Text = Convert.ToString(trkScaleY.Value);
         }
@@ -298,6 +308,28 @@ namespace Waypoint_Path_Generator
                 if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid";
                 _path.Add_Path(_wpg, _gmap, path_name, "Mathamatical", wplist);
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
+                MathGUI gui = new MathGUI();
+                gui.name = txtPathName.Text;
+                if (_path_type == "Parabolic") gui.path_type = "Parabolic";
+                if (_path_type == "Cubic") gui.path_type = "Cubic";
+                if (_path_type == "Trisectrix") gui.path_type = "Trisectrix";
+                if (_path_type == "Botanic-1") gui.path_type = "Botanic-1";
+                if (_path_type == "Botanic-2") gui.path_type = "Botanic-2";
+                if (_path_type == "Strophoid") gui.path_type = "Strophoid";
+                gui.size = trkSize.Value;
+                gui.rot_angle = trkAngle.Value;
+                gui.start_angle = trkStartAngle.Value;
+                gui.altitude = trkAlt1.Value;
+                gui.numpnts = trkNumPoints.Value;
+                gui.scalex = trkScaleX.Value;
+                gui.scaley = trkScaleY.Value;
+                gui.lat = _lat;
+                gui.lon = _lon;
+                gui.a = _a;
+                gui.b = _b;
+                gui.c = _c;
+                gui.d = _d;
+                _path.mathgui = gui;
                 _path.visible = true;
                 _path.selected = false;
                 _first_pass = false;
@@ -313,6 +345,19 @@ namespace Waypoint_Path_Generator
                 //_gmap.Delete_gMapPath(path);
 
             }
+
+            int poi_id = 0;
+            if (chkPOI.Checked)
+            {
+                string name = cmbPOI.Text;
+                if(name != "")
+                {
+                    POIPoints poipnt = _wpg.POIPointName(name);
+                    if (poipnt != null) poi_id = poipnt.internal_id;
+                }
+                _wpg.SetPathPoi(true, poi_id, _path);
+            } else _wpg.SetPathPoi(false, poi_id, _path);
+
             _path.visible = true;
             _path.selected = false;
             //_gmap.BuildgMap();
@@ -334,7 +379,7 @@ namespace Waypoint_Path_Generator
 
         private void btnAddPath_Click(object sender, EventArgs e)
         {
-            MathGUI gui = new MathGUI();
+            MathGUI gui = _path.mathgui;
             gui.name = txtPathName.Text;
             if (_path_type == "Parabolic") gui.path_type = "Parabolic";
             if (_path_type == "Cubic") gui.path_type = "Cubic";
@@ -371,6 +416,23 @@ namespace Waypoint_Path_Generator
         private void lbltrkAlt1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void trkRadius1_Scroll(object sender, EventArgs e)
+        {
+            lblRadius1.Text = "Major Radius : " + Convert.ToString(trkRadius1.Value);
+            buildPath();
+        }
+
+        private void trkRadius2_Scroll(object sender, EventArgs e)
+        {
+            lblRadius1.Text = "Minor Radius : " + Convert.ToString(trkRadius2.Value);
+            buildPath();
+        }
+
+        private void chkPOI_CheckedChanged(object sender, EventArgs e)
+        {
+            buildPath();
         }
 
         private void lbltrkSize_Click(object sender, EventArgs e)

@@ -50,6 +50,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.trkStartAngle = new System.Windows.Forms.TrackBar();
             this.lblStartAngle = new System.Windows.Forms.Label();
+            this.trkRadius1 = new System.Windows.Forms.TrackBar();
+            this.trkRadius2 = new System.Windows.Forms.TrackBar();
+            this.lblRadius1 = new System.Windows.Forms.Label();
+            this.lblRadius2 = new System.Windows.Forms.Label();
+            this.chkPOI = new System.Windows.Forms.CheckBox();
+            this.cmbPOI = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.trkAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
@@ -57,6 +63,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkStartAngle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkRadius1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkRadius2)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbPathType
@@ -78,7 +86,7 @@
             // 
             // btnAddPath
             // 
-            this.btnAddPath.Location = new System.Drawing.Point(12, 579);
+            this.btnAddPath.Location = new System.Drawing.Point(12, 650);
             this.btnAddPath.Name = "btnAddPath";
             this.btnAddPath.Size = new System.Drawing.Size(75, 23);
             this.btnAddPath.TabIndex = 1;
@@ -88,7 +96,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(205, 579);
+            this.btnCancel.Location = new System.Drawing.Point(326, 650);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -164,9 +172,9 @@
             // 
             // rtbMathPath
             // 
-            this.rtbMathPath.Location = new System.Drawing.Point(12, 421);
+            this.rtbMathPath.Location = new System.Drawing.Point(12, 492);
             this.rtbMathPath.Name = "rtbMathPath";
-            this.rtbMathPath.Size = new System.Drawing.Size(268, 143);
+            this.rtbMathPath.Size = new System.Drawing.Size(389, 143);
             this.rtbMathPath.TabIndex = 9;
             this.rtbMathPath.Text = "";
             // 
@@ -228,7 +236,7 @@
             // 
             // trkScaleY
             // 
-            this.trkScaleY.Location = new System.Drawing.Point(139, 362);
+            this.trkScaleY.Location = new System.Drawing.Point(133, 364);
             this.trkScaleY.Maximum = 100;
             this.trkScaleY.Minimum = 1;
             this.trkScaleY.Name = "trkScaleY";
@@ -269,6 +277,7 @@
             this.trkStartAngle.Name = "trkStartAngle";
             this.trkStartAngle.Size = new System.Drawing.Size(104, 42);
             this.trkStartAngle.TabIndex = 20;
+            this.trkStartAngle.TickFrequency = 10;
             this.trkStartAngle.Scroll += new System.EventHandler(this.trkStartAngle_Scroll);
             // 
             // lblStartAngle
@@ -281,11 +290,76 @@
             this.lblStartAngle.Text = "label4";
             this.lblStartAngle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // trkRadius1
+            // 
+            this.trkRadius1.Location = new System.Drawing.Point(297, 97);
+            this.trkRadius1.Maximum = 500;
+            this.trkRadius1.Minimum = 5;
+            this.trkRadius1.Name = "trkRadius1";
+            this.trkRadius1.Size = new System.Drawing.Size(104, 42);
+            this.trkRadius1.TabIndex = 22;
+            this.trkRadius1.Value = 5;
+            this.trkRadius1.Scroll += new System.EventHandler(this.trkRadius1_Scroll);
+            // 
+            // trkRadius2
+            // 
+            this.trkRadius2.Location = new System.Drawing.Point(297, 135);
+            this.trkRadius2.Maximum = 500;
+            this.trkRadius2.Minimum = 5;
+            this.trkRadius2.Name = "trkRadius2";
+            this.trkRadius2.Size = new System.Drawing.Size(104, 42);
+            this.trkRadius2.TabIndex = 23;
+            this.trkRadius2.Value = 5;
+            this.trkRadius2.Scroll += new System.EventHandler(this.trkRadius2_Scroll);
+            // 
+            // lblRadius1
+            // 
+            this.lblRadius1.AutoSize = true;
+            this.lblRadius1.Location = new System.Drawing.Point(246, 97);
+            this.lblRadius1.Name = "lblRadius1";
+            this.lblRadius1.Size = new System.Drawing.Size(35, 13);
+            this.lblRadius1.TabIndex = 24;
+            this.lblRadius1.Text = "label4";
+            // 
+            // lblRadius2
+            // 
+            this.lblRadius2.AutoSize = true;
+            this.lblRadius2.Location = new System.Drawing.Point(246, 135);
+            this.lblRadius2.Name = "lblRadius2";
+            this.lblRadius2.Size = new System.Drawing.Size(35, 13);
+            this.lblRadius2.TabIndex = 25;
+            this.lblRadius2.Text = "label5";
+            // 
+            // chkPOI
+            // 
+            this.chkPOI.AutoSize = true;
+            this.chkPOI.Location = new System.Drawing.Point(43, 415);
+            this.chkPOI.Name = "chkPOI";
+            this.chkPOI.Size = new System.Drawing.Size(74, 17);
+            this.chkPOI.TabIndex = 26;
+            this.chkPOI.Text = "POI Mode";
+            this.chkPOI.UseVisualStyleBackColor = true;
+            this.chkPOI.CheckedChanged += new System.EventHandler(this.chkPOI_CheckedChanged);
+            // 
+            // cmbPOI
+            // 
+            this.cmbPOI.FormattingEnabled = true;
+            this.cmbPOI.Location = new System.Drawing.Point(133, 413);
+            this.cmbPOI.Name = "cmbPOI";
+            this.cmbPOI.Size = new System.Drawing.Size(121, 21);
+            this.cmbPOI.TabIndex = 27;
+            // 
             // DialogAddMathPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 611);
+            this.ClientSize = new System.Drawing.Size(417, 681);
+            this.Controls.Add(this.cmbPOI);
+            this.Controls.Add(this.chkPOI);
+            this.Controls.Add(this.lblRadius2);
+            this.Controls.Add(this.lblRadius1);
+            this.Controls.Add(this.trkRadius2);
+            this.Controls.Add(this.trkRadius1);
             this.Controls.Add(this.lblStartAngle);
             this.Controls.Add(this.trkStartAngle);
             this.Controls.Add(this.label3);
@@ -318,6 +392,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkScaleY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkStartAngle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkRadius1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkRadius2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,5 +423,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar trkStartAngle;
         private System.Windows.Forms.Label lblStartAngle;
+        private System.Windows.Forms.TrackBar trkRadius1;
+        private System.Windows.Forms.TrackBar trkRadius2;
+        private System.Windows.Forms.Label lblRadius1;
+        private System.Windows.Forms.Label lblRadius2;
+        private System.Windows.Forms.CheckBox chkPOI;
+        private System.Windows.Forms.ComboBox cmbPOI;
     }
 }

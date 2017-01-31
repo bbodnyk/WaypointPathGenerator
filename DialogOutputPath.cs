@@ -27,13 +27,14 @@ namespace Waypoint_Path_Generator
             InitializeComponent();
             txtCSVFilePath.Text = _options.def_csv_path;
             txtKMLFilePath.Text = _options.def_kml_path;
+            txtMissionPlanner.Text = _options.def_mp_path;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        
         private void btnOutputCVS_Click(object sender, EventArgs e)
         {
             LinkedList<WayPoints> wp_list = _path.waypoints;
@@ -235,6 +236,42 @@ namespace Waypoint_Path_Generator
                 System.IO.File.WriteAllText(filename, serializer.Xml);
 
             }
+            this.Close();
+        }
+
+        private void btnOutputMissionPlanner_Click(object sender, EventArgs e)
+        {
+            string str = "QGC WPL 110\n";
+
+            LinkedList<WayPoints> wp_list = _path.waypoints;
+            int count = 0;
+
+            if(_path.type == "Mathamatical")
+            {
+                MathGUI gui = _path.mathgui;
+                str = str + Convert.ToString(count++) + " "; // wp count
+                str = str + "1 0 16 0 0 0 0 ";
+                str = str + Convert.ToString(gui.lat) + " ";
+                str = str + Convert.ToString(gui.lon) + " ";
+                str = str + Convert.ToString(gui.altitude);
+                str = str + " 1\n";
+            }
+
+            for(int i = 0; i < wp_list.Count; i++)
+            {
+                WayPoints wp = wp_list.ElementAt(i);
+                str = str + Convert.ToString(count++) + " " ; // wp count
+                str = str + "0 0 16 0 0 0 0 ";
+                str = str + Convert.ToString(wp.lat) + " ";
+                str = str + Convert.ToString(wp.lon)+ " ";
+                str = str + Convert.ToString(wp.alt);
+                str = str + " 1\n";
+            }
+
+            // Write to File 
+
+            string filename = _options.def_mp_path;
+            System.IO.File.WriteAllText(filename, str);
             this.Close();
         }
     }

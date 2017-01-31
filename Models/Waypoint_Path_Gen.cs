@@ -60,14 +60,14 @@ namespace Waypoint_Path_Generator.Models
 
         public Models.Shape ShapeWithId(int id)
         {
-            for( int i=0; i< shape_list.Count(); i++)
+            for (int i = 0; i < shape_list.Count(); i++)
             {
                 if (shape_list.ElementAt(i).internal_id == id)
                 {
                     return shape_list.ElementAt(i);
                 }
             }
-            return  null;
+            return null;
         }
 
         public Models.Shape ShapeAt(int index)
@@ -110,7 +110,7 @@ namespace Waypoint_Path_Generator.Models
 
         public Action GetAction(string name)
         {
-            for(int i = 0; i < action_list.Count; i++)
+            for (int i = 0; i < action_list.Count; i++)
             {
                 if (action_list.ElementAt(i).name == name)
                 {
@@ -240,9 +240,9 @@ namespace Waypoint_Path_Generator.Models
         public int PathIndex(Path path)
         {
             string name = path.name;
-            for(int i = 0; i < path_list.Count(); i++)
+            for (int i = 0; i < path_list.Count(); i++)
             {
-                if(name == PathAt(i).name)
+                if (name == PathAt(i).name)
                 {
                     return i;
                 }
@@ -268,6 +268,52 @@ namespace Waypoint_Path_Generator.Models
             return path_list.ElementAt(index);
         }
 
+        public void SetPathPoi(bool setpoi, int poi_id, Path path)
+        {
+            double poi_lat, poi_lon, poi_alt, poi_elev, poi_camalt;
+            LinkedList<WayPoints> wp_list = path.waypoints;
+            int wpcnt = wp_list.Count;
+
+            if (setpoi)
+            {
+                // Point Drone at POI
+                // Get POI location
+
+                if (poi_id == 0)
+                {
+                    MathGUI gui = path.mathgui;
+                    poi_lat = gui.lat;
+                    poi_lon = gui.lon;
+                }
+                else {
+                    POIPoints poipnt = POIPointID(poi_id);
+                    if (poipnt == null) return;
+                    poi_lat = poipnt.lat;
+                    poi_lon = poipnt.lon;
+                    poi_alt = poipnt.alt;
+                    poi_elev = poipnt.elev;
+                    poi_camalt = poipnt.cam_alt;
+                }
+                // Loop thorugh waypoints
+
+                for (int i = 0; i < wpcnt; i++)
+                {
+                    WayPoints wp = wp_list.ElementAt(i);
+                    wp.head = GPS.GPS_Bearing(wp.lat, wp.lon, poi_lat, poi_lon);
+                }
+            }
+            else
+            // Point Drone at next wp
+            {
+                for(int i = 0; i < wpcnt - 1; i++)
+                {
+                    WayPoints wp1 = wp_list.ElementAt(i);
+                    WayPoints wp2 = wp_list.ElementAt(i+1);
+                    wp1.head = GPS.GPS_Bearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
+                }
+            }
+        }
+
         public void ChangePathWP(int index, LinkedList<WayPoints> wp_list)
         {
             path_list.ElementAt(index).waypoints = wp_list;
@@ -276,7 +322,7 @@ namespace Waypoint_Path_Generator.Models
         public void ChangePathWPIntId(int intid, LinkedList<WayPoints> wp_list)
         {
             Path path;
-            for( int i = 0; i < path_list.Count; i++)
+            for (int i = 0; i < path_list.Count; i++)
             {
                 path = path_list.ElementAt(i);
                 if (path.internal_id == intid)
@@ -486,6 +532,32 @@ namespace Waypoint_Path_Generator.Models
             poi_list.ElementAt(index).visible = newpoint.visible;
         }
 
+        public POIPoints POIPointName(string name)
+        {
+            for (int i = 0; i < POICount(); i++)
+            {
+                POIPoints poipnt = POIPointAt(i);
+                if (poipnt.name == name)
+                {
+                    return poipnt;
+                }
+            }
+            return null;
+        }
+
+        public POIPoints POIPointID(int poi_id)
+        {
+            for (int i = 0; i < POICount(); i++)
+            {
+                POIPoints poipnt = POIPointAt(i);
+                if (poipnt.internal_id == poi_id)
+                {
+                    return poipnt;
+                }
+            }
+            return null;
+        }
+
         public POIPoints POIPointAt(int index)
         {
             return poi_list.ElementAt(index);
@@ -555,7 +627,8 @@ namespace Waypoint_Path_Generator.Models
                                                         //MessageBox.Show(Globals.default_location);
                 xml_writer.WriteElementString("Default_Location", Form1.Globals.default_location);
                 xml_writer.WriteElementString("Default_Altitude", Convert.ToString(_options.def_altitude));
-                xml_writer.WriteElementString("Out_CVS_Path", _options.def_csv_path);
+                xml_writer.WriteElementString("Out_MissionHub_Path", _options.def_csv_path);
+                xml_writer.WriteElementString("Out_MissionPlanner_Path", _options.def_mp_path);
                 xml_writer.WriteElementString("Out_KML_Path", _options.def_kml_path);
                 xml_writer.WriteElementString("Cam_Hor_Angle", Form1.Globals.default_cam_hor_ang);
                 xml_writer.WriteElementString("Cam_Ver_Angle", Form1.Globals.default_cam_ver_ang);
@@ -599,7 +672,7 @@ namespace Waypoint_Path_Generator.Models
                     xml_writer.WriteStartElement("WP_Action"); // Start of Action
                     xml_writer.WriteElementString("Name", name);
                     xml_writer.WriteElementString("IntID", action_id_str);
-                    if(action.locked) xml_writer.WriteElementString("Locked", "true");
+                    if (action.locked) xml_writer.WriteElementString("Locked", "true");
                     else xml_writer.WriteElementString("Locked", "false");
 
                     xml_writer.WriteStartElement("Action_List"); // Start of Element Action List
@@ -812,7 +885,8 @@ namespace Waypoint_Path_Generator.Models
             {
                 Form1.Globals.default_location = node.SelectSingleNode("Default_Location").InnerText;
                 _options.def_altitude = Convert.ToDouble(node.SelectSingleNode("Default_Altitude").InnerText);
-                _options.def_csv_path = node.SelectSingleNode("Out_CVS_Path").InnerText;
+                _options.def_csv_path = node.SelectSingleNode("Out_MissionHub_Path").InnerText;
+                _options.def_mp_path = node.SelectSingleNode("Out_MissionPlanner_Path").InnerText;
                 _options.def_kml_path = node.SelectSingleNode("Out_KML_Path").InnerText;
                 Form1.Globals.default_cam_hor_ang = node.SelectSingleNode("Cam_Hor_Angle").InnerText;
                 Form1.Globals.default_cam_ver_ang = node.SelectSingleNode("Cam_Ver_Angle").InnerText;
@@ -890,7 +964,7 @@ namespace Waypoint_Path_Generator.Models
             {
 
                 Models.Path path = new Models.Path();
-                
+
                 path.name = path_node.SelectSingleNode("Name").InnerText;
                 path.type = path_node.SelectSingleNode("Type").InnerText;
                 path.internal_id = Convert.ToInt16(path_node.SelectSingleNode("InternalId").InnerText);
@@ -899,7 +973,8 @@ namespace Waypoint_Path_Generator.Models
                 {
                     CircularGUI gui = new CircularGUI();
                     XmlNodeList GUI_node = path_node.SelectNodes("./GUI");
-                    foreach (XmlNode node in GUI_node) {
+                    foreach (XmlNode node in GUI_node)
+                    {
                         gui.CW = Convert.ToBoolean(node.SelectSingleNode("CW").InnerText);
                         gui.name = node.SelectSingleNode("Name").InnerText;
                         gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
@@ -945,7 +1020,7 @@ namespace Waypoint_Path_Generator.Models
                 {
                     RectanglarGUI gui = new RectanglarGUI();
                     XmlNodeList GUI_node = path_node.SelectNodes("./GUI");
-                    foreach(XmlNode node in GUI_node)
+                    foreach (XmlNode node in GUI_node)
                     {
                         gui.name = node.SelectSingleNode("Name").InnerText;
                         gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
@@ -999,7 +1074,7 @@ namespace Waypoint_Path_Generator.Models
                         gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
                         gui.lon = Convert.ToDouble(node.SelectSingleNode("Lon").InnerText);
                     }
-                    path.mathgui = gui;                   
+                    path.mathgui = gui;
                 }
 
                 path.selected = false;
@@ -1145,9 +1220,10 @@ namespace Waypoint_Path_Generator.Models
             {
                 for (int i = 0; i < PathCount(); i++)
                 {
-                    if (PathAt(i).selected ) count++;
+                    if (PathAt(i).selected) count++;
                 }
-            } else
+            }
+            else
             {
                 for (int i = 0; i < PathCount(); i++)
                 {

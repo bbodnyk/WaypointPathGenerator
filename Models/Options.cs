@@ -24,12 +24,14 @@ namespace Waypoint_Path_Generator.Models
         public string def_xml_config_file;
         public string def_kml_path;
         public string def_csv_path;
+        public string def_mp_path;
 
         public Options()
         {
             def_xml_config_file = "waypoint_path_generator.xml";
             def_kml_path = "c:\\tmp\\waypoints.kml";
             def_csv_path = "c:\\tmp\\waypoints.csv";
+            def_mp_path = "c:\\tmp\\waypoints.waypoints";
             focal_angle_hor = 81;
             focal_angle_ver = 66;
             hor_overlap_percent = 25;
