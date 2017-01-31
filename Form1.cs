@@ -2053,11 +2053,41 @@ namespace Waypoint_Path_Generator
 
             if (Globals.MouseDown & button == "Left")
             {
+                //MessageBox.Show("Mouse Move");
+
                 // Move Waypoints
 
                 for (int i = 0; i < path_count; i++)
                 {
                     Models.Path path = _wpg.PathAt(i);
+                    
+                    // Adjust Path lat/lon
+
+                    if(path.selected & path.type == "Mathamatical")
+                    {
+                        MathGUI gui = path.mathgui;
+                        gui.lat = gui.lat + lat_delta;
+                        gui.lon = gui.lon + lon_delta;
+                    }
+                    if (path.selected & path.type == "Circular")
+                    {
+                        CircularGUI gui = path.circgui;
+                        gui.lat = gui.lat + lat_delta;
+                        gui.lon = gui.lon + lon_delta;
+                    }
+                    if (path.selected & path.type == "Helical")
+                    {
+                        HelicalGUI gui = path.helixgui;
+                        gui.lat = gui.lat + lat_delta;
+                        gui.lon = gui.lon + lon_delta;
+                    }
+                    if (path.selected & path.type == "Rectangular")
+                    {
+                        RectanglarGUI gui = path.rectanglegui;
+                        gui.lat = gui.lat + lat_delta;
+                        gui.lon = gui.lon + lon_delta;
+                    }
+
                     LinkedList<WayPoints> wp_list = path.waypoints;
                     int wpcount = 0;
                     foreach (WayPoints wp in wp_list)

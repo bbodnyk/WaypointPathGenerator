@@ -709,6 +709,8 @@ namespace Waypoint_Path_Generator.Models
                         RectanglarGUI gui = path.rectanglegui;
                         xml_writer.WriteStartElement("GUI"); // Start of Gui
                         xml_writer.WriteElementString("Name", gui.name);
+                        xml_writer.WriteElementString("Lat", Convert.ToString(gui.lat));
+                        xml_writer.WriteElementString("Lon", Convert.ToString(gui.lon));
                         xml_writer.WriteElementString("Video", Convert.ToString(gui.video));
                         xml_writer.WriteElementString("StartEnd", Convert.ToString(gui.startend));
                         xml_writer.WriteElementString("Altitude", Convert.ToString(gui.altitude));
@@ -946,6 +948,8 @@ namespace Waypoint_Path_Generator.Models
                     foreach(XmlNode node in GUI_node)
                     {
                         gui.name = node.SelectSingleNode("Name").InnerText;
+                        gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
+                        gui.lon = Convert.ToDouble(node.SelectSingleNode("Lon").InnerText);
                         gui.video = Convert.ToBoolean(node.SelectSingleNode("Video").InnerText);
                         gui.startend = Convert.ToBoolean(node.SelectSingleNode("StartEnd").InnerText);
                         gui.altitude = Convert.ToDouble(node.SelectSingleNode("Altitude").InnerText);

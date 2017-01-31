@@ -59,6 +59,7 @@ namespace Waypoint_Path_Generator
                 _first_pass = false;
                 _path = path;
                 _path.visible = true;
+                _path.selected = true;
                 _gui = _path.mathgui;
                 txtPathName.Text = _gui.name;
                 cmbPathType.SelectedText = _gui.path_type;

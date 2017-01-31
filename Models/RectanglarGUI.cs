@@ -18,5 +18,7 @@ namespace Waypoint_Path_Generator.Models
         public bool single;
         public bool poimode;
         public string poiname;
+        public double lat;
+        public double lon;
     }
 }

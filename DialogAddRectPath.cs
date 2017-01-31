@@ -79,6 +79,8 @@ namespace Waypoint_Path_Generator
                 _current_intid = path.internal_id;
                 RectanglarGUI gui = _path.rectanglegui;
                 _build = false;
+                _lat = gui.lat;
+                _lon = gui.lon;
                 txtRectPathName.Text = gui.name;
                 radioVideo.Checked = Convert.ToBoolean(gui.video);
                 radioPhoto.Checked = !Convert.ToBoolean(gui.video);
@@ -677,6 +679,8 @@ namespace Waypoint_Path_Generator
             Path path = _wpg.PathIntId(_current_intid);
             RectanglarGUI gui = new RectanglarGUI();
             gui.name = path.name;
+            gui.lat = _lat;
+            gui.lon = _lon;
             gui.video = radioVideo.Checked;
             gui.startend = chkRectHome.Checked;
             gui.altitude = Convert.ToDouble(txtPathAlt.Text);
