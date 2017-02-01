@@ -100,7 +100,7 @@ namespace Waypoint_Path_Generator
             lbltrkSize.Text = "Size : " + Convert.ToString(trkSize.Value);
             lblStartAngle.Text = "Start Angle : " + Convert.ToString(trkStartAngle.Value);
             lblRadius1.Text = "Major Radius : " + Convert.ToString(trkRadius1.Value);
-            lblRadius1.Text = "Minor Radius : " + Convert.ToString(trkRadius2.Value);
+            lblRadius2.Text = "Minor Radius : " + Convert.ToString(trkRadius2.Value);
             txtScaleX.Text = Convert.ToString(trkScaleX.Value);
             txtScaleY.Text = Convert.ToString(trkScaleY.Value);
         }
@@ -108,6 +108,7 @@ namespace Waypoint_Path_Generator
         private void btnCancel_Click(object sender, EventArgs e)
         {
             if (_new_path) _wpg.DeletePath(_path);
+            _gmap.ReDrawgMap();
             this.Close();
         }
 
@@ -295,6 +296,14 @@ namespace Waypoint_Path_Generator
                 }
             }
 
+            // Newtons Egg
+
+            if (_path_type == "Newtons Egg")
+            {
+                //
+
+            }
+
             // Save Path
 
             if (_new_path & _first_pass)
@@ -426,7 +435,7 @@ namespace Waypoint_Path_Generator
 
         private void trkRadius2_Scroll(object sender, EventArgs e)
         {
-            lblRadius1.Text = "Minor Radius : " + Convert.ToString(trkRadius2.Value);
+            lblRadius2.Text = "Minor Radius : " + Convert.ToString(trkRadius2.Value);
             buildPath();
         }
 

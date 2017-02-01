@@ -77,7 +77,8 @@
             "Trisectrix",
             "Botanic-1",
             "Botanic-2",
-            "Strophoid"});
+            "Strophoid",
+            "Newtons Egg"});
             this.cmbPathType.Location = new System.Drawing.Point(90, 48);
             this.cmbPathType.Name = "cmbPathType";
             this.cmbPathType.Size = new System.Drawing.Size(121, 21);
@@ -315,7 +316,7 @@
             // lblRadius1
             // 
             this.lblRadius1.AutoSize = true;
-            this.lblRadius1.Location = new System.Drawing.Point(246, 97);
+            this.lblRadius1.Location = new System.Drawing.Point(204, 97);
             this.lblRadius1.Name = "lblRadius1";
             this.lblRadius1.Size = new System.Drawing.Size(35, 13);
             this.lblRadius1.TabIndex = 24;
@@ -324,7 +325,7 @@
             // lblRadius2
             // 
             this.lblRadius2.AutoSize = true;
-            this.lblRadius2.Location = new System.Drawing.Point(246, 135);
+            this.lblRadius2.Location = new System.Drawing.Point(204, 135);
             this.lblRadius2.Name = "lblRadius2";
             this.lblRadius2.Size = new System.Drawing.Size(35, 13);
             this.lblRadius2.TabIndex = 25;
