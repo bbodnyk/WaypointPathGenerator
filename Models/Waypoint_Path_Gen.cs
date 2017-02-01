@@ -826,6 +826,8 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteElementString("ScaleY", Convert.ToString(gui.scaley));
                         xml_writer.WriteElementString("Lat", Convert.ToString(gui.lat));
                         xml_writer.WriteElementString("Lon", Convert.ToString(gui.lon));
+                        xml_writer.WriteElementString("POIMode", Convert.ToString(gui.poimode));
+                        xml_writer.WriteElementString("POIName", gui.poiname);
                         xml_writer.WriteEndElement(); // End of GUI
                     }
 
@@ -1073,6 +1075,8 @@ namespace Waypoint_Path_Generator.Models
                         gui.scaley = Convert.ToDouble(node.SelectSingleNode("ScaleY").InnerText);
                         gui.lat = Convert.ToDouble(node.SelectSingleNode("Lat").InnerText);
                         gui.lon = Convert.ToDouble(node.SelectSingleNode("Lon").InnerText);
+                        gui.poimode = Convert.ToBoolean(node.SelectSingleNode("POIMode").InnerText);
+                        gui.poiname = node.SelectSingleNode("POIName").InnerText;
                     }
                     path.mathgui = gui;
                 }

@@ -20,6 +20,8 @@ namespace Waypoint_Path_Generator.Models
         public double scaley;
         public double lat;
         public double lon;
+        public bool poimode;
+        public string poiname;
         public double a;
         public double b;
         public double c;

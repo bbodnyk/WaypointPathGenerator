@@ -78,7 +78,7 @@
             "Botanic-1",
             "Botanic-2",
             "Strophoid",
-            "Newtons Egg"});
+            "Folium"});
             this.cmbPathType.Location = new System.Drawing.Point(90, 48);
             this.cmbPathType.Name = "cmbPathType";
             this.cmbPathType.Size = new System.Drawing.Size(121, 21);
@@ -349,6 +349,7 @@
             this.cmbPOI.Name = "cmbPOI";
             this.cmbPOI.Size = new System.Drawing.Size(121, 21);
             this.cmbPOI.TabIndex = 27;
+            this.cmbPOI.SelectedIndexChanged += new System.EventHandler(this.cmbPOI_SelectedIndexChanged);
             // 
             // DialogAddMathPath
             // 

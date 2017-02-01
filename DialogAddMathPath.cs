@@ -81,6 +81,10 @@ namespace Waypoint_Path_Generator
                 trkScaleY.Value = Convert.ToInt16(_gui.scaley);
                 txtScaleX.Text = Convert.ToString(trkScaleX.Value);
                 txtScaleY.Text = Convert.ToString(trkScaleY.Value);
+                chkPOI.Checked = _gui.poimode;
+                int index = cmbPOI.Items.IndexOf(_gui.poiname);
+                cmbPOI.SelectedIndex = index;
+                cmbPOI.SelectedText = _gui.poiname;
                 _lat = _gui.lat;
                 _lon = _gui.lon;
                 _build = true;
@@ -143,7 +147,7 @@ namespace Waypoint_Path_Generator
                 str = str + "Num Points - Number of points\n";
                 str = str + "Scale X - Scale parabola width\n";
                 str = str + "Scale Y - Scale parabola height\n";
-                MessageBox.Show(str);
+                //MessageBox.Show(str);
             }
             buildPath();
         }
@@ -298,10 +302,25 @@ namespace Waypoint_Path_Generator
 
             // Newtons Egg
 
-            if (_path_type == "Newtons Egg")
+            if (_path_type == "Folium")
             {
-                //
+                double rot_ang = Convert.ToDouble(trkAngle.Value);
+                double ang, radian, radius, costheta;
 
+                ang = trkStartAngle.Value;
+                double ang_inc = 180.0 / numpnt;
+                for (int i = 0; i < numpnt; i++)
+                {
+                    //ang = ang_inc * i;
+                    radian = GPS.DegreesToRadians(ang);
+                    costheta = Math.Cos(radian);
+                    radius = costheta * costheta * costheta * size;
+                    lat = GPS.GPS_Lat_BearDist(_lat, _lon, ang + rot_ang, radius, gps_radius);
+                    lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, ang + rot_ang, radius, gps_radius);
+                    rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(lat) + ", " + Convert.ToString(lon) + "\n");
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    ang = ang + ang_inc;
+                }
             }
 
             // Save Path
@@ -315,6 +334,7 @@ namespace Waypoint_Path_Generator
                 if (path_name == "" & _path_type == "Botanic-1") path_name = "Untitled - Botanic-1";
                 if (path_name == "" & _path_type == "Botanic-2") path_name = "Untitled - Botanic-2";
                 if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid";
+                if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium";
                 _path.Add_Path(_wpg, _gmap, path_name, "Mathamatical", wplist);
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
                 MathGUI gui = new MathGUI();
@@ -325,6 +345,7 @@ namespace Waypoint_Path_Generator
                 if (_path_type == "Botanic-1") gui.path_type = "Botanic-1";
                 if (_path_type == "Botanic-2") gui.path_type = "Botanic-2";
                 if (_path_type == "Strophoid") gui.path_type = "Strophoid";
+                if (_path_type == "Folium") gui.path_type = "Folium";
                 gui.size = trkSize.Value;
                 gui.rot_angle = trkAngle.Value;
                 gui.start_angle = trkStartAngle.Value;
@@ -334,6 +355,8 @@ namespace Waypoint_Path_Generator
                 gui.scaley = trkScaleY.Value;
                 gui.lat = _lat;
                 gui.lon = _lon;
+                gui.poimode = chkPOI.Checked;
+                gui.poiname = cmbPOI.GetItemText(cmbPOI.SelectedItem);
                 gui.a = _a;
                 gui.b = _b;
                 gui.c = _c;
@@ -396,6 +419,7 @@ namespace Waypoint_Path_Generator
             if (_path_type == "Botanic-1") gui.path_type = "Botanic-1";
             if (_path_type == "Botanic-2") gui.path_type = "Botanic-2";
             if (_path_type == "Strophoid") gui.path_type = "Strophoid";
+            if (_path_type == "Folium") gui.path_type = "Folium";
             gui.size = trkSize.Value;
             gui.rot_angle = trkAngle.Value;
             gui.start_angle = trkStartAngle.Value;
@@ -405,6 +429,8 @@ namespace Waypoint_Path_Generator
             gui.scaley = trkScaleY.Value;
             gui.lat = _lat;
             gui.lon = _lon;
+            gui.poimode = chkPOI.Checked;
+            gui.poiname = cmbPOI.GetItemText(cmbPOI.SelectedItem);
             gui.a = _a;
             gui.b = _b;
             gui.c = _c;
@@ -440,6 +466,11 @@ namespace Waypoint_Path_Generator
         }
 
         private void chkPOI_CheckedChanged(object sender, EventArgs e)
+        {
+            buildPath();
+        }
+
+        private void cmbPOI_SelectedIndexChanged(object sender, EventArgs e)
         {
             buildPath();
         }
