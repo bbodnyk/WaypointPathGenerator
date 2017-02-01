@@ -185,6 +185,7 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolEditPathAlt = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -206,6 +207,7 @@
             this.toolAddPoly,
             this.toolStripSeparator8,
             this.toolStripMenuItem5,
+            this.toolEditPathAlt,
             this.toolStripSeparator4,
             this.toolInsertWP,
             this.toolJoinPaths,
@@ -232,7 +234,7 @@
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 504);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 548);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -1402,6 +1404,13 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
             // 
+            // toolEditPathAlt
+            // 
+            this.toolEditPathAlt.Name = "toolEditPathAlt";
+            this.toolEditPathAlt.Size = new System.Drawing.Size(203, 22);
+            this.toolEditPathAlt.Text = "Edit Path Altitude";
+            this.toolEditPathAlt.Click += new System.EventHandler(this.toolEditPathAlt_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1582,6 +1591,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem mathamaticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mathamaticalPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolEditPathAlt;
     }
 }
 

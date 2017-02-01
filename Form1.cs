@@ -10,6 +10,8 @@ using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 
+
+
 using System.Windows.Forms;
 using SharpKml.Base;
 using SharpKml.Engine;
@@ -3743,6 +3745,30 @@ namespace Waypoint_Path_Generator
                     GMAPTree.Update_GMapTree(_wpg, treGMap);
                 }
             }
+        }
+
+        private void toolEditPathAlt_Click(object sender, EventArgs e)
+        {
+            int path_count = _wpg.SelectedPathCount("");
+            if (path_count != 1)
+            {
+                MessageBox.Show("Select a single Path");
+                return;
+            }
+
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected)
+                {
+                    Models.Path path = _wpg.PathAt(i);
+                    Globals.map_center = gMapControl.Position;
+                    DialogPathAltitude dialog = new DialogPathAltitude(_wpg, _gmap, _options, path);
+                    dialog.ShowDialog();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                }
+            }
+
         }
     }
 }

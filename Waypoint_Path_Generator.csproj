@@ -84,6 +84,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,6 +95,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\ZedGraph_Control_Test\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DialogAddPOI.cs">
@@ -210,6 +215,12 @@
     <Compile Include="DialogAddMathPath.Designer.cs">
       <DependentUpon>DialogAddMathPath.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogPathAltitude.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogPathAltitude.Designer.cs">
+      <DependentUpon>DialogPathAltitude.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -294,6 +305,9 @@
     <EmbeddedResource Include="DialogActions.resx">
       <DependentUpon>DialogActions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DialogPathAltitude.resx">
+      <DependentUpon>DialogPathAltitude.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -315,6 +329,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
