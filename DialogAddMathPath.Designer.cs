@@ -56,6 +56,8 @@
             this.lblRadius2 = new System.Windows.Forms.Label();
             this.chkPOI = new System.Windows.Forms.CheckBox();
             this.cmbPOI = new System.Windows.Forms.ComboBox();
+            this.lblOrder = new System.Windows.Forms.Label();
+            this.trkOrder = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.trkAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
@@ -65,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkStartAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkOrder)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbPathType
@@ -76,8 +79,7 @@
             "Parabolic",
             "Cubic",
             "Trisectrix",
-            "Botanic-1",
-            "Botanic-2",
+            "Botanic",
             "Strophoid",
             "Folium"});
             this.cmbPathType.Location = new System.Drawing.Point(90, 48);
@@ -352,11 +354,33 @@
             this.cmbPOI.TabIndex = 27;
             this.cmbPOI.SelectedIndexChanged += new System.EventHandler(this.cmbPOI_SelectedIndexChanged);
             // 
+            // lblOrder
+            // 
+            this.lblOrder.AutoSize = true;
+            this.lblOrder.Location = new System.Drawing.Point(206, 176);
+            this.lblOrder.Name = "lblOrder";
+            this.lblOrder.Size = new System.Drawing.Size(33, 13);
+            this.lblOrder.TabIndex = 28;
+            this.lblOrder.Text = "Order";
+            // 
+            // trkOrder
+            // 
+            this.trkOrder.Location = new System.Drawing.Point(297, 176);
+            this.trkOrder.Maximum = 8;
+            this.trkOrder.Minimum = 3;
+            this.trkOrder.Name = "trkOrder";
+            this.trkOrder.Size = new System.Drawing.Size(104, 42);
+            this.trkOrder.TabIndex = 29;
+            this.trkOrder.Value = 3;
+            this.trkOrder.Scroll += new System.EventHandler(this.trkOrder_Scroll);
+            // 
             // DialogAddMathPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 681);
+            this.Controls.Add(this.trkOrder);
+            this.Controls.Add(this.lblOrder);
             this.Controls.Add(this.cmbPOI);
             this.Controls.Add(this.chkPOI);
             this.Controls.Add(this.lblRadius2);
@@ -397,6 +421,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkStartAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkOrder)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,5 +457,7 @@
         private System.Windows.Forms.Label lblRadius2;
         private System.Windows.Forms.CheckBox chkPOI;
         private System.Windows.Forms.ComboBox cmbPOI;
+        private System.Windows.Forms.Label lblOrder;
+        private System.Windows.Forms.TrackBar trkOrder;
     }
 }

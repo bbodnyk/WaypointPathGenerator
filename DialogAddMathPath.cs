@@ -107,6 +107,7 @@ namespace Waypoint_Path_Generator
             lblRadius2.Text = "Minor Radius : " + Convert.ToString(trkRadius2.Value);
             txtScaleX.Text = Convert.ToString(trkScaleX.Value);
             txtScaleY.Text = Convert.ToString(trkScaleY.Value);
+            lblOrder.Text = "Order : " + Convert.ToString(trkOrder.Value);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -295,12 +296,16 @@ namespace Waypoint_Path_Generator
                 }
             }
 
-            if (_path_type == "Botanic-1" | _path_type == "Botanic-2")
+            if (_path_type == "Botanic")
             {
+                _c = trkOrder.Value;
+                _d = .125;
+
                 // r = 1 + d Sin(c * theta)
 
                 double rot_ang = Convert.ToDouble(trkAngle.Value);
                 double ang, radian, radius;
+                /*
                 if (_path_type == "Botanic-1")
                 {
                     _c = 3;
@@ -311,6 +316,7 @@ namespace Waypoint_Path_Generator
                     _c = 4;
                     _d = .125;
                 }
+                */
                 ang = trkStartAngle.Value;
                 double ang_inc = 360.0 / numpnt;
                 for (int i = 0; i < numpnt; i++)
@@ -358,8 +364,7 @@ namespace Waypoint_Path_Generator
                 if (path_name == "" & _path_type == "Parabolic") path_name = "Untitled - Parabolic";
                 if (path_name == "" & _path_type == "Cubic") path_name = "Untitled - Cubic";
                 if (path_name == "" & _path_type == "Trisectrix") path_name = "Untitled - Trisectrix";
-                if (path_name == "" & _path_type == "Botanic-1") path_name = "Untitled - Botanic-1";
-                if (path_name == "" & _path_type == "Botanic-2") path_name = "Untitled - Botanic-2";
+                if (path_name == "" & _path_type == "Botanic") path_name = "Untitled - Botanic";
                 if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid";
                 if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium";
                 _path.Add_Path(_wpg, _gmap, path_name, "Mathamatical", wplist);
@@ -370,8 +375,7 @@ namespace Waypoint_Path_Generator
                 if (_path_type == "Parabolic") gui.path_type = "Parabolic";
                 if (_path_type == "Cubic") gui.path_type = "Cubic";
                 if (_path_type == "Trisectrix") gui.path_type = "Trisectrix";
-                if (_path_type == "Botanic-1") gui.path_type = "Botanic-1";
-                if (_path_type == "Botanic-2") gui.path_type = "Botanic-2";
+                if (_path_type == "Botanic") gui.path_type = "Botanic";
                 if (_path_type == "Strophoid") gui.path_type = "Strophoid";
                 if (_path_type == "Folium") gui.path_type = "Folium";
                 gui.size = trkSize.Value;
@@ -445,8 +449,7 @@ namespace Waypoint_Path_Generator
             if (_path_type == "Parabolic") gui.path_type = "Parabolic";
             if (_path_type == "Cubic") gui.path_type = "Cubic";
             if (_path_type == "Trisectrix") gui.path_type = "Trisectrix";
-            if (_path_type == "Botanic-1") gui.path_type = "Botanic-1";
-            if (_path_type == "Botanic-2") gui.path_type = "Botanic-2";
+            if (_path_type == "Botanic") gui.path_type = "Botanic";
             if (_path_type == "Strophoid") gui.path_type = "Strophoid";
             if (_path_type == "Folium") gui.path_type = "Folium";
             gui.size = trkSize.Value;
@@ -501,6 +504,12 @@ namespace Waypoint_Path_Generator
 
         private void cmbPOI_SelectedIndexChanged(object sender, EventArgs e)
         {
+            buildPath();
+        }
+
+        private void trkOrder_Scroll(object sender, EventArgs e)
+        {
+            lblOrder.Text = "Order : " + Convert.ToString(trkOrder.Value);
             buildPath();
         }
 
