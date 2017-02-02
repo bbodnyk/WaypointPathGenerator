@@ -42,6 +42,13 @@ namespace Waypoint_Path_Generator
             txtAlt1.Text = Convert.ToString(trkAlt1.Value);
             txtAlt2.Text = Convert.ToString(trkAlt2.Value);
 
+            cmbPOI.Items.Clear();
+            cmbPOI.Items.Add("");
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                cmbPOI.Items.Add(_wpg.POIPointAt(i).name);
+            }
+
             Series altseries = chartAlt.Series["Altitude"];
             altseries.ChartType = SeriesChartType.Area;
             ChartArea chartarea = chartAlt.ChartAreas[0];
@@ -53,6 +60,7 @@ namespace Waypoint_Path_Generator
             for (int i = 0; i < wplist.Count(); i++)
             {
                 WayPoints wp = wplist.ElementAt(i);
+                wp.selected = false;
                 altseries.Points.AddXY(i,wp.alt);
             }
 
@@ -82,12 +90,22 @@ namespace Waypoint_Path_Generator
 
         private void trkWP1_Scroll(object sender, EventArgs e)
         {
+            if (chkAllWP.Checked)
+            {
+                trkWP1.Value = trkWP1.Minimum;
+                lblwp1.Text = "Waypoint " + Convert.ToString(trkWP1.Value);
+            }
             if (trkWP1.Value > trkWP2.Value) trkWP1.Value = trkWP2.Value;
             lblwp1.Text = "Waypoint " + Convert.ToString(trkWP1.Value);
         }
 
         private void trkWP2_Scroll(object sender, EventArgs e)
         {
+            if (chkAllWP.Checked)
+            {
+                trkWP2.Value = trkWP2.Maximum;
+                lblwp2.Text = "Waypoint " + Convert.ToString(trkWP2.Value);
+            }
             if (trkWP2.Value < trkWP1.Value) trkWP2.Value = trkWP1.Value;
             lblwp2.Text = "Waypoint " + Convert.ToString(trkWP2.Value);
         }
@@ -135,44 +153,60 @@ namespace Waypoint_Path_Generator
         {
             LinkedList<WayPoints> wplist = _path.waypoints;
             WayPoints wp;
-            Series altseries = chartAlt.Series["Altitude"];
 
-            int start_wp = trkWP1.Value;
-            int end_wp = trkWP2.Value;
-            double start_alt = trkAlt1.Value;
-            double end_alt = trkAlt2.Value;
-            double alt_delta = start_alt - end_alt;
-            double theta, alt_diff;
-            if(start_wp == end_wp)
+            if (chkSetAlt.Checked)
             {
-                wp = wplist.ElementAt(start_wp);
-                wp.alt = start_alt;
-            }
+                // Adjust Path Altitude
 
-            if( (end_wp - start_wp) == 1)
-            {
-                wp = wplist.ElementAt(start_wp);
-                wp.alt = start_alt;
-                wp = wplist.ElementAt(end_wp);
-                wp.alt = end_alt;
-            }
-
-            if ((end_wp - start_wp) > 1) {
-
-                for (int i = start_wp; i <= end_wp; i++)
+                int start_wp = trkWP1.Value;
+                int end_wp = trkWP2.Value;
+                double start_alt = trkAlt1.Value;
+                double end_alt = trkAlt2.Value;
+                double alt_delta = start_alt - end_alt;
+                double theta, alt_diff;
+                if (start_wp == end_wp)
                 {
-                    double wprange = end_wp - start_wp;
-                    wp = wplist.ElementAt(i);
-                    if (start_alt == end_alt) wp.alt = start_alt;
-                    else
+                    wp = wplist.ElementAt(start_wp);
+                    wp.alt = start_alt;
+                }
+
+                if ((end_wp - start_wp) == 1)
+                {
+                    wp = wplist.ElementAt(start_wp);
+                    wp.alt = start_alt;
+                    wp = wplist.ElementAt(end_wp);
+                    wp.alt = end_alt;
+                }
+
+                if ((end_wp - start_wp) > 1)
+                {
+
+                    for (int i = start_wp; i <= end_wp; i++)
                     {
-                        theta = GPS.DegreesToRadians(((i - start_wp) / wprange) * 180);
-                        alt_diff = end_alt - start_alt;
-                        wp.alt = start_alt + alt_diff * ((-Math.Cos(theta) + 1) / 2);
+                        double wprange = end_wp - start_wp;
+                        wp = wplist.ElementAt(i);
+                        if (start_alt == end_alt) wp.alt = start_alt;
+                        else
+                        {
+                            theta = GPS.DegreesToRadians(((i - start_wp) / wprange) * 180);
+                            alt_diff = end_alt - start_alt;
+                            wp.alt = start_alt + alt_diff * ((-Math.Cos(theta) + 1) / 2);
+                        }
                     }
                 }
             }
 
+            if (chkSetPOI.Checked)
+            {
+                // Set WP POI
+
+                bool poimode = chkPOIMode.Checked;
+                String poi_name = cmbPOI.GetItemText(cmbPOI.SelectedItem);
+            }
+
+            // Redraw Altitude Plot
+
+            Series altseries = chartAlt.Series["Altitude"];
             altseries.Points.Clear();
             for (int i = 0; i < wplist.Count(); i++)
             {
@@ -181,6 +215,27 @@ namespace Waypoint_Path_Generator
             }
         }
 
-        
+        private void chkAllWP_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAllWP.Checked)
+            {
+                LinkedList<WayPoints> wplist = _path.waypoints;
+                trkWP1.Minimum = 0;
+                trkWP1.Maximum = wplist.Count() - 1;
+                trkWP1.Value = 0;
+                trkWP2.Minimum = 0;
+                trkWP2.Maximum = wplist.Count() - 1;
+                trkWP2.Value = wplist.Count() - 1;
+                lblwp1.Text = "Waypoint " + Convert.ToString(trkWP1.Value);
+                lblwp2.Text = "Waypoint " + Convert.ToString(trkWP2.Value);
+                txtAlt1.Text = Convert.ToString(trkAlt1.Value);
+                txtAlt2.Text = Convert.ToString(trkAlt2.Value);
+            }
+        }
+
+        private void chkSetAlt_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

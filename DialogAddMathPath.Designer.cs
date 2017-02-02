@@ -72,6 +72,7 @@
             this.cmbPathType.FormattingEnabled = true;
             this.cmbPathType.Items.AddRange(new object[] {
             "",
+            "Eliptical",
             "Parabolic",
             "Cubic",
             "Trisectrix",

@@ -224,6 +224,32 @@ namespace Waypoint_Path_Generator
                 }
             }
 
+            if(_path_type == "Eliptical")
+            {
+                double rot_ang = Convert.ToDouble(trkAngle.Value);
+                double radius = Convert.ToDouble(trkSize.Value);
+                double ang = Convert.ToDouble(trkStartAngle.Value);
+                double ang_inc = 360.0 / numpnt;
+                double xval, yval;
+                double xscale = trkScaleX.Value;
+                double yscale = trkScaleY.Value;
+                double distance;
+
+                for (int i=0;i< numpnt; i++)
+                {
+                    xval = radius * Math.Cos(GPS.DegreesToRadians(ang)) / yscale;
+                    yval = radius * Math.Sin(GPS.DegreesToRadians(ang)) * xscale;
+                    lat = _lat + xval / lat_degree;
+                    lon = _lon + yval / lon_degree;
+                    bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
+                    distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
+                    lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + rot_ang, distance, _gps_radius);
+                    lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, bearing + rot_ang, distance, _gps_radius);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    ang = ang + ang_inc;
+                }
+            }
+
             if(_path_type == "Trisectrix")
             {
                 // r = 1 + b Sin(theta)
@@ -328,6 +354,7 @@ namespace Waypoint_Path_Generator
             if (_new_path & _first_pass)
             {
                 string path_name = txtPathName.Text;
+                if (path_name == "" & _path_type == "Eliptical") path_name = "Untitled - Eliptical";
                 if (path_name == "" & _path_type == "Parabolic") path_name = "Untitled - Parabolic";
                 if (path_name == "" & _path_type == "Cubic") path_name = "Untitled - Cubic";
                 if (path_name == "" & _path_type == "Trisectrix") path_name = "Untitled - Trisectrix";
@@ -339,6 +366,7 @@ namespace Waypoint_Path_Generator
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
                 MathGUI gui = new MathGUI();
                 gui.name = txtPathName.Text;
+                if (_path_type == "Eliptical") gui.path_type = "Eliptical";
                 if (_path_type == "Parabolic") gui.path_type = "Parabolic";
                 if (_path_type == "Cubic") gui.path_type = "Cubic";
                 if (_path_type == "Trisectrix") gui.path_type = "Trisectrix";
@@ -413,6 +441,7 @@ namespace Waypoint_Path_Generator
         {
             MathGUI gui = _path.mathgui;
             gui.name = txtPathName.Text;
+            if (_path_type == "Eliptical") gui.path_type = "Eliptical";
             if (_path_type == "Parabolic") gui.path_type = "Parabolic";
             if (_path_type == "Cubic") gui.path_type = "Cubic";
             if (_path_type == "Trisectrix") gui.path_type = "Trisectrix";
