@@ -81,6 +81,8 @@ namespace Waypoint_Path_Generator
                 trkScaleY.Value = Convert.ToInt16(_gui.scaley);
                 txtScaleX.Text = Convert.ToString(trkScaleX.Value);
                 txtScaleY.Text = Convert.ToString(trkScaleY.Value);
+                trkOrder.Value = Convert.ToInt16(_gui.order);
+                lblOrder.Text = "Order : " + Convert.ToString(trkOrder.Value);
                 chkPOI.Checked = _gui.poimode;
                 int index = cmbPOI.Items.IndexOf(_gui.poiname);
                 cmbPOI.SelectedIndex = index;
@@ -393,6 +395,7 @@ namespace Waypoint_Path_Generator
                 gui.b = _b;
                 gui.c = _c;
                 gui.d = _d;
+                gui.order = trkOrder.Value;
                 _path.mathgui = gui;
                 _path.visible = true;
                 _path.selected = false;
@@ -467,6 +470,7 @@ namespace Waypoint_Path_Generator
             gui.b = _b;
             gui.c = _c;
             gui.d = _d;
+            gui.order = trkOrder.Value;
             _path.mathgui = gui;
             _path.selected = false;
             _path.visible = true;

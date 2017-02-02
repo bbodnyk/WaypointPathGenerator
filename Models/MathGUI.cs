@@ -26,5 +26,6 @@ namespace Waypoint_Path_Generator.Models
         public double b;
         public double c;
         public double d;
+        public double order;
     }
 }

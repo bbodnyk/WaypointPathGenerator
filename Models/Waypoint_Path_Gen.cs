@@ -816,6 +816,7 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteStartElement("GUI"); // Start of Gui
                         xml_writer.WriteElementString("Name", gui.name);
                         xml_writer.WriteElementString("PathType", gui.path_type);
+                        xml_writer.WriteElementString("Order", Convert.ToString(gui.order));
                         xml_writer.WriteElementString("Size", Convert.ToString(gui.size));
                         xml_writer.WriteElementString("RotAngle", Convert.ToString(gui.rot_angle));
                         xml_writer.WriteElementString("StartAngle", Convert.ToString(gui.start_angle));
@@ -1065,6 +1066,7 @@ namespace Waypoint_Path_Generator.Models
                     {
                         gui.name = node.SelectSingleNode("Name").InnerText;
                         gui.path_type = node.SelectSingleNode("PathType").InnerText;
+                        gui.order = Convert.ToDouble(node.SelectSingleNode("Order").InnerText);
                         gui.size = Convert.ToDouble(node.SelectSingleNode("Size").InnerText);
                         gui.rot_angle = Convert.ToDouble(node.SelectSingleNode("RotAngle").InnerText);
                         gui.start_angle = Convert.ToDouble(node.SelectSingleNode("StartAngle").InnerText);
