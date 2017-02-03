@@ -19,13 +19,16 @@ namespace Waypoint_Path_Generator
         Waypoint_Path_Gen _wpg;
         GMAP _gmap;
         Options _options;
+        double _lat_center, _lon_center;
 
-        public DialogPathAltitude(Waypoint_Path_Gen wpg, GMAP gmap, Options options, Path path)
+        public DialogPathAltitude(Waypoint_Path_Gen wpg, GMAP gmap, Options options, Path path, double lat, double lon)
         {
             _wpg = wpg;
             _gmap = gmap;
             _options = options;
             _path = path;
+            _lat_center = lat;
+            _lon_center = lon;
 
             InitializeComponent();
 
@@ -63,7 +66,8 @@ namespace Waypoint_Path_Generator
                 wp.selected = false;
                 altseries.Points.AddXY(i,wp.alt);
             }
-
+            _path.selected = false;
+            _gmap.ReDrawgMap();
         }
 
         private void DialogPathAltitude_Load(object sender, EventArgs e)
@@ -202,6 +206,57 @@ namespace Waypoint_Path_Generator
 
                 bool poimode = chkPOIMode.Checked;
                 String poi_name = cmbPOI.GetItemText(cmbPOI.SelectedItem);
+
+                // No POI Mode
+
+                if (poimode)
+                {
+                    int start_wp = trkWP1.Value;
+                    int end_wp = trkWP2.Value;
+
+                    double lat_camera = _lat_center;
+                    double lon_camera = _lon_center;
+                    double cam_alt = 5;
+                    double distance;
+
+                    for (int i = 0; i < _wpg.POICount(); i++)
+                    {
+                        POIPoints tmp_point = _wpg.POIPointAt(i);
+                        string name = tmp_point.name;
+                        if (poi_name == name)
+                        {
+                            lat_camera = tmp_point.lat;
+                            lon_camera = tmp_point.lon;
+                            cam_alt = tmp_point.cam_alt;
+                        }
+                    }
+
+                    for(int i = 0; i < wplist.Count(); i++)
+                    {
+                        wp = wplist.ElementAt(i);
+                        wp.head = GPS.GPS_Bearing(wp.lat, wp.lon, lat_camera, lon_camera);
+                        distance = GPS.GPS_Distance(wp.lat, wp.lon, lat_camera, lon_camera, Form1.Globals.gps_radius);
+                        wp.gimblepitch = -GPS.RadiansToDegrees(Math.Atan((wp.alt-cam_alt) / distance));
+                        wp.gimblemode = 2;
+                    }
+                }
+                else
+                {
+                    int start_wp = trkWP1.Value;
+                    int end_wp = trkWP2.Value;
+                    WayPoints wp1, wp2;
+                    double last_head = 0;
+
+                    for (int i = start_wp; i < end_wp; i++)
+                    {
+                        wp1 = wplist.ElementAt(i);
+                        wp2 = wplist.ElementAt(i+1);
+                        wp1.head = GPS.GPS_Bearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
+                        last_head = wp1.head;
+                    }
+                    wp1 = wplist.ElementAt(end_wp);
+                    wp1.head = last_head;
+                }
             }
 
             // Redraw Altitude Plot
@@ -213,6 +268,9 @@ namespace Waypoint_Path_Generator
                 wp = wplist.ElementAt(i);
                 altseries.Points.AddXY(i, wp.alt);
             }
+
+            _path.selected = false;
+            _gmap.ReDrawgMap();
         }
 
         private void chkAllWP_CheckedChanged(object sender, EventArgs e)
@@ -234,6 +292,11 @@ namespace Waypoint_Path_Generator
         }
 
         private void chkSetAlt_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkSetPOI_CheckedChanged(object sender, EventArgs e)
         {
 
         }

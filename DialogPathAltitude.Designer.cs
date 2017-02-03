@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btnClose = new System.Windows.Forms.Button();
             this.chartAlt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.trkAlt1 = new System.Windows.Forms.TrackBar();
@@ -50,10 +50,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkAllWP = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chkSetPOI = new System.Windows.Forms.CheckBox();
-            this.cmbPOI = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.chkPOIMode = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbPOI = new System.Windows.Forms.ComboBox();
+            this.chkSetPOI = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartAlt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWP1)).BeginInit();
@@ -76,27 +76,27 @@
             // 
             // chartAlt
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartAlt.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartAlt.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chartAlt.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartAlt.Legends.Add(legend3);
             this.chartAlt.Location = new System.Drawing.Point(12, 292);
             this.chartAlt.Name = "chartAlt";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Altitude";
-            this.chartAlt.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Altitude";
+            this.chartAlt.Series.Add(series3);
             this.chartAlt.Size = new System.Drawing.Size(716, 250);
             this.chartAlt.TabIndex = 1;
             this.chartAlt.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Path Altitude";
-            this.chartAlt.Titles.Add(title1);
+            title3.Name = "Title1";
+            title3.Text = "Path Altitude";
+            this.chartAlt.Titles.Add(title3);
             this.chartAlt.Click += new System.EventHandler(this.chartAlt_Click);
             // 
             // trkAlt1
             // 
-            this.trkAlt1.Location = new System.Drawing.Point(79, 97);
+            this.trkAlt1.Location = new System.Drawing.Point(106, 97);
             this.trkAlt1.Maximum = 129;
             this.trkAlt1.Minimum = 5;
             this.trkAlt1.Name = "trkAlt1";
@@ -141,14 +141,14 @@
             // 
             // txtAlt2
             // 
-            this.txtAlt2.Location = new System.Drawing.Point(24, 156);
+            this.txtAlt2.Location = new System.Drawing.Point(24, 145);
             this.txtAlt2.Name = "txtAlt2";
             this.txtAlt2.Size = new System.Drawing.Size(49, 20);
             this.txtAlt2.TabIndex = 8;
             // 
             // trkAlt2
             // 
-            this.trkAlt2.Location = new System.Drawing.Point(79, 156);
+            this.trkAlt2.Location = new System.Drawing.Point(106, 145);
             this.trkAlt2.Maximum = 129;
             this.trkAlt2.Minimum = 5;
             this.trkAlt2.Name = "trkAlt2";
@@ -208,7 +208,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(197, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(237, 207);
+            this.groupBox1.Size = new System.Drawing.Size(237, 223);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Altitude";
@@ -216,8 +216,6 @@
             // chkSetAlt
             // 
             this.chkSetAlt.AutoSize = true;
-            this.chkSetAlt.Checked = true;
-            this.chkSetAlt.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSetAlt.Location = new System.Drawing.Point(33, 33);
             this.chkSetAlt.Name = "chkSetAlt";
             this.chkSetAlt.Size = new System.Drawing.Size(80, 17);
@@ -266,23 +264,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Camera";
             // 
-            // chkSetPOI
+            // chkPOIMode
             // 
-            this.chkSetPOI.AutoSize = true;
-            this.chkSetPOI.Location = new System.Drawing.Point(22, 33);
-            this.chkSetPOI.Name = "chkSetPOI";
-            this.chkSetPOI.Size = new System.Drawing.Size(63, 17);
-            this.chkSetPOI.TabIndex = 0;
-            this.chkSetPOI.Text = "Set POI";
-            this.chkSetPOI.UseVisualStyleBackColor = true;
-            // 
-            // cmbPOI
-            // 
-            this.cmbPOI.FormattingEnabled = true;
-            this.cmbPOI.Location = new System.Drawing.Point(78, 97);
-            this.cmbPOI.Name = "cmbPOI";
-            this.cmbPOI.Size = new System.Drawing.Size(121, 21);
-            this.cmbPOI.TabIndex = 1;
+            this.chkPOIMode.AutoSize = true;
+            this.chkPOIMode.Location = new System.Drawing.Point(22, 69);
+            this.chkPOIMode.Name = "chkPOIMode";
+            this.chkPOIMode.Size = new System.Drawing.Size(74, 17);
+            this.chkPOIMode.TabIndex = 3;
+            this.chkPOIMode.Text = "POI Mode";
+            this.chkPOIMode.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -293,15 +283,24 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "POI";
             // 
-            // chkPOIMode
+            // cmbPOI
             // 
-            this.chkPOIMode.AutoSize = true;
-            this.chkPOIMode.Location = new System.Drawing.Point(22, 69);
-            this.chkPOIMode.Name = "chkPOIMode";
-            this.chkPOIMode.Size = new System.Drawing.Size(74, 17);
-            this.chkPOIMode.TabIndex = 3;
-            this.chkPOIMode.Text = "POI Mode";
-            this.chkPOIMode.UseVisualStyleBackColor = true;
+            this.cmbPOI.FormattingEnabled = true;
+            this.cmbPOI.Location = new System.Drawing.Point(78, 97);
+            this.cmbPOI.Name = "cmbPOI";
+            this.cmbPOI.Size = new System.Drawing.Size(121, 21);
+            this.cmbPOI.TabIndex = 1;
+            // 
+            // chkSetPOI
+            // 
+            this.chkSetPOI.AutoSize = true;
+            this.chkSetPOI.Location = new System.Drawing.Point(22, 33);
+            this.chkSetPOI.Name = "chkSetPOI";
+            this.chkSetPOI.Size = new System.Drawing.Size(98, 17);
+            this.chkSetPOI.TabIndex = 0;
+            this.chkSetPOI.Text = "Adjust Heading";
+            this.chkSetPOI.UseVisualStyleBackColor = true;
+            this.chkSetPOI.CheckedChanged += new System.EventHandler(this.chkSetPOI_CheckedChanged);
             // 
             // DialogPathAltitude
             // 

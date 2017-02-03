@@ -3763,7 +3763,7 @@ namespace Waypoint_Path_Generator
                 {
                     Models.Path path = _wpg.PathAt(i);
                     Globals.map_center = gMapControl.Position;
-                    DialogPathAltitude dialog = new DialogPathAltitude(_wpg, _gmap, _options, path);
+                    DialogPathAltitude dialog = new DialogPathAltitude(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
                     dialog.ShowDialog();
                     GMAPTree.Update_GMapTree(_wpg, treGMap);
                 }
