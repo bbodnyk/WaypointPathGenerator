@@ -253,7 +253,36 @@ namespace Waypoint_Path_Generator
                 }
             }
 
-            if(_path_type == "Trisectrix")
+            if (_path_type == "Resonance")
+            {
+                // x = tan(t)
+                // y = cos2(t)
+
+                double rot_ang = Convert.ToDouble(trkAngle.Value);
+                //double ang = Convert.ToDouble(trkStartAngle.Value);
+                double ang = -85.0;
+                double ang_inc = 170.0 / numpnt;
+                double distance;
+                double xscale = trkScaleX.Value;
+                double yscale = trkScaleY.Value;
+
+                for (int i=0;i<= numpnt; i++)
+                {
+
+                    double xval = Math.Tan(GPS.DegreesToRadians(ang)) * size / yscale;
+                    double yval = Math.Cos(GPS.DegreesToRadians(ang) * GPS.DegreesToRadians(ang)) * size * xscale;
+                    lat = _lat + xval / lat_degree;
+                    lon = _lon + yval / lon_degree;
+                    bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
+                    distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
+                    lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + rot_ang, distance, _gps_radius);
+                    lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, bearing + rot_ang, distance, _gps_radius);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    ang = ang + ang_inc;
+                }
+            }
+
+            if (_path_type == "Trisectrix")
             {
                 // r = 1 + b Sin(theta)
 
@@ -261,6 +290,7 @@ namespace Waypoint_Path_Generator
                 double ang, radian, radius;
                 //double lat, lon;
                 _b = 2;
+                //_b = trkOrder.Value;
                 ang = Convert.ToDouble(trkStartAngle.Value);
                 double ang_inc = 360.0 / numpnt;
                 for(int i=0;i< numpnt; i++)
@@ -369,6 +399,7 @@ namespace Waypoint_Path_Generator
                 if (path_name == "" & _path_type == "Botanic") path_name = "Untitled - Botanic";
                 if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid";
                 if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium";
+                if (path_name == "" & _path_type == "Resonance") path_name = "Untitled - Resonance";
                 _path.Add_Path(_wpg, _gmap, path_name, "Mathamatical", wplist);
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
                 MathGUI gui = new MathGUI();
@@ -380,6 +411,7 @@ namespace Waypoint_Path_Generator
                 if (_path_type == "Botanic") gui.path_type = "Botanic";
                 if (_path_type == "Strophoid") gui.path_type = "Strophoid";
                 if (_path_type == "Folium") gui.path_type = "Folium";
+                if (_path_type == "Resonance") gui.path_type = "Resonance";
                 gui.size = trkSize.Value;
                 gui.rot_angle = trkAngle.Value;
                 gui.start_angle = trkStartAngle.Value;
@@ -455,6 +487,7 @@ namespace Waypoint_Path_Generator
             if (_path_type == "Botanic") gui.path_type = "Botanic";
             if (_path_type == "Strophoid") gui.path_type = "Strophoid";
             if (_path_type == "Folium") gui.path_type = "Folium";
+            if (_path_type == "Resonance") gui.path_type = "Resonance";
             gui.size = trkSize.Value;
             gui.rot_angle = trkAngle.Value;
             gui.start_angle = trkStartAngle.Value;

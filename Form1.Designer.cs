@@ -55,6 +55,7 @@
             this.selectedPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedPolygonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectedWaypointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolEditPathAlt = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolInsertWP = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolInsertWPBefore = new System.Windows.Forms.ToolStripMenuItem();
@@ -185,7 +186,6 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolEditPathAlt = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -234,7 +234,7 @@
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 548);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 526);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -366,6 +366,13 @@
             this.selectedWaypointToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.selectedWaypointToolStripMenuItem.Text = "Selected Waypoint";
             this.selectedWaypointToolStripMenuItem.Click += new System.EventHandler(this.selectedWaypointToolStripMenuItem_Click);
+            // 
+            // toolEditPathAlt
+            // 
+            this.toolEditPathAlt.Name = "toolEditPathAlt";
+            this.toolEditPathAlt.Size = new System.Drawing.Size(203, 22);
+            this.toolEditPathAlt.Text = "Edit Path Altitude";
+            this.toolEditPathAlt.Click += new System.EventHandler(this.toolEditPathAlt_Click);
             // 
             // toolStripSeparator4
             // 
@@ -1120,6 +1127,7 @@
             this.treGMap.Size = new System.Drawing.Size(159, 634);
             this.treGMap.TabIndex = 25;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
+            this.treGMap.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treGMap_NodeMouseClick);
             // 
             // gMapControl
             // 
@@ -1403,13 +1411,6 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
-            // 
-            // toolEditPathAlt
-            // 
-            this.toolEditPathAlt.Name = "toolEditPathAlt";
-            this.toolEditPathAlt.Size = new System.Drawing.Size(203, 22);
-            this.toolEditPathAlt.Text = "Edit Path Altitude";
-            this.toolEditPathAlt.Click += new System.EventHandler(this.toolEditPathAlt_Click);
             // 
             // Form1
             // 

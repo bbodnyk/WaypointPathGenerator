@@ -263,6 +263,19 @@ namespace Waypoint_Path_Generator.Models
             return null;
         }
 
+        public Models.Path PathWithName(string name)
+        {
+            for (int i = 0; i < path_list.Count(); i++)
+            {
+                if (name == PathAt(i).name)
+                {
+                    return path_list.ElementAt(i);
+                }
+            }
+
+            return null;
+        }
+
         public Models.Path PathAt(int index)
         {
             return path_list.ElementAt(index);

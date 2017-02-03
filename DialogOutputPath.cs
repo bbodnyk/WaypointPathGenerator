@@ -74,9 +74,7 @@ namespace Waypoint_Path_Generator
                     str = str + ", " + Convert.ToString(gimblepitch);
                     int actionid = point.action_id;
                     Models.Action pnt_action = _wpg.ActionWithId(actionid);
-
-
-                    
+          
                     for (int i = 0; i < 15; i++)
                     {
                         str = str + ", " + Convert.ToString(pnt_action.actions[i, 0]);
@@ -245,6 +243,8 @@ namespace Waypoint_Path_Generator
 
             LinkedList<WayPoints> wp_list = _path.waypoints;
             int count = 0;
+            int wp_code, wp_delay;
+            double gimble_pitch;
 
             if(_path.type == "Mathamatical")
             {
@@ -259,13 +259,48 @@ namespace Waypoint_Path_Generator
 
             for(int i = 0; i < wp_list.Count; i++)
             {
+                wp_delay = 0;
                 WayPoints wp = wp_list.ElementAt(i);
+                int action_id = wp.action_id;
+                Models.Action action = _wpg.ActionWithId(action_id);
+                string action_name = action.name;
+                if(action_name == "Take Picture")
+                {
+                    wp_delay = 1;
+                }
+                if(action_name == "Pause/Take Picture")
+                {
+                    wp_delay = action.actions[0, 1]/1000;
+                }
+                // WAYPOINT
+                wp_code = 16;
                 str = str + Convert.ToString(count++) + " " ; // wp count
-                str = str + "0 0 16 0 0 0 0 ";
+                str = str + "0 0 ";
+                str = str + Convert.ToString(wp_code) + " ";
+                str = str + Convert.ToString(wp_delay) + " ";
+                str = str + " 0 0 0 ";
                 str = str + Convert.ToString(wp.lat) + " ";
                 str = str + Convert.ToString(wp.lon)+ " ";
                 str = str + Convert.ToString(wp.alt);
                 str = str + " 1\n";
+
+                if (action_name == "Take Picture" | action_name == "Pause/Take Picture") {
+
+                    gimble_pitch = wp.gimblepitch;
+                    // DO_MOUNT_CONTROL
+                    wp_code = 205;
+                    str = str + Convert.ToString(count++) + " "; // wp count
+                    str = str + "0 0 ";
+                    str = str + Convert.ToString(wp_code) + " ";
+                    str = str + Convert.ToString(gimble_pitch) + " ";
+                    str = str + "0 0 0 0 0 0 1\n";
+                    // DO_DIGICAM_CONTROL
+                    wp_code = 203;
+                    str = str + Convert.ToString(count++) + " "; // wp count
+                    str = str + "0 0 ";
+                    str = str + Convert.ToString(wp_code) + " ";
+                    str = str + "0 0 0 0 0 0 0 1\n";
+                }
             }
 
             // Write to File 

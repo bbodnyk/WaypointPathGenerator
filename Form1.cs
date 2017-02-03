@@ -1903,6 +1903,79 @@ namespace Waypoint_Path_Generator
             MessageBox.Show("text of node is : " + e.Node.Text + ", Index is " + Convert.ToString(index));
         }
 
+
+        private void treGMap_MouseClick(object sender, TreeViewEventArgs e)
+        {
+            if (!Globals.TreView_Handler) return;
+            TreeNode node = e.Node;
+            int index = e.Node.Index;
+            MessageBox.Show("text of node is : " + e.Node.Text + ", Index is " + Convert.ToString(index));
+
+        }
+
+        private void treGMap_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode node = e.Node;
+            if (node.Parent == null) return;
+            string parent = e.Node.Parent.Text;
+            int index = e.Node.Parent.Index;
+            //MessageBox.Show("text of node is : " + e.Node.Text + ", Parent is " + parent);
+
+            if (parent == "POIs")
+            {
+                POIPoints pnt = _wpg.POIPointName(e.Node.Text);
+                if (pnt != null) pnt.selected = !pnt.selected;
+                if (pnt.selected)
+                {
+                    e.Node.BackColor = SystemColors.Highlight;
+                    e.Node.ForeColor = SystemColors.HighlightText;
+                }
+                else
+                {
+                    e.Node.BackColor = ((TreeView)sender).BackColor;
+                    e.Node.ForeColor = ((TreeView)sender).ForeColor;
+                }
+            }
+
+            if (parent == "Paths")
+            {
+                Models.Path path = _wpg.PathWithName(e.Node.Text);
+                if (path != null)
+                {
+                    path.selected = !path.selected;
+                    SelectPath(path, path.selected);
+                    if (path.selected)
+                    {
+                        e.Node.BackColor = SystemColors.Highlight;
+                        e.Node.ForeColor = SystemColors.HighlightText;
+                    }
+                    else
+                    {
+                        e.Node.BackColor = ((TreeView)sender).BackColor;
+                        e.Node.ForeColor = ((TreeView)sender).ForeColor;
+                    }
+                }
+            }
+
+            if(parent == "Polygons")
+            {
+                Models.Shape polygon = _wpg.ShapeAt(e.Node.Index);
+                polygon.selected = !polygon.selected;
+                if (polygon.selected)
+                {
+                    e.Node.BackColor = SystemColors.Highlight;
+                    e.Node.ForeColor = SystemColors.HighlightText;
+                }
+                else
+                {
+                    e.Node.BackColor = ((TreeView)sender).BackColor;
+                    e.Node.ForeColor = ((TreeView)sender).ForeColor;
+                }
+            }
+
+            _gmap.ReDrawgMap();
+        }
+
         private void treGMap_AfterCheck(object sender, TreeViewEventArgs e)
         {
             if (!Globals.TreView_Handler) return;
@@ -3770,5 +3843,7 @@ namespace Waypoint_Path_Generator
             }
 
         }
+
+        
     }
 }
