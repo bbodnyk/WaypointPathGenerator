@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btnClose = new System.Windows.Forms.Button();
             this.chartAlt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.trkAlt1 = new System.Windows.Forms.TrackBar();
@@ -54,6 +56,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbPOI = new System.Windows.Forms.ComboBox();
             this.chkSetPOI = new System.Windows.Forms.CheckBox();
+            this.chkShowAlt = new System.Windows.Forms.CheckBox();
+            this.chkShowHeading = new System.Windows.Forms.CheckBox();
+            this.chkShowPitch = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartAlt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWP1)).BeginInit();
@@ -66,7 +71,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(320, 561);
+            this.btnClose.Location = new System.Drawing.Point(320, 585);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 29);
             this.btnClose.TabIndex = 0;
@@ -76,22 +81,33 @@
             // 
             // chartAlt
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartAlt.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartAlt.Legends.Add(legend3);
-            this.chartAlt.Location = new System.Drawing.Point(12, 292);
+            chartArea1.Name = "ChartArea1";
+            this.chartAlt.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartAlt.Legends.Add(legend1);
+            this.chartAlt.Location = new System.Drawing.Point(12, 329);
             this.chartAlt.Name = "chartAlt";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Altitude";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "Heading";
             series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series3.Legend = "Legend1";
-            series3.Name = "Altitude";
+            series3.Name = "Pitch";
+            this.chartAlt.Series.Add(series1);
+            this.chartAlt.Series.Add(series2);
             this.chartAlt.Series.Add(series3);
-            this.chartAlt.Size = new System.Drawing.Size(716, 250);
+            this.chartAlt.Size = new System.Drawing.Size(717, 250);
             this.chartAlt.TabIndex = 1;
             this.chartAlt.Text = "chart1";
-            title3.Name = "Title1";
-            title3.Text = "Path Altitude";
-            this.chartAlt.Titles.Add(title3);
+            title1.Name = "Title1";
+            title1.Text = "Path Altitude";
+            this.chartAlt.Titles.Add(title1);
             this.chartAlt.Click += new System.EventHandler(this.chartAlt_Click);
             // 
             // trkAlt1
@@ -302,11 +318,47 @@
             this.chkSetPOI.UseVisualStyleBackColor = true;
             this.chkSetPOI.CheckedChanged += new System.EventHandler(this.chkSetPOI_CheckedChanged);
             // 
+            // chkShowAlt
+            // 
+            this.chkShowAlt.AutoSize = true;
+            this.chkShowAlt.Checked = true;
+            this.chkShowAlt.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkShowAlt.Location = new System.Drawing.Point(221, 293);
+            this.chkShowAlt.Name = "chkShowAlt";
+            this.chkShowAlt.Size = new System.Drawing.Size(61, 17);
+            this.chkShowAlt.TabIndex = 18;
+            this.chkShowAlt.Text = "Altitude";
+            this.chkShowAlt.UseVisualStyleBackColor = true;
+            // 
+            // chkShowHeading
+            // 
+            this.chkShowHeading.AutoSize = true;
+            this.chkShowHeading.Location = new System.Drawing.Point(332, 293);
+            this.chkShowHeading.Name = "chkShowHeading";
+            this.chkShowHeading.Size = new System.Drawing.Size(66, 17);
+            this.chkShowHeading.TabIndex = 19;
+            this.chkShowHeading.Text = "Heading";
+            this.chkShowHeading.UseVisualStyleBackColor = true;
+            this.chkShowHeading.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // chkShowPitch
+            // 
+            this.chkShowPitch.AutoSize = true;
+            this.chkShowPitch.Location = new System.Drawing.Point(433, 293);
+            this.chkShowPitch.Name = "chkShowPitch";
+            this.chkShowPitch.Size = new System.Drawing.Size(50, 17);
+            this.chkShowPitch.TabIndex = 20;
+            this.chkShowPitch.Text = "Pitch";
+            this.chkShowPitch.UseVisualStyleBackColor = true;
+            // 
             // DialogPathAltitude
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 622);
+            this.ClientSize = new System.Drawing.Size(741, 633);
+            this.Controls.Add(this.chkShowPitch);
+            this.Controls.Add(this.chkShowHeading);
+            this.Controls.Add(this.chkShowAlt);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -328,6 +380,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -355,5 +408,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbPOI;
         private System.Windows.Forms.CheckBox chkSetPOI;
+        private System.Windows.Forms.CheckBox chkShowAlt;
+        private System.Windows.Forms.CheckBox chkShowHeading;
+        private System.Windows.Forms.CheckBox chkShowPitch;
     }
 }

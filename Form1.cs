@@ -181,7 +181,9 @@ namespace Waypoint_Path_Generator
 
             _gmap.BuildgMap();
             Globals.map_center = _gmap.GetCenter();
+            Globals.TreView_Handler = false;
             GMAPTree.Update_GMapTree(_wpg, _gmaptree);
+            Globals.TreView_Handler = true;
             _gmaptree.ExpandAll();
 
             // Activate Map Tab
@@ -598,7 +600,9 @@ namespace Waypoint_Path_Generator
                 int row = e.RowIndex;
                 Models.Path path = _wpg.PathAt(row);
                 _wpg.DeletePath(path);
-                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+                Globals.TreView_Handler = false;
+                GMAPTree.Update_GMapTree(_wpg, treGMap);
+                Globals.TreView_Handler = true;
                 //RemovePath_GMapTree(path);
                 _gmap.Delete_gMapPath(path);
                 //GMAPTree.Update_GMapTree(_wpg, treGMap);;
@@ -1093,7 +1097,9 @@ namespace Waypoint_Path_Generator
                 _wpg.ReadXml_Actions(filename);
                 _wpg.ReadXml_Polygon(filename);
                 _wpg.ReadXml_Path(filename);
+                Globals.TreView_Handler = false;
                 GMAPTree.Update_GMapTree(_wpg, treGMap);
+                Globals.TreView_Handler = true;
                 _gmap.BuildgMap();
                 //_gmap.ReDrawgMap();
                 Update_POI_Dgv();
@@ -1111,7 +1117,9 @@ namespace Waypoint_Path_Generator
                 _wpg.ReadXml_Actions("waypoint_path_generator.xml");
                 _wpg.ReadXml_Polygon("waypoint_path_generator.xml");
             }
+            Globals.TreView_Handler = false;
             GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
             _gmap.ReDrawgMap();
             Update_POI_Dgv();
             Update_GUI();
@@ -1161,7 +1169,9 @@ namespace Waypoint_Path_Generator
                 _wpg.DeleteShape(shape);
                 //Update_Shapecmb();
                 _gmap.Delete_gMapPoly(shape);
-                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+                Globals.TreView_Handler = false;
+                GMAPTree.Update_GMapTree(_wpg, treGMap);
+                Globals.TreView_Handler = true;
             }
         }
 
@@ -1587,7 +1597,9 @@ namespace Waypoint_Path_Generator
                 }
                 RemovePOI_GMapTree(row);
                 _gmap.Delete_gMapPOI(_wpg.POIPointAt(row));
-                GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+                Globals.TreView_Handler = false;
+                GMAPTree.Update_GMapTree(_wpg, treGMap);
+                Globals.TreView_Handler = true;
                 _wpg.POIPointDeleteAt(row);
                 //Globals.POIpoint_Handler = false;
                 Update_POI_Dgv();
@@ -1920,6 +1932,10 @@ namespace Waypoint_Path_Generator
 
         private void treGMap_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            if (!Globals.TreView_Handler) return;
+
+            Globals.TreView_Handler = false;
+
             TreeNode node = e.Node;
             if (node.Parent == null) return;
             string parent = e.Node.Parent.Text;
@@ -1929,23 +1945,26 @@ namespace Waypoint_Path_Generator
             if (parent == "POIs")
             {
                 POIPoints pnt = _wpg.POIPointName(e.Node.Text);
-                if (pnt != null) pnt.selected = !pnt.selected;
-                if (pnt.selected)
+                if (pnt != null & pnt.visible)
                 {
-                    e.Node.BackColor = SystemColors.Highlight;
-                    e.Node.ForeColor = SystemColors.HighlightText;
-                }
-                else
-                {
-                    e.Node.BackColor = ((TreeView)sender).BackColor;
-                    e.Node.ForeColor = ((TreeView)sender).ForeColor;
+                    if (pnt != null) pnt.selected = !pnt.selected;
+                    if (pnt.selected)
+                    {
+                        e.Node.BackColor = SystemColors.Highlight;
+                        e.Node.ForeColor = SystemColors.HighlightText;
+                    }
+                    else
+                    {
+                        e.Node.BackColor = ((TreeView)sender).BackColor;
+                        e.Node.ForeColor = ((TreeView)sender).ForeColor;
+                    }
                 }
             }
 
             if (parent == "Paths")
             {
                 Models.Path path = _wpg.PathWithName(e.Node.Text);
-                if (path != null)
+                if (path != null & path.visible)
                 {
                     path.selected = !path.selected;
                     SelectPath(path, path.selected);
@@ -1965,20 +1984,25 @@ namespace Waypoint_Path_Generator
             if(parent == "Polygons")
             {
                 Models.Shape polygon = _wpg.ShapeAt(e.Node.Index);
-                polygon.selected = !polygon.selected;
-                if (polygon.selected)
+                if (polygon != null & polygon.visible)
                 {
-                    e.Node.BackColor = SystemColors.Highlight;
-                    e.Node.ForeColor = SystemColors.HighlightText;
-                }
-                else
-                {
-                    e.Node.BackColor = ((TreeView)sender).BackColor;
-                    e.Node.ForeColor = ((TreeView)sender).ForeColor;
+                    polygon.selected = !polygon.selected;
+                    if (polygon.selected)
+                    {
+                        e.Node.BackColor = SystemColors.Highlight;
+                        e.Node.ForeColor = SystemColors.HighlightText;
+                    }
+                    else
+                    {
+                        e.Node.BackColor = ((TreeView)sender).BackColor;
+                        e.Node.ForeColor = ((TreeView)sender).ForeColor;
+                    }
                 }
             }
 
             _gmap.ReDrawgMap();
+
+            Globals.TreView_Handler = true;
         }
 
         private void treGMap_AfterCheck(object sender, TreeViewEventArgs e)
@@ -2346,7 +2370,9 @@ namespace Waypoint_Path_Generator
             frmAddPOI form = new frmAddPOI(_wpg, _gmap, Globals.mouse_down_lat, Globals.mouse_down_lon);
             form.ShowDialog();
             _gmap.ReDrawgMap();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            Globals.TreView_Handler = false;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
             Update_POI_Dgv();
         }
 
@@ -2363,7 +2389,9 @@ namespace Waypoint_Path_Generator
                 _wpg.POIPointAt(i).visible = true;
             }
             _gmap.ReDrawgMap();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            Globals.TreView_Handler = false;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
         }
 
         private void ToolAllPOIHide_Click(object sender, EventArgs e)
@@ -2374,7 +2402,9 @@ namespace Waypoint_Path_Generator
                 _wpg.POIPointAt(i).visible = false;
             }
             _gmap.ReDrawgMap();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            Globals.TreView_Handler = false;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
         }
 
         private void ToolAllPathShow_Click(object sender, EventArgs e)
@@ -2395,7 +2425,9 @@ namespace Waypoint_Path_Generator
             {
                 _wpg.PathAt(i).visible = false;
             }
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            Globals.TreView_Handler = false;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
             _gmap.ReDrawgMap();
 
         }
@@ -2418,7 +2450,9 @@ namespace Waypoint_Path_Generator
             {
                 _wpg.ShapeAt(i).visible = false;
             }
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            Globals.TreView_Handler = false;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
             _gmap.ReDrawgMap();
         }
 
@@ -2435,7 +2469,9 @@ namespace Waypoint_Path_Generator
             Models.Path path = null;
             DialogAddHelixPath dialog = new DialogAddHelixPath(_wpg, _gmap, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
+            Globals.TreView_Handler = false;
             GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
         }
 
         private void addManualPathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2443,7 +2479,9 @@ namespace Waypoint_Path_Generator
             Models.Path path = null;
             DialogAddRectPath dialog = new DialogAddRectPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
+            Globals.TreView_Handler = false;
             GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
         }
 
         private void addPolygonGridPathToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2460,7 +2498,9 @@ namespace Waypoint_Path_Generator
             Models.Path path = null;
             DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
             dialog.ShowDialog();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+            Globals.TreView_Handler = false;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.TreView_Handler = true;
         }
 
         // Delete all selected Paths
@@ -2531,6 +2571,14 @@ namespace Waypoint_Path_Generator
         {
             DialogPolyPerimPath dialog = new DialogPolyPerimPath(_wpg, _gmap, _options, treGMap);
             dialog.Show();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+        
+        private void addMathamaticalPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Models.Path path = null;
+            DialogAddMathPath dialog = new DialogAddMathPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
+            dialog.ShowDialog();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
@@ -3849,6 +3897,9 @@ namespace Waypoint_Path_Generator
 
         }
 
-        
+        private void treGMap_NodeMouseClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

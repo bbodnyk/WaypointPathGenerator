@@ -186,6 +186,7 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addMathamaticalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -254,7 +255,8 @@
             this.addManualPathToolStripMenuItem,
             this.addPolygonGridPathToolStripMenuItem,
             this.ToolAddKMLPath,
-            this.ToolAddPolyPerimPath});
+            this.ToolAddPolyPerimPath,
+            this.addMathamaticalPathToolStripMenuItem});
             this.ToolAddPath.Name = "ToolAddPath";
             this.ToolAddPath.Size = new System.Drawing.Size(203, 22);
             this.ToolAddPath.Text = "Add Path";
@@ -1128,6 +1130,7 @@
             this.treGMap.TabIndex = 25;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
             this.treGMap.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treGMap_NodeMouseClick);
+            this.treGMap.DoubleClick += new System.EventHandler(this.treGMap_NodeMouseClick);
             // 
             // gMapControl
             // 
@@ -1410,6 +1413,13 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
             // 
+            // addMathamaticalPathToolStripMenuItem
+            // 
+            this.addMathamaticalPathToolStripMenuItem.Name = "addMathamaticalPathToolStripMenuItem";
+            this.addMathamaticalPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.addMathamaticalPathToolStripMenuItem.Text = "Add Mathamatical Path";
+            this.addMathamaticalPathToolStripMenuItem.Click += new System.EventHandler(this.addMathamaticalPathToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1591,6 +1601,7 @@
         private System.Windows.Forms.ToolStripMenuItem mathamaticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mathamaticalPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolEditPathAlt;
+        private System.Windows.Forms.ToolStripMenuItem addMathamaticalPathToolStripMenuItem;
     }
 }
 

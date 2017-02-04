@@ -51,9 +51,15 @@ namespace Waypoint_Path_Generator
             {
                 cmbPOI.Items.Add(_wpg.POIPointAt(i).name);
             }
-
             Series altseries = chartAlt.Series["Altitude"];
-            altseries.ChartType = SeriesChartType.Area;
+            Series headingseries = chartAlt.Series["Heading"];
+            Series pitchseries = chartAlt.Series["Pitch"];
+            altseries.Points.Clear();
+            headingseries.Points.Clear();
+            pitchseries.Points.Clear();
+            altseries.ChartType = SeriesChartType.Line;
+            headingseries.ChartType = SeriesChartType.Line;
+            pitchseries.ChartType = SeriesChartType.Line;
             ChartArea chartarea = chartAlt.ChartAreas[0];
             chartarea.AxisX.Minimum = 0;
             chartarea.AxisX.Maximum = wplist.Count()-1;
@@ -64,7 +70,9 @@ namespace Waypoint_Path_Generator
             {
                 WayPoints wp = wplist.ElementAt(i);
                 wp.selected = false;
-                altseries.Points.AddXY(i,wp.alt);
+                if(chkShowAlt.Checked) altseries.Points.AddXY(i,wp.alt);
+                if(chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
+                if(chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
             }
             _path.selected = false;
             _gmap.ReDrawgMap();
@@ -261,13 +269,25 @@ namespace Waypoint_Path_Generator
 
             // Redraw Altitude Plot
 
-            Series altseries = chartAlt.Series["Altitude"];
-            altseries.Points.Clear();
-            for (int i = 0; i < wplist.Count(); i++)
-            {
-                wp = wplist.ElementAt(i);
-                altseries.Points.AddXY(i, wp.alt);
-            }
+            
+                Series altseries = chartAlt.Series["Altitude"];
+                Series headingseries = chartAlt.Series["Heading"];
+                Series pitchseries = chartAlt.Series["Pitch"];
+                altseries.Points.Clear();
+                headingseries.Points.Clear();
+                pitchseries.Points.Clear();
+                altseries.ChartType = SeriesChartType.Line;
+                headingseries.ChartType = SeriesChartType.Line;
+                pitchseries.ChartType = SeriesChartType.Line;
+                
+                for (int i = 0; i < wplist.Count(); i++)
+                {
+                    wp = wplist.ElementAt(i);
+                    if (chkShowAlt.Checked) altseries.Points.AddXY(i, wp.alt);
+                    if (chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
+                    if (chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
+                }
+            
 
             _path.selected = false;
             _gmap.ReDrawgMap();
@@ -292,6 +312,11 @@ namespace Waypoint_Path_Generator
         }
 
         private void chkSetAlt_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
 
         }
