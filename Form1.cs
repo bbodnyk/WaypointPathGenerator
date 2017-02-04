@@ -1741,6 +1741,10 @@ namespace Waypoint_Path_Generator
                 }
 
             }
+
+            /* - Commented out to remove POI selection graphically 
+
+
             else
             {
                 for (int i = 0; i < _wpg.POICount(); i++)
@@ -1761,6 +1765,7 @@ namespace Waypoint_Path_Generator
                 //text = text + "Button : " + button + "\n";
                 //MessageBox.Show(text);
             }
+            */
         }
 
         private void gMap_MouseUp(object sender, MouseEventArgs e)

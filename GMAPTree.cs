@@ -12,7 +12,6 @@ namespace Waypoint_Path_Generator.Models
 
         public static void Update_GMapTree(Waypoint_Path_Gen _wpg, TreeView _tregmap)
         {
-
             // Add POI Items
             POIPoints pnt;
             Models.Path path;
@@ -29,7 +28,18 @@ namespace Waypoint_Path_Generator.Models
                 pnt = _wpg.POIPointAt(i);
                 _tregmap.Nodes[0].Nodes[0].Nodes.Add(pnt.name);
                 _tregmap.Nodes[0].Nodes[0].Nodes[i].Tag = i;
+                //_tregmap.Nodes[0].Nodes[0].Nodes[i].Tag = pnt.internal_id;
                 _tregmap.Nodes[0].Nodes[0].Nodes[i].Checked = pnt.visible;
+                if (pnt.selected)
+                {
+                    _tregmap.Nodes[0].Nodes[0].Nodes[i].BackColor = System.Drawing.SystemColors.Highlight;
+                    _tregmap.Nodes[0].Nodes[0].Nodes[i].ForeColor = System.Drawing.SystemColors.HighlightText;
+                }
+                else
+                {
+                    _tregmap.Nodes[0].Nodes[0].Nodes[i].BackColor = System.Drawing.SystemColors.Window;
+                    _tregmap.Nodes[0].Nodes[0].Nodes[i].ForeColor = System.Drawing.SystemColors.WindowText;
+                }
             }
 
             for (int i = 0; i < _wpg.PathCount(); i++)
@@ -38,6 +48,16 @@ namespace Waypoint_Path_Generator.Models
                 _tregmap.Nodes[0].Nodes[1].Nodes.Add(path.name);
                 _tregmap.Nodes[0].Nodes[1].Nodes[i].Tag = i;
                 _tregmap.Nodes[0].Nodes[1].Nodes[i].Checked = path.visible;
+                if (path.selected)
+                {
+                    _tregmap.Nodes[0].Nodes[1].Nodes[i].BackColor = System.Drawing.SystemColors.Highlight;
+                    _tregmap.Nodes[0].Nodes[1].Nodes[i].ForeColor = System.Drawing.SystemColors.HighlightText;
+                }
+                else
+                {
+                    _tregmap.Nodes[0].Nodes[1].Nodes[i].BackColor = System.Drawing.SystemColors.Window;
+                    _tregmap.Nodes[0].Nodes[1].Nodes[i].ForeColor = System.Drawing.SystemColors.WindowText;
+                }
             }
 
             for (int i = 0; i < _wpg.ShapeCount(); i++)
@@ -46,8 +66,22 @@ namespace Waypoint_Path_Generator.Models
                 _tregmap.Nodes[0].Nodes[2].Nodes.Add(shape.name);
                 _tregmap.Nodes[0].Nodes[2].Nodes[i].Tag = i;
                 _tregmap.Nodes[0].Nodes[2].Nodes[i].Checked = shape.visible;
+                if (shape.selected)
+                {
+                    _tregmap.Nodes[0].Nodes[2].Nodes[i].BackColor = System.Drawing.SystemColors.Highlight;
+                    _tregmap.Nodes[0].Nodes[2].Nodes[i].ForeColor = System.Drawing.SystemColors.HighlightText;
+                    ;
+                }
+                else
+                {
+                    _tregmap.Nodes[0].Nodes[2].Nodes[i].BackColor = System.Drawing.SystemColors.Window;
+                    _tregmap.Nodes[0].Nodes[2].Nodes[i].ForeColor = System.Drawing.SystemColors.WindowText;
+                }
 
             }
+
+            _tregmap.ExpandAll();
         }
+        
     }
 }
