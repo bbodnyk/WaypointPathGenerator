@@ -290,14 +290,23 @@ namespace Waypoint_Path_Generator
                     double last_pitch = 0;
                     WayPoints wp1, wp2;
                     double last_head = 0;
-
+                    double theta, pitch_diff;
                     for (int i = start_wp; i < end_wp; i++)
                     {
-                        
+                        double wprange = end_wp - start_wp;
                         wp1 = wplist.ElementAt(i);
                         wp2 = wplist.ElementAt(i+1);
                         wp1.head = GPS.GPS_Bearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
-                        if (chkSinglePitch.Checked) wp1.gimblepitch = start_pitch;
+                        if (chkSinglePitch.Checked)
+                        {
+                            wp1.gimblepitch = start_pitch;
+                        }
+                        else
+                        {
+                            theta = GPS.DegreesToRadians(((i - start_wp) / wprange) * 180);
+                            pitch_diff = end_pitch - start_pitch;
+                            wp1.gimblepitch = start_pitch + pitch_diff * ((-Math.Cos(theta) + 1) / 2);
+                        }
                         last_head = wp1.head;
                         last_pitch = wp1.gimblepitch;
                     }
