@@ -43,7 +43,6 @@
             this.txtPathName.Name = "txtPathName";
             this.txtPathName.Size = new System.Drawing.Size(161, 20);
             this.txtPathName.TabIndex = 0;
-            this.txtPathName.Text = "Untitled Manual";
             this.txtPathName.TextChanged += new System.EventHandler(this.txtPathName_TextChanged);
             // 
             // label1

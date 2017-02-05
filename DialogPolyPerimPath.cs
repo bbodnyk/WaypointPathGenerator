@@ -116,6 +116,8 @@ namespace Waypoint_Path_Generator
             _current_path_index = index;
 
             Models.Path path = _wpg.PathAt(index);
+            path_name = "Untitled - Perimeter - " + Convert.ToString(path.internal_id);
+            path.name = path_name;
             string exist_type = path.type;
             bool exist_select = path.selected;
             bool exist_visible = path.visible;

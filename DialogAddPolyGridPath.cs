@@ -378,6 +378,8 @@ namespace Waypoint_Path_Generator
                 _path.Add_Path(_wpg, _gmap, path_name, "Polygon", new_list);
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
                 _current_intid = _path.internal_id;
+                path_name = "Untitled - Polygon - " + Convert.ToString(_path.internal_id);
+                _path.name = path_name;
                 _first_pass = false;
             }
             else

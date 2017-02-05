@@ -66,7 +66,8 @@ namespace Waypoint_Path_Generator
             _wp_list.AddLast(_wp);
             _path.waypoints = _wp_list;
             _wpg.AddPath(_path);
-
+            if (name == "") name = "Untitled - Manual - " + Convert.ToString(_path.internal_id);
+            _path.name = name;
 
             GMAPTree.Update_GMapTree(_wpg, _treeview);
             _gmap.ReDrawgMap();

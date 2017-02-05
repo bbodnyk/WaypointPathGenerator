@@ -225,6 +225,8 @@ namespace Waypoint_Path_Generator
                 if (path_name == "") path_name = "Untitled - Helical";
                 _path.Add_Path(_wpg, _gmap, path_name, "Helical", new_list);
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
+                path_name = "Untitled - Helical - " + Convert.ToString(_path.internal_id);
+                _path.name = path_name;
                 _first_pass = false;
                 
             } else

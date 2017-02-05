@@ -647,6 +647,8 @@ namespace Waypoint_Path_Generator
                 _path.Add_Path(_wpg, _gmap, path_name, "Rectangular", new_list);
                 Path newpath = _wpg.PathAt(_wpg.PathCount() - 1);
                 _current_intid = newpath.internal_id;
+                path_name = "Untitled - Rectangular - " + Convert.ToString(newpath.internal_id);
+                newpath.name = path_name;
                 _first_pass = false;
             }
             else

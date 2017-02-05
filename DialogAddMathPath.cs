@@ -392,16 +392,18 @@ namespace Waypoint_Path_Generator
             if (_new_path & _first_pass)
             {
                 string path_name = txtPathName.Text;
-                if (path_name == "" & _path_type == "Eliptical") path_name = "Untitled - Eliptical";
-                if (path_name == "" & _path_type == "Parabolic") path_name = "Untitled - Parabolic";
-                if (path_name == "" & _path_type == "Cubic") path_name = "Untitled - Cubic";
-                if (path_name == "" & _path_type == "Trisectrix") path_name = "Untitled - Trisectrix";
-                if (path_name == "" & _path_type == "Botanic") path_name = "Untitled - Botanic";
-                if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid";
-                if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium";
-                if (path_name == "" & _path_type == "Resonance") path_name = "Untitled - Resonance";
                 _path.Add_Path(_wpg, _gmap, path_name, "Mathamatical", wplist);
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
+                string path_id = Convert.ToString(_path.internal_id);
+                if (path_name == "" & _path_type == "Eliptical") path_name = "Untitled - Eliptical - " + path_id;
+                if (path_name == "" & _path_type == "Parabolic") path_name = "Untitled - Parabolic - " + path_id;
+                if (path_name == "" & _path_type == "Cubic") path_name = "Untitled - Cubic - " + path_id;
+                if (path_name == "" & _path_type == "Trisectrix") path_name = "Untitled - Trisectrix - " + path_id;
+                if (path_name == "" & _path_type == "Botanic") path_name = "Untitled - Botanic - " + path_id;
+                if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid - " + path_id;
+                if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium - " + path_id;
+                if (path_name == "" & _path_type == "Resonance") path_name = "Untitled - Resonance - " + path_id;
+                _path.name = path_name;
                 MathGUI gui = new MathGUI();
                 gui.name = txtPathName.Text;
                 if (_path_type == "Eliptical") gui.path_type = "Eliptical";
