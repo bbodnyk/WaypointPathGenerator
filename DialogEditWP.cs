@@ -209,5 +209,96 @@ namespace Waypoint_Path_Generator
 
             _gmap.ReDrawgMap();
         }
+
+        private void btnFirstWP_Click(object sender, EventArgs e)
+        {
+            // Save current wp
+
+            _wp.alt = Convert.ToDouble(txtwpalt.Text);
+            _wp.head = Convert.ToDouble(txtwphead.Text);
+            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
+            _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
+            _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
+            _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
+            int action_id = cmbActions.SelectedIndex;
+            Models.Action action = _wpg.ActionAt(action_id);
+            string name = action.name;
+            int[,] actions = action.actions;
+            _wp.action_id = action.internal_id;
+            _wp.selected = false;
+
+            // Go to first wp
+
+            _wp_index = 0;
+            _wp = _wp_list.ElementAt(_wp_index);
+            txtWPIndex.Text = Convert.ToString(_wp_index);
+            txtwplat.Text = Convert.ToString(_wp.lat);
+            txtwplon.Text = Convert.ToString(_wp.lon);
+            txtwpalt.Text = Convert.ToString(_wp.alt);
+            txtwphead.Text = Convert.ToString(_wp.head);
+            txtwpcurvesize.Text = Convert.ToString(_wp.curvesize);
+            txtwprotdirection.Text = Convert.ToString(_wp.rotationdir);
+            txtwpgimblemode.Text = Convert.ToString(_wp.gimblemode);
+            txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
+            trkHeading.Value = Convert.ToInt16(_wp.head);
+            trkCurveSize.Value = Convert.ToInt16(_wp.curvesize);
+            Models.Action wpaction = _wpg.ActionWithId(_wp.action_id);
+            int current_action_index = -1;
+
+            for (int i = 0; i < _wpg.ActionCount(); i++)
+            {
+                if (wpaction.name == _wpg.ActionAt(i).name) current_action_index = i;
+            }
+            if (current_action_index == -1) current_action_index = 0;
+            cmbActions.SelectedIndex = current_action_index;
+            _wp.selected = true;
+
+            _gmap.ReDrawgMap();
+        }
+
+        private void btnLastWP_Click(object sender, EventArgs e)
+        {
+            // Save current wp
+
+            _wp.alt = Convert.ToDouble(txtwpalt.Text);
+            _wp.head = Convert.ToDouble(txtwphead.Text);
+            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
+            _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
+            _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
+            _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
+            int action_id = cmbActions.SelectedIndex;
+            Models.Action action = _wpg.ActionAt(action_id);
+            string name = action.name;
+            int[,] actions = action.actions;
+            _wp.action_id = action.internal_id;
+            _wp.selected = false;
+
+            // Go to last wp
+
+            _wp_index = _wp_list.Count - 1;
+            _wp = _wp_list.ElementAt(_wp_index);
+            txtWPIndex.Text = Convert.ToString(_wp_index);
+            txtwplat.Text = Convert.ToString(_wp.lat);
+            txtwplon.Text = Convert.ToString(_wp.lon);
+            txtwpalt.Text = Convert.ToString(_wp.alt);
+            txtwphead.Text = Convert.ToString(_wp.head);
+            txtwpcurvesize.Text = Convert.ToString(_wp.curvesize);
+            txtwprotdirection.Text = Convert.ToString(_wp.rotationdir);
+            txtwpgimblemode.Text = Convert.ToString(_wp.gimblemode);
+            txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
+            trkHeading.Value = Convert.ToInt16(_wp.head);
+            trkCurveSize.Value = Convert.ToInt16(_wp.curvesize);
+            Models.Action wpaction = _wpg.ActionWithId(_wp.action_id);
+            int current_action_index = -1;
+
+            for (int i = 0; i < _wpg.ActionCount(); i++)
+            {
+                if (wpaction.name == _wpg.ActionAt(i).name) current_action_index = i;
+            }
+            if (current_action_index == -1) current_action_index = 0;
+            cmbActions.SelectedIndex = current_action_index;
+            _wp.selected = true;
+            _gmap.ReDrawgMap();
+        }
     }
 }

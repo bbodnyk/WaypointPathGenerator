@@ -54,6 +54,8 @@
             this.txtWPIndex = new System.Windows.Forms.TextBox();
             this.btnPrevWP = new System.Windows.Forms.Button();
             this.btnNextWP = new System.Windows.Forms.Button();
+            this.btnFirstWP = new System.Windows.Forms.Button();
+            this.btnLastWP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trkHeading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkCurveSize)).BeginInit();
             this.SuspendLayout();
@@ -111,7 +113,7 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(26, 384);
+            this.btnAccept.Location = new System.Drawing.Point(20, 417);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(103, 23);
             this.btnAccept.TabIndex = 6;
@@ -121,7 +123,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(190, 384);
+            this.btnCancel.Location = new System.Drawing.Point(184, 417);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -267,7 +269,7 @@
             // 
             // btnPrevWP
             // 
-            this.btnPrevWP.Location = new System.Drawing.Point(26, 327);
+            this.btnPrevWP.Location = new System.Drawing.Point(26, 368);
             this.btnPrevWP.Name = "btnPrevWP";
             this.btnPrevWP.Size = new System.Drawing.Size(103, 23);
             this.btnPrevWP.TabIndex = 24;
@@ -277,7 +279,7 @@
             // 
             // btnNextWP
             // 
-            this.btnNextWP.Location = new System.Drawing.Point(145, 327);
+            this.btnNextWP.Location = new System.Drawing.Point(145, 368);
             this.btnNextWP.Name = "btnNextWP";
             this.btnNextWP.Size = new System.Drawing.Size(88, 23);
             this.btnNextWP.TabIndex = 25;
@@ -285,11 +287,33 @@
             this.btnNextWP.UseVisualStyleBackColor = true;
             this.btnNextWP.Click += new System.EventHandler(this.btnNextWP_Click);
             // 
+            // btnFirstWP
+            // 
+            this.btnFirstWP.Location = new System.Drawing.Point(26, 330);
+            this.btnFirstWP.Name = "btnFirstWP";
+            this.btnFirstWP.Size = new System.Drawing.Size(103, 23);
+            this.btnFirstWP.TabIndex = 26;
+            this.btnFirstWP.Text = "First WP";
+            this.btnFirstWP.UseVisualStyleBackColor = true;
+            this.btnFirstWP.Click += new System.EventHandler(this.btnFirstWP_Click);
+            // 
+            // btnLastWP
+            // 
+            this.btnLastWP.Location = new System.Drawing.Point(145, 330);
+            this.btnLastWP.Name = "btnLastWP";
+            this.btnLastWP.Size = new System.Drawing.Size(88, 23);
+            this.btnLastWP.TabIndex = 27;
+            this.btnLastWP.Text = "Last WP";
+            this.btnLastWP.UseVisualStyleBackColor = true;
+            this.btnLastWP.Click += new System.EventHandler(this.btnLastWP_Click);
+            // 
             // DialogEditWP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 434);
+            this.ClientSize = new System.Drawing.Size(292, 471);
+            this.Controls.Add(this.btnLastWP);
+            this.Controls.Add(this.btnFirstWP);
             this.Controls.Add(this.btnNextWP);
             this.Controls.Add(this.btnPrevWP);
             this.Controls.Add(this.txtWPIndex);
@@ -355,5 +379,7 @@
         private System.Windows.Forms.TextBox txtWPIndex;
         private System.Windows.Forms.Button btnPrevWP;
         private System.Windows.Forms.Button btnNextWP;
+        private System.Windows.Forms.Button btnFirstWP;
+        private System.Windows.Forms.Button btnLastWP;
     }
 }

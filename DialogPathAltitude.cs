@@ -44,6 +44,8 @@ namespace Waypoint_Path_Generator
             lblwp2.Text = "Waypoint " + Convert.ToString(trkWP2.Value);
             txtAlt1.Text = Convert.ToString(trkAlt1.Value);
             txtAlt2.Text = Convert.ToString(trkAlt2.Value);
+            txtPitch1.Text = Convert.ToString(trkPitch1.Value);
+            txtPitch2.Text = Convert.ToString(trkPitch2.Value);
 
             cmbPOI.Items.Clear();
             cmbPOI.Items.Add("");
@@ -131,6 +133,16 @@ namespace Waypoint_Path_Generator
         {
 
         }
+        
+        private void trkPitch1_Scroll(object sender, EventArgs e)
+        {
+            txtPitch1.Text = Convert.ToString(trkPitch1.Value);
+            if (chkSinglePitch.Checked)
+            {
+                trkPitch2.Value = trkPitch1.Value;
+                txtPitch2.Text = Convert.ToString(trkPitch2.Value);
+            }
+        }
 
         private void trkAlt1_Scroll(object sender, EventArgs e)
         {
@@ -139,6 +151,16 @@ namespace Waypoint_Path_Generator
             {
                 trkAlt2.Value = trkAlt1.Value;
                 txtAlt2.Text = Convert.ToString(trkAlt2.Value);
+            }
+        }
+
+        private void trkPitch2_Scroll(object sender, EventArgs e)
+        {
+            txtPitch2.Text = Convert.ToString(trkPitch2.Value);
+            if (chkSinglePitch.Checked)
+            {
+                trkPitch1.Value = trkPitch2.Value;
+                txtPitch1.Text = Convert.ToString(trkPitch1.Value);
             }
         }
 
@@ -158,6 +180,16 @@ namespace Waypoint_Path_Generator
             {
                 trkAlt2.Value = trkAlt1.Value;
                 txtAlt2.Text = Convert.ToString(trkAlt2.Value);
+            }
+        }
+
+        private void chkSinglePitch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSinglePitch.Checked)
+            {
+                trkPitch2.Value = trkPitch1.Value;
+                txtPitch2.Text = Convert.ToString(trkPitch2.Value);
+                chkPOIMode.Checked = false;
             }
         }
 
@@ -250,20 +282,28 @@ namespace Waypoint_Path_Generator
                 }
                 else
                 {
+
                     int start_wp = trkWP1.Value;
                     int end_wp = trkWP2.Value;
+                    int start_pitch = trkPitch1.Value;
+                    int end_pitch = trkPitch2.Value;
+                    double last_pitch = 0;
                     WayPoints wp1, wp2;
                     double last_head = 0;
 
                     for (int i = start_wp; i < end_wp; i++)
                     {
+                        
                         wp1 = wplist.ElementAt(i);
                         wp2 = wplist.ElementAt(i+1);
                         wp1.head = GPS.GPS_Bearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
+                        if (chkSinglePitch.Checked) wp1.gimblepitch = start_pitch;
                         last_head = wp1.head;
+                        last_pitch = wp1.gimblepitch;
                     }
                     wp1 = wplist.ElementAt(end_wp);
                     wp1.head = last_head;
+                    wp1.gimblepitch = last_pitch;
                 }
             }
 
@@ -319,6 +359,11 @@ namespace Waypoint_Path_Generator
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkPOIMode_CheckedChanged(object sender, EventArgs e)
+        {
+            chkSinglePitch.Checked = false;
         }
 
         private void chkSetPOI_CheckedChanged(object sender, EventArgs e)
