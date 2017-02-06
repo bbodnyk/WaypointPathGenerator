@@ -17,6 +17,7 @@ namespace Waypoint_Path_Generator
         GMAP _gmap;
         Path _path;
         int _wp_index;
+        bool _run;
         LinkedList<WayPoints> _wp_list;
         WayPoints _wp;
 
@@ -29,6 +30,7 @@ namespace Waypoint_Path_Generator
             _wp_list = _path.waypoints;
             _wp = _wp_list.ElementAt(wp_index);
             InitializeComponent();
+            _run = false;
             txtWPIndex.Text = Convert.ToString(wp_index);
             txtwplat.Text = Convert.ToString(_wp.lat);
             txtwplon.Text = Convert.ToString(_wp.lon);
@@ -65,7 +67,7 @@ namespace Waypoint_Path_Generator
                 if (_wp.poi_id == pnt.internal_id) save_i = i+1;
             }
             cmbPOI.SelectedIndex = save_i;
-
+            _run = true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -316,6 +318,7 @@ namespace Waypoint_Path_Generator
 
         private void cmbPOI_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!_run) return;
             string poi_name = cmbPOI.GetItemText(cmbPOI.SelectedItem);
             POIPoints poi = _wpg.POIPointName(poi_name);
             double poi_lat = poi.lat;
