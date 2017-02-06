@@ -56,6 +56,8 @@
             this.btnNextWP = new System.Windows.Forms.Button();
             this.btnFirstWP = new System.Windows.Forms.Button();
             this.btnLastWP = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmbPOI = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.trkHeading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkCurveSize)).BeginInit();
             this.SuspendLayout();
@@ -113,7 +115,7 @@
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(20, 417);
+            this.btnAccept.Location = new System.Drawing.Point(20, 460);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(103, 23);
             this.btnAccept.TabIndex = 6;
@@ -123,7 +125,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(184, 417);
+            this.btnCancel.Location = new System.Drawing.Point(184, 460);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -141,7 +143,7 @@
             // 
             // txtwpcurvesize
             // 
-            this.txtwpcurvesize.Location = new System.Drawing.Point(86, 153);
+            this.txtwpcurvesize.Location = new System.Drawing.Point(86, 196);
             this.txtwpcurvesize.Name = "txtwpcurvesize";
             this.txtwpcurvesize.Size = new System.Drawing.Size(37, 20);
             this.txtwpcurvesize.TabIndex = 9;
@@ -149,14 +151,14 @@
             // 
             // txtwprotdirection
             // 
-            this.txtwprotdirection.Location = new System.Drawing.Point(86, 188);
+            this.txtwprotdirection.Location = new System.Drawing.Point(86, 231);
             this.txtwprotdirection.Name = "txtwprotdirection";
             this.txtwprotdirection.Size = new System.Drawing.Size(100, 20);
             this.txtwprotdirection.TabIndex = 10;
             // 
             // txtwpgimblemode
             // 
-            this.txtwpgimblemode.Location = new System.Drawing.Point(86, 224);
+            this.txtwpgimblemode.Location = new System.Drawing.Point(86, 267);
             this.txtwpgimblemode.Name = "txtwpgimblemode";
             this.txtwpgimblemode.Size = new System.Drawing.Size(100, 20);
             this.txtwpgimblemode.TabIndex = 11;
@@ -174,7 +176,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 156);
+            this.label5.Location = new System.Drawing.Point(19, 199);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 13;
@@ -182,7 +184,7 @@
             // 
             // txtgimblepitch
             // 
-            this.txtgimblepitch.Location = new System.Drawing.Point(86, 258);
+            this.txtgimblepitch.Location = new System.Drawing.Point(86, 301);
             this.txtgimblepitch.Name = "txtgimblepitch";
             this.txtgimblepitch.Size = new System.Drawing.Size(37, 20);
             this.txtgimblepitch.TabIndex = 14;
@@ -190,7 +192,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 191);
+            this.label6.Location = new System.Drawing.Point(14, 234);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 13);
             this.label6.TabIndex = 15;
@@ -199,7 +201,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 227);
+            this.label7.Location = new System.Drawing.Point(8, 270);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 13);
             this.label7.TabIndex = 16;
@@ -208,7 +210,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 261);
+            this.label8.Location = new System.Drawing.Point(8, 304);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 13);
             this.label8.TabIndex = 17;
@@ -217,7 +219,7 @@
             // cmbActions
             // 
             this.cmbActions.FormattingEnabled = true;
-            this.cmbActions.Location = new System.Drawing.Point(86, 294);
+            this.cmbActions.Location = new System.Drawing.Point(86, 337);
             this.cmbActions.Name = "cmbActions";
             this.cmbActions.Size = new System.Drawing.Size(121, 21);
             this.cmbActions.TabIndex = 18;
@@ -234,7 +236,7 @@
             // 
             // trkCurveSize
             // 
-            this.trkCurveSize.Location = new System.Drawing.Point(129, 153);
+            this.trkCurveSize.Location = new System.Drawing.Point(129, 196);
             this.trkCurveSize.Maximum = 30;
             this.trkCurveSize.Name = "trkCurveSize";
             this.trkCurveSize.Size = new System.Drawing.Size(104, 42);
@@ -244,7 +246,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 297);
+            this.label9.Location = new System.Drawing.Point(30, 340);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(42, 13);
             this.label9.TabIndex = 21;
@@ -269,7 +271,7 @@
             // 
             // btnPrevWP
             // 
-            this.btnPrevWP.Location = new System.Drawing.Point(26, 368);
+            this.btnPrevWP.Location = new System.Drawing.Point(26, 411);
             this.btnPrevWP.Name = "btnPrevWP";
             this.btnPrevWP.Size = new System.Drawing.Size(103, 23);
             this.btnPrevWP.TabIndex = 24;
@@ -279,7 +281,7 @@
             // 
             // btnNextWP
             // 
-            this.btnNextWP.Location = new System.Drawing.Point(145, 368);
+            this.btnNextWP.Location = new System.Drawing.Point(145, 411);
             this.btnNextWP.Name = "btnNextWP";
             this.btnNextWP.Size = new System.Drawing.Size(88, 23);
             this.btnNextWP.TabIndex = 25;
@@ -289,7 +291,7 @@
             // 
             // btnFirstWP
             // 
-            this.btnFirstWP.Location = new System.Drawing.Point(26, 330);
+            this.btnFirstWP.Location = new System.Drawing.Point(26, 373);
             this.btnFirstWP.Name = "btnFirstWP";
             this.btnFirstWP.Size = new System.Drawing.Size(103, 23);
             this.btnFirstWP.TabIndex = 26;
@@ -299,7 +301,7 @@
             // 
             // btnLastWP
             // 
-            this.btnLastWP.Location = new System.Drawing.Point(145, 330);
+            this.btnLastWP.Location = new System.Drawing.Point(145, 373);
             this.btnLastWP.Name = "btnLastWP";
             this.btnLastWP.Size = new System.Drawing.Size(88, 23);
             this.btnLastWP.TabIndex = 27;
@@ -307,11 +309,31 @@
             this.btnLastWP.UseVisualStyleBackColor = true;
             this.btnLastWP.Click += new System.EventHandler(this.btnLastWP_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(31, 159);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(25, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "POI";
+            // 
+            // cmbPOI
+            // 
+            this.cmbPOI.FormattingEnabled = true;
+            this.cmbPOI.Location = new System.Drawing.Point(86, 159);
+            this.cmbPOI.Name = "cmbPOI";
+            this.cmbPOI.Size = new System.Drawing.Size(121, 21);
+            this.cmbPOI.TabIndex = 29;
+            this.cmbPOI.SelectedIndexChanged += new System.EventHandler(this.cmbPOI_SelectedIndexChanged);
+            // 
             // DialogEditWP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 471);
+            this.ClientSize = new System.Drawing.Size(292, 574);
+            this.Controls.Add(this.cmbPOI);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.btnLastWP);
             this.Controls.Add(this.btnFirstWP);
             this.Controls.Add(this.btnNextWP);
@@ -381,5 +403,7 @@
         private System.Windows.Forms.Button btnNextWP;
         private System.Windows.Forms.Button btnFirstWP;
         private System.Windows.Forms.Button btnLastWP;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbPOI;
     }
 }

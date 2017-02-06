@@ -257,6 +257,8 @@ namespace Waypoint_Path_Generator
                     double lat_camera = _lat_center;
                     double lon_camera = _lon_center;
                     double cam_alt = 5;
+                    int poi_id = -1;
+
                     double distance;
 
                     for (int i = 0; i < _wpg.POICount(); i++)
@@ -268,6 +270,7 @@ namespace Waypoint_Path_Generator
                             lat_camera = tmp_point.lat;
                             lon_camera = tmp_point.lon;
                             cam_alt = tmp_point.cam_alt;
+                            poi_id = tmp_point.internal_id;
                         }
                     }
 
@@ -278,6 +281,7 @@ namespace Waypoint_Path_Generator
                         distance = GPS.GPS_Distance(wp.lat, wp.lon, lat_camera, lon_camera, Form1.Globals.gps_radius);
                         wp.gimblepitch = -GPS.RadiansToDegrees(Math.Atan((wp.alt-cam_alt) / distance));
                         wp.gimblemode = 2;
+                        wp.poi_id = poi_id;
                     }
                 }
                 else

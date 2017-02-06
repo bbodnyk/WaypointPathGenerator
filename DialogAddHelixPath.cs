@@ -145,6 +145,7 @@ namespace Waypoint_Path_Generator
 
             double lat_camera = lat_center;
             double lon_camera = lon_center;
+            int poi_id = -1;
             String cam_poi_name = cmbHelixPOI.GetItemText(cmbHelixPOI.SelectedItem);
 
             for (int i = 0; i < _wpg.POICount(); i++)
@@ -155,6 +156,7 @@ namespace Waypoint_Path_Generator
                 {
                     lat_camera = tmp_point.lat;
                     lon_camera = tmp_point.lon;
+                    poi_id = tmp_point.internal_id;
                 }
             }
 
@@ -180,7 +182,7 @@ namespace Waypoint_Path_Generator
             double rotdir = 0;
             if (startend)
             {
-                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, no_actions_id);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, -1, no_actions_id);
             }
             do
             {
@@ -205,7 +207,7 @@ namespace Waypoint_Path_Generator
                     if (radioCCW.Checked) heading = GPS.Mod_Angle(heading + 180.0);
                 }
 
-                _wp.Add_Waypoint_List(_wpg, new_list, circ_lat, circ_lon, helix_altitude, heading, curvesize, rotdir, gimblemode, gimplepitch, actions_id);
+                _wp.Add_Waypoint_List(_wpg, new_list, circ_lat, circ_lon, helix_altitude, heading, curvesize, rotdir, gimblemode, gimplepitch, poi_id, actions_id);
 
                 angle = angle + angle_increment;
                 count++;
@@ -214,7 +216,7 @@ namespace Waypoint_Path_Generator
 
             if (startend)
             {
-                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, no_actions_id);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, helix_start_alt, 0.0, curvesize, rotdir, gimblemode, gimplepitch, -1, no_actions_id);
             }
 
             // Save Path

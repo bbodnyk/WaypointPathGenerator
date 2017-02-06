@@ -52,6 +52,20 @@ namespace Waypoint_Path_Generator
             }
             if (current_action_index == -1) current_action_index = 0;
             cmbActions.SelectedIndex = current_action_index;
+
+            cmbPOI.Items.Clear();
+            cmbPOI.Items.Add("");
+            int save_i = 0;
+            POIPoints pnt;
+
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                pnt = _wpg.POIPointAt(i);
+                cmbPOI.Items.Add(pnt.name);
+                if (_wp.poi_id == pnt.internal_id) save_i = i+1;
+            }
+            cmbPOI.SelectedIndex = save_i;
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -66,16 +80,8 @@ namespace Waypoint_Path_Generator
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            _wp.alt = Convert.ToDouble(txtwpalt.Text);
-            _wp.head = Convert.ToDouble(txtwphead.Text);
-            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
-            _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
-            _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
-            _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
-            int action_id = cmbActions.SelectedIndex;
-            Models.Action action = _wpg.ActionAt(action_id);
-            string name = action.name;
-            _wp.action_id = action.internal_id;
+            SaveCurrent();
+            
             _gmap.ReDrawgMap();
             this.Close();
         }
@@ -122,17 +128,7 @@ namespace Waypoint_Path_Generator
         {
             // Save current wp
 
-            _wp.alt = Convert.ToDouble(txtwpalt.Text);
-            _wp.head = Convert.ToDouble(txtwphead.Text);
-            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
-            _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
-            _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
-            _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
-            int action_id = cmbActions.SelectedIndex;
-            Models.Action action = _wpg.ActionAt(action_id);
-            string name = action.name;
-            _wp.action_id = action.internal_id;
-            _wp.selected = false;
+            SaveCurrent();
 
             // Go tp previous wp
 
@@ -159,11 +155,17 @@ namespace Waypoint_Path_Generator
             }
             if (current_action_index == -1) current_action_index = 0;
             cmbActions.SelectedIndex = current_action_index;
+
+            for(int i=0;i < _wpg.POICount(); i++)
+            {
+                POIPoints pnt = _wpg.POIPointAt(i);
+                if (pnt.internal_id == _wp.poi_id) cmbPOI.SelectedIndex = (i + 1);
+            }
             _wp.selected = true;
             _gmap.ReDrawgMap();
         }
 
-        private void btnNextWP_Click(object sender, EventArgs e)
+        private void SaveCurrent()
         {
             // Save current wp
 
@@ -173,6 +175,12 @@ namespace Waypoint_Path_Generator
             _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
             _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
             _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
+            int poi_id = cmbPOI.SelectedIndex - 1;
+            if (poi_id >= 0)
+            {
+                POIPoints pnt = _wpg.POIPointAt(poi_id);
+                _wp.poi_id = pnt.internal_id;
+            }
             int action_id = cmbActions.SelectedIndex;
             Models.Action action = _wpg.ActionAt(action_id);
             string name = action.name;
@@ -180,6 +188,14 @@ namespace Waypoint_Path_Generator
             _wp.action_id = action.internal_id;
             _wp.selected = false;
 
+        }
+
+        private void btnNextWP_Click(object sender, EventArgs e)
+        {
+            // Save Current WP
+
+            SaveCurrent();
+            
             // Go to next wp
 
             _wp_index++;
@@ -205,6 +221,13 @@ namespace Waypoint_Path_Generator
             }
             if (current_action_index == -1) current_action_index = 0;
             cmbActions.SelectedIndex = current_action_index;
+
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                POIPoints pnt = _wpg.POIPointAt(i);
+                if (pnt.internal_id == _wp.poi_id) cmbPOI.SelectedIndex = (i + 1);
+            }
+
             _wp.selected = true;
 
             _gmap.ReDrawgMap();
@@ -214,18 +237,7 @@ namespace Waypoint_Path_Generator
         {
             // Save current wp
 
-            _wp.alt = Convert.ToDouble(txtwpalt.Text);
-            _wp.head = Convert.ToDouble(txtwphead.Text);
-            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
-            _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
-            _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
-            _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
-            int action_id = cmbActions.SelectedIndex;
-            Models.Action action = _wpg.ActionAt(action_id);
-            string name = action.name;
-            int[,] actions = action.actions;
-            _wp.action_id = action.internal_id;
-            _wp.selected = false;
+            SaveCurrent();
 
             // Go to first wp
 
@@ -251,8 +263,13 @@ namespace Waypoint_Path_Generator
             }
             if (current_action_index == -1) current_action_index = 0;
             cmbActions.SelectedIndex = current_action_index;
-            _wp.selected = true;
 
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                POIPoints pnt = _wpg.POIPointAt(i);
+                if (pnt.internal_id == _wp.poi_id) cmbPOI.SelectedIndex = (i + 1);
+            }
+            _wp.selected = true;
             _gmap.ReDrawgMap();
         }
 
@@ -260,18 +277,7 @@ namespace Waypoint_Path_Generator
         {
             // Save current wp
 
-            _wp.alt = Convert.ToDouble(txtwpalt.Text);
-            _wp.head = Convert.ToDouble(txtwphead.Text);
-            _wp.curvesize = Convert.ToDouble(txtwpcurvesize.Text);
-            _wp.rotationdir = Convert.ToDouble(txtwprotdirection.Text);
-            _wp.gimblemode = Convert.ToInt16(txtwpgimblemode.Text);
-            _wp.gimblepitch = Convert.ToDouble(txtgimblepitch.Text);
-            int action_id = cmbActions.SelectedIndex;
-            Models.Action action = _wpg.ActionAt(action_id);
-            string name = action.name;
-            int[,] actions = action.actions;
-            _wp.action_id = action.internal_id;
-            _wp.selected = false;
+            SaveCurrent();
 
             // Go to last wp
 
@@ -297,8 +303,33 @@ namespace Waypoint_Path_Generator
             }
             if (current_action_index == -1) current_action_index = 0;
             cmbActions.SelectedIndex = current_action_index;
+
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                POIPoints pnt = _wpg.POIPointAt(i);
+                if (pnt.internal_id == _wp.poi_id) cmbPOI.SelectedIndex = (i + 1);
+            }
+
             _wp.selected = true;
             _gmap.ReDrawgMap();
+        }
+
+        private void cmbPOI_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string poi_name = cmbPOI.GetItemText(cmbPOI.SelectedItem);
+            POIPoints poi = _wpg.POIPointName(poi_name);
+            double poi_lat = poi.lat;
+            double poi_lon = poi.lon;
+            double poi_elev = poi.cam_alt;
+
+            double heading = GPS.GPS_Bearing(_wp.lat, _wp.lon, poi_lat, poi_lon);
+            double distance = GPS.GPS_Distance(_wp.lat, _wp.lon, poi_lat, poi_lon, Form1.Globals.gps_radius);
+            _wp.gimblepitch = -GPS.RadiansToDegrees(Math.Atan((_wp.alt-poi_elev) / distance));
+            _wp.gimblemode = 2;
+            _wp.head = heading;
+            txtgimblepitch.Text = Convert.ToString(_wp.gimblepitch);
+            txtwphead.Text = Convert.ToString(_wp.head);
+            trkHeading.Value = Convert.ToInt16(_wp.head);
         }
     }
 }

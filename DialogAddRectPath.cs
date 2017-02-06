@@ -392,23 +392,23 @@ namespace Waypoint_Path_Generator
 
                 if (startend)
                 {
-                    _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, no_actions);
+                    _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, no_actions);
                 }
 
                 if (radioUpLeft.Checked | radioLowLeft.Checked)
                 {
                     _wp.Add_Leg_List(_wpg, new_list, lat_left, lon_left, lat_right, lon_right, 
-                        altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                        altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                 }
                 else
                 {
                     _wp.Add_Leg_List(_wpg, new_list, lat_right, lon_right, lat_left, lon_left, 
-                        altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                        altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                 }
 
                 if (startend)
                 {
-                    _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, no_actions);
+                    _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, no_actions);
                 }
             }
             else
@@ -436,43 +436,43 @@ namespace Waypoint_Path_Generator
 
                     if (startend)
                     {
-                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, no_actions);
+                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, no_actions);
                     }
                     if (radioLowLeft.Checked)
                     {
                         _wp.Add_Leg_List(_wpg, new_list, lat_bottom_left, lon_bottom_left, lat_bottom_right, lon_bottom_right, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                         _wp.Add_Leg_List(_wpg, new_list, lat_top_right, lon_top_right, lat_top_left, lon_top_left, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                     }
 
                     if (radioLowRight.Checked)
                     {
                         _wp.Add_Leg_List(_wpg, new_list, lat_bottom_right, lon_bottom_right, lat_bottom_left, lon_bottom_left, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                         _wp.Add_Leg_List(_wpg, new_list, lat_top_left, lon_top_left, lat_top_right, lon_top_right, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                     }
 
                     if (radioUpLeft.Checked)
                     {
                         _wp.Add_Leg_List(_wpg, new_list, lat_top_left, lon_top_left, lat_top_right, lon_top_right, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                         _wp.Add_Leg_List(_wpg, new_list, lat_bottom_right, lon_bottom_right, lat_bottom_left, lon_bottom_left, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                     }
 
                     if (radioUpRight.Checked)
                     {
                         _wp.Add_Leg_List(_wpg, new_list, lat_top_right, lon_top_right, lat_top_left, lon_top_left, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                         _wp.Add_Leg_List(_wpg, new_list, lat_bottom_left, lon_bottom_left, lat_bottom_right, lon_bottom_right, 
-                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                            altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                     }
 
                     if (startend)
                     {
-                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, no_actions);
+                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, no_actions);
                     }
                 }
                 else {
@@ -486,7 +486,7 @@ namespace Waypoint_Path_Generator
 
                     if (startend)
                     {
-                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, no_actions);
+                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, no_actions);
                     }
 
                     int row_count = 0;
@@ -504,7 +504,7 @@ namespace Waypoint_Path_Generator
                             if (radioLowLeft.Checked)
                             {
                                 _wp.Add_Leg_List(_wpg, new_list, lat_bottom, lon_left, lat_bottom, lon_right, 
-                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_bottom;
                                 next_lon_start = lon_right;
                                 next_lon_end = lon_left;
@@ -512,7 +512,7 @@ namespace Waypoint_Path_Generator
                             if (radioLowRight.Checked)
                             {
                                 _wp.Add_Leg_List(_wpg, new_list, lat_bottom, lon_right, lat_bottom, lon_left, 
-                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_bottom;
                                 next_lon_start = lon_left;
                                 next_lon_end = lon_right;
@@ -520,7 +520,7 @@ namespace Waypoint_Path_Generator
                             if (radioUpLeft.Checked)
                             {
                                 _wp.Add_Leg_List(_wpg, new_list, lat_top, lon_left, lat_top, lon_right, 
-                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_top;
                                 next_lon_start = lon_right;
                                 next_lon_end = lon_left;
@@ -528,7 +528,7 @@ namespace Waypoint_Path_Generator
                             if (radioUpRight.Checked)
                             {
                                 _wp.Add_Leg_List(_wpg, new_list, lat_top, lon_right, lat_top, lon_left, 
-                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                                    altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                                 lat_current = lat_top;
                                 next_lon_start = lon_left;
                                 next_lon_end = lon_right;
@@ -542,7 +542,7 @@ namespace Waypoint_Path_Generator
                             //lat_current = Globals.waypoints[Globals.waypoint_count - 1, 0];
                             lat_next = lat_current + (-ver_dir_flag * (degrees_per_foot * row_increment));
                             _wp.Add_Leg_List(_wpg, new_list, lat_next, next_lon_start, lat_next, next_lon_end, 
-                                altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions, photo_actions, _video, _camera_height, _overlap_height);
+                                altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, video_actions, photo_actions, _video, _camera_height, _overlap_height);
                             lon_tmp = next_lon_start;
                             next_lon_start = next_lon_end;
                             next_lon_end = lon_tmp;
@@ -553,7 +553,7 @@ namespace Waypoint_Path_Generator
 
                     if (startend)
                     {
-                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, no_actions);
+                        _wp.Add_Waypoint_List(_wpg, new_list, lat_home, lon_home, altitude, drone_heading, curvesize, rotdir, gimblemode, gimblepitch, -1, no_actions);
                     }
                 }
             }

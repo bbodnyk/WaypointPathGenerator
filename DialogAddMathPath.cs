@@ -179,7 +179,24 @@ namespace Waypoint_Path_Generator
             rtbMathPath.AppendText("Meters/Degree Lat : " + Convert.ToString(lat_degree) + "\n");
             rtbMathPath.AppendText("Meters/Degree Lon : " + Convert.ToString(lon_degree) + "\n");
 
+            // Get Camera Location
 
+            double lat_camera = _lat;
+            double lon_camera = _lon;
+            String cam_poi_name = cmbPOI.GetItemText(cmbPOI.SelectedItem);
+            int poi_id = -1;
+
+            for (int i = 0; i < _wpg.POICount(); i++)
+            {
+                POIPoints tmp_point = _wpg.POIPointAt(i);
+                string name = tmp_point.name;
+                if (cam_poi_name == name)
+                {
+                    lat_camera = tmp_point.lat;
+                    lon_camera = tmp_point.lon;
+                    poi_id = tmp_point.internal_id;
+                }
+            }
             // Get type of path
 
             _path_type = cmbPathType.Text;
@@ -222,7 +239,7 @@ namespace Waypoint_Path_Generator
                     rot_lon = GPS.GPS_Lon_BearDist(_lat, _lon, rot_lat, bearing + angle, dist, gps_radius);
 
                     rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(rot_lat) + ", " + Convert.ToString(rot_lon) + "\n");
-                    _wp.Add_Waypoint_List(_wpg, wplist, rot_lat, rot_lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    _wp.Add_Waypoint_List(_wpg, wplist, rot_lat, rot_lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
                     xval = xval + xinc;
                 }
             }
@@ -248,7 +265,7 @@ namespace Waypoint_Path_Generator
                     distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + rot_ang, distance, _gps_radius);
                     lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, bearing + rot_ang, distance, _gps_radius);
-                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
                     ang = ang + ang_inc;
                 }
             }
@@ -277,7 +294,7 @@ namespace Waypoint_Path_Generator
                     distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + rot_ang, distance, _gps_radius);
                     lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, bearing + rot_ang, distance, _gps_radius);
-                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
                     ang = ang + ang_inc;
                 }
             }
@@ -301,7 +318,7 @@ namespace Waypoint_Path_Generator
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, ang + rot_ang, radius, gps_radius);
                     lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, ang + rot_ang, radius, gps_radius);
                     rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(lat) + ", " + Convert.ToString(lon) + "\n");
-                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
                     ang = ang + ang_inc;
                 }
             }
@@ -323,7 +340,7 @@ namespace Waypoint_Path_Generator
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, ang + rot_ang, radius, gps_radius);
                     lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, ang + rot_ang, radius, gps_radius);
                     rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(lat) + ", " + Convert.ToString(lon) + "\n");
-                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
                     ang = ang + ang_inc;
                 }
             }
@@ -359,7 +376,7 @@ namespace Waypoint_Path_Generator
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, ang + rot_ang, radius, gps_radius);
                     lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, ang + rot_ang, radius, gps_radius);
                     rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(lat) + ", " + Convert.ToString(lon) + "\n");
-                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
                     ang = ang + ang_inc;
                 }
             }
@@ -382,7 +399,7 @@ namespace Waypoint_Path_Generator
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, ang + rot_ang, radius, gps_radius);
                     lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, ang + rot_ang, radius, gps_radius);
                     rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(lat) + ", " + Convert.ToString(lon) + "\n");
-                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, no_action_id);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
                     ang = ang + ang_inc;
                 }
             }
@@ -446,18 +463,8 @@ namespace Waypoint_Path_Generator
                 //_gmap.Delete_gMapPath(path);
 
             }
-
-            int poi_id = 0;
-            if (chkPOI.Checked)
-            {
-                string name = cmbPOI.Text;
-                if(name != "")
-                {
-                    POIPoints poipnt = _wpg.POIPointName(name);
-                    if (poipnt != null) poi_id = poipnt.internal_id;
-                }
-                _wpg.SetPathPoi(true, poi_id, _path);
-            } else _wpg.SetPathPoi(false, poi_id, _path);
+            
+            _wpg.SetPathPoi(chkPOI.Checked, poi_id, _path);
 
             _path.visible = true;
             _path.selected = false;

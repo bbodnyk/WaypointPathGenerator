@@ -284,6 +284,7 @@ namespace Waypoint_Path_Generator.Models
         public void SetPathPoi(bool setpoi, int poi_id, Path path)
         {
             double poi_lat, poi_lon, poi_alt, poi_elev, poi_camalt;
+
             LinkedList<WayPoints> wp_list = path.waypoints;
             int wpcnt = wp_list.Count;
 
@@ -292,7 +293,7 @@ namespace Waypoint_Path_Generator.Models
                 // Point Drone at POI
                 // Get POI location
 
-                if (poi_id == 0)
+                if (poi_id <= 0)
                 {
                     MathGUI gui = path.mathgui;
                     poi_lat = gui.lat;
@@ -313,6 +314,7 @@ namespace Waypoint_Path_Generator.Models
                 {
                     WayPoints wp = wp_list.ElementAt(i);
                     wp.head = GPS.GPS_Bearing(wp.lat, wp.lon, poi_lat, poi_lon);
+                    wp.poi_id = poi_id;
                 }
             }
             else
@@ -323,6 +325,7 @@ namespace Waypoint_Path_Generator.Models
                     WayPoints wp1 = wp_list.ElementAt(i);
                     WayPoints wp2 = wp_list.ElementAt(i+1);
                     wp1.head = GPS.GPS_Bearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
+                    wp1.poi_id = -1;
                 }
             }
         }
@@ -408,7 +411,7 @@ namespace Waypoint_Path_Generator.Models
             if (wp_count <= 1) return;
 
             // Split at first Waypoint
-
+            
             if (selected_wp_index == 0)
             {
                 WayPoints wpnew = new WayPoints();
@@ -622,7 +625,7 @@ namespace Waypoint_Path_Generator.Models
             double lat, lon, alt, elev, cam_alt, head, rotdir, gimble_pitch, curvesize;
             int gimble_mode, int_id;
             int[,] actions;
-            int action_id;
+            int action_id, poi_id;
             Models.Action action;
 
             // Generate XML
@@ -859,6 +862,7 @@ namespace Waypoint_Path_Generator.Models
                         gimble_mode = waypoint.ElementAt(j).gimblemode;
                         gimble_pitch = waypoint.ElementAt(j).gimblepitch;
                         action_id = waypoint.ElementAt(j).action_id;
+                        poi_id = waypoint.ElementAt(j).poi_id;
                         xml_writer.WriteElementString("Lat", Convert.ToString(lat));
                         xml_writer.WriteElementString("Lon", Convert.ToString(lon));
                         xml_writer.WriteElementString("Alt", Convert.ToString(alt));
@@ -868,6 +872,7 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteElementString("GimbleMode", Convert.ToString(gimble_mode));
                         xml_writer.WriteElementString("GimblePitch", Convert.ToString(gimble_pitch));
                         xml_writer.WriteElementString("ActionID", Convert.ToString(action_id));
+                        xml_writer.WriteElementString("POIID", Convert.ToString(poi_id));
 
                         /*
                         for (int k = 0; k < 15; k++)
@@ -1119,7 +1124,7 @@ namespace Waypoint_Path_Generator.Models
                     waypoint.gimblemode = Convert.ToInt16(wp_node.SelectSingleNode("GimbleMode").InnerText);
                     waypoint.gimblepitch = Convert.ToDouble(wp_node.SelectSingleNode("GimblePitch").InnerText);
                     waypoint.action_id = Convert.ToInt16(wp_node.SelectSingleNode("ActionID").InnerText);
-
+                    waypoint.poi_id = Convert.ToInt16(wp_node.SelectSingleNode("POIID").InnerText);
                     way_list.AddLast(waypoint);
                     way_count++;
                 }

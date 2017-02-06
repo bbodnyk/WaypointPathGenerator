@@ -3147,6 +3147,7 @@ namespace Waypoint_Path_Generator
             str = str + "Rotation Dir : " + Convert.ToString(wp.rotationdir) + "\n";
             str = str + "Gimble Mode : " + Convert.ToString(wp.gimblemode) + "\n";
             str = str + "Gimble Pitch : " + Convert.ToString(wp.gimblepitch) + "\n";
+            str = str + "POI Id : " + Convert.ToString(wp.poi_id) + "\n";
             str = str + "Action : " + action_name + "\n";
             MessageBox.Show(str);
         }

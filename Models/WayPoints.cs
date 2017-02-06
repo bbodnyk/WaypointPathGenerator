@@ -12,6 +12,7 @@ namespace Waypoint_Path_Generator.Models
         public double gimblepitch;
         //public int[,] actions;
         public int action_id;
+        public int poi_id;
         public bool selected;
         public bool visible;
         public int path_int_id;
@@ -60,7 +61,7 @@ namespace Waypoint_Path_Generator.Models
             
         }
 
-        public void Add_Waypoint_List(Waypoint_Path_Gen wpg, LinkedList<WayPoints> list, double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int action_id)
+        public void Add_Waypoint_List(Waypoint_Path_Gen wpg, LinkedList<WayPoints> list, double lat, double lon, double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int poi_id, int action_id)
         {
             WayPoints waypoint = new WayPoints();
             waypoint.lat = lat;
@@ -76,7 +77,7 @@ namespace Waypoint_Path_Generator.Models
         }
 
         public void Add_Leg_List(Waypoint_Path_Gen wpg, LinkedList<WayPoints> list, double lat1, double lon1, double lat2, double lon2, 
-            double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int video_actions_id, int photo_actions_id, 
+            double alt, double heading, double curvesize, double rotdir, int gimblemode, double gimblepitch, int poi_id, int video_actions_id, int photo_actions_id, 
             bool video, double camera_increment, double overlap)
         {
             // See if we have to reverse the points
@@ -106,8 +107,8 @@ namespace Waypoint_Path_Generator.Models
                 // If in Video mode only output start and end points
 
             
-                wp.Add_Waypoint_List(wpg, list, lat1, lon1, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions_id);
-                wp.Add_Waypoint_List(wpg, list, lat2, lon2, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, video_actions_id);
+                wp.Add_Waypoint_List(wpg, list, lat1, lon1, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, poi_id, video_actions_id);
+                wp.Add_Waypoint_List(wpg, list, lat2, lon2, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, poi_id, video_actions_id);
             }
             else
             {
@@ -115,7 +116,7 @@ namespace Waypoint_Path_Generator.Models
 
                 // Output first WP
 
-                wp.Add_Waypoint_List(wpg, list, lat1, lon1, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, photo_actions_id);
+                wp.Add_Waypoint_List(wpg, list, lat1, lon1, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, poi_id, photo_actions_id);
 
                 camera_increment = camera_increment * (1 - overlap / 100.0);
                 double distance = GPS.GPS_Distance(lat1, lon1, lat2, lon2, Form1.Globals.gps_radius);
@@ -128,7 +129,7 @@ namespace Waypoint_Path_Generator.Models
                     {
                         new_lat = GPS.GPS_Lat_BearDist(lat1, lon1, bearing, distance / 2, Form1.Globals.gps_radius);
                         new_lon = GPS.GPS_Lon_BearDist(lat1, lon1, new_lat, bearing, distance / 2, Form1.Globals.gps_radius);
-                        wp.Add_Waypoint_List(wpg, list, new_lat, new_lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, photo_actions_id);
+                        wp.Add_Waypoint_List(wpg, list, new_lat, new_lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, poi_id, photo_actions_id);
                     }
                     else
                     {
@@ -136,14 +137,14 @@ namespace Waypoint_Path_Generator.Models
                         double dist_diff = distance - width;
                         new_lat = GPS.GPS_Lat_BearDist(lat1, lon1, bearing, dist_diff / 2, Form1.Globals.gps_radius);
                         new_lon = GPS.GPS_Lon_BearDist(lat1, lon1, new_lat, bearing, dist_diff / 2, Form1.Globals.gps_radius);
-                        wp.Add_Waypoint_List(wpg, list, new_lat, new_lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, photo_actions_id);
+                        wp.Add_Waypoint_List(wpg, list, new_lat, new_lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, poi_id, photo_actions_id);
                         last_lat = new_lat;
                         last_lon = new_lon;
                         for (int i = 0; i < num_wp - 1; i++)
                         {
                             new_lat = GPS.GPS_Lat_BearDist(last_lat, last_lon, bearing, camera_increment, Form1.Globals.gps_radius);
                             new_lon = GPS.GPS_Lon_BearDist(last_lat, last_lon, new_lat, bearing, camera_increment, Form1.Globals.gps_radius);
-                            wp.Add_Waypoint_List(wpg, list, new_lat, new_lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, photo_actions_id);
+                            wp.Add_Waypoint_List(wpg, list, new_lat, new_lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, poi_id, photo_actions_id);
                             last_lat = new_lat;
                             last_lon = new_lon;
                         }
@@ -152,7 +153,7 @@ namespace Waypoint_Path_Generator.Models
 
                 // Output last WP 
 
-                wp.Add_Waypoint_List(wpg, list, lat2, lon2, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, photo_actions_id);
+                wp.Add_Waypoint_List(wpg, list, lat2, lon2, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, poi_id, photo_actions_id);
 
             }
         }

@@ -210,7 +210,7 @@ namespace Waypoint_Path_Generator
                         heading = GPS.GPS_Bearing(lat, lon, lat_next, lon_next);
                     }
                 }
-                _wp.Add_Waypoint_List(_wpg, new_list, lat, lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, action_id);
+                _wp.Add_Waypoint_List(_wpg, new_list, lat, lon, alt, heading, curvesize, rotdir, gimblemode, gimblepitch, -1, action_id);
                 //dgvWaypoints.Rows.Add(Globals.waypoint_count + i+1, Convert.ToString(lat), Convert.ToString(lon), Convert.ToString(alt));
             }
 

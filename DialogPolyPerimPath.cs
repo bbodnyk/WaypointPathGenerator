@@ -98,7 +98,7 @@ namespace Waypoint_Path_Generator
                     lon_next = points.ElementAt(0).lon;
                     head = GPS.GPS_Bearing(lat, lon, lat_next, lon_next);
                 }
-                _wp.Add_Waypoint_List(_wpg, waypoints, lat, lon, alt, head, curvesize, rotdir, gimblemode, gimblepitch, action_id);
+                _wp.Add_Waypoint_List(_wpg, waypoints, lat, lon, alt, head, curvesize, rotdir, gimblemode, gimblepitch, -1, action_id);
             }
 
             // Add Path
