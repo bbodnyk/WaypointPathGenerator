@@ -323,6 +323,33 @@ namespace Waypoint_Path_Generator
                 }
             }
 
+            if(_path_type == "Sine")
+            {
+                double xval, yval;
+                double distance;
+                double xscale = trkScaleX.Value;
+                double yscale = trkScaleY.Value;
+                size = trkSize.Value;
+                double rotang = trkAngle.Value;
+                double ang = trkStartAngle.Value;
+                double ang_inc = 360.0 / numpnt;
+                for (int i = 0; i < numpnt; i++)
+                {
+                    //ang = 360.0 * (i / (numpnt - 1));
+                    double percent = Convert.ToDouble(i) / (Convert.ToDouble(numpnt) - 1);
+                    xval = size * percent;
+                    yval = Math.Sin(GPS.DegreesToRadians(ang)) * size;
+                    lat = _lat + (yval / lat_degree)/yscale;
+                    lon = _lon + (xval / lon_degree)*xscale;
+                    bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
+                    distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
+                    lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing+rotang, distance, _gps_radius);
+                    lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat2, bearing + rotang, distance, _gps_radius);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
+                    ang = ang + ang_inc;
+                }
+            }
+
             if (_path_type == "Strophoid")
             {
                 // r = cos(2*theta)/cos(theta)
@@ -420,6 +447,7 @@ namespace Waypoint_Path_Generator
                 if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid - " + path_id;
                 if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium - " + path_id;
                 if (path_name == "" & _path_type == "Resonance") path_name = "Untitled - Resonance - " + path_id;
+                if (path_name == "" & _path_type == "Sine") path_name = "Untitled - Sine - " + path_id;
                 _path.name = path_name;
                 MathGUI gui = new MathGUI();
                 gui.name = txtPathName.Text;
@@ -431,6 +459,7 @@ namespace Waypoint_Path_Generator
                 if (_path_type == "Strophoid") gui.path_type = "Strophoid";
                 if (_path_type == "Folium") gui.path_type = "Folium";
                 if (_path_type == "Resonance") gui.path_type = "Resonance";
+                if (_path_type == "Sine") gui.path_type = "Sine";
                 gui.size = trkSize.Value;
                 gui.rot_angle = trkAngle.Value;
                 gui.start_angle = trkStartAngle.Value;
@@ -497,6 +526,7 @@ namespace Waypoint_Path_Generator
             if (_path_type == "Strophoid") gui.path_type = "Strophoid";
             if (_path_type == "Folium") gui.path_type = "Folium";
             if (_path_type == "Resonance") gui.path_type = "Resonance";
+            if (_path_type == "Sine") gui.path_type = "Sine";
             gui.size = trkSize.Value;
             gui.rot_angle = trkAngle.Value;
             gui.start_angle = trkStartAngle.Value;

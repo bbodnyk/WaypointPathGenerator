@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btnClose = new System.Windows.Forms.Button();
             this.chartAlt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.trkAlt1 = new System.Windows.Forms.TrackBar();
@@ -52,17 +52,18 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chkAllWP = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkSinglePitch = new System.Windows.Forms.CheckBox();
+            this.trkPitch2 = new System.Windows.Forms.TrackBar();
+            this.trkPitch1 = new System.Windows.Forms.TrackBar();
+            this.txtPitch2 = new System.Windows.Forms.TextBox();
+            this.txtPitch1 = new System.Windows.Forms.TextBox();
             this.chkPOIMode = new System.Windows.Forms.CheckBox();
             this.cmbPOI = new System.Windows.Forms.ComboBox();
             this.chkSetPOI = new System.Windows.Forms.CheckBox();
             this.chkShowAlt = new System.Windows.Forms.CheckBox();
             this.chkShowHeading = new System.Windows.Forms.CheckBox();
             this.chkShowPitch = new System.Windows.Forms.CheckBox();
-            this.txtPitch1 = new System.Windows.Forms.TextBox();
-            this.txtPitch2 = new System.Windows.Forms.TextBox();
-            this.trkPitch1 = new System.Windows.Forms.TrackBar();
-            this.trkPitch2 = new System.Windows.Forms.TrackBar();
-            this.chkSinglePitch = new System.Windows.Forms.CheckBox();
+            this.btnSwapAlt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chartAlt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWP1)).BeginInit();
@@ -71,8 +72,8 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trkPitch1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkPitch2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkPitch1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
@@ -87,38 +88,38 @@
             // 
             // chartAlt
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartAlt.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chartAlt.Legends.Add(legend6);
+            chartArea1.Name = "ChartArea1";
+            this.chartAlt.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartAlt.Legends.Add(legend1);
             this.chartAlt.Location = new System.Drawing.Point(12, 329);
             this.chartAlt.Name = "chartAlt";
-            series16.ChartArea = "ChartArea1";
-            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series16.Legend = "Legend1";
-            series16.Name = "Altitude";
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series17.Legend = "Legend1";
-            series17.Name = "Heading";
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series18.Legend = "Legend1";
-            series18.Name = "Pitch";
-            this.chartAlt.Series.Add(series16);
-            this.chartAlt.Series.Add(series17);
-            this.chartAlt.Series.Add(series18);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Altitude";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "Heading";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Legend1";
+            series3.Name = "Pitch";
+            this.chartAlt.Series.Add(series1);
+            this.chartAlt.Series.Add(series2);
+            this.chartAlt.Series.Add(series3);
             this.chartAlt.Size = new System.Drawing.Size(717, 250);
             this.chartAlt.TabIndex = 1;
             this.chartAlt.Text = "chart1";
-            title6.Name = "Title1";
-            title6.Text = "Path Altitude";
-            this.chartAlt.Titles.Add(title6);
+            title1.Name = "Title1";
+            title1.Text = "Path Altitude";
+            this.chartAlt.Titles.Add(title1);
             this.chartAlt.Click += new System.EventHandler(this.chartAlt_Click);
             // 
             // trkAlt1
             // 
-            this.trkAlt1.Location = new System.Drawing.Point(106, 97);
+            this.trkAlt1.Location = new System.Drawing.Point(106, 136);
             this.trkAlt1.Maximum = 129;
             this.trkAlt1.Minimum = 5;
             this.trkAlt1.Name = "trkAlt1";
@@ -131,7 +132,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(120, 115);
+            this.label1.Location = new System.Drawing.Point(120, 123);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 4;
@@ -140,10 +141,11 @@
             // 
             // txtAlt1
             // 
-            this.txtAlt1.Location = new System.Drawing.Point(24, 97);
+            this.txtAlt1.Location = new System.Drawing.Point(24, 136);
             this.txtAlt1.Name = "txtAlt1";
             this.txtAlt1.Size = new System.Drawing.Size(49, 20);
             this.txtAlt1.TabIndex = 5;
+            this.txtAlt1.TextChanged += new System.EventHandler(this.txtAlt1_TextChanged);
             // 
             // trkWP1
             // 
@@ -164,14 +166,15 @@
             // 
             // txtAlt2
             // 
-            this.txtAlt2.Location = new System.Drawing.Point(24, 145);
+            this.txtAlt2.Location = new System.Drawing.Point(24, 184);
             this.txtAlt2.Name = "txtAlt2";
             this.txtAlt2.Size = new System.Drawing.Size(49, 20);
             this.txtAlt2.TabIndex = 8;
+            this.txtAlt2.TextChanged += new System.EventHandler(this.txtAlt2_TextChanged);
             // 
             // trkAlt2
             // 
-            this.trkAlt2.Location = new System.Drawing.Point(106, 145);
+            this.trkAlt2.Location = new System.Drawing.Point(106, 184);
             this.trkAlt2.Maximum = 129;
             this.trkAlt2.Minimum = 5;
             this.trkAlt2.Name = "trkAlt2";
@@ -223,6 +226,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSwapAlt);
             this.groupBox1.Controls.Add(this.chkSetAlt);
             this.groupBox1.Controls.Add(this.chkSingleAlt);
             this.groupBox1.Controls.Add(this.trkAlt2);
@@ -292,6 +296,55 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Camera";
             // 
+            // chkSinglePitch
+            // 
+            this.chkSinglePitch.AutoSize = true;
+            this.chkSinglePitch.Checked = true;
+            this.chkSinglePitch.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSinglePitch.Location = new System.Drawing.Point(22, 100);
+            this.chkSinglePitch.Name = "chkSinglePitch";
+            this.chkSinglePitch.Size = new System.Drawing.Size(82, 17);
+            this.chkSinglePitch.TabIndex = 8;
+            this.chkSinglePitch.Text = "Single Pitch";
+            this.chkSinglePitch.UseVisualStyleBackColor = true;
+            this.chkSinglePitch.CheckedChanged += new System.EventHandler(this.chkSinglePitch_CheckedChanged);
+            // 
+            // trkPitch2
+            // 
+            this.trkPitch2.Location = new System.Drawing.Point(91, 175);
+            this.trkPitch2.Maximum = 15;
+            this.trkPitch2.Minimum = -90;
+            this.trkPitch2.Name = "trkPitch2";
+            this.trkPitch2.Size = new System.Drawing.Size(104, 42);
+            this.trkPitch2.TabIndex = 7;
+            this.trkPitch2.TickFrequency = 10;
+            this.trkPitch2.Scroll += new System.EventHandler(this.trkPitch2_Scroll);
+            // 
+            // trkPitch1
+            // 
+            this.trkPitch1.Location = new System.Drawing.Point(91, 136);
+            this.trkPitch1.Maximum = 15;
+            this.trkPitch1.Minimum = -90;
+            this.trkPitch1.Name = "trkPitch1";
+            this.trkPitch1.Size = new System.Drawing.Size(104, 42);
+            this.trkPitch1.TabIndex = 6;
+            this.trkPitch1.TickFrequency = 10;
+            this.trkPitch1.Scroll += new System.EventHandler(this.trkPitch1_Scroll);
+            // 
+            // txtPitch2
+            // 
+            this.txtPitch2.Location = new System.Drawing.Point(18, 175);
+            this.txtPitch2.Name = "txtPitch2";
+            this.txtPitch2.Size = new System.Drawing.Size(58, 20);
+            this.txtPitch2.TabIndex = 5;
+            // 
+            // txtPitch1
+            // 
+            this.txtPitch1.Location = new System.Drawing.Point(18, 136);
+            this.txtPitch1.Name = "txtPitch1";
+            this.txtPitch1.Size = new System.Drawing.Size(58, 20);
+            this.txtPitch1.TabIndex = 4;
+            // 
             // chkPOIMode
             // 
             this.chkPOIMode.AutoSize = true;
@@ -355,54 +408,15 @@
             this.chkShowPitch.Text = "Pitch";
             this.chkShowPitch.UseVisualStyleBackColor = true;
             // 
-            // txtPitch1
+            // btnSwapAlt
             // 
-            this.txtPitch1.Location = new System.Drawing.Point(18, 136);
-            this.txtPitch1.Name = "txtPitch1";
-            this.txtPitch1.Size = new System.Drawing.Size(58, 20);
-            this.txtPitch1.TabIndex = 4;
-            // 
-            // txtPitch2
-            // 
-            this.txtPitch2.Location = new System.Drawing.Point(18, 175);
-            this.txtPitch2.Name = "txtPitch2";
-            this.txtPitch2.Size = new System.Drawing.Size(58, 20);
-            this.txtPitch2.TabIndex = 5;
-            // 
-            // trkPitch1
-            // 
-            this.trkPitch1.Location = new System.Drawing.Point(91, 136);
-            this.trkPitch1.Maximum = 15;
-            this.trkPitch1.Minimum = -90;
-            this.trkPitch1.Name = "trkPitch1";
-            this.trkPitch1.Size = new System.Drawing.Size(104, 42);
-            this.trkPitch1.TabIndex = 6;
-            this.trkPitch1.TickFrequency = 10;
-            this.trkPitch1.Scroll += new System.EventHandler(this.trkPitch1_Scroll);
-            // 
-            // trkPitch2
-            // 
-            this.trkPitch2.Location = new System.Drawing.Point(91, 175);
-            this.trkPitch2.Maximum = 15;
-            this.trkPitch2.Minimum = -90;
-            this.trkPitch2.Name = "trkPitch2";
-            this.trkPitch2.Size = new System.Drawing.Size(104, 42);
-            this.trkPitch2.TabIndex = 7;
-            this.trkPitch2.TickFrequency = 10;
-            this.trkPitch2.Scroll += new System.EventHandler(this.trkPitch2_Scroll);
-            // 
-            // chkSinglePitch
-            // 
-            this.chkSinglePitch.AutoSize = true;
-            this.chkSinglePitch.Checked = true;
-            this.chkSinglePitch.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSinglePitch.Location = new System.Drawing.Point(22, 100);
-            this.chkSinglePitch.Name = "chkSinglePitch";
-            this.chkSinglePitch.Size = new System.Drawing.Size(82, 17);
-            this.chkSinglePitch.TabIndex = 8;
-            this.chkSinglePitch.Text = "Single Pitch";
-            this.chkSinglePitch.UseVisualStyleBackColor = true;
-            this.chkSinglePitch.CheckedChanged += new System.EventHandler(this.chkSinglePitch_CheckedChanged);
+            this.btnSwapAlt.Location = new System.Drawing.Point(33, 94);
+            this.btnSwapAlt.Name = "btnSwapAlt";
+            this.btnSwapAlt.Size = new System.Drawing.Size(120, 23);
+            this.btnSwapAlt.TabIndex = 15;
+            this.btnSwapAlt.Text = "Swap Altitude";
+            this.btnSwapAlt.UseVisualStyleBackColor = true;
+            this.btnSwapAlt.Click += new System.EventHandler(this.btnSwapAlt_Click);
             // 
             // DialogPathAltitude
             // 
@@ -432,8 +446,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trkPitch1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkPitch2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trkPitch1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,5 +484,6 @@
         private System.Windows.Forms.TrackBar trkPitch1;
         private System.Windows.Forms.TextBox txtPitch2;
         private System.Windows.Forms.TextBox txtPitch1;
+        private System.Windows.Forms.Button btnSwapAlt;
     }
 }

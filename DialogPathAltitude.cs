@@ -379,6 +379,49 @@ namespace Waypoint_Path_Generator
             chkSinglePitch.Checked = false;
         }
 
+        private void txtAlt1_TextChanged(object sender, EventArgs e)
+        {
+            double alt = Convert.ToDouble(txtAlt1.Text);
+            double alt_min = Convert.ToDouble(trkAlt1.Minimum);
+            double alt_max = Convert.ToDouble(trkAlt1.Maximum);
+            if(alt < alt_min)
+            {
+                trkAlt1.Value = trkAlt1.Minimum;
+                txtAlt1.Text = Convert.ToString(trkAlt1.Minimum);
+            }
+            if(alt > alt_max)
+            {
+                trkAlt1.Value = trkAlt1.Maximum;
+                txtAlt1.Text = Convert.ToString(trkAlt1.Maximum);
+            }
+            trkAlt1.Value = Convert.ToInt16(alt);
+        }
+
+        private void txtAlt2_TextChanged(object sender, EventArgs e)
+        {
+            double alt = Convert.ToDouble(txtAlt2.Text);
+            double alt_min = Convert.ToDouble(trkAlt2.Minimum);
+            double alt_max = Convert.ToDouble(trkAlt2.Maximum);
+            if (alt < alt_min)
+            {
+                trkAlt2.Value = trkAlt2.Minimum;
+                txtAlt2.Text = Convert.ToString(trkAlt2.Minimum);
+            }
+            if (alt > alt_max)
+            {
+                trkAlt2.Value = trkAlt2.Maximum;
+                txtAlt2.Text = Convert.ToString(trkAlt2.Maximum);
+            }
+            trkAlt2.Value = Convert.ToInt16(alt);
+        }
+
+        private void btnSwapAlt_Click(object sender, EventArgs e)
+        {
+            string save = txtAlt1.Text;
+            txtAlt1.Text = txtAlt2.Text;
+            txtAlt2.Text = save;
+        }
+
         private void chkSetPOI_CheckedChanged(object sender, EventArgs e)
         {
 
