@@ -35,17 +35,18 @@ namespace Waypoint_Path_Generator
             LinkedList<WayPoints> wplist = _path.waypoints;
 
             trkWP1.Minimum = 0;
-            trkWP1.Maximum = wplist.Count()-1;
+            trkWP1.Maximum = wplist.Count() - 1;
             trkWP1.Value = 0;
             trkWP2.Minimum = 0;
-            trkWP2.Maximum = wplist.Count()-1;
-            trkWP2.Value = wplist.Count()-1;
+            trkWP2.Maximum = wplist.Count() - 1;
+            trkWP2.Value = wplist.Count() - 1;
             lblwp1.Text = "Waypoint " + Convert.ToString(trkWP1.Value);
             lblwp2.Text = "Waypoint " + Convert.ToString(trkWP2.Value);
             txtAlt1.Text = Convert.ToString(trkAlt1.Value);
             txtAlt2.Text = Convert.ToString(trkAlt2.Value);
             txtPitch1.Text = Convert.ToString(trkPitch1.Value);
             txtPitch2.Text = Convert.ToString(trkPitch2.Value);
+            txtWPDist.Text = Convert.ToString(trkWPDist.Value);
 
             cmbPOI.Items.Clear();
             cmbPOI.Items.Add("");
@@ -56,15 +57,18 @@ namespace Waypoint_Path_Generator
             Series altseries = chartAlt.Series["Altitude"];
             Series headingseries = chartAlt.Series["Heading"];
             Series pitchseries = chartAlt.Series["Pitch"];
+            Series distseries = chartAlt.Series["Distance"];
             altseries.Points.Clear();
             headingseries.Points.Clear();
             pitchseries.Points.Clear();
+            distseries.Points.Clear();
             altseries.ChartType = SeriesChartType.Line;
             headingseries.ChartType = SeriesChartType.Line;
             pitchseries.ChartType = SeriesChartType.Line;
+            distseries.ChartType = SeriesChartType.Line;
             ChartArea chartarea = chartAlt.ChartAreas[0];
             chartarea.AxisX.Minimum = 0;
-            chartarea.AxisX.Maximum = wplist.Count()-1;
+            chartarea.AxisX.Maximum = wplist.Count() - 1;
             chartarea.AxisX.Interval = 1;
             chartarea.AxisX.Name = "Way Points";
 
@@ -72,9 +76,22 @@ namespace Waypoint_Path_Generator
             {
                 WayPoints wp = wplist.ElementAt(i);
                 wp.selected = false;
-                if(chkShowAlt.Checked) altseries.Points.AddXY(i,wp.alt);
-                if(chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
-                if(chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
+                if (chkShowAlt.Checked) altseries.Points.AddXY(i, wp.alt);
+                if (chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
+                if (chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
+                if (chkSHowDist.Checked)
+                {
+                    if (i == 0)
+                    {
+                        distseries.Points.AddXY(i, 0);
+                    }
+                    else
+                    {
+                        WayPoints wpprev = wplist.ElementAt(i - 1);
+                        double dist = GPS.GPS_Distance(wpprev.lat, wpprev.lon, wp.lat, wp.lon, _options.earth_radius);
+                        distseries.Points.AddXY(i, dist);
+                    }
+                }
             }
             _path.selected = false;
             _gmap.ReDrawgMap();
@@ -133,7 +150,7 @@ namespace Waypoint_Path_Generator
         {
 
         }
-        
+
         private void trkPitch1_Scroll(object sender, EventArgs e)
         {
             txtPitch1.Text = Convert.ToString(trkPitch1.Value);
@@ -147,7 +164,7 @@ namespace Waypoint_Path_Generator
         private void trkAlt1_Scroll(object sender, EventArgs e)
         {
             txtAlt1.Text = Convert.ToString(trkAlt1.Value);
-            if(chkSingleAlt.Checked)
+            if (chkSingleAlt.Checked)
             {
                 trkAlt2.Value = trkAlt1.Value;
                 txtAlt2.Text = Convert.ToString(trkAlt2.Value);
@@ -196,7 +213,7 @@ namespace Waypoint_Path_Generator
         private void btnApply_Click(object sender, EventArgs e)
         {
             LinkedList<WayPoints> wplist = _path.waypoints;
-            WayPoints wp;
+            WayPoints wp, wpprev;
 
             if (chkSetAlt.Checked)
             {
@@ -274,12 +291,12 @@ namespace Waypoint_Path_Generator
                         }
                     }
 
-                    for(int i = 0; i < wplist.Count(); i++)
+                    for (int i = 0; i < wplist.Count(); i++)
                     {
                         wp = wplist.ElementAt(i);
                         wp.head = GPS.GPS_Bearing(wp.lat, wp.lon, lat_camera, lon_camera);
                         distance = GPS.GPS_Distance(wp.lat, wp.lon, lat_camera, lon_camera, Form1.Globals.gps_radius);
-                        wp.gimblepitch = -GPS.RadiansToDegrees(Math.Atan((wp.alt-cam_alt) / distance));
+                        wp.gimblepitch = -GPS.RadiansToDegrees(Math.Atan((wp.alt - cam_alt) / distance));
                         wp.gimblemode = 2;
                         wp.poi_id = poi_id;
                     }
@@ -299,7 +316,7 @@ namespace Waypoint_Path_Generator
                     {
                         double wprange = end_wp - start_wp;
                         wp1 = wplist.ElementAt(i);
-                        wp2 = wplist.ElementAt(i+1);
+                        wp2 = wplist.ElementAt(i + 1);
                         wp1.head = GPS.GPS_Bearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
                         if (chkSinglePitch.Checked)
                         {
@@ -320,27 +337,76 @@ namespace Waypoint_Path_Generator
                 }
             }
 
+            if (chkRemoveWP.Checked)
+            {
+                // Remove waypoints too close together
+                int start_wp = trkWP1.Value;
+                int end_wp = trkWP2.Value;
+                WayPoints wp1, wp2;
+                double dist;
+                double maxdist = Convert.ToDouble(txtWPDist.Text);
+                bool flag = false;
+
+                do
+                {
+                    // Loop until minimum distance between waypoints is less than dist
+                    
+                        flag = false;
+                        for (int i = start_wp; i < end_wp - 1; i++)
+                        {
+                            wp1 = wplist.ElementAt(i);
+                            wp2 = wplist.ElementAt(i + 1);
+                            dist = GPS.GPS_Distance(wp1.lat, wp1.lon, wp2.lat, wp2.lon, _options.earth_radius);
+                            if(dist < maxdist)
+                            {
+                                wplist.Remove(wp2);
+                                end_wp--;
+                                trkWP2.Maximum = trkWP2.Maximum - 1;
+                                lblwp2.Text = "Waypoint " + Convert.ToString(trkWP2.Value);
+                                flag = true;
+                                break;
+                            }
+                        }
+                } while (flag);
+            }
+
             // Redraw Altitude Plot
 
-            
-                Series altseries = chartAlt.Series["Altitude"];
-                Series headingseries = chartAlt.Series["Heading"];
-                Series pitchseries = chartAlt.Series["Pitch"];
-                altseries.Points.Clear();
-                headingseries.Points.Clear();
-                pitchseries.Points.Clear();
-                altseries.ChartType = SeriesChartType.Line;
-                headingseries.ChartType = SeriesChartType.Line;
-                pitchseries.ChartType = SeriesChartType.Line;
-                
-                for (int i = 0; i < wplist.Count(); i++)
+
+            Series altseries = chartAlt.Series["Altitude"];
+            Series headingseries = chartAlt.Series["Heading"];
+            Series pitchseries = chartAlt.Series["Pitch"];
+            Series distseries = chartAlt.Series["Distance"];
+            altseries.Points.Clear();
+            headingseries.Points.Clear();
+            pitchseries.Points.Clear();
+            distseries.Points.Clear();
+            altseries.ChartType = SeriesChartType.Line;
+            headingseries.ChartType = SeriesChartType.Line;
+            pitchseries.ChartType = SeriesChartType.Line;
+            distseries.ChartType = SeriesChartType.Line;
+
+            for (int i = 0; i < wplist.Count(); i++)
+            {
+                wp = wplist.ElementAt(i);
+                if (chkShowAlt.Checked) altseries.Points.AddXY(i, wp.alt);
+                if (chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
+                if (chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
+                if (chkSHowDist.Checked)
                 {
-                    wp = wplist.ElementAt(i);
-                    if (chkShowAlt.Checked) altseries.Points.AddXY(i, wp.alt);
-                    if (chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
-                    if (chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
+                    if (i == 0)
+                    {
+                        distseries.Points.AddXY(i, 0);
+                    }
+                    else
+                    {
+                        wpprev = wplist.ElementAt(i - 1);
+                        double dist = GPS.GPS_Distance(wpprev.lat, wpprev.lon, wp.lat, wp.lon, _options.earth_radius);
+                        distseries.Points.AddXY(i, dist);
+                    }
                 }
-            
+            }
+
 
             _path.selected = false;
             _gmap.ReDrawgMap();
@@ -384,12 +450,12 @@ namespace Waypoint_Path_Generator
             double alt = Convert.ToDouble(txtAlt1.Text);
             double alt_min = Convert.ToDouble(trkAlt1.Minimum);
             double alt_max = Convert.ToDouble(trkAlt1.Maximum);
-            if(alt < alt_min)
+            if (alt < alt_min)
             {
                 trkAlt1.Value = trkAlt1.Minimum;
                 txtAlt1.Text = Convert.ToString(trkAlt1.Minimum);
             }
-            if(alt > alt_max)
+            if (alt > alt_max)
             {
                 trkAlt1.Value = trkAlt1.Maximum;
                 txtAlt1.Text = Convert.ToString(trkAlt1.Maximum);
@@ -420,6 +486,11 @@ namespace Waypoint_Path_Generator
             string save = txtAlt1.Text;
             txtAlt1.Text = txtAlt2.Text;
             txtAlt2.Text = save;
+        }
+
+        private void trkWPDist_Scroll(object sender, EventArgs e)
+        {
+            txtWPDist.Text = Convert.ToString(trkWPDist.Value);
         }
 
         private void chkSetPOI_CheckedChanged(object sender, EventArgs e)

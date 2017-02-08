@@ -83,7 +83,8 @@
             "Strophoid",
             "Folium",
             "Resonance",
-            "Sine"});
+            "Sine",
+            "Tan"});
             this.cmbPathType.Location = new System.Drawing.Point(90, 48);
             this.cmbPathType.Name = "cmbPathType";
             this.cmbPathType.Size = new System.Drawing.Size(121, 21);

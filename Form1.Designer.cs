@@ -47,6 +47,7 @@
             this.addPolygonGridPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddKMLPath = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPolyPerimPath = new System.Windows.Forms.ToolStripMenuItem();
+            this.addMathamaticalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolAddPoly = new System.Windows.Forms.ToolStripMenuItem();
             this.kMLPolygonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -186,7 +187,6 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addMathamaticalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -235,7 +235,7 @@
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 526);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 548);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -310,6 +310,13 @@
             this.ToolAddPolyPerimPath.Text = "Add Polygon Perimeter Path";
             this.ToolAddPolyPerimPath.Click += new System.EventHandler(this.ToolAddPolyPerimPath_Click);
             // 
+            // addMathamaticalPathToolStripMenuItem
+            // 
+            this.addMathamaticalPathToolStripMenuItem.Name = "addMathamaticalPathToolStripMenuItem";
+            this.addMathamaticalPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.addMathamaticalPathToolStripMenuItem.Text = "Add Mathamatical Path";
+            this.addMathamaticalPathToolStripMenuItem.Click += new System.EventHandler(this.addMathamaticalPathToolStripMenuItem_Click);
+            // 
             // toolAddPoly
             // 
             this.toolAddPoly.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -373,7 +380,7 @@
             // 
             this.toolEditPathAlt.Name = "toolEditPathAlt";
             this.toolEditPathAlt.Size = new System.Drawing.Size(203, 22);
-            this.toolEditPathAlt.Text = "Edit Path Altitude";
+            this.toolEditPathAlt.Text = "Edit Path Parameters";
             this.toolEditPathAlt.Click += new System.EventHandler(this.toolEditPathAlt_Click);
             // 
             // toolStripSeparator4
@@ -1412,13 +1419,6 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
-            // 
-            // addMathamaticalPathToolStripMenuItem
-            // 
-            this.addMathamaticalPathToolStripMenuItem.Name = "addMathamaticalPathToolStripMenuItem";
-            this.addMathamaticalPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.addMathamaticalPathToolStripMenuItem.Text = "Add Mathamatical Path";
-            this.addMathamaticalPathToolStripMenuItem.Click += new System.EventHandler(this.addMathamaticalPathToolStripMenuItem_Click);
             // 
             // Form1
             // 
