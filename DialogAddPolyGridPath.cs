@@ -305,6 +305,8 @@ namespace Waypoint_Path_Generator
             double lat1 = 0.0;
             double lon1 = 0.0;
             int gimblemode = 0;
+            double gimblepitch = 0;
+            if (radioPhoto.Checked) gimblepitch = -90;
             double curvesize = 0;
             double rotdir = 0;
             bool startend = chkRectHome.Checked;
@@ -313,7 +315,7 @@ namespace Waypoint_Path_Generator
 
             if (startend)
             {
-                _wp.Add_Waypoint_List(_wpg, new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, -1, no_action_id);
+                _wp.Add_Waypoint_List(_wpg, new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, -1, no_action_id);
             }
 
             for (int i = 1; i < path_count; i++)
@@ -350,7 +352,7 @@ namespace Waypoint_Path_Generator
                                 heading = GPS.GPS_Bearing(lat1, lon1, lat, lon);
                                 firstleg = false;
                             }
-                            _wp.Add_Leg_List(_wpg, new_list, lat1, lon1, lat, lon, altitude, heading, 0, 0, 0, 0, -1, video_action_id, pict_action_id, video, _camera_height, _over_hgt);
+                            _wp.Add_Leg_List(_wpg, new_list, lat1, lon1, lat, lon, altitude, heading, 0, 0, gimblemode, gimblepitch, -1, video_action_id, pict_action_id, video, _camera_height, _over_hgt);
                             leg_count++;
                             firstpnt = true;
                         }
@@ -360,9 +362,11 @@ namespace Waypoint_Path_Generator
 
             if (startend)
             {
-                _wp.Add_Waypoint_List(_wpg, new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, 0.0, -1, no_action_id);
+                gimblepitch = 0.0;
+                _wp.Add_Waypoint_List(_wpg, new_list, _lat, _lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, -1, no_action_id);
             }
 
+            if (radioPhoto.Checked) gimblepitch = -90;
             rtbPoly.AppendText("Leg Count :" + Convert.ToString(leg_count) + "\n");
             int wp_count = new_list.Count;
             rtbPoly.AppendText("Waypoint Count :" + Convert.ToString(wp_count) + "\n");

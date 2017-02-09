@@ -164,6 +164,8 @@ namespace Waypoint_Path_Generator
                     //image_wid = 50;
                     double diag_ang;
                     double diag_len;
+                    double poi_lat = 0;
+                    double poi_lon = 0;
                     double gps_radius;
                     int poi_id;
 
@@ -191,8 +193,38 @@ namespace Waypoint_Path_Generator
                         alt = point.alt;
                         poi_id = point.poi_id;
                         POIPoints poipnt = _wpg.POIPointID(poi_id);
-                        if (poipnt != null) pitch = point.gimblepitch;
-
+                        if (poipnt != null)
+                        {
+                            poi_lat = poipnt.lat;
+                            poi_lon = poipnt.lon;
+                        } else
+                        {
+                            string path_type = _path.type;
+                            if(path_type == "Circular")
+                            {
+                                CircularGUI gui = _path.circgui;
+                                poi_lat = gui.lat;
+                                poi_lon = gui.lon;
+                            }
+                            if (path_type == "Helical")
+                            {
+                                HelicalGUI gui = _path.helixgui;
+                                poi_lat = gui.lat;
+                                poi_lon = gui.lon;
+                            }
+                            if (path_type == "Rectangular")
+                            {
+                                RectanglarGUI gui = _path.rectanglegui;
+                                poi_lat = gui.lat;
+                                poi_lon = gui.lon;
+                            }
+                            if (path_type == "Mathamatical")
+                            {
+                                MathGUI gui = _path.mathgui;
+                                poi_lat = gui.lat;
+                                poi_lon = gui.lon;
+                            }
+                        }
                         pitch = point.gimblepitch;
                         gps_radius = _options.earth_radius + _options.def_elevation + alt;
 
@@ -227,27 +259,41 @@ namespace Waypoint_Path_Generator
                             coor.Add(vector);
                             vector = new Vector(start_lat, start_lon, alt);
                             coor.Add(vector);
+
+                            line.Coordinates = coor;
+                            outer.LinearRing = line;
+                            poly.OuterBoundary = outer;
+
+                            rect_placemark.Geometry = poly;
+                            rect_placemark.AddStyle(poly_style);
+                            rect_placemark.Name = "WP " + Convert.ToString(i);
+                            folder.AddFeature(rect_placemark);
                         }
                         else
                         {
-                            vector = new Vector(lat, lon, alt);
-                            coor.Add(vector);
-                            vector = new Vector(lat, lon, 2);
-                            coor.Add(vector);
-                            vector = new Vector(poipnt.lat, poipnt.lon, 2);
-                            coor.Add(vector);
-                            vector = new Vector(lat, lon, alt);
-                            coor.Add(vector);
+                            if (pitch < 0)
+                            {
+                                vector = new Vector(lat, lon, alt);
+                                coor.Add(vector);
+                                vector = new Vector(lat, lon, 2);
+                                coor.Add(vector);
+                                vector = new Vector(poi_lat, poi_lon, 2);
+                                coor.Add(vector);
+                                vector = new Vector(lat, lon, alt);
+                                coor.Add(vector);
+
+                                line.Coordinates = coor;
+                                outer.LinearRing = line;
+                                poly.OuterBoundary = outer;
+
+                                rect_placemark.Geometry = poly;
+                                rect_placemark.AddStyle(poly_style);
+                                rect_placemark.Name = "WP " + Convert.ToString(i);
+                                folder.AddFeature(rect_placemark);
+                            }
                         }
 
-                        line.Coordinates = coor;
-                        outer.LinearRing = line;
-                        poly.OuterBoundary = outer;
-
-                        rect_placemark.Geometry = poly;
-                        rect_placemark.AddStyle(poly_style);
-                        rect_placemark.Name = "WP " + Convert.ToString(i);
-                        folder.AddFeature(rect_placemark);
+                        
 
                     }
                 }
