@@ -34,7 +34,7 @@ namespace Waypoint_Path_Generator
         {
             this.Close();
         }
-        
+
         private void btnOutputCVS_Click(object sender, EventArgs e)
         {
             LinkedList<WayPoints> wp_list = _path.waypoints;
@@ -74,13 +74,13 @@ namespace Waypoint_Path_Generator
                     str = str + ", " + Convert.ToString(gimblepitch);
                     int actionid = point.action_id;
                     Models.Action pnt_action = _wpg.ActionWithId(actionid);
-          
+
                     for (int i = 0; i < 15; i++)
                     {
                         str = str + ", " + Convert.ToString(pnt_action.actions[i, 0]);
                         str = str + ", " + Convert.ToString(pnt_action.actions[i, 1]);
                     }
-                    
+
                     str = str + "\r\n";
                     pcount++;
 
@@ -106,10 +106,11 @@ namespace Waypoint_Path_Generator
                 //double lon_center = Convert.ToDouble(txtCenterLon.Text);
                 double lat, new_lat, start_lat;
                 double lon, new_lon, start_lon;
+                double pitch;
                 double image_len;
                 double image_wid;
 
-                
+
                 double alt;
                 double bear;
                 string location_name = txtKMLPath.Text;
@@ -164,6 +165,7 @@ namespace Waypoint_Path_Generator
                     double diag_ang;
                     double diag_len;
                     double gps_radius;
+                    int poi_id;
 
                     for (int i = 0; i < wp_list.Count; i++)
                     {
@@ -182,38 +184,61 @@ namespace Waypoint_Path_Generator
                         poly.AltitudeMode = AltitudeMode.RelativeToGround;
                         poly.Extrude = false;
 
+
                         point = wp_list.ElementAt(i);
                         lat = point.lat;
                         lon = point.lon;
                         alt = point.alt;
-                        image_len = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_hor / 2)) * alt);
-                        image_wid = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_ver / 2)) * alt);
-                        diag_ang = GPS.RadiansToDegrees(Math.Atan(image_len / image_wid));
-                        diag_len = Math.Sqrt((image_len * image_len) + (image_wid * image_wid));
+                        poi_id = point.poi_id;
+                        POIPoints poipnt = _wpg.POIPointID(poi_id);
+                        if (poipnt != null) pitch = point.gimblepitch;
+
+                        pitch = point.gimblepitch;
                         gps_radius = _options.earth_radius + _options.def_elevation + alt;
-                        alt = 2;
-                        bear = point.head;
+
                         coor.Clear();
-                        new_lat = GPS.GPS_Lat_BearDist(lat, lon, diag_ang + bear, diag_len, gps_radius);
-                        new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, diag_ang + bear, diag_len, gps_radius);
-                        start_lat = new_lat;
-                        start_lon = new_lon;
-                        vector = new Vector(new_lat, new_lon, alt);
-                        coor.Add(vector);
-                        new_lat = GPS.GPS_Lat_BearDist(lat, lon, 180 - diag_ang + bear, diag_len, gps_radius);
-                        new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 180 - diag_ang + bear, diag_len, gps_radius);
-                        vector = new Vector(new_lat, new_lon, alt);
-                        coor.Add(vector);
-                        new_lat = GPS.GPS_Lat_BearDist(lat, lon, 180 + diag_ang + bear, diag_len, gps_radius);
-                        new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 180 + diag_ang + bear, diag_len, gps_radius);
-                        vector = new Vector(new_lat, new_lon, alt);
-                        coor.Add(vector);
-                        new_lat = GPS.GPS_Lat_BearDist(lat, lon, 360 - diag_ang + bear, diag_len, gps_radius);
-                        new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 360 - diag_ang + bear, diag_len, gps_radius);
-                        vector = new Vector(new_lat, new_lon, alt);
-                        coor.Add(vector);
-                        vector = new Vector(start_lat, start_lon, alt);
-                        coor.Add(vector);
+
+                        if (pitch == -90)
+                        {
+                            image_len = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_hor / 2)) * alt);
+                            image_wid = (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_ver / 2)) * alt);
+                            diag_ang = GPS.RadiansToDegrees(Math.Atan(image_len / image_wid));
+                            diag_len = Math.Sqrt((image_len * image_len) + (image_wid * image_wid));
+                            alt = 2;
+                            bear = point.head;
+
+                            new_lat = GPS.GPS_Lat_BearDist(lat, lon, diag_ang + bear, diag_len, gps_radius);
+                            new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, diag_ang + bear, diag_len, gps_radius);
+                            start_lat = new_lat;
+                            start_lon = new_lon;
+                            vector = new Vector(new_lat, new_lon, alt);
+                            coor.Add(vector);
+                            new_lat = GPS.GPS_Lat_BearDist(lat, lon, 180 - diag_ang + bear, diag_len, gps_radius);
+                            new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 180 - diag_ang + bear, diag_len, gps_radius);
+                            vector = new Vector(new_lat, new_lon, alt);
+                            coor.Add(vector);
+                            new_lat = GPS.GPS_Lat_BearDist(lat, lon, 180 + diag_ang + bear, diag_len, gps_radius);
+                            new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 180 + diag_ang + bear, diag_len, gps_radius);
+                            vector = new Vector(new_lat, new_lon, alt);
+                            coor.Add(vector);
+                            new_lat = GPS.GPS_Lat_BearDist(lat, lon, 360 - diag_ang + bear, diag_len, gps_radius);
+                            new_lon = GPS.GPS_Lon_BearDist(lat, lon, new_lat, 360 - diag_ang + bear, diag_len, gps_radius);
+                            vector = new Vector(new_lat, new_lon, alt);
+                            coor.Add(vector);
+                            vector = new Vector(start_lat, start_lon, alt);
+                            coor.Add(vector);
+                        }
+                        else
+                        {
+                            vector = new Vector(lat, lon, alt);
+                            coor.Add(vector);
+                            vector = new Vector(lat, lon, 2);
+                            coor.Add(vector);
+                            vector = new Vector(poipnt.lat, poipnt.lon, 2);
+                            coor.Add(vector);
+                            vector = new Vector(lat, lon, alt);
+                            coor.Add(vector);
+                        }
 
                         line.Coordinates = coor;
                         outer.LinearRing = line;
@@ -223,6 +248,7 @@ namespace Waypoint_Path_Generator
                         rect_placemark.AddStyle(poly_style);
                         rect_placemark.Name = "WP " + Convert.ToString(i);
                         folder.AddFeature(rect_placemark);
+
                     }
                 }
 
@@ -246,7 +272,7 @@ namespace Waypoint_Path_Generator
             int wp_code, wp_delay;
             double gimble_pitch;
 
-            if(_path.type == "Mathamatical")
+            if (_path.type == "Mathamatical")
             {
                 MathGUI gui = _path.mathgui;
                 str = str + Convert.ToString(count++) + " "; // wp count
@@ -257,34 +283,35 @@ namespace Waypoint_Path_Generator
                 str = str + " 1\n";
             }
 
-            for(int i = 0; i < wp_list.Count; i++)
+            for (int i = 0; i < wp_list.Count; i++)
             {
                 wp_delay = 0;
                 WayPoints wp = wp_list.ElementAt(i);
                 int action_id = wp.action_id;
                 Models.Action action = _wpg.ActionWithId(action_id);
                 string action_name = action.name;
-                if(action_name == "Take Picture")
+                if (action_name == "Take Picture")
                 {
                     wp_delay = 1;
                 }
-                if(action_name == "Pause/Take Picture")
+                if (action_name == "Pause/Take Picture")
                 {
-                    wp_delay = action.actions[0, 1]/1000;
+                    wp_delay = action.actions[0, 1] / 1000;
                 }
                 // WAYPOINT
                 wp_code = 16;
-                str = str + Convert.ToString(count++) + " " ; // wp count
+                str = str + Convert.ToString(count++) + " "; // wp count
                 str = str + "0 0 ";
                 str = str + Convert.ToString(wp_code) + " ";
                 str = str + Convert.ToString(wp_delay) + " ";
                 str = str + " 0 0 0 ";
                 str = str + Convert.ToString(wp.lat) + " ";
-                str = str + Convert.ToString(wp.lon)+ " ";
+                str = str + Convert.ToString(wp.lon) + " ";
                 str = str + Convert.ToString(wp.alt);
                 str = str + " 1\n";
 
-                if (action_name == "Take Picture" | action_name == "Pause/Take Picture") {
+                if (action_name == "Take Picture" | action_name == "Pause/Take Picture")
+                {
 
                     gimble_pitch = wp.gimblepitch;
                     // DO_MOUNT_CONTROL

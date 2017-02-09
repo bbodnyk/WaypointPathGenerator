@@ -283,8 +283,8 @@ namespace Waypoint_Path_Generator.Models
 
         public void SetPathPoi(bool setpoi, int poi_id, Path path)
         {
-            double poi_lat, poi_lon, poi_alt, poi_elev, poi_camalt;
-
+            double poi_lat, poi_lon, poi_alt, poi_elev, distance, altitude;
+            double poi_camalt = 0.0;
             LinkedList<WayPoints> wp_list = path.waypoints;
             int wpcnt = wp_list.Count;
 
@@ -298,6 +298,7 @@ namespace Waypoint_Path_Generator.Models
                     MathGUI gui = path.mathgui;
                     poi_lat = gui.lat;
                     poi_lon = gui.lon;
+                    poi_camalt = 5;
                 }
                 else {
                     POIPoints poipnt = POIPointID(poi_id);
@@ -314,6 +315,10 @@ namespace Waypoint_Path_Generator.Models
                 {
                     WayPoints wp = wp_list.ElementAt(i);
                     wp.head = GPS.GPS_Bearing(wp.lat, wp.lon, poi_lat, poi_lon);
+                    distance = GPS.GPS_Distance(wp.lat, wp.lon, poi_lat, poi_lon, Form1.Globals.gps_radius);
+                    altitude = wp.alt - poi_camalt;
+                    wp.gimblepitch = -GPS.RadiansToDegrees(Math.Atan((wp.alt- poi_camalt) / distance));
+                    wp.gimblemode = 2;
                     wp.poi_id = poi_id;
                 }
             }

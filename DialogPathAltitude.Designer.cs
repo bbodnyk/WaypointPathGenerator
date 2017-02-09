@@ -71,9 +71,9 @@
             this.chkRemoveWP = new System.Windows.Forms.CheckBox();
             this.chkSHowDist = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.chkAction = new System.Windows.Forms.CheckBox();
-            this.cmbActions = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.cmbActions = new System.Windows.Forms.ComboBox();
+            this.chkAction = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartAlt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWP1)).BeginInit();
@@ -287,9 +287,9 @@
             this.groupBox2.Controls.Add(this.trkWP1);
             this.groupBox2.Controls.Add(this.trkWP2);
             this.groupBox2.Controls.Add(this.lblwp2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 12);
+            this.groupBox2.Location = new System.Drawing.Point(188, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(783, 73);
+            this.groupBox2.Size = new System.Drawing.Size(419, 73);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Way Points";
@@ -498,15 +498,14 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Waypoint Actions";
             // 
-            // chkAction
+            // label2
             // 
-            this.chkAction.AutoSize = true;
-            this.chkAction.Location = new System.Drawing.Point(27, 25);
-            this.chkAction.Name = "chkAction";
-            this.chkAction.Size = new System.Drawing.Size(75, 17);
-            this.chkAction.TabIndex = 0;
-            this.chkAction.Text = "Set Action";
-            this.chkAction.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(50, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Action";
             // 
             // cmbActions
             // 
@@ -516,14 +515,15 @@
             this.cmbActions.Size = new System.Drawing.Size(121, 21);
             this.cmbActions.TabIndex = 1;
             // 
-            // label2
+            // chkAction
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 54);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Action";
+            this.chkAction.AutoSize = true;
+            this.chkAction.Location = new System.Drawing.Point(27, 25);
+            this.chkAction.Name = "chkAction";
+            this.chkAction.Size = new System.Drawing.Size(75, 17);
+            this.chkAction.TabIndex = 0;
+            this.chkAction.Text = "Set Action";
+            this.chkAction.UseVisualStyleBackColor = true;
             // 
             // DialogPathAltitude
             // 
