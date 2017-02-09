@@ -48,6 +48,12 @@ namespace Waypoint_Path_Generator
             txtPitch2.Text = Convert.ToString(trkPitch2.Value);
             txtWPDist.Text = Convert.ToString(trkWPDist.Value);
 
+            for (int i = 0; i < _wpg.ActionCount(); i++)
+            {
+                cmbActions.Items.Add(_wpg.ActionAt(i).name);
+            }
+            cmbActions.SelectedIndex = 0;
+
             cmbPOI.Items.Clear();
             cmbPOI.Items.Add("");
             for (int i = 0; i < _wpg.POICount(); i++)
@@ -370,8 +376,23 @@ namespace Waypoint_Path_Generator
                 } while (flag);
             }
 
-            // Redraw Altitude Plot
+            // Set WP Actions
 
+            if (chkAction.Checked)
+            {
+                int start_wp = trkWP1.Value;
+                int end_wp = trkWP2.Value;
+
+                int action_index = cmbActions.SelectedIndex;
+                Models.Action action = _wpg.ActionAt(action_index);
+                for(int i = start_wp; i <= end_wp;i++)
+                {
+                    wp = wplist.ElementAt(i);
+                    wp.action_id = action.internal_id;
+                }
+            }
+
+            // Redraw Altitude Plot
 
             Series altseries = chartAlt.Series["Altitude"];
             Series headingseries = chartAlt.Series["Heading"];

@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btnClose = new System.Windows.Forms.Button();
             this.chartAlt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.trkAlt1 = new System.Windows.Forms.TrackBar();
@@ -66,10 +66,14 @@
             this.chkShowHeading = new System.Windows.Forms.CheckBox();
             this.chkShowPitch = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.chkRemoveWP = new System.Windows.Forms.CheckBox();
-            this.txtWPDist = new System.Windows.Forms.TextBox();
             this.trkWPDist = new System.Windows.Forms.TrackBar();
+            this.txtWPDist = new System.Windows.Forms.TextBox();
+            this.chkRemoveWP = new System.Windows.Forms.CheckBox();
             this.chkSHowDist = new System.Windows.Forms.CheckBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chkAction = new System.Windows.Forms.CheckBox();
+            this.cmbActions = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chartAlt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWP1)).BeginInit();
@@ -82,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkPitch1)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkWPDist)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnClose
@@ -96,38 +101,38 @@
             // 
             // chartAlt
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartAlt.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartAlt.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chartAlt.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartAlt.Legends.Add(legend1);
             this.chartAlt.Location = new System.Drawing.Point(12, 417);
             this.chartAlt.Name = "chartAlt";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "Altitude";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series6.Legend = "Legend1";
-            series6.Name = "Heading";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series7.Legend = "Legend1";
-            series7.Name = "Pitch";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Legend = "Legend1";
-            series8.Name = "Distance";
-            this.chartAlt.Series.Add(series5);
-            this.chartAlt.Series.Add(series6);
-            this.chartAlt.Series.Add(series7);
-            this.chartAlt.Series.Add(series8);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Altitude";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "Heading";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Legend1";
+            series3.Name = "Pitch";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "Distance";
+            this.chartAlt.Series.Add(series1);
+            this.chartAlt.Series.Add(series2);
+            this.chartAlt.Series.Add(series3);
+            this.chartAlt.Series.Add(series4);
             this.chartAlt.Size = new System.Drawing.Size(791, 250);
             this.chartAlt.TabIndex = 1;
             this.chartAlt.Text = "chart1";
-            title2.Name = "Title1";
-            title2.Text = "Path Altitude";
-            this.chartAlt.Titles.Add(title2);
+            title1.Name = "Title1";
+            title1.Text = "Path Altitude";
+            this.chartAlt.Titles.Add(title1);
             this.chartAlt.Click += new System.EventHandler(this.chartAlt_Click);
             // 
             // trkAlt1
@@ -438,10 +443,28 @@
             this.groupBox4.Controls.Add(this.chkRemoveWP);
             this.groupBox4.Location = new System.Drawing.Point(531, 104);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(264, 223);
+            this.groupBox4.Size = new System.Drawing.Size(264, 107);
             this.groupBox4.TabIndex = 21;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Minimum WP Distance";
+            // 
+            // trkWPDist
+            // 
+            this.trkWPDist.Location = new System.Drawing.Point(107, 69);
+            this.trkWPDist.Maximum = 30;
+            this.trkWPDist.Minimum = 1;
+            this.trkWPDist.Name = "trkWPDist";
+            this.trkWPDist.Size = new System.Drawing.Size(118, 42);
+            this.trkWPDist.TabIndex = 2;
+            this.trkWPDist.Value = 3;
+            this.trkWPDist.Scroll += new System.EventHandler(this.trkWPDist_Scroll);
+            // 
+            // txtWPDist
+            // 
+            this.txtWPDist.Location = new System.Drawing.Point(27, 69);
+            this.txtWPDist.Name = "txtWPDist";
+            this.txtWPDist.Size = new System.Drawing.Size(49, 20);
+            this.txtWPDist.TabIndex = 1;
             // 
             // chkRemoveWP
             // 
@@ -453,24 +476,6 @@
             this.chkRemoveWP.Text = "Remove WP";
             this.chkRemoveWP.UseVisualStyleBackColor = true;
             // 
-            // txtWPDist
-            // 
-            this.txtWPDist.Location = new System.Drawing.Point(27, 69);
-            this.txtWPDist.Name = "txtWPDist";
-            this.txtWPDist.Size = new System.Drawing.Size(49, 20);
-            this.txtWPDist.TabIndex = 1;
-            // 
-            // trkWPDist
-            // 
-            this.trkWPDist.Location = new System.Drawing.Point(107, 69);
-            this.trkWPDist.Maximum = 20;
-            this.trkWPDist.Minimum = 1;
-            this.trkWPDist.Name = "trkWPDist";
-            this.trkWPDist.Size = new System.Drawing.Size(118, 42);
-            this.trkWPDist.TabIndex = 2;
-            this.trkWPDist.Value = 3;
-            this.trkWPDist.Scroll += new System.EventHandler(this.trkWPDist_Scroll);
-            // 
             // chkSHowDist
             // 
             this.chkSHowDist.AutoSize = true;
@@ -481,11 +486,51 @@
             this.chkSHowDist.Text = "Distance";
             this.chkSHowDist.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label2);
+            this.groupBox5.Controls.Add(this.cmbActions);
+            this.groupBox5.Controls.Add(this.chkAction);
+            this.groupBox5.Location = new System.Drawing.Point(531, 227);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(264, 100);
+            this.groupBox5.TabIndex = 23;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Waypoint Actions";
+            // 
+            // chkAction
+            // 
+            this.chkAction.AutoSize = true;
+            this.chkAction.Location = new System.Drawing.Point(27, 25);
+            this.chkAction.Name = "chkAction";
+            this.chkAction.Size = new System.Drawing.Size(75, 17);
+            this.chkAction.TabIndex = 0;
+            this.chkAction.Text = "Set Action";
+            this.chkAction.UseVisualStyleBackColor = true;
+            // 
+            // cmbActions
+            // 
+            this.cmbActions.FormattingEnabled = true;
+            this.cmbActions.Location = new System.Drawing.Point(104, 52);
+            this.cmbActions.Name = "cmbActions";
+            this.cmbActions.Size = new System.Drawing.Size(121, 21);
+            this.cmbActions.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(50, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Action";
+            // 
             // DialogPathAltitude
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(825, 715);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.chkSHowDist);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.chkShowPitch);
@@ -497,6 +542,8 @@
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.chartAlt);
             this.Controls.Add(this.btnClose);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DialogPathAltitude";
             this.Text = "Edit Path Altitude";
             this.Load += new System.EventHandler(this.DialogPathAltitude_Load);
@@ -516,6 +563,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkWPDist)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -558,5 +607,9 @@
         private System.Windows.Forms.TextBox txtWPDist;
         private System.Windows.Forms.CheckBox chkRemoveWP;
         private System.Windows.Forms.CheckBox chkSHowDist;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbActions;
+        private System.Windows.Forms.CheckBox chkAction;
     }
 }

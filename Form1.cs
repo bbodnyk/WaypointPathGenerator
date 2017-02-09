@@ -2223,7 +2223,7 @@ namespace Waypoint_Path_Generator
             }
 
             // Rotate WayPoints
-
+            /*
             if (Globals.MouseDown & button == "Middle")
             {
                 double bearing, distance, new_lat, new_lon;
@@ -2260,7 +2260,7 @@ namespace Waypoint_Path_Generator
                 }
                 _gmap.ReDrawgMap();
             }
-
+            */
             // Add Waypoint to New Path
 
             if (Globals.path_active)
@@ -3901,6 +3901,69 @@ namespace Waypoint_Path_Generator
         private void treGMap_NodeMouseClick(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void distanceBetweenWaypointsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make Sure on two way points are selected
+            int count = _wpg.SelectedWPCount();
+            if (count != 2)
+            {
+                MessageBox.Show("Two Way Points must be Selected");
+                return;
+            }
+            // Get selected Waypoints
+            count = 0;
+            int path_id1 = -1;
+            int path_id2 = -1;
+            int wp_count1 = 0;
+            int wp_count2 = 0;
+            int wp_index1 = -1;
+            int wp_index2 = -1;
+            LinkedList<WayPoints> wp_list;
+            Models.Path path;
+            WayPoints wp1 = null;
+            WayPoints wp2 = null;
+
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                path = _wpg.PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    WayPoints wp = wp_list.ElementAt(j);
+                    if (wp.selected)
+                    {
+                        if (count == 0)
+                        {
+                            path_id1 = i;
+                            wp_index1 = j;
+                            wp_count1 = wp_list.Count;
+                            wp1 = wp_list.ElementAt(wp_index1);
+                            count++;
+                        }
+                        else
+                        {
+                            path_id2 = i;
+                            wp_index2 = j;
+                            wp_count2 = wp_list.Count;
+                            wp2 = wp_list.ElementAt(wp_index2);
+                            count++;
+                        }
+                    }
+                }
+            }
+            // Compute distance between waypoints
+            double dist = GPS.GPS_Distance(wp1.lat, wp1.lon, wp2.lat, wp2.lon, _options.earth_radius);
+            MessageBox.Show("Distance between Waypoints : " + Convert.ToString(dist));
+            wp1.selected = false;
+            wp2.selected = false;
+            _gmap.ReDrawgMap();
         }
     }
 }
