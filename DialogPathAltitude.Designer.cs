@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btnClose = new System.Windows.Forms.Button();
             this.chartAlt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.trkAlt1 = new System.Windows.Forms.TrackBar();
@@ -101,38 +101,38 @@
             // 
             // chartAlt
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartAlt.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartAlt.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chartAlt.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartAlt.Legends.Add(legend2);
             this.chartAlt.Location = new System.Drawing.Point(12, 417);
             this.chartAlt.Name = "chartAlt";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Altitude";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "Heading";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.Legend = "Legend1";
-            series3.Name = "Pitch";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Legend = "Legend1";
-            series4.Name = "Distance";
-            this.chartAlt.Series.Add(series1);
-            this.chartAlt.Series.Add(series2);
-            this.chartAlt.Series.Add(series3);
-            this.chartAlt.Series.Add(series4);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Legend = "Legend1";
+            series5.Name = "Altitude";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series6.Legend = "Legend1";
+            series6.Name = "Heading";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series7.Legend = "Legend1";
+            series7.Name = "Pitch";
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Legend = "Legend1";
+            series8.Name = "Distance";
+            this.chartAlt.Series.Add(series5);
+            this.chartAlt.Series.Add(series6);
+            this.chartAlt.Series.Add(series7);
+            this.chartAlt.Series.Add(series8);
             this.chartAlt.Size = new System.Drawing.Size(791, 250);
             this.chartAlt.TabIndex = 1;
             this.chartAlt.Text = "chart1";
-            title1.Name = "Title1";
-            title1.Text = "Path Altitude";
-            this.chartAlt.Titles.Add(title1);
+            title2.Name = "Title1";
+            title2.Text = "Path Altitude";
+            this.chartAlt.Titles.Add(title2);
             this.chartAlt.Click += new System.EventHandler(this.chartAlt_Click);
             // 
             // trkAlt1
@@ -542,6 +542,7 @@
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.chartAlt);
             this.Controls.Add(this.btnClose);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DialogPathAltitude";
