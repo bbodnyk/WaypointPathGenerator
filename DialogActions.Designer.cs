@@ -672,6 +672,7 @@
             this.radioLocked.TabStop = true;
             this.radioLocked.Text = "Action Locked";
             this.radioLocked.UseVisualStyleBackColor = true;
+            this.radioLocked.CheckedChanged += new System.EventHandler(this.radioLocked_CheckedChanged);
             // 
             // radioUnlocked
             // 
@@ -683,6 +684,7 @@
             this.radioUnlocked.TabStop = true;
             this.radioUnlocked.Text = "Action Unlocked";
             this.radioUnlocked.UseVisualStyleBackColor = true;
+            this.radioUnlocked.CheckedChanged += new System.EventHandler(this.radioUnlocked_CheckedChanged);
             // 
             // DialogActions
             // 

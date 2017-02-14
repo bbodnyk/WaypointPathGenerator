@@ -130,7 +130,7 @@ namespace Waypoint_Path_Generator
 
             _drone_image_notselected = (Bitmap)Image.FromFile("drone.png", true);
             _drone_image_selected = (Bitmap)Image.FromFile("drone_selected.png", true);
-            
+
 
             // Map POI
 
@@ -142,9 +142,9 @@ namespace Waypoint_Path_Generator
                 string poiname = pnt.name;
                 if (i == 0) _mapcontrol.Position = new global::GMap.NET.PointLatLng(pnt.lat, pnt.lon);
                 if (pnt.selected)
-                    { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_selected_image); }
+                { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_selected_image); }
                 else
-                    { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_image); }
+                { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_image); }
 
                 //    GMarkerGoogleType.blue_pushpin);
 
@@ -182,18 +182,18 @@ namespace Waypoint_Path_Generator
                     {
                         _drone_image = _drone_image_selected;
                         _drone_image = RotateImage(_drone_image_selected, wp.head);
-                        marker = new GMarkerGoogle( new PointLatLng(wp.lat, wp.lon), _drone_image);
+                        marker = new GMarkerGoogle(new PointLatLng(wp.lat, wp.lon), _drone_image);
                         //GMarkerGoogleType.red_pushpin);
                     }
                     else {
                         _drone_image = _drone_image_notselected;
                         _drone_image = RotateImage(_drone_image_notselected, wp.head);
-                        marker = new GMarkerGoogle(new PointLatLng(wp.lat, wp.lon),_drone_image);
+                        marker = new GMarkerGoogle(new PointLatLng(wp.lat, wp.lon), _drone_image);
                         //GMarkerGoogleType.blue_pushpin);
                     }
                     //marker.Size = new Size(64,64);
                     marker.Position = new PointLatLng(wp.lat, wp.lon);
-                    marker.Offset = new Point(-16,-16);
+                    marker.Offset = new Point(-16, -16);
                     marker.Tag = Convert.ToString(i) + "." + Convert.ToString(count);
                     marker.IsVisible = visible;
                     marker.ToolTipText = "WP(" + Convert.ToString(count) + ") - Alt:" + Convert.ToString(wp.alt);
@@ -238,7 +238,7 @@ namespace Waypoint_Path_Generator
                     points.Add(new PointLatLng(wp.lat, wp.lon));
                 }
                 GMapPolygon poly = new GMapPolygon(points, name);
-                if(polyshape.selected) poly.Stroke = new Pen(Color.Red, 1);
+                if (polyshape.selected) poly.Stroke = new Pen(Color.Red, 1);
                 else poly.Stroke = new Pen(Color.Yellow, 1);
                 poly.Fill = new SolidBrush(Color.FromArgb(25, Color.Yellow));
                 poly.Tag = polyshape.name;
@@ -286,7 +286,7 @@ namespace Waypoint_Path_Generator
                 { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_selected_image); }
                 else
                 { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_image); }
-                
+
                 //GMarkerGoogleType.blue_pushpin);
                 marker.Offset = new Point(-16, -16);
                 marker.ToolTipText = poiname;
@@ -306,6 +306,8 @@ namespace Waypoint_Path_Generator
             {
                 Models.Path path = _wpg.PathAt(i);
                 bool path_visible = path.visible;
+
+
                 bool path_selected = path.selected;
                 string name = path.name;
                 LinkedList<WayPoints> wplist = path.waypoints;
@@ -342,7 +344,8 @@ namespace Waypoint_Path_Generator
                         wpmarker.path = i;
                         wpmarker.wp = count;
                         wpmarker.marker = marker;
-                        wpmarker.selected = wp.selected;
+                        if (path.selected) wpmarker.selected = wp.selected;
+                        else wpmarker.selected = false;
                         _markers.Add(wpmarker);
 
                         count++;
@@ -356,6 +359,7 @@ namespace Waypoint_Path_Generator
                 }
                 //gMap.Overlays.Add(overroutes);
                 //gMap.Overlays.Add(markers);
+
             }
 
             //gMap.Overlays.Add(markers);
@@ -585,7 +589,7 @@ namespace Waypoint_Path_Generator
             Bitmap returnBitmap = new Bitmap(b.Width, b.Height);
             int xres = Convert.ToInt16(b.HorizontalResolution);
             int yres = Convert.ToInt16(b.VerticalResolution);
-            returnBitmap.SetResolution(200,200);
+            returnBitmap.SetResolution(200, 200);
             //Bitmap returnBitmap = new Bitmap(32, 32);
             //Make a graphics object from the empty bitmap.
             Graphics g = Graphics.FromImage(returnBitmap);
@@ -596,7 +600,7 @@ namespace Waypoint_Path_Generator
             //g.ScaleTransform(scale,scale);
             //Rotate.
             float f_ang = Convert.ToSingle(angle);
-            g.RotateTransform(f_ang);           
+            g.RotateTransform(f_ang);
             //Move image back.
             g.TranslateTransform(-(float)b.Width / 2, -(float)b.Height / 2);
             //Draw passed in image onto graphics object.

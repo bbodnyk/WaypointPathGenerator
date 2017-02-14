@@ -85,10 +85,25 @@ namespace Waypoint_Path_Generator.Models
             shape_list.Clear();
         }
 
-        public void AddAction(Models.Action action)
+        public void AddAction(Models.Action new_action)
         {
-            action.internal_id = next_internal_id();
-            action_list.AddLast(action);
+            string action_name = new_action.name;
+            Models.Action action;
+
+            // See if Action alreay exists
+
+            for(int i = 0; i < action_list.Count(); i++)
+            {
+                action = action_list.ElementAt(i);
+                if(action_name == action.name)
+                {
+                    action.actions = new_action.actions;
+                    if (i <= 5) action.locked = true;
+                    return;
+                }
+            }
+            new_action.internal_id = next_internal_id();
+            action_list.AddLast(new_action);
         }
 
         public void DeleteAction(string name)

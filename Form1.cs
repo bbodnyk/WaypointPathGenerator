@@ -1940,6 +1940,7 @@ namespace Waypoint_Path_Generator
             if (node.Parent == null) return;
             string parent = e.Node.Parent.Text;
             int index = e.Node.Parent.Index;
+            
             //MessageBox.Show("text of node is : " + e.Node.Text + ", Parent is " + parent);
 
             if (parent == "POIs")
@@ -3760,6 +3761,11 @@ namespace Waypoint_Path_Generator
             _path.Add_Path(_wpg, _gmap, new_name, "Combined", wp_list);
             _wpg.UnselectAll();
 
+            path1.selected = false;
+            path2.selected = false;
+            path1.visible = false;
+            path2.visible = false;
+
             // Redraw map
             GMAPTree.Update_GMapTree(_wpg, treGMap);
             _gmap.ReDrawgMap();
@@ -3895,11 +3901,6 @@ namespace Waypoint_Path_Generator
                     GMAPTree.Update_GMapTree(_wpg, treGMap);
                 }
             }
-
-        }
-
-        private void treGMap_NodeMouseClick(object sender, EventArgs e)
-        {
 
         }
 

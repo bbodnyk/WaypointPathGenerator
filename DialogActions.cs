@@ -152,10 +152,16 @@ namespace Waypoint_Path_Generator
 
         private void btnDelectAction_Click(object sender, EventArgs e)
         {
-            string name = txtNewActionName.Text;
-            _wpg.DeleteAction(name);
-            Update_Actioncmb();
-            cmbActionsList.SelectedIndex = 0;
+            int action_id = Convert.ToInt16(txtActionID.Text);
+            Models.Action action = _wpg.ActionWithId(action_id);
+            if (!action.locked)
+            {
+                string name = txtNewActionName.Text;
+                _wpg.DeleteAction(name);
+                Update_Actioncmb();
+                cmbActionsList.SelectedIndex = 0;
+            }
+            else MessageBox.Show("Can not delete a locked action");
         }
 
         private void Update_Actioncmb()
@@ -233,6 +239,17 @@ namespace Waypoint_Path_Generator
         private void DialogActions_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void radioLocked_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioUnlocked_CheckedChanged(object sender, EventArgs e)
+        {
+            int index = cmbActionsList.SelectedIndex;
+            if (index <= 6) radioLocked.Checked = true;
         }
     }
 }
