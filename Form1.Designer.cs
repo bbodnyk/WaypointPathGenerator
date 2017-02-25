@@ -30,13 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("POI");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Paths");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Polygons");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("POI");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Paths");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Polygons");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Objects", new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode10,
+            treeNode11});
             this.cntxtgMap = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolAddPOI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,6 +183,7 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -211,6 +212,7 @@
             this.toolSplitatWP,
             this.toolReversePath,
             this.toolStripSeparator7,
+            this.toolStripMenuItem9,
             this.toolUnselectAll,
             this.toolStripSeparator6,
             this.toolStripMenuItem6,
@@ -231,7 +233,7 @@
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
-            this.cntxtgMap.Size = new System.Drawing.Size(204, 542);
+            this.cntxtgMap.Size = new System.Drawing.Size(204, 564);
             this.cntxtgMap.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.cntxtgMap.MouseLeave += new System.EventHandler(this.cntxtgMap_MouseLeave);
             // 
@@ -1091,16 +1093,16 @@
             this.treGMap.Dock = System.Windows.Forms.DockStyle.Left;
             this.treGMap.Location = new System.Drawing.Point(0, 0);
             this.treGMap.Name = "treGMap";
-            treeNode1.Name = "POI";
-            treeNode1.Text = "POI";
-            treeNode2.Name = "Paths";
-            treeNode2.Text = "Paths";
-            treeNode3.Name = "Polygons";
-            treeNode3.Text = "Polygons";
-            treeNode4.Name = "GMap";
-            treeNode4.Text = "Objects";
+            treeNode9.Name = "POI";
+            treeNode9.Text = "POI";
+            treeNode10.Name = "Paths";
+            treeNode10.Text = "Paths";
+            treeNode11.Name = "Polygons";
+            treeNode11.Text = "Polygons";
+            treeNode12.Name = "GMap";
+            treeNode12.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode12});
             this.treGMap.Size = new System.Drawing.Size(159, 634);
             this.treGMap.TabIndex = 25;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
@@ -1136,7 +1138,9 @@
             this.gMapControl.TabIndex = 16;
             this.gMapControl.Zoom = 13D;
             this.gMapControl.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gMap_OnMarkerClick);
+            this.gMapControl.OnRouteClick += new GMap.NET.WindowsForms.RouteClick(this.gMap_OnRouteClick);
             this.gMapControl.OnMapDrag += new GMap.NET.MapDrag(this.gMap_OnMapDrag);
+            this.gMapControl.Load += new System.EventHandler(this.gMapControl_Load_1);
             this.gMapControl.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl_MouseClick);
             this.gMapControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseDown);
             this.gMapControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMap_MouseMove);
@@ -1387,6 +1391,13 @@
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
             // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(203, 22);
+            this.toolStripMenuItem9.Text = "Select Waypoint Path";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1565,6 +1576,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private System.Windows.Forms.ToolStripMenuItem distanceBetweenWaypointsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
     }
 }
 

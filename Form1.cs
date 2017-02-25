@@ -2327,6 +2327,7 @@ namespace Waypoint_Path_Generator
             bool selected = _wpg.PathAt(id).selected;
             //if(!selected)Globals.path_active = true;
             SelectPath(_wpg.PathAt(id), !selected);
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void gMap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
@@ -2593,6 +2594,7 @@ namespace Waypoint_Path_Generator
         {
             _wpg.UnselectAll();
             _gmap.ReDrawgMap();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void ToolSplitBefore_Click(object sender, EventArgs e)
@@ -3100,23 +3102,31 @@ namespace Waypoint_Path_Generator
             // Only 1 waypoint can be selected
 
             int wp_count = _wpg.SelectedWPCount();
+            
             if (wp_count != 1)
             {
                 MessageBox.Show("Select a single Waypoint");
                 return;
             }
-
+            
             // Find single selected waypoint
 
             Models.Path path;
             LinkedList<WayPoints> wp_list;
             WayPoints wp;
             int path_id = 0, wp_index = 0;
+            string str = "Waypoint Properties\n\n";
+            str = str + "Waypoint Count : " + Convert.ToString(wp_count) + "\n";
 
             for (int i = 0; i < _wpg.PathCount(); i++)
             {
                 path = _wpg.PathAt(i);
                 wp_list = path.waypoints;
+
+                str = str + "Path : " + path.name + "\n";
+                str = str + "Path Int Id: " + Convert.ToString(path.internal_id) + "\n";
+                str = str + "Waypoint Count : " + Convert.ToString(wp_list.Count) + "\n\n";
+
                 for (int j = 0; j < wp_list.Count; j++)
                 {
                     wp = wp_list.ElementAt(j);
@@ -3126,30 +3136,30 @@ namespace Waypoint_Path_Generator
                         path_id = i;
                         wp_index = j;
                         wp_count = wp_list.Count;
+
+
+                        path = _wpg.PathAt(path_id);
+                        wp_list = path.waypoints;
+                        wp = wp_list.ElementAt(wp_index);
+                        string action_name = _wpg.ActionWithId(wp.action_id).name;
+
+
+                        str = str + "Waypoint ID : " + Convert.ToString(wp_index) + "\n";
+                        str = str + "Latitude : " + TrimTo(Convert.ToString(wp.lat), 6) + "\n";
+                        str = str + "Longitude : " + TrimTo(Convert.ToString(wp.lon), 6) + "\n";
+                        str = str + "Altitude : " + Convert.ToString(wp.alt) + "\n";
+                        str = str + "Heading : " + TrimTo(Convert.ToString(wp.head), 2) + "\n";
+                        str = str + "Curve Size : " + Convert.ToString(wp.curvesize) + "\n";
+                        str = str + "Rotation Dir : " + Convert.ToString(wp.rotationdir) + "\n";
+                        str = str + "Gimble Mode : " + Convert.ToString(wp.gimblemode) + "\n";
+                        str = str + "Gimble Pitch : " + Convert.ToString(wp.gimblepitch) + "\n";
+                        str = str + "POI Id : " + Convert.ToString(wp.poi_id) + "\n";
+                        str = str + "Action : " + action_name + "\n\n";
                     }
                 }
             }
 
-            path = _wpg.PathAt(path_id);
             
-            wp_list = path.waypoints;
-            wp = wp_list.ElementAt(wp_index);
-            string action_name = _wpg.ActionWithId(wp.action_id).name;
-            string str = "Waypoint Properties\n\n";
-            str = str + "Path : " + path.name + "\n";
-            str = str + "Path Int Id: " + Convert.ToString(path.internal_id) + "\n";
-            str = str + "Waypoint Count : " + Convert.ToString(wp_list.Count) + "\n\n";
-            str = str + "Waypoint ID : " + Convert.ToString(wp_index) + "\n";
-            str = str + "Latitude : " + TrimTo(Convert.ToString(wp.lat),6) + "\n";
-            str = str + "Longitude : " + TrimTo(Convert.ToString(wp.lon),6) + "\n";
-            str = str + "Altitude : " + Convert.ToString(wp.alt) + "\n";
-            str = str + "Heading : " + TrimTo(Convert.ToString(wp.head),2) + "\n";
-            str = str + "Curve Size : " + Convert.ToString(wp.curvesize) + "\n";
-            str = str + "Rotation Dir : " + Convert.ToString(wp.rotationdir) + "\n";
-            str = str + "Gimble Mode : " + Convert.ToString(wp.gimblemode) + "\n";
-            str = str + "Gimble Pitch : " + Convert.ToString(wp.gimblepitch) + "\n";
-            str = str + "POI Id : " + Convert.ToString(wp.poi_id) + "\n";
-            str = str + "Action : " + action_name + "\n";
             MessageBox.Show(str);
         }
 
@@ -3715,7 +3725,21 @@ namespace Waypoint_Path_Generator
                 {
                     wp_old = wp_old_list.ElementAt(i);
                     WayPoints wp = new WayPoints();
-                    wp = wp_old;
+                    wp.lat = wp_old.lat;
+                    wp.lon = wp_old.lon;
+                    wp.alt = wp_old.alt;
+                    wp.head = wp_old.head;
+                    wp.curvesize = wp_old.curvesize;
+                    wp.rotationdir = wp_old.rotationdir;
+                    wp.gimblemode = wp_old.gimblemode;
+                    wp.gimblepitch = wp_old.gimblepitch;
+                    wp.action_id = wp_old.action_id;
+                    wp.poi_id = wp_old.poi_id;
+                    wp.selected = wp_old.selected;
+                    wp.visible = wp_old.visible;
+                    wp.path_int_id = wp_old.path_int_id;
+                    wp.marker = wp_old.marker;
+                    //wp = wp_old;
                     wp_list.AddLast(wp);
                 }
             }
@@ -3725,7 +3749,21 @@ namespace Waypoint_Path_Generator
                 {
                     wp_old = wp_old_list.ElementAt(i);
                     WayPoints wp = new WayPoints();
-                    wp = wp_old;
+                    wp.lat = wp_old.lat;
+                    wp.lon = wp_old.lon;
+                    wp.alt = wp_old.alt;
+                    wp.head = wp_old.head;
+                    wp.curvesize = wp_old.curvesize;
+                    wp.rotationdir = wp_old.rotationdir;
+                    wp.gimblemode = wp_old.gimblemode;
+                    wp.gimblepitch = wp_old.gimblepitch;
+                    wp.action_id = wp_old.action_id;
+                    wp.poi_id = wp_old.poi_id;
+                    wp.selected = wp_old.selected;
+                    wp.visible = wp_old.visible;
+                    wp.path_int_id = wp_old.path_int_id;
+                    wp.marker = wp_old.marker;
+                    //wp = wp_old;
                     wp_list.AddLast(wp);
                 }
             }
@@ -3741,7 +3779,21 @@ namespace Waypoint_Path_Generator
                 {
                     wp_old = wp_old_list.ElementAt(i);
                     WayPoints wp = new WayPoints();
-                    wp = wp_old;
+                    wp.lat = wp_old.lat;
+                    wp.lon = wp_old.lon;
+                    wp.alt = wp_old.alt;
+                    wp.head = wp_old.head;
+                    wp.curvesize = wp_old.curvesize;
+                    wp.rotationdir = wp_old.rotationdir;
+                    wp.gimblemode = wp_old.gimblemode;
+                    wp.gimblepitch = wp_old.gimblepitch;
+                    wp.action_id = wp_old.action_id;
+                    wp.poi_id = wp_old.poi_id;
+                    wp.selected = wp_old.selected;
+                    wp.visible = wp_old.visible;
+                    wp.path_int_id = wp_old.path_int_id;
+                    wp.marker = wp_old.marker;
+                    //wp = wp_old;
                     wp_list.AddLast(wp);
                 }
             }
@@ -3751,7 +3803,21 @@ namespace Waypoint_Path_Generator
                 {
                     wp_old = wp_old_list.ElementAt(i);
                     WayPoints wp = new WayPoints();
-                    wp = wp_old;
+                    wp.lat = wp_old.lat;
+                    wp.lon = wp_old.lon;
+                    wp.alt = wp_old.alt;
+                    wp.head = wp_old.head;
+                    wp.curvesize = wp_old.curvesize;
+                    wp.rotationdir = wp_old.rotationdir;
+                    wp.gimblemode = wp_old.gimblemode;
+                    wp.gimblepitch = wp_old.gimblepitch;
+                    wp.action_id = wp_old.action_id;
+                    wp.poi_id = wp_old.poi_id;
+                    wp.selected = wp_old.selected;
+                    wp.visible = wp_old.visible;
+                    wp.path_int_id = wp_old.path_int_id;
+                    wp.marker = wp_old.marker;
+                    //wp = wp_old;
                     wp_list.AddLast(wp);
                 }
             }
@@ -3965,6 +4031,56 @@ namespace Waypoint_Path_Generator
             wp1.selected = false;
             wp2.selected = false;
             _gmap.ReDrawgMap();
+        }
+
+        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        {
+            // Select Waypoint Path
+
+            // Only 1 waypoint can be selected
+
+            int wp_count = _wpg.SelectedWPCount();
+            if (wp_count != 1)
+            {
+                MessageBox.Show("Select a single Waypoint");
+                return;
+            }
+
+            // Find single selected waypoint
+
+            Models.Path path;
+            LinkedList<WayPoints> wp_list;
+            int path_index = -1, wp_index = 0;
+            WayPoints wp;
+
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                path = _wpg.PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    wp = wp_list.ElementAt(j);
+                    if (wp.selected)
+                    {
+                        path_index = i;
+                        wp_index = j;
+                        wp_count = wp_list.Count;
+                    }
+                }
+            }
+            
+            if(path_index != -1)
+            {
+                SelectPath(_wpg.PathAt(path_index), true);
+            }
+
+            _gmap.ReDrawgMap();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
+
+        private void gMapControl_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
