@@ -77,5 +77,15 @@ namespace Waypoint_Path_Generator
             _options.focal_angle_ver = Convert.ToDouble(txtCamVerAngle.Text);
             txtImageWidth.Text = Convert.ToString(2 * (Math.Tan(GPS.DegreesToRadians(_options.focal_angle_ver / 2)) * _options.def_altitude));
         }
+
+        private void txtImageVerOverlap_TextChanged(object sender, EventArgs e)
+        {
+            _options.ver_overlap_percent = Convert.ToDouble(txtImageVerOverlap.Text);
+        }
+
+        private void txtImageHorOverlap_TextChanged(object sender, EventArgs e)
+        {
+            _options.hor_overlap_percent = Convert.ToDouble(txtImageHorOverlap.Text);
+        }
     }
 }

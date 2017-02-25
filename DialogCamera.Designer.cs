@@ -75,6 +75,7 @@
             this.txtImageVerOverlap.Size = new System.Drawing.Size(100, 20);
             this.txtImageVerOverlap.TabIndex = 43;
             this.txtImageVerOverlap.Text = "15.0";
+            this.txtImageVerOverlap.TextChanged += new System.EventHandler(this.txtImageVerOverlap_TextChanged);
             // 
             // txtImageHorOverlap
             // 
@@ -83,6 +84,7 @@
             this.txtImageHorOverlap.Size = new System.Drawing.Size(100, 20);
             this.txtImageHorOverlap.TabIndex = 42;
             this.txtImageHorOverlap.Text = "25.0";
+            this.txtImageHorOverlap.TextChanged += new System.EventHandler(this.txtImageHorOverlap_TextChanged);
             // 
             // txtImageWidth
             // 
