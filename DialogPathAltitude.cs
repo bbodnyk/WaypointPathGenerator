@@ -481,7 +481,7 @@ namespace Waypoint_Path_Generator
                 if (chkShowAlt.Checked) altseries.Points.AddXY(i, wp.alt);
                 if (chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
                 if (chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
-                if (chkShowCurve.Checked) pitchseries.Points.AddXY(i, wp.curvesize);
+                if (chkShowCurve.Checked) curveseries.Points.AddXY(i, wp.curvesize);
                 if (chkSHowDist.Checked)
                 {
                     if (i == 0)

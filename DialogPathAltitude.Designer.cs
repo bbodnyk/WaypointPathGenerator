@@ -117,22 +117,27 @@
             this.chartAlt.Legends.Add(legend1);
             this.chartAlt.Location = new System.Drawing.Point(21, 519);
             this.chartAlt.Name = "chartAlt";
+            series1.BorderWidth = 2;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Altitude";
+            series2.BorderWidth = 2;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series2.Legend = "Legend1";
             series2.Name = "Heading";
+            series3.BorderWidth = 2;
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series3.Legend = "Legend1";
             series3.Name = "Pitch";
+            series4.BorderWidth = 2;
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series4.Legend = "Legend1";
             series4.Name = "Distance";
+            series5.BorderWidth = 2;
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series5.Legend = "Legend1";
@@ -146,7 +151,7 @@
             this.chartAlt.TabIndex = 1;
             this.chartAlt.Text = "chart1";
             title1.Name = "Title1";
-            title1.Text = "Path Altitude";
+            title1.Text = "Path Parameters";
             this.chartAlt.Titles.Add(title1);
             this.chartAlt.Click += new System.EventHandler(this.chartAlt_Click);
             // 
