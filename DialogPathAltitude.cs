@@ -73,14 +73,17 @@ namespace Waypoint_Path_Generator
             Series headingseries = chartAlt.Series["Heading"];
             Series pitchseries = chartAlt.Series["Pitch"];
             Series distseries = chartAlt.Series["Distance"];
+            Series curveseries = chartAlt.Series["CurveSize"];
             altseries.Points.Clear();
             headingseries.Points.Clear();
             pitchseries.Points.Clear();
             distseries.Points.Clear();
+            curveseries.Points.Clear();
             altseries.ChartType = SeriesChartType.Line;
             headingseries.ChartType = SeriesChartType.Line;
             pitchseries.ChartType = SeriesChartType.Line;
             distseries.ChartType = SeriesChartType.Line;
+            curveseries.ChartType = SeriesChartType.Line;
             ChartArea chartarea = chartAlt.ChartAreas[0];
             chartarea.AxisX.Minimum = 0;
             chartarea.AxisX.Maximum = wplist.Count() - 1;
@@ -94,6 +97,7 @@ namespace Waypoint_Path_Generator
                 if (chkShowAlt.Checked) altseries.Points.AddXY(i, wp.alt);
                 if (chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
                 if (chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
+                if (chkShowCurve.Checked) curveseries.Points.AddXY(i, wp.curvesize);
                 if (chkSHowDist.Checked)
                 {
                     if (i == 0)
@@ -459,14 +463,17 @@ namespace Waypoint_Path_Generator
             Series headingseries = chartAlt.Series["Heading"];
             Series pitchseries = chartAlt.Series["Pitch"];
             Series distseries = chartAlt.Series["Distance"];
+            Series curveseries = chartAlt.Series["CurveSize"];
             altseries.Points.Clear();
             headingseries.Points.Clear();
             pitchseries.Points.Clear();
             distseries.Points.Clear();
+            curveseries.Points.Clear();
             altseries.ChartType = SeriesChartType.Line;
             headingseries.ChartType = SeriesChartType.Line;
             pitchseries.ChartType = SeriesChartType.Line;
             distseries.ChartType = SeriesChartType.Line;
+            curveseries.ChartType = SeriesChartType.Line;
 
             for (int i = 0; i < wplist.Count(); i++)
             {
@@ -474,6 +481,7 @@ namespace Waypoint_Path_Generator
                 if (chkShowAlt.Checked) altseries.Points.AddXY(i, wp.alt);
                 if (chkShowHeading.Checked) headingseries.Points.AddXY(i, wp.head);
                 if (chkShowPitch.Checked) pitchseries.Points.AddXY(i, wp.gimblepitch);
+                if (chkShowCurve.Checked) pitchseries.Points.AddXY(i, wp.curvesize);
                 if (chkSHowDist.Checked)
                 {
                     if (i == 0)
