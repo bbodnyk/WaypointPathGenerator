@@ -48,6 +48,7 @@ namespace Waypoint_Path_Generator
             txtPitch2.Text = Convert.ToString(trkPitch2.Value);
             txtWPDist.Text = Convert.ToString(trkWPDist.Value);
 
+
             for (int i = 0; i < _wpg.ActionCount(); i++)
             {
                 cmbActions.Items.Add(_wpg.ActionAt(i).name);
@@ -60,6 +61,14 @@ namespace Waypoint_Path_Generator
             {
                 cmbPOI.Items.Add(_wpg.POIPointAt(i).name);
             }
+
+            chkAbsCurve.Checked = true;
+            chkRelCurve.Checked = false;
+            trkCurveSize.Minimum = 0;
+            trkCurveSize.Maximum = 100;
+            trkCurveSize.Value = 10;
+            txtCurveSize.Text = "10";
+
             Series altseries = chartAlt.Series["Altitude"];
             Series headingseries = chartAlt.Series["Heading"];
             Series pitchseries = chartAlt.Series["Pitch"];
@@ -392,6 +401,58 @@ namespace Waypoint_Path_Generator
                 }
             }
 
+            // Set Waypoint Curve Size
+
+            if (chkCurveSize.Checked)
+            {
+                WayPoints wp0, wp1, wp2;
+                double dist1, dist2, dist;
+
+                int start_wp = trkWP1.Value;
+                int end_wp = trkWP2.Value;
+                if(end_wp-start_wp >= 2)
+                {
+                    for(int i= start_wp+1; i <= end_wp - 1; i++)
+                    {
+                        wp0 = wplist.ElementAt(i - 1);
+                        wp1 = wplist.ElementAt(i);
+                        wp2 = wplist.ElementAt(i + 1);
+                        dist1 = GPS.GPS_Distance(wp0.lat, wp0.lon, wp1.lat, wp1.lon, _options.earth_radius);
+                        dist2 = GPS.GPS_Distance(wp1.lat, wp1.lon, wp2.lat, wp2.lon, _options.earth_radius);
+
+                        if (chkAbsCurve.Checked)
+                        {
+                            dist = Convert.ToDouble(txtCurveSize.Text);
+                            if(dist < (dist1*.5) & dist < (dist2 * .5))
+                            {
+                                wp1.curvesize = dist;
+                            } else
+                            {
+                                if (dist1 < dist2)
+                                {
+                                    wp1.curvesize = dist1 * 0.5;
+                                }
+                                else
+                                {
+                                    wp1.curvesize = dist2 * 0.5;
+                                }
+                            }
+
+                        }
+                        else {
+                            
+                            if(dist1 < dist2)
+                            {
+                                wp1.curvesize = dist1 * (Convert.ToDouble(txtCurveSize.Text) / 100.0);
+                            } else
+                            {
+                                wp1.curvesize = dist2 * (Convert.ToDouble(txtCurveSize.Text) / 100.0);
+                            }
+                        }
+                    }
+                }
+            }
+
             // Redraw Altitude Plot
 
             Series altseries = chartAlt.Series["Altitude"];
@@ -512,6 +573,41 @@ namespace Waypoint_Path_Generator
         private void trkWPDist_Scroll(object sender, EventArgs e)
         {
             txtWPDist.Text = Convert.ToString(trkWPDist.Value);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkAbsCurve_CheckedChanged(object sender, EventArgs e)
+        {
+            chkRelCurve.Checked = !chkAbsCurve.Checked;
+            if (chkAbsCurve.Checked)
+            {
+                trkCurveSize.Minimum = 0;
+                trkCurveSize.Maximum = 100;
+                trkCurveSize.Value = 10;
+                txtCurveSize.Text = "10";
+            }
+        }
+
+        private void chkRelCurve_CheckedChanged(object sender, EventArgs e)
+        {
+            chkAbsCurve.Checked = !chkRelCurve.Checked;
+            if (chkRelCurve.Checked)
+            {
+                trkCurveSize.Minimum = 10;
+                trkCurveSize.Maximum = 50;
+                trkCurveSize.Value = 25;
+                txtCurveSize.Text = "25";
+            }
+
+        }
+
+        private void trkCurveSize_Scroll(object sender, EventArgs e)
+        {
+            txtCurveSize.Text = Convert.ToString(trkCurveSize.Value);
         }
 
         private void chkSetPOI_CheckedChanged(object sender, EventArgs e)

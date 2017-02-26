@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.btnClose = new System.Windows.Forms.Button();
             this.chartAlt = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.trkAlt1 = new System.Windows.Forms.TrackBar();
@@ -74,6 +74,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbActions = new System.Windows.Forms.ComboBox();
             this.chkAction = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtCurveSize = new System.Windows.Forms.TextBox();
+            this.chkAbsCurve = new System.Windows.Forms.CheckBox();
+            this.chkRelCurve = new System.Windows.Forms.CheckBox();
+            this.trkCurveSize = new System.Windows.Forms.TrackBar();
+            this.chkCurveSize = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartAlt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWP1)).BeginInit();
@@ -87,11 +93,13 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trkWPDist)).BeginInit();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkCurveSize)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(320, 673);
+            this.btnClose.Location = new System.Drawing.Point(329, 775);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(149, 29);
             this.btnClose.TabIndex = 0;
@@ -101,38 +109,38 @@
             // 
             // chartAlt
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartAlt.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartAlt.Legends.Add(legend2);
-            this.chartAlt.Location = new System.Drawing.Point(12, 417);
+            chartArea3.Name = "ChartArea1";
+            this.chartAlt.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartAlt.Legends.Add(legend3);
+            this.chartAlt.Location = new System.Drawing.Point(21, 519);
             this.chartAlt.Name = "chartAlt";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "Altitude";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series6.Legend = "Legend1";
-            series6.Name = "Heading";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series7.Legend = "Legend1";
-            series7.Name = "Pitch";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Legend = "Legend1";
-            series8.Name = "Distance";
-            this.chartAlt.Series.Add(series5);
-            this.chartAlt.Series.Add(series6);
-            this.chartAlt.Series.Add(series7);
-            this.chartAlt.Series.Add(series8);
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Legend = "Legend1";
+            series9.Name = "Altitude";
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series10.Legend = "Legend1";
+            series10.Name = "Heading";
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series11.Legend = "Legend1";
+            series11.Name = "Pitch";
+            series12.ChartArea = "ChartArea1";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series12.Legend = "Legend1";
+            series12.Name = "Distance";
+            this.chartAlt.Series.Add(series9);
+            this.chartAlt.Series.Add(series10);
+            this.chartAlt.Series.Add(series11);
+            this.chartAlt.Series.Add(series12);
             this.chartAlt.Size = new System.Drawing.Size(791, 250);
             this.chartAlt.TabIndex = 1;
             this.chartAlt.Text = "chart1";
-            title2.Name = "Title1";
-            title2.Text = "Path Altitude";
-            this.chartAlt.Titles.Add(title2);
+            title3.Name = "Title1";
+            title3.Text = "Path Altitude";
+            this.chartAlt.Titles.Add(title3);
             this.chartAlt.Click += new System.EventHandler(this.chartAlt_Click);
             // 
             // trkAlt1
@@ -234,7 +242,7 @@
             // 
             // btnApply
             // 
-            this.btnApply.Location = new System.Drawing.Point(332, 340);
+            this.btnApply.Location = new System.Drawing.Point(341, 442);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(149, 23);
             this.btnApply.TabIndex = 14;
@@ -252,7 +260,7 @@
             this.groupBox1.Controls.Add(this.txtAlt2);
             this.groupBox1.Controls.Add(this.trkAlt1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 104);
+            this.groupBox1.Location = new System.Drawing.Point(12, 91);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(237, 223);
             this.groupBox1.TabIndex = 15;
@@ -317,7 +325,7 @@
             this.groupBox3.Controls.Add(this.chkPOIMode);
             this.groupBox3.Controls.Add(this.cmbPOI);
             this.groupBox3.Controls.Add(this.chkSetPOI);
-            this.groupBox3.Location = new System.Drawing.Point(270, 104);
+            this.groupBox3.Location = new System.Drawing.Point(265, 91);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(242, 223);
             this.groupBox3.TabIndex = 17;
@@ -408,7 +416,7 @@
             this.chkShowAlt.AutoSize = true;
             this.chkShowAlt.Checked = true;
             this.chkShowAlt.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkShowAlt.Location = new System.Drawing.Point(221, 381);
+            this.chkShowAlt.Location = new System.Drawing.Point(230, 483);
             this.chkShowAlt.Name = "chkShowAlt";
             this.chkShowAlt.Size = new System.Drawing.Size(61, 17);
             this.chkShowAlt.TabIndex = 18;
@@ -418,7 +426,7 @@
             // chkShowHeading
             // 
             this.chkShowHeading.AutoSize = true;
-            this.chkShowHeading.Location = new System.Drawing.Point(332, 381);
+            this.chkShowHeading.Location = new System.Drawing.Point(341, 483);
             this.chkShowHeading.Name = "chkShowHeading";
             this.chkShowHeading.Size = new System.Drawing.Size(66, 17);
             this.chkShowHeading.TabIndex = 19;
@@ -429,7 +437,7 @@
             // chkShowPitch
             // 
             this.chkShowPitch.AutoSize = true;
-            this.chkShowPitch.Location = new System.Drawing.Point(433, 381);
+            this.chkShowPitch.Location = new System.Drawing.Point(442, 483);
             this.chkShowPitch.Name = "chkShowPitch";
             this.chkShowPitch.Size = new System.Drawing.Size(50, 17);
             this.chkShowPitch.TabIndex = 20;
@@ -441,7 +449,7 @@
             this.groupBox4.Controls.Add(this.trkWPDist);
             this.groupBox4.Controls.Add(this.txtWPDist);
             this.groupBox4.Controls.Add(this.chkRemoveWP);
-            this.groupBox4.Location = new System.Drawing.Point(531, 104);
+            this.groupBox4.Location = new System.Drawing.Point(523, 91);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(264, 107);
             this.groupBox4.TabIndex = 21;
@@ -479,7 +487,7 @@
             // chkSHowDist
             // 
             this.chkSHowDist.AutoSize = true;
-            this.chkSHowDist.Location = new System.Drawing.Point(527, 381);
+            this.chkSHowDist.Location = new System.Drawing.Point(536, 483);
             this.chkSHowDist.Name = "chkSHowDist";
             this.chkSHowDist.Size = new System.Drawing.Size(68, 17);
             this.chkSHowDist.TabIndex = 22;
@@ -491,7 +499,7 @@
             this.groupBox5.Controls.Add(this.label2);
             this.groupBox5.Controls.Add(this.cmbActions);
             this.groupBox5.Controls.Add(this.chkAction);
-            this.groupBox5.Location = new System.Drawing.Point(531, 227);
+            this.groupBox5.Location = new System.Drawing.Point(523, 214);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(264, 100);
             this.groupBox5.TabIndex = 23;
@@ -525,11 +533,80 @@
             this.chkAction.Text = "Set Action";
             this.chkAction.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.chkCurveSize);
+            this.groupBox6.Controls.Add(this.trkCurveSize);
+            this.groupBox6.Controls.Add(this.chkRelCurve);
+            this.groupBox6.Controls.Add(this.chkAbsCurve);
+            this.groupBox6.Controls.Add(this.txtCurveSize);
+            this.groupBox6.Location = new System.Drawing.Point(12, 320);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(237, 132);
+            this.groupBox6.TabIndex = 24;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Curve Size";
+            // 
+            // txtCurveSize
+            // 
+            this.txtCurveSize.Location = new System.Drawing.Point(14, 82);
+            this.txtCurveSize.Name = "txtCurveSize";
+            this.txtCurveSize.Size = new System.Drawing.Size(49, 20);
+            this.txtCurveSize.TabIndex = 0;
+            this.txtCurveSize.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // chkAbsCurve
+            // 
+            this.chkAbsCurve.AutoSize = true;
+            this.chkAbsCurve.Checked = true;
+            this.chkAbsCurve.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAbsCurve.Location = new System.Drawing.Point(14, 47);
+            this.chkAbsCurve.Name = "chkAbsCurve";
+            this.chkAbsCurve.Size = new System.Drawing.Size(67, 17);
+            this.chkAbsCurve.TabIndex = 1;
+            this.chkAbsCurve.Text = "Absolute";
+            this.chkAbsCurve.UseVisualStyleBackColor = true;
+            this.chkAbsCurve.CheckedChanged += new System.EventHandler(this.chkAbsCurve_CheckedChanged);
+            // 
+            // chkRelCurve
+            // 
+            this.chkRelCurve.AutoSize = true;
+            this.chkRelCurve.Location = new System.Drawing.Point(113, 47);
+            this.chkRelCurve.Name = "chkRelCurve";
+            this.chkRelCurve.Size = new System.Drawing.Size(65, 17);
+            this.chkRelCurve.TabIndex = 2;
+            this.chkRelCurve.Text = "Relative";
+            this.chkRelCurve.UseVisualStyleBackColor = true;
+            this.chkRelCurve.CheckedChanged += new System.EventHandler(this.chkRelCurve_CheckedChanged);
+            // 
+            // trkCurveSize
+            // 
+            this.trkCurveSize.Location = new System.Drawing.Point(104, 82);
+            this.trkCurveSize.Maximum = 50;
+            this.trkCurveSize.Minimum = 1;
+            this.trkCurveSize.Name = "trkCurveSize";
+            this.trkCurveSize.Size = new System.Drawing.Size(104, 42);
+            this.trkCurveSize.TabIndex = 3;
+            this.trkCurveSize.TickFrequency = 10;
+            this.trkCurveSize.Value = 1;
+            this.trkCurveSize.Scroll += new System.EventHandler(this.trkCurveSize_Scroll);
+            // 
+            // chkCurveSize
+            // 
+            this.chkCurveSize.AutoSize = true;
+            this.chkCurveSize.Location = new System.Drawing.Point(14, 24);
+            this.chkCurveSize.Name = "chkCurveSize";
+            this.chkCurveSize.Size = new System.Drawing.Size(96, 17);
+            this.chkCurveSize.TabIndex = 4;
+            this.chkCurveSize.Text = "Set Curve Size";
+            this.chkCurveSize.UseVisualStyleBackColor = true;
+            // 
             // DialogPathAltitude
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(825, 715);
+            this.ClientSize = new System.Drawing.Size(825, 815);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.chkSHowDist);
             this.Controls.Add(this.groupBox4);
@@ -566,6 +643,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.trkWPDist)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkCurveSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,5 +692,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbActions;
         private System.Windows.Forms.CheckBox chkAction;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.CheckBox chkAbsCurve;
+        private System.Windows.Forms.TextBox txtCurveSize;
+        private System.Windows.Forms.TrackBar trkCurveSize;
+        private System.Windows.Forms.CheckBox chkRelCurve;
+        private System.Windows.Forms.CheckBox chkCurveSize;
     }
 }

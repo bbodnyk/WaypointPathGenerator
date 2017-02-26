@@ -888,7 +888,7 @@ namespace Waypoint_Path_Generator.Models
                         xml_writer.WriteElementString("Alt", Convert.ToString(alt));
                         xml_writer.WriteElementString("Heading", Convert.ToString(head));
                         xml_writer.WriteElementString("CurveSize", Convert.ToString(curvesize));
-                        xml_writer.WriteElementString("RotationDir", Convert.ToString(curvesize));
+                        xml_writer.WriteElementString("RotationDir", Convert.ToString(rotdir));
                         xml_writer.WriteElementString("GimbleMode", Convert.ToString(gimble_mode));
                         xml_writer.WriteElementString("GimblePitch", Convert.ToString(gimble_pitch));
                         xml_writer.WriteElementString("ActionID", Convert.ToString(action_id));
