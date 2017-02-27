@@ -270,6 +270,39 @@ namespace Waypoint_Path_Generator
                 }
             }
 
+            if (_path_type == "Egg")
+            {
+                double rot_ang = Convert.ToDouble(trkAngle.Value);
+                double radius = Convert.ToDouble(trkSize.Value);
+                double ang = Convert.ToDouble(trkStartAngle.Value);
+                double ang_inc = 360.0 / numpnt;
+                double xval, yval;
+                double xscale = trkScaleX.Value;
+                double yscale = trkScaleY.Value;
+                double distance;
+                double order = trkOrder.Value;
+                double a = trkSize.Value;
+                double b = order/10.0 * a;
+
+
+                for (int i = 0; i < numpnt; i++)
+                {
+                    //xval = radius * Math.Cos(GPS.DegreesToRadians(ang)) / yscale;
+                    //yval = radius * Math.Sin(GPS.DegreesToRadians(ang)) * xscale;
+                    xval = (a / 2 - (b / 4) * (1 - Math.Cos(GPS.DegreesToRadians(ang)))) * (1 + Math.Cos(GPS.DegreesToRadians(ang))) / yscale;
+                    yval = (a / 2 - (b / 4) * (1 - Math.Cos(GPS.DegreesToRadians(ang)))) * Math.Sin(GPS.DegreesToRadians(ang)) * xscale;
+
+                    lat = _lat + xval / lat_degree;
+                    lon = _lon + yval / lon_degree;
+                    bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
+                    distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
+                    lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + rot_ang, distance, _gps_radius);
+                    lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, bearing + rot_ang, distance, _gps_radius);
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
+                    ang = ang + ang_inc;
+                }
+            }
+
             if (_path_type == "Resonance")
             {
                 // x = tan(t)
@@ -473,6 +506,7 @@ namespace Waypoint_Path_Generator
                 if (path_name == "" & _path_type == "Botanic") path_name = "Untitled - Botanic - " + path_id;
                 if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid - " + path_id;
                 if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium - " + path_id;
+                if (path_name == "" & _path_type == "Egg") path_name = "Untitled - Egg - " + path_id;
                 if (path_name == "" & _path_type == "Resonance") path_name = "Untitled - Resonance - " + path_id;
                 if (path_name == "" & _path_type == "Sine") path_name = "Untitled - Sine - " + path_id;
                 if (path_name == "" & _path_type == "Tan") path_name = "Untitled - Tan - " + path_id;
@@ -486,6 +520,7 @@ namespace Waypoint_Path_Generator
                 if (_path_type == "Botanic") gui.path_type = "Botanic";
                 if (_path_type == "Strophoid") gui.path_type = "Strophoid";
                 if (_path_type == "Folium") gui.path_type = "Folium";
+                if (_path_type == "Egg") gui.path_type = "Egg";
                 if (_path_type == "Resonance") gui.path_type = "Resonance";
                 if (_path_type == "Sine") gui.path_type = "Sine";
                 if (_path_type == "Tan") gui.path_type = "Tan";

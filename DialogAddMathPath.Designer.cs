@@ -82,6 +82,7 @@
             "Botanic",
             "Strophoid",
             "Folium",
+            "Egg",
             "Resonance",
             "Sine",
             "Tan"});
@@ -369,7 +370,7 @@
             // trkOrder
             // 
             this.trkOrder.Location = new System.Drawing.Point(297, 176);
-            this.trkOrder.Maximum = 8;
+            this.trkOrder.Maximum = 9;
             this.trkOrder.Minimum = 3;
             this.trkOrder.Name = "trkOrder";
             this.trkOrder.Size = new System.Drawing.Size(104, 42);
