@@ -58,6 +58,10 @@
             this.cmbPOI = new System.Windows.Forms.ComboBox();
             this.lblOrder = new System.Windows.Forms.Label();
             this.trkOrder = new System.Windows.Forms.TrackBar();
+            this.chkXScaleUp = new System.Windows.Forms.CheckBox();
+            this.chkXScaleDown = new System.Windows.Forms.CheckBox();
+            this.chkYScaleUp = new System.Windows.Forms.CheckBox();
+            this.chkYScaleDown = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trkAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkNumPoints)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).BeginInit();
@@ -75,17 +79,19 @@
             this.cmbPathType.FormattingEnabled = true;
             this.cmbPathType.Items.AddRange(new object[] {
             "",
-            "Eliptical",
-            "Parabolic",
-            "Cubic",
-            "Trisectrix",
             "Botanic",
-            "Strophoid",
-            "Folium",
+            "Cubic",
             "Egg",
+            "Eliptical",
+            "Folium",
+            "Ophiuride",
+            "Parabolic",
             "Resonance",
+            "Serpentine",
             "Sine",
-            "Tan"});
+            "Strophoid",
+            "Tan",
+            "Trisectrix"});
             this.cmbPathType.Location = new System.Drawing.Point(90, 48);
             this.cmbPathType.Name = "cmbPathType";
             this.cmbPathType.Size = new System.Drawing.Size(121, 21);
@@ -227,14 +233,14 @@
             // 
             // txtScaleX
             // 
-            this.txtScaleX.Location = new System.Drawing.Point(85, 316);
+            this.txtScaleX.Location = new System.Drawing.Point(59, 316);
             this.txtScaleX.Name = "txtScaleX";
             this.txtScaleX.Size = new System.Drawing.Size(41, 20);
             this.txtScaleX.TabIndex = 14;
             // 
             // trkScaleX
             // 
-            this.trkScaleX.Location = new System.Drawing.Point(133, 316);
+            this.trkScaleX.Location = new System.Drawing.Point(107, 316);
             this.trkScaleX.Minimum = 1;
             this.trkScaleX.Name = "trkScaleX";
             this.trkScaleX.Size = new System.Drawing.Size(104, 42);
@@ -244,8 +250,7 @@
             // 
             // trkScaleY
             // 
-            this.trkScaleY.Location = new System.Drawing.Point(133, 364);
-            this.trkScaleY.Maximum = 100;
+            this.trkScaleY.Location = new System.Drawing.Point(107, 364);
             this.trkScaleY.Minimum = 1;
             this.trkScaleY.Name = "trkScaleY";
             this.trkScaleY.Size = new System.Drawing.Size(104, 42);
@@ -255,7 +260,7 @@
             // 
             // txtScaleY
             // 
-            this.txtScaleY.Location = new System.Drawing.Point(85, 364);
+            this.txtScaleY.Location = new System.Drawing.Point(59, 364);
             this.txtScaleY.Name = "txtScaleY";
             this.txtScaleY.Size = new System.Drawing.Size(41, 20);
             this.txtScaleY.TabIndex = 16;
@@ -263,7 +268,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 319);
+            this.label2.Location = new System.Drawing.Point(14, 319);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 18;
@@ -272,7 +277,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 367);
+            this.label3.Location = new System.Drawing.Point(16, 367);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 19;
@@ -378,11 +383,63 @@
             this.trkOrder.Value = 3;
             this.trkOrder.Scroll += new System.EventHandler(this.trkOrder_Scroll);
             // 
+            // chkXScaleUp
+            // 
+            this.chkXScaleUp.AutoSize = true;
+            this.chkXScaleUp.Checked = true;
+            this.chkXScaleUp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkXScaleUp.Location = new System.Drawing.Point(241, 319);
+            this.chkXScaleUp.Name = "chkXScaleUp";
+            this.chkXScaleUp.Size = new System.Drawing.Size(40, 17);
+            this.chkXScaleUp.TabIndex = 30;
+            this.chkXScaleUp.Text = "Up";
+            this.chkXScaleUp.UseVisualStyleBackColor = true;
+            this.chkXScaleUp.CheckedChanged += new System.EventHandler(this.chkXScaleUp_CheckedChanged);
+            // 
+            // chkXScaleDown
+            // 
+            this.chkXScaleDown.AutoSize = true;
+            this.chkXScaleDown.Location = new System.Drawing.Point(303, 319);
+            this.chkXScaleDown.Name = "chkXScaleDown";
+            this.chkXScaleDown.Size = new System.Drawing.Size(54, 17);
+            this.chkXScaleDown.TabIndex = 31;
+            this.chkXScaleDown.Text = "Down";
+            this.chkXScaleDown.UseVisualStyleBackColor = true;
+            this.chkXScaleDown.CheckedChanged += new System.EventHandler(this.chkXScaleDown_CheckedChanged);
+            // 
+            // chkYScaleUp
+            // 
+            this.chkYScaleUp.AutoSize = true;
+            this.chkYScaleUp.Location = new System.Drawing.Point(241, 367);
+            this.chkYScaleUp.Name = "chkYScaleUp";
+            this.chkYScaleUp.Size = new System.Drawing.Size(40, 17);
+            this.chkYScaleUp.TabIndex = 32;
+            this.chkYScaleUp.Text = "Up";
+            this.chkYScaleUp.UseVisualStyleBackColor = true;
+            this.chkYScaleUp.CheckedChanged += new System.EventHandler(this.chkYScaleUp_CheckedChanged);
+            // 
+            // chkYScaleDown
+            // 
+            this.chkYScaleDown.AutoSize = true;
+            this.chkYScaleDown.Checked = true;
+            this.chkYScaleDown.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkYScaleDown.Location = new System.Drawing.Point(303, 367);
+            this.chkYScaleDown.Name = "chkYScaleDown";
+            this.chkYScaleDown.Size = new System.Drawing.Size(54, 17);
+            this.chkYScaleDown.TabIndex = 33;
+            this.chkYScaleDown.Text = "Down";
+            this.chkYScaleDown.UseVisualStyleBackColor = true;
+            this.chkYScaleDown.CheckedChanged += new System.EventHandler(this.chkYScaleDown_CheckedChanged);
+            // 
             // DialogAddMathPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(417, 681);
+            this.Controls.Add(this.chkYScaleDown);
+            this.Controls.Add(this.chkYScaleUp);
+            this.Controls.Add(this.chkXScaleDown);
+            this.Controls.Add(this.chkXScaleUp);
             this.Controls.Add(this.trkOrder);
             this.Controls.Add(this.lblOrder);
             this.Controls.Add(this.cmbPOI);
@@ -463,5 +520,9 @@
         private System.Windows.Forms.ComboBox cmbPOI;
         private System.Windows.Forms.Label lblOrder;
         private System.Windows.Forms.TrackBar trkOrder;
+        private System.Windows.Forms.CheckBox chkXScaleUp;
+        private System.Windows.Forms.CheckBox chkXScaleDown;
+        private System.Windows.Forms.CheckBox chkYScaleUp;
+        private System.Windows.Forms.CheckBox chkYScaleDown;
     }
 }

@@ -49,6 +49,17 @@ namespace Waypoint_Path_Generator
                 cmbPOI.Items.Add(_wpg.POIPointAt(i).name);
             }
 
+            // Turn Controls Off
+
+            trkSize.Enabled = false;
+            trkAngle.Enabled = false;
+            trkStartAngle.Enabled = false;
+            trkScaleX.Enabled = false;
+            trkScaleY.Enabled = false;
+            trkRadius1.Enabled = false;
+            trkRadius2.Enabled = false;
+            trkOrder.Enabled = false;
+
             // New or Old Path
 
             if (path == null)
@@ -87,6 +98,10 @@ namespace Waypoint_Path_Generator
                 int index = cmbPOI.Items.IndexOf(_gui.poiname);
                 cmbPOI.SelectedIndex = index;
                 cmbPOI.SelectedText = _gui.poiname;
+
+                
+                
+
                 _lat = _gui.lat;
                 _lon = _gui.lon;
                 _build = true;
@@ -139,18 +154,151 @@ namespace Waypoint_Path_Generator
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string pathtype = cmbPathType.Text;
-            string str;
+
+            
+
+            if (pathtype == "Botanic")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = false;
+                trkScaleY.Enabled = false;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = true;
+            }
+            if (pathtype == "Cubic")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Eliptical")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = true;
+            }
+            if (pathtype == "Egg")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = true;
+            }
+            if (pathtype == "Folium")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = false;
+                trkScaleY.Enabled = false;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Ophiuride")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = false;
+                trkScaleX.Enabled = false;
+                trkScaleY.Enabled = false;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = true;
+            }
             if (pathtype == "Parabolic")
             {
-                str = "Path Type - Parabolic\n\n";
-                str = str + "Altitude - Altitude of part\n";
-                str = str + "Size - Width across ends of parabola\n";
-                str = str + "Angle - Rotation of parabola\n";
-                str = str + "Radius - n/a\n";
-                str = str + "Num Points - Number of points\n";
-                str = str + "Scale X - Scale parabola width\n";
-                str = str + "Scale Y - Scale parabola height\n";
-                //MessageBox.Show(str);
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = false;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Resonance")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = false;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Serpentine")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Sine")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Strophoid")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = false;
+                trkScaleX.Enabled = false;
+                trkScaleY.Enabled = false;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Tan")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = true;
+                trkScaleY.Enabled = true;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
+            }
+            if (pathtype == "Trisectrix")
+            {
+                trkSize.Enabled = true;
+                trkAngle.Enabled = true;
+                trkStartAngle.Enabled = true;
+                trkScaleX.Enabled = false;
+                trkScaleY.Enabled = false;
+                trkRadius1.Enabled = false;
+                trkRadius2.Enabled = false;
+                trkOrder.Enabled = false;
             }
             buildPath();
         }
@@ -167,6 +315,8 @@ namespace Waypoint_Path_Generator
             int numpnt = trkNumPoints.Value;
             double scalex = Convert.ToDouble(txtScaleX.Text);
             double scaley = Convert.ToDouble(txtScaleY.Text);
+            if (chkXScaleDown.Checked) scalex = 1.0 / scalex;
+            if (chkYScaleDown.Checked) scaley = 1.0 / scaley;
             double lat2 = _lat + 1.0;
             double lon2 = _lon + 1.0;
             double lat, lon, lat_inc, lon_inc;
@@ -207,7 +357,7 @@ namespace Waypoint_Path_Generator
             double curvesize = 0;
             double rotdir = 0;
 
-            if (_path_type == "Parabolic" | _path_type == "Cubic")
+            if (_path_type == "Parabolic" | _path_type == "Cubic" | _path_type == "Serpentine")
             {
                 // Parabolic Path - lon = lat * lat
 
@@ -223,10 +373,11 @@ namespace Waypoint_Path_Generator
                     yval = 0;
                     if (_path_type == "Parabolic") yval = (xval * xval);
                     if (_path_type == "Cubic") yval = (xval * xval * xval);
+                    if (_path_type == "Serpentine") yval = xval / (xval * xval + 1);
                     distance = Math.Sqrt((xval * xval) + (yval * yval));
                     angle = GPS.RadiansToDegrees(Math.Atan(yval / xval));
                     scale_x = xval * scalex;
-                    scale_y = yval / scaley;
+                    scale_y = yval * scaley;
                     new_lat = _lat + (scale_y / lat_degree);
                     new_lon = _lon + (scale_x / lon_degree);
 
@@ -251,16 +402,16 @@ namespace Waypoint_Path_Generator
                 double ang = Convert.ToDouble(trkStartAngle.Value);
                 double ang_inc = 360.0 / numpnt;
                 double xval, yval;
-                double xscale = trkScaleX.Value;
-                double yscale = trkScaleY.Value;
+                //double xscale = trkScaleX.Value;
+                //double yscale = trkScaleY.Value;
                 double distance;
 
                 for (int i=0;i< numpnt; i++)
                 {
-                    xval = radius * Math.Cos(GPS.DegreesToRadians(ang)) / yscale;
-                    yval = radius * Math.Sin(GPS.DegreesToRadians(ang)) * xscale;
-                    lat = _lat + xval / lat_degree;
-                    lon = _lon + yval / lon_degree;
+                    xval = radius * Math.Cos(GPS.DegreesToRadians(ang)) * scalex;
+                    yval = radius * Math.Sin(GPS.DegreesToRadians(ang)) * scaley;
+                    lat = _lat + yval / lat_degree;
+                    lon = _lon + xval / lon_degree;
                     bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
                     distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + rot_ang, distance, _gps_radius);
@@ -277,8 +428,8 @@ namespace Waypoint_Path_Generator
                 double ang = Convert.ToDouble(trkStartAngle.Value);
                 double ang_inc = 360.0 / numpnt;
                 double xval, yval;
-                double xscale = trkScaleX.Value;
-                double yscale = trkScaleY.Value;
+                //double xscale = trkScaleX.Value;
+                //double yscale = trkScaleY.Value;
                 double distance;
                 double order = trkOrder.Value;
                 double a = trkSize.Value;
@@ -287,10 +438,8 @@ namespace Waypoint_Path_Generator
 
                 for (int i = 0; i < numpnt; i++)
                 {
-                    //xval = radius * Math.Cos(GPS.DegreesToRadians(ang)) / yscale;
-                    //yval = radius * Math.Sin(GPS.DegreesToRadians(ang)) * xscale;
-                    xval = (a / 2 - (b / 4) * (1 - Math.Cos(GPS.DegreesToRadians(ang)))) * (1 + Math.Cos(GPS.DegreesToRadians(ang))) / yscale;
-                    yval = (a / 2 - (b / 4) * (1 - Math.Cos(GPS.DegreesToRadians(ang)))) * Math.Sin(GPS.DegreesToRadians(ang)) * xscale;
+                    xval = (a / 2 - (b / 4) * (1 - Math.Cos(GPS.DegreesToRadians(ang)))) * (1 + Math.Cos(GPS.DegreesToRadians(ang))) * scaley;
+                    yval = (a / 2 - (b / 4) * (1 - Math.Cos(GPS.DegreesToRadians(ang)))) * Math.Sin(GPS.DegreesToRadians(ang)) * scalex;
 
                     lat = _lat + xval / lat_degree;
                     lon = _lon + yval / lon_degree;
@@ -313,14 +462,14 @@ namespace Waypoint_Path_Generator
                 double ang = -85.0;
                 double ang_inc = 170.0 / numpnt;
                 double distance;
-                double xscale = trkScaleX.Value;
-                double yscale = trkScaleY.Value;
+                //double xscale = trkScaleX.Value;
+                //double yscale = trkScaleY.Value;
 
                 for (int i=0;i<= numpnt; i++)
                 {
 
-                    double xval = Math.Tan(GPS.DegreesToRadians(ang)) * size / yscale;
-                    double yval = Math.Cos(GPS.DegreesToRadians(ang) * GPS.DegreesToRadians(ang)) * size * xscale;
+                    double xval = Math.Tan(GPS.DegreesToRadians(ang)) * size * scaley;
+                    double yval = Math.Cos(GPS.DegreesToRadians(ang) * GPS.DegreesToRadians(ang)) * size * scalex;
                     lat = _lat + xval / lat_degree;
                     lon = _lon + yval / lon_degree;
                     bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
@@ -360,8 +509,8 @@ namespace Waypoint_Path_Generator
             {
                 double xval, yval;
                 double distance;
-                double xscale = trkScaleX.Value;
-                double yscale = trkScaleY.Value;
+                //double xscale = trkScaleX.Value;
+                //double yscale = trkScaleY.Value;
                 size = trkSize.Value;
                 double rotang = trkAngle.Value;
                 double ang = trkStartAngle.Value;
@@ -372,8 +521,8 @@ namespace Waypoint_Path_Generator
                     double percent = Convert.ToDouble(i) / (Convert.ToDouble(numpnt) - 1);
                     xval = size * percent;
                     yval = Math.Sin(GPS.DegreesToRadians(ang)) * size;
-                    lat = _lat + (yval / lat_degree)/yscale;
-                    lon = _lon + (xval / lon_degree)*xscale;
+                    lat = _lat + (yval / lat_degree)*scaley;
+                    lon = _lon + (xval / lon_degree)*scalex;
                     bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
                     distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing+rotang, distance, _gps_radius);
@@ -387,8 +536,8 @@ namespace Waypoint_Path_Generator
             {
                 double xval, yval;
                 double distance;
-                double xscale = trkScaleX.Value;
-                double yscale = trkScaleY.Value;
+                //double xscale = trkScaleX.Value;
+                //double yscale = trkScaleY.Value;
                 size = trkSize.Value;
                 double rotang = trkAngle.Value;
                 double ang = -70.0;
@@ -399,8 +548,8 @@ namespace Waypoint_Path_Generator
                     double percent = Convert.ToDouble(i) / (Convert.ToDouble(numpnt) - 1);
                     xval = size * percent;
                     yval = Math.Tan(GPS.DegreesToRadians(ang)) * size;
-                    lat = _lat + (yval / lat_degree) / yscale;
-                    lon = _lon + (xval / lon_degree) * xscale;
+                    lat = _lat + (yval / lat_degree) * scaley;
+                    lon = _lon + (xval / lon_degree) * scalex;
                     bearing = GPS.GPS_Bearing(_lat, _lon, lat, lon);
                     distance = GPS.GPS_Distance(_lat, _lon, lat, lon, _gps_radius);
                     lat = GPS.GPS_Lat_BearDist(_lat, _lon, bearing + rotang, distance, _gps_radius);
@@ -491,6 +640,31 @@ namespace Waypoint_Path_Generator
                 }
             }
 
+            // Ophiuride
+
+            if (_path_type == "Ophiuride")
+            {
+                double rot_ang = Convert.ToDouble(trkAngle.Value);
+                double order = trkOrder.Value;
+                double ang, radian, radius, sintheta, costheta;
+                //ang = trkStartAngle.Value;
+                ang = 100;
+                double ang_inc = 170.0 / numpnt;
+                for (int i = 0; i < numpnt; i++)
+                {
+                    //ang = ang_inc * i;
+                    radian = GPS.DegreesToRadians(ang);
+                    sintheta = Math.Sin(radian);
+                    costheta = Math.Cos(radian);
+                    radius = (sintheta - (order * costheta)) * Math.Tan(radian) * size;
+                    lat = GPS.GPS_Lat_BearDist(_lat, _lon, ang + rot_ang, radius, gps_radius);
+                    lon = GPS.GPS_Lon_BearDist(_lat, _lon, lat, ang + rot_ang, radius, gps_radius);
+                    rtbMathPath.AppendText("Lat/Lon : " + Convert.ToString(lat) + ", " + Convert.ToString(lon) + "\n");
+                    _wp.Add_Waypoint_List(_wpg, wplist, lat, lon, altitude, 0.0, curvesize, rotdir, gimblemode, gimblepitch, poi_id, no_action_id);
+                    ang = ang + ang_inc;
+                }
+            }
+
             // Save Path
 
             if (_new_path & _first_pass)
@@ -510,6 +684,8 @@ namespace Waypoint_Path_Generator
                 if (path_name == "" & _path_type == "Resonance") path_name = "Untitled - Resonance - " + path_id;
                 if (path_name == "" & _path_type == "Sine") path_name = "Untitled - Sine - " + path_id;
                 if (path_name == "" & _path_type == "Tan") path_name = "Untitled - Tan - " + path_id;
+                if (path_name == "" & _path_type == "Serpentine") path_name = "Untitled - Serpentine - " + path_id;
+                if (path_name == "" & _path_type == "Ophiuride") path_name = "Untitled - Ophiuride - " + path_id;
                 _path.name = path_name;
                 MathGUI gui = new MathGUI();
                 gui.name = txtPathName.Text;
@@ -524,6 +700,8 @@ namespace Waypoint_Path_Generator
                 if (_path_type == "Resonance") gui.path_type = "Resonance";
                 if (_path_type == "Sine") gui.path_type = "Sine";
                 if (_path_type == "Tan") gui.path_type = "Tan";
+                if (_path_type == "Serpentine") gui.path_type = "Serpentine";
+                if (_path_type == "Ophiuride") gui.path_type = "Ophiuride";
                 gui.size = trkSize.Value;
                 gui.rot_angle = trkAngle.Value;
                 gui.start_angle = trkStartAngle.Value;
@@ -592,6 +770,8 @@ namespace Waypoint_Path_Generator
             if (_path_type == "Resonance") gui.path_type = "Resonance";
             if (_path_type == "Sine") gui.path_type = "Sine";
             if (_path_type == "Tan") gui.path_type = "Tan";
+            if (_path_type == "Serpentine") gui.path_type = "Serpentine";
+            if (_path_type == "Ophiuride") gui.path_type = "Ophiuride";
             gui.size = trkSize.Value;
             gui.rot_angle = trkAngle.Value;
             gui.start_angle = trkStartAngle.Value;
@@ -651,6 +831,30 @@ namespace Waypoint_Path_Generator
         private void trkOrder_Scroll(object sender, EventArgs e)
         {
             lblOrder.Text = "Order : " + Convert.ToString(trkOrder.Value);
+            buildPath();
+        }
+
+        private void chkXScaleUp_CheckedChanged(object sender, EventArgs e)
+        {
+            chkXScaleDown.Checked = !chkXScaleUp.Checked;
+            buildPath();
+        }
+
+        private void chkXScaleDown_CheckedChanged(object sender, EventArgs e)
+        {
+            chkXScaleUp.Checked = !chkXScaleDown.Checked;
+            buildPath();
+        }
+
+        private void chkYScaleUp_CheckedChanged(object sender, EventArgs e)
+        {
+            chkYScaleDown.Checked = !chkYScaleUp.Checked;
+            buildPath();
+        }
+
+        private void chkYScaleDown_CheckedChanged(object sender, EventArgs e)
+        {
+            chkYScaleUp.Checked = !chkYScaleDown.Checked;
             buildPath();
         }
 
