@@ -32,8 +32,8 @@
             this.txtRadius = new System.Windows.Forms.TextBox();
             this.trkRadius = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioCCW = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioCCW = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.txtAngle = new System.Windows.Forms.TextBox();
             this.trkAngle = new System.Windows.Forms.TrackBar();
@@ -61,6 +61,7 @@
             // 
             // txtRadius
             // 
+            this.txtRadius.Enabled = false;
             this.txtRadius.Location = new System.Drawing.Point(86, 118);
             this.txtRadius.Name = "txtRadius";
             this.txtRadius.Size = new System.Drawing.Size(40, 20);
@@ -74,8 +75,8 @@
             this.trkRadius.Name = "trkRadius";
             this.trkRadius.Size = new System.Drawing.Size(104, 42);
             this.trkRadius.TabIndex = 2;
-            this.trkRadius.TickFrequency = 10;
-            this.trkRadius.Value = 10;
+            this.trkRadius.TickFrequency = 25;
+            this.trkRadius.Value = 100;
             this.trkRadius.Scroll += new System.EventHandler(this.trkRadius_Scroll);
             // 
             // groupBox1
@@ -88,6 +89,17 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Direction";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(22, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(43, 17);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.Text = "CW";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // radioCCW
             // 
@@ -102,17 +114,6 @@
             this.radioCCW.UseVisualStyleBackColor = true;
             this.radioCCW.CheckedChanged += new System.EventHandler(this.radioCW_CheckedChanged);
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(22, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(43, 17);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.Text = "CW";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -124,6 +125,7 @@
             // 
             // txtAngle
             // 
+            this.txtAngle.Enabled = false;
             this.txtAngle.Location = new System.Drawing.Point(86, 169);
             this.txtAngle.Name = "txtAngle";
             this.txtAngle.Size = new System.Drawing.Size(40, 20);
@@ -172,6 +174,7 @@
             // 
             // txtNumPoints
             // 
+            this.txtNumPoints.Enabled = false;
             this.txtNumPoints.Location = new System.Drawing.Point(86, 212);
             this.txtNumPoints.Name = "txtNumPoints";
             this.txtNumPoints.Size = new System.Drawing.Size(40, 20);
@@ -208,7 +211,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 336);
+            this.ClientSize = new System.Drawing.Size(269, 306);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.trkNumPoints);
@@ -223,6 +226,8 @@
             this.Controls.Add(this.trkRadius);
             this.Controls.Add(this.txtRadius);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DialogTangentArcPath";
             this.Text = "Tangent Path";
             ((System.ComponentModel.ISupportInitialize)(this.trkRadius)).EndInit();

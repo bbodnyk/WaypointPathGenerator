@@ -69,7 +69,7 @@ namespace Waypoint_Path_Generator
             bool cwdir = radioCCW.Checked;
             double radius = trkRadius.Value;
             double anglespan = trkAngle.Value;
-            double numpoints = trkNumPoints.Value;
+            int numpoints = trkNumPoints.Value;
             double lat_center, lon_center;
             double lat_new, lon_new;
             double ang_inc, angle;
@@ -102,9 +102,22 @@ namespace Waypoint_Path_Generator
                 lat_new = GPS.GPS_Lat_BearDist(lat_center, lon_center, angle, radius, _options.earth_radius);
                 lon_new = GPS.GPS_Lon_BearDist(lat_center, lon_center, lat_new, angle, radius, _options.earth_radius);
                 _wp.Add_Waypoint_List(_wpg, wplist, lat_new, lon_new, _alt, 0.0, 0.0, 0.0, 0, 0, -1, no_action_id);
-
             }
 
+            WayPoints wp1, wp2;
+            double lat1, lon1, lat2, lon2, heading;
+
+            numpoints = wplist.Count();
+            for(int i=0;i< numpoints-1; i++)
+            {
+                wp1 = wplist.ElementAt(i);
+                wp2 = wplist.ElementAt(i + 1);
+                heading = GPS.GPS_Bearing(wp1.lat, wp1.lon, wp2.lat, wp2.lon);
+                wp1.head = heading;
+            }
+            wp1 = wplist.ElementAt(numpoints-1);
+            wp2 = wplist.ElementAt(numpoints-2);
+            wp1.head = wp2.head;
 
             if (_new_path & _first_pass)
             {
