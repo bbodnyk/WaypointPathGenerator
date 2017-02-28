@@ -4082,5 +4082,76 @@ namespace Waypoint_Path_Generator
         {
 
         }
+
+        private void toolStripMenuTangentPath_Click(object sender, EventArgs e)
+        {
+            // Select Waypoint Path
+
+            // Only 1 waypoint can be selected
+
+            int wp_count = _wpg.SelectedWPCount();
+            if (wp_count != 1)
+            {
+                MessageBox.Show("Select a single Waypoint");
+                return;
+            }
+
+            // Find single selected waypoint
+
+            Models.Path path;
+            LinkedList<WayPoints> wp_list;
+            int path_index = -1, wp_index = 0;
+            WayPoints wp;
+
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                path = _wpg.PathAt(i);
+                wp_list = path.waypoints;
+                for (int j = 0; j < wp_list.Count; j++)
+                {
+                    wp = wp_list.ElementAt(j);
+                    if (wp.selected)
+                    {
+                        path_index = i;
+                        wp_index = j;
+                        wp_count = wp_list.Count;
+                    }
+                }
+            }
+
+            if(wp_index != 0 & wp_index != (wp_count - 1))
+            {
+                MessageBox.Show("Selected waypoint must be an end waypoint");
+                return;
+            }
+
+            path = _wpg.PathAt(path_index);
+            wp_list = path.waypoints;
+            wp = wp_list.ElementAt(wp_index);
+            double lat_start = wp.lat;
+            double lon_start = wp.lon;
+            double alt = wp.alt;
+            double lat_end, lon_end;
+
+            if(wp_index == 0)
+            {
+                wp = wp_list.ElementAt(1);
+                lat_end = wp.lat;
+                lon_end = wp.lon;
+            }
+            else
+            {
+                wp = wp_list.ElementAt(wp_list.Count-2);
+                lat_end = wp.lat;
+                lon_end = wp.lon;
+            }
+            double bearing = GPS.GPS_Bearing(lat_start, lon_start, lat_end, lon_end);
+            Models.Path newpath = null;
+            DialogTangentArcPath dialog = new DialogTangentArcPath(_wpg, _gmap, _options, newpath, lat_start, lon_start, alt, bearing);
+            dialog.ShowDialog();
+            _wpg.UnselectAll();
+            _gmap.ReDrawgMap();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
+        }
     }
 }

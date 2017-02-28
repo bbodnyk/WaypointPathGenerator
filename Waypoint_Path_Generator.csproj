@@ -251,6 +251,12 @@
     <Compile Include="DialogPathAltitude.Designer.cs">
       <DependentUpon>DialogPathAltitude.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogTangentArcPath.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogTangentArcPath.Designer.cs">
+      <DependentUpon>DialogTangentArcPath.cs</DependentUpon>
+    </Compile>
     <Compile Include="GPS.cs" />
     <Compile Include="GMap.cs" />
     <Compile Include="GMAPTree.cs" />
@@ -322,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DialogPolyPerimPath.resx">
       <DependentUpon>DialogPolyPerimPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogTangentArcPath.resx">
+      <DependentUpon>DialogTangentArcPath.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
