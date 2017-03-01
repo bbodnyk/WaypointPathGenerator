@@ -233,6 +233,9 @@ namespace Waypoint_Path_Generator
                 
             } else
             {
+                string path_name = txtAddHelixPathName.Text;
+                if (path_name == "") path_name = "Untitled - Helical";
+                _path.name = path_name;
                 _path.waypoints = new_list;
                 //_gmap.Delete_gMapPath(_path);
                 //_gmap.Add_gMapPath(_path, false);

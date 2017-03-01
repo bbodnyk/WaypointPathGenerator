@@ -140,6 +140,10 @@ namespace Waypoint_Path_Generator
             }
             else
             {
+                string path_name = txtName.Text;
+                string path_id = Convert.ToString(_path.internal_id);
+                if (path_name == "") path_name = "Untitled - TangentArc - " + path_id;
+                _path.name = path_name;
                 _path.waypoints = wplist;
             }
 
@@ -188,6 +192,11 @@ namespace Waypoint_Path_Generator
             _path.visible = true;
             _gmap.ReDrawgMap();
             this.Close();
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            buildPath();
         }
     }
 }

@@ -4153,5 +4153,11 @@ namespace Waypoint_Path_Generator
             _gmap.ReDrawgMap();
             GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
+
+        private void toolStripGoTo_Click(object sender, EventArgs e)
+        {
+            DialogGoTo dialog = new DialogGoTo(_wpg, _gmap, _options);
+            dialog.ShowDialog();
+        }
     }
 }

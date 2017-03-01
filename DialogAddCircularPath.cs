@@ -283,6 +283,9 @@ namespace Waypoint_Path_Generator
             }
             else
             {
+                string path_name = txtDiaAddCircPathName.Text;
+                if (path_name == "") path_name = "Untitled - Circular";
+                _path.name = path_name;
                 _path.waypoints = new_list;
                 //_wpg.ChangePathWP(_path, new_list);
                 //Models.Path path = _wpg.PathAt(_current_path_index);
@@ -333,6 +336,7 @@ namespace Waypoint_Path_Generator
 
         private void txtDiaAddCircPathName_TextChanged(object sender, EventArgs e)
         {
+
             buildCircPath();
         }
 

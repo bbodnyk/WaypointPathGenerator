@@ -221,6 +221,7 @@
             this.txtPathName.Name = "txtPathName";
             this.txtPathName.Size = new System.Drawing.Size(100, 20);
             this.txtPathName.TabIndex = 12;
+            this.txtPathName.TextChanged += new System.EventHandler(this.txtPathName_TextChanged);
             // 
             // label1
             // 

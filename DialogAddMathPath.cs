@@ -728,6 +728,22 @@ namespace Waypoint_Path_Generator
             }
             else
             {
+                string path_name = txtPathName.Text;
+                string path_id = Convert.ToString(_path.internal_id);
+                if (path_name == "" & _path_type == "Eliptical") path_name = "Untitled - Eliptical - " + path_id;
+                if (path_name == "" & _path_type == "Parabolic") path_name = "Untitled - Parabolic - " + path_id;
+                if (path_name == "" & _path_type == "Cubic") path_name = "Untitled - Cubic - " + path_id;
+                if (path_name == "" & _path_type == "Trisectrix") path_name = "Untitled - Trisectrix - " + path_id;
+                if (path_name == "" & _path_type == "Botanic") path_name = "Untitled - Botanic - " + path_id;
+                if (path_name == "" & _path_type == "Strophoid") path_name = "Untitled - Strophoid - " + path_id;
+                if (path_name == "" & _path_type == "Folium") path_name = "Untitled - Folium - " + path_id;
+                if (path_name == "" & _path_type == "Egg") path_name = "Untitled - Egg - " + path_id;
+                if (path_name == "" & _path_type == "Resonance") path_name = "Untitled - Resonance - " + path_id;
+                if (path_name == "" & _path_type == "Sine") path_name = "Untitled - Sine - " + path_id;
+                if (path_name == "" & _path_type == "Tan") path_name = "Untitled - Tan - " + path_id;
+                if (path_name == "" & _path_type == "Serpentine") path_name = "Untitled - Serpentine - " + path_id;
+                if (path_name == "" & _path_type == "Ophiuride") path_name = "Untitled - Ophiuride - " + path_id;
+                _path.name = path_name;
                 _path.waypoints = wplist;
                 //_wpg.ChangePathWP(_path, new_list);
                 //Models.Path path = _wpg.PathAt(_current_path_index);
@@ -855,6 +871,11 @@ namespace Waypoint_Path_Generator
         private void chkYScaleDown_CheckedChanged(object sender, EventArgs e)
         {
             chkYScaleUp.Checked = !chkYScaleDown.Checked;
+            buildPath();
+        }
+
+        private void txtPathName_TextChanged(object sender, EventArgs e)
+        {
             buildPath();
         }
 

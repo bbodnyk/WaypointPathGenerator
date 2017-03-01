@@ -42,6 +42,7 @@
             this.ToolAddPath = new System.Windows.Forms.ToolStripMenuItem();
             this.toolAddManualPath = new System.Windows.Forms.ToolStripMenuItem();
             this.addCircularPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuTangentPath = new System.Windows.Forms.ToolStripMenuItem();
             this.addHelicalPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addManualPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addPolygonGridPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -111,6 +112,7 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolOutputPath = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripGoTo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolToggleCenter = new System.Windows.Forms.ToolStripMenuItem();
             this.toolReDrawgMap = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -166,9 +168,7 @@
             this.btngMapRedraw = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtMouseLat = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtMouseLon = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabLocation = new System.Windows.Forms.TabControl();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -191,7 +191,6 @@
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripMenuTangentPath = new System.Windows.Forms.ToolStripMenuItem();
             this.cntxtgMap.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabGMap.SuspendLayout();
@@ -240,6 +239,7 @@
             this.toolStripSeparator9,
             this.toolOutputPath,
             this.toolStripSeparator5,
+            this.toolStripGoTo,
             this.toolToggleCenter,
             this.toolReDrawgMap});
             this.cntxtgMap.Name = "cntxtgMap";
@@ -283,6 +283,13 @@
             this.addCircularPathToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.addCircularPathToolStripMenuItem.Text = "Add Circular Path";
             this.addCircularPathToolStripMenuItem.Click += new System.EventHandler(this.addCircularPathToolStripMenuItem_Click);
+            // 
+            // toolStripMenuTangentPath
+            // 
+            this.toolStripMenuTangentPath.Name = "toolStripMenuTangentPath";
+            this.toolStripMenuTangentPath.Size = new System.Drawing.Size(208, 22);
+            this.toolStripMenuTangentPath.Text = "Add Tangent Path";
+            this.toolStripMenuTangentPath.Click += new System.EventHandler(this.toolStripMenuTangentPath_Click);
             // 
             // addHelicalPathToolStripMenuItem
             // 
@@ -784,6 +791,13 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(200, 6);
             // 
+            // toolStripGoTo
+            // 
+            this.toolStripGoTo.Name = "toolStripGoTo";
+            this.toolStripGoTo.Size = new System.Drawing.Size(203, 22);
+            this.toolStripGoTo.Text = "Go To Lat/ Lon";
+            this.toolStripGoTo.Click += new System.EventHandler(this.toolStripGoTo_Click);
+            // 
             // toolToggleCenter
             // 
             this.toolToggleCenter.Name = "toolToggleCenter";
@@ -1132,9 +1146,9 @@
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel2.Controls.Add(this.splitContainer1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 106);
+            this.panel2.Location = new System.Drawing.Point(0, 56);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(852, 638);
+            this.panel2.Size = new System.Drawing.Size(852, 695);
             this.panel2.TabIndex = 38;
             // 
             // splitContainer1
@@ -1152,7 +1166,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gMapControl);
-            this.splitContainer1.Size = new System.Drawing.Size(852, 638);
+            this.splitContainer1.Size = new System.Drawing.Size(852, 695);
             this.splitContainer1.SplitterDistance = 166;
             this.splitContainer1.TabIndex = 0;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
@@ -1173,7 +1187,7 @@
             treeNode4.Text = "Objects";
             this.treGMap.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.treGMap.Size = new System.Drawing.Size(159, 634);
+            this.treGMap.Size = new System.Drawing.Size(159, 691);
             this.treGMap.TabIndex = 25;
             this.treGMap.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treGMap_AfterCheck);
             this.treGMap.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treGMap_NodeMouseClick);
@@ -1204,7 +1218,7 @@
             this.gMapControl.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl.ShowTileGridLines = false;
-            this.gMapControl.Size = new System.Drawing.Size(685, 638);
+            this.gMapControl.Size = new System.Drawing.Size(685, 695);
             this.gMapControl.TabIndex = 16;
             this.gMapControl.Zoom = 13D;
             this.gMapControl.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gMap_OnMarkerClick);
@@ -1224,13 +1238,11 @@
             this.panel1.Controls.Add(this.btngMapRedraw);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.txtMouseLat);
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.txtMouseLon);
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(852, 106);
+            this.panel1.Size = new System.Drawing.Size(852, 56);
             this.panel1.TabIndex = 37;
             // 
             // cmbGMapProvider
@@ -1244,7 +1256,7 @@
             "Google China Satellite",
             "ArcGIS Topological",
             "YahooSatellite"});
-            this.cmbGMapProvider.Location = new System.Drawing.Point(324, 12);
+            this.cmbGMapProvider.Location = new System.Drawing.Point(188, 12);
             this.cmbGMapProvider.Name = "cmbGMapProvider";
             this.cmbGMapProvider.Size = new System.Drawing.Size(215, 24);
             this.cmbGMapProvider.TabIndex = 15;
@@ -1254,7 +1266,7 @@
             // label109
             // 
             this.label109.AutoSize = true;
-            this.label109.Location = new System.Drawing.Point(218, 15);
+            this.label109.Location = new System.Drawing.Point(82, 15);
             this.label109.Name = "label109";
             this.label109.Size = new System.Drawing.Size(89, 16);
             this.label109.TabIndex = 16;
@@ -1262,7 +1274,7 @@
             // 
             // trkMapScale
             // 
-            this.trkMapScale.Location = new System.Drawing.Point(543, 53);
+            this.trkMapScale.Location = new System.Drawing.Point(483, 12);
             this.trkMapScale.Maximum = 24;
             this.trkMapScale.Minimum = 1;
             this.trkMapScale.Name = "trkMapScale";
@@ -1273,7 +1285,7 @@
             // 
             // btngMapRedraw
             // 
-            this.btngMapRedraw.Location = new System.Drawing.Point(569, 12);
+            this.btngMapRedraw.Location = new System.Drawing.Point(609, 12);
             this.btngMapRedraw.Name = "btngMapRedraw";
             this.btngMapRedraw.Size = new System.Drawing.Size(137, 23);
             this.btngMapRedraw.TabIndex = 27;
@@ -1284,7 +1296,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(494, 56);
+            this.label5.Location = new System.Drawing.Point(434, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 16);
             this.label5.TabIndex = 34;
@@ -1292,39 +1304,24 @@
             // 
             // txtMouseLat
             // 
-            this.txtMouseLat.Location = new System.Drawing.Point(188, 53);
+            this.txtMouseLat.Location = new System.Drawing.Point(19, 12);
             this.txtMouseLat.Name = "txtMouseLat";
-            this.txtMouseLat.Size = new System.Drawing.Size(100, 22);
+            this.txtMouseLat.ReadOnly = true;
+            this.txtMouseLat.Size = new System.Drawing.Size(37, 22);
             this.txtMouseLat.TabIndex = 25;
             this.txtMouseLat.Text = "0.0";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(304, 56);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 16);
-            this.label4.TabIndex = 33;
-            this.label4.Text = "Longitude";
-            this.label4.Click += new System.EventHandler(this.label4_Click_1);
+            this.txtMouseLat.Visible = false;
             // 
             // txtMouseLon
             // 
-            this.txtMouseLon.Location = new System.Drawing.Point(377, 53);
+            this.txtMouseLon.Location = new System.Drawing.Point(790, 14);
             this.txtMouseLon.Name = "txtMouseLon";
-            this.txtMouseLon.Size = new System.Drawing.Size(100, 22);
+            this.txtMouseLon.ReadOnly = true;
+            this.txtMouseLon.Size = new System.Drawing.Size(39, 22);
             this.txtMouseLon.TabIndex = 26;
             this.txtMouseLon.Text = "0.0";
+            this.txtMouseLon.Visible = false;
             this.txtMouseLon.TextChanged += new System.EventHandler(this.txtMouseLon_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(120, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 16);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "Latitude";
             // 
             // tabLocation
             // 
@@ -1460,13 +1457,6 @@
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             this.dataGridViewTextBoxColumn11.Width = 75;
-            // 
-            // toolStripMenuTangentPath
-            // 
-            this.toolStripMenuTangentPath.Name = "toolStripMenuTangentPath";
-            this.toolStripMenuTangentPath.Size = new System.Drawing.Size(208, 22);
-            this.toolStripMenuTangentPath.Text = "Add Tangent Path";
-            this.toolStripMenuTangentPath.Click += new System.EventHandler(this.toolStripMenuTangentPath_Click);
             // 
             // Form1
             // 
@@ -1634,10 +1624,6 @@
         private System.Windows.Forms.TrackBar trkMapScale;
         private System.Windows.Forms.Button btngMapRedraw;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtMouseLat;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtMouseLon;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem mathamaticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mathamaticalPathToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolEditPathAlt;
@@ -1655,6 +1641,9 @@
         private System.Windows.Forms.ToolStripMenuItem mathamaticalPathToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuTangentPath;
+        private System.Windows.Forms.ToolStripMenuItem toolStripGoTo;
+        private System.Windows.Forms.TextBox txtMouseLat;
+        private System.Windows.Forms.TextBox txtMouseLon;
     }
 }
 

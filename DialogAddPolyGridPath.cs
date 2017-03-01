@@ -388,7 +388,11 @@ namespace Waypoint_Path_Generator
             }
             else
             {
+                String path_name = txtPolyPathName.Text;
+                if (path_name == "") path_name = "Untitled - Rectangular";
                 _wpg.ChangePathWPIntId(_current_intid, new_list);
+                _path = _wpg.PathIntId(_current_intid);
+                _path.name = path_name;
                 //Models.Path path = _wpg.PathAt(_current_path_index);
                 //_gmap.Delete_gMapPath(path);
                 //_gmap.Add_gMapPath(path, false);
@@ -459,7 +463,10 @@ namespace Waypoint_Path_Generator
             BuildPolyGridPath();
         }
 
-        
+        private void txtPolyPathName_TextChanged(object sender, EventArgs e)
+        {
+            BuildPolyGridPath();
+        }
     }
 }
 

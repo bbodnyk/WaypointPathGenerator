@@ -206,6 +206,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(122, 20);
             this.txtName.TabIndex = 13;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // DialogTangentArcPath
             // 

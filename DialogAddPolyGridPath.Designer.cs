@@ -171,6 +171,7 @@
             this.txtPolyPathName.Size = new System.Drawing.Size(162, 20);
             this.txtPolyPathName.TabIndex = 95;
             this.txtPolyPathName.Text = "Untitled - Polygon";
+            this.txtPolyPathName.TextChanged += new System.EventHandler(this.txtPolyPathName_TextChanged);
             // 
             // label1
             // 
