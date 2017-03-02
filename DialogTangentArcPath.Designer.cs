@@ -93,10 +93,12 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(22, 19);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(43, 17);
             this.radioButton1.TabIndex = 1;
+            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "CW";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -104,12 +106,10 @@
             // radioCCW
             // 
             this.radioCCW.AutoSize = true;
-            this.radioCCW.Checked = true;
             this.radioCCW.Location = new System.Drawing.Point(80, 19);
             this.radioCCW.Name = "radioCCW";
             this.radioCCW.Size = new System.Drawing.Size(50, 17);
             this.radioCCW.TabIndex = 0;
-            this.radioCCW.TabStop = true;
             this.radioCCW.Text = "CCW";
             this.radioCCW.UseVisualStyleBackColor = true;
             this.radioCCW.CheckedChanged += new System.EventHandler(this.radioCW_CheckedChanged);

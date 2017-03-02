@@ -19,7 +19,7 @@ namespace Waypoint_Path_Generator
 
         private void DialogAbout_Load(object sender, EventArgs e)
         {
-            lblVersion.Text = "Version 1.0 - 7abd764e";
+            lblVersion.Text = "Version 1.0 - 7a1c0523";
         }
 
         private void lblVersion_Click(object sender, EventArgs e)

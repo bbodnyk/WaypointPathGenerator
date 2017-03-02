@@ -48,11 +48,12 @@
             // 
             // txtLat
             // 
+            this.txtLat.AcceptsReturn = true;
             this.txtLat.Location = new System.Drawing.Point(119, 49);
             this.txtLat.Name = "txtLat";
             this.txtLat.Size = new System.Drawing.Size(100, 20);
             this.txtLat.TabIndex = 1;
-            this.txtLat.TextChanged += new System.EventHandler(this.txtLat_TextChanged);
+            this.txtLat.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLat_KeyPress);
             // 
             // label2
             // 
@@ -69,7 +70,7 @@
             this.txtLon.Name = "txtLon";
             this.txtLon.Size = new System.Drawing.Size(100, 20);
             this.txtLon.TabIndex = 3;
-            this.txtLon.TextChanged += new System.EventHandler(this.txtLon_TextChanged);
+            this.txtLon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLon_KeyPress);
             // 
             // btnClose
             // 

@@ -46,18 +46,90 @@ namespace Waypoint_Path_Generator
             this.Close();
         }
 
-        private void txtLat_TextChanged(object sender, EventArgs e)
+        private void txtLat_KeyPress(object sender, KeyPressEventArgs e)
         {
-            _center.Lat = Convert.ToDouble(txtLat.Text);
-            _gmap.SetCenter(_center.Lat, _center.Lng);
-            _gmap.ReDrawgMap();
+            //txtLat.TextChanged -= txtLat_TextChanged;
+
+            // Test first character - either text is blank or the selection starts at first character.
+            TextBox txt = (sender as TextBox);
+
+            if (txt.Text == "" || txt.SelectionStart == 0)
+            {
+                // If the first character is a minus or digit, AND
+                // if the text does not contain a minus OR the selected text DOES contain a minus.
+                if ((e.KeyChar == '-' || char.IsDigit(e.KeyChar)) && (!txt.Text.Contains("-") || txt.SelectedText.Contains("-")))
+                    e.Handled = false;
+                else
+                {
+                    // If the first character is a decimal point or digit, AND
+                    // if the text does not contain a decimal point OR the selected text DOES contain a decimal point.
+                    if ((e.KeyChar == '.' || char.IsDigit(e.KeyChar)) && (!txt.Text.Contains(".") || txt.SelectedText.Contains(".")))
+                        e.Handled = false;
+                    else
+                        e.Handled = true;
+                }
+            }
+            else
+            {
+                // If it's not the first character, then it must be a digit or backspace OR
+                // a decimal point AND
+                // if the text does not contain a decimal point or the selected text does contain a decimal point.
+                if (char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back) || (e.KeyChar == '.' && (!txt.Text.Contains(".") || txt.SelectedText.Contains("."))))
+                    e.Handled = false;
+                else
+                    e.Handled = true;
+            }
+
+            if ( e.KeyChar == '\r')
+            {
+                e.Handled = true;
+                if (txtLat.Text == "") txtLat.Text = "0";
+                _center.Lat = Convert.ToDouble(txtLat.Text);
+                _gmap.SetCenter(_center.Lat, _center.Lng);
+                _gmap.ReDrawgMap();
+            }
         }
 
-        private void txtLon_TextChanged(object sender, EventArgs e)
+        private void txtLon_KeyPress(object sender, KeyPressEventArgs e)
         {
-            _center.Lng = Convert.ToDouble(txtLon.Text);
-            _gmap.SetCenter(_center.Lat, _center.Lng);
-            _gmap.ReDrawgMap();
+
+            TextBox txt = (sender as TextBox);
+
+            if (txt.Text == "" || txt.SelectionStart == 0)
+            {
+                // If the first character is a minus or digit, AND
+                // if the text does not contain a minus OR the selected text DOES contain a minus.
+                if ((e.KeyChar == '-' || char.IsDigit(e.KeyChar)) && (!txt.Text.Contains("-") || txt.SelectedText.Contains("-")))
+                    e.Handled = false;
+                else
+                {
+                    // If the first character is a decimal point or digit, AND
+                    // if the text does not contain a decimal point OR the selected text DOES contain a decimal point.
+                    if ((e.KeyChar == '.' || char.IsDigit(e.KeyChar)) && (!txt.Text.Contains(".") || txt.SelectedText.Contains(".")))
+                        e.Handled = false;
+                    else
+                        e.Handled = true;
+                }
+            }
+            else
+            {
+                // If it's not the first character, then it must be a digit or backspace OR
+                // a decimal point AND
+                // if the text does not contain a decimal point or the selected text does contain a decimal point.
+                if (char.IsDigit(e.KeyChar) || e.KeyChar == Convert.ToChar(Keys.Back) || (e.KeyChar == '.' && (!txt.Text.Contains(".") || txt.SelectedText.Contains("."))))
+                    e.Handled = false;
+                else
+                    e.Handled = true;
+            }
+
+            if (e.KeyChar == '\r')
+            {
+                e.Handled = true;
+                if (txtLon.Text == "") txtLon.Text = "0";
+                _center.Lng = Convert.ToDouble(txtLon.Text);
+                _gmap.SetCenter(_center.Lat, _center.Lng);
+                _gmap.ReDrawgMap();
+            }
         }
     }
 }

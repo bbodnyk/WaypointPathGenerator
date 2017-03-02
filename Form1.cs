@@ -1313,7 +1313,7 @@ namespace Waypoint_Path_Generator
             }
         }
 
-        /*
+/*        
         private void textNumeric_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -1328,7 +1328,7 @@ namespace Waypoint_Path_Generator
                 e.Handled = true;
             }
         }
-        */
+*/        
         private void txtPOILat_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -1553,7 +1553,7 @@ namespace Waypoint_Path_Generator
                 e.Handled = true;
             }
         }
-
+        /*
         private void txtGridWidth_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -1568,7 +1568,7 @@ namespace Waypoint_Path_Generator
                 e.Handled = true;
             }
         }
-
+        */
         private void label41_Click(object sender, EventArgs e)
         {
 
@@ -1753,10 +1753,6 @@ namespace Waypoint_Path_Generator
                 }
 
             }
-
-            /* - Commented out to remove POI selection graphically 
-
-
             else
             {
                 for (int i = 0; i < _wpg.POICount(); i++)
@@ -1777,7 +1773,7 @@ namespace Waypoint_Path_Generator
                 //text = text + "Button : " + button + "\n";
                 //MessageBox.Show(text);
             }
-            */
+            
         }
 
         private void gMap_MouseUp(object sender, MouseEventArgs e)
@@ -2299,7 +2295,7 @@ namespace Waypoint_Path_Generator
         private void btngMapRedraw_Click(object sender, EventArgs e)
         {
             _gmap.ReDrawgMap();
-            //GMAPTree.Update_GMapTree(_wpg, treGMap);;
+            GMAPTree.Update_GMapTree(_wpg, treGMap);;
         }
 
         
@@ -2327,7 +2323,7 @@ namespace Waypoint_Path_Generator
             bool selected = _wpg.PathAt(id).selected;
             //if(!selected)Globals.path_active = true;
             SelectPath(_wpg.PathAt(id), !selected);
-            GMAPTree.Update_GMapTree(_wpg, treGMap);
+            //GMAPTree.Update_GMapTree(_wpg, treGMap);
         }
 
         private void gMap_OnPolygonClick(GMapPolygon item, MouseEventArgs e)
