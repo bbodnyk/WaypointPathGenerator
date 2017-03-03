@@ -166,6 +166,7 @@ namespace Waypoint_Path_Generator
                     double diag_len;
                     double poi_lat = 0;
                     double poi_lon = 0;
+                    double poi_cam_alt;
                     double gps_radius;
                     int poi_id;
 
@@ -193,6 +194,7 @@ namespace Waypoint_Path_Generator
                         alt = point.alt;
                         poi_id = point.poi_id;
                         POIPoints poipnt = _wpg.POIPointID(poi_id);
+                        poi_cam_alt = poipnt.cam_alt;
                         if (poipnt != null)
                         {
                             poi_lat = poipnt.lat;
@@ -275,9 +277,9 @@ namespace Waypoint_Path_Generator
                             {
                                 vector = new Vector(lat, lon, alt);
                                 coor.Add(vector);
-                                vector = new Vector(lat, lon, 2);
+                                vector = new Vector(lat, lon, poi_cam_alt);
                                 coor.Add(vector);
-                                vector = new Vector(poi_lat, poi_lon, 2);
+                                vector = new Vector(poi_lat, poi_lon, poi_cam_alt);
                                 coor.Add(vector);
                                 vector = new Vector(lat, lon, alt);
                                 coor.Add(vector);
