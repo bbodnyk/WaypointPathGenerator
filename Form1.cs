@@ -2486,12 +2486,12 @@ namespace Waypoint_Path_Generator
         {
             // Make sure only one polygon is selected
 
-            int poly_count = _wpg.SelectedPolyCount();
-            if (poly_count != 1)
-            {
-                MessageBox.Show("Select a single Polygon");
-                return;
-            }
+            //int poly_count = _wpg.SelectedPolyCount();
+            //if (poly_count != 1)
+            //{
+            //    MessageBox.Show("Select a single Polygon");
+            //    return;
+            //}
 
             Models.Path path = null;
             DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.mouse_down_lat, Globals.mouse_down_lon);
@@ -3338,18 +3338,48 @@ namespace Waypoint_Path_Generator
         {
             // Make sure only one polygon is selected
 
-            int poly_count = _wpg.SelectedPolyCount();
-            if (poly_count != 1)
+            //int poly_count = _wpg.SelectedPolyCount();
+            //if (poly_count != 1)
+            //{
+            //    MessageBox.Show("Select a single Polygon");
+            //    return;
+            //}
+
+            //Globals.map_center = gMapControl.Position;
+            //Models.Path path = null;
+            //DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+            //dialog.ShowDialog();
+            //GMAPTree.Update_GMapTree(_wpg, treGMap);
+
+            int path_count = _wpg.SelectedPathCount("Polygon");
+            if (path_count != 1)
             {
-                MessageBox.Show("Select a single Polygon");
+                MessageBox.Show("Select a single Polygon Grid Path");
                 return;
             }
+            // Get Selected Path index
+            for (int i = 0; i < _wpg.PathCount(); i++)
+            {
+                if (_wpg.PathAt(i).selected & _wpg.PathAt(i).type == "Polygon")
+                {
+                    // Make sure path polygon still exists
 
-            Globals.map_center = gMapControl.Position;
-            Models.Path path = null;
-            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
-            dialog.ShowDialog();
-            GMAPTree.Update_GMapTree(_wpg, treGMap); ;
+                    Models.Path path = _wpg.PathAt(i);
+                    PolygonGridGUI gui = path.polygridgui;
+                    int poly_id = gui.poly_internal_id;
+                    Models.Shape poly = _wpg.ShapeWithId(poly_id);
+                    if (poly == null)
+                    {
+                        MessageBox.Show("Polygon no longer exists");
+                        return;
+                    }
+                    Globals.map_center = gMapControl.Position;
+                    DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+                    dialog.ShowDialog();
+                    GMAPTree.Update_GMapTree(_wpg, treGMap);
+                }
+            }
+
         }
 
         private void polygonPerimeterToolStripMenuItem_Click(object sender, EventArgs e)

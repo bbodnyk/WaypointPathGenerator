@@ -42,13 +42,15 @@
             this.txtPolyPathName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.rtbPoly = new System.Windows.Forms.RichTextBox();
+            this.cmbPolygon = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trkAltitude)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkHeading)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(175, 189);
+            this.btnCancel.Location = new System.Drawing.Point(175, 233);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 0;
@@ -58,7 +60,7 @@
             // 
             // btnAddPath
             // 
-            this.btnAddPath.Location = new System.Drawing.Point(48, 189);
+            this.btnAddPath.Location = new System.Drawing.Point(48, 233);
             this.btnAddPath.Name = "btnAddPath";
             this.btnAddPath.Size = new System.Drawing.Size(75, 23);
             this.btnAddPath.TabIndex = 1;
@@ -71,7 +73,7 @@
             this.chkRectHome.AutoSize = true;
             this.chkRectHome.Checked = true;
             this.chkRectHome.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRectHome.Location = new System.Drawing.Point(48, 76);
+            this.chkRectHome.Location = new System.Drawing.Point(48, 120);
             this.chkRectHome.Name = "chkRectHome";
             this.chkRectHome.Size = new System.Drawing.Size(138, 17);
             this.chkRectHome.TabIndex = 16;
@@ -82,7 +84,7 @@
             // lblGridAlt
             // 
             this.lblGridAlt.AutoSize = true;
-            this.lblGridAlt.Location = new System.Drawing.Point(27, 108);
+            this.lblGridAlt.Location = new System.Drawing.Point(27, 152);
             this.lblGridAlt.Name = "lblGridAlt";
             this.lblGridAlt.Size = new System.Drawing.Size(59, 13);
             this.lblGridAlt.TabIndex = 23;
@@ -90,7 +92,7 @@
             // 
             // txtGridAlt
             // 
-            this.txtGridAlt.Location = new System.Drawing.Point(92, 105);
+            this.txtGridAlt.Location = new System.Drawing.Point(92, 149);
             this.txtGridAlt.Name = "txtGridAlt";
             this.txtGridAlt.Size = new System.Drawing.Size(36, 20);
             this.txtGridAlt.TabIndex = 22;
@@ -100,7 +102,7 @@
             // 
             // trkAltitude
             // 
-            this.trkAltitude.Location = new System.Drawing.Point(134, 105);
+            this.trkAltitude.Location = new System.Drawing.Point(134, 149);
             this.trkAltitude.Maximum = 129;
             this.trkAltitude.Minimum = 5;
             this.trkAltitude.Name = "trkAltitude";
@@ -112,7 +114,7 @@
             // 
             // txtHeading
             // 
-            this.txtHeading.Location = new System.Drawing.Point(92, 141);
+            this.txtHeading.Location = new System.Drawing.Point(92, 185);
             this.txtHeading.Name = "txtHeading";
             this.txtHeading.Size = new System.Drawing.Size(36, 20);
             this.txtHeading.TabIndex = 81;
@@ -122,7 +124,7 @@
             // 
             // trkHeading
             // 
-            this.trkHeading.Location = new System.Drawing.Point(134, 141);
+            this.trkHeading.Location = new System.Drawing.Point(134, 185);
             this.trkHeading.Maximum = 360;
             this.trkHeading.Name = "trkHeading";
             this.trkHeading.Size = new System.Drawing.Size(104, 42);
@@ -135,7 +137,7 @@
             this.radioVideo.AutoSize = true;
             this.radioVideo.Checked = true;
             this.radioVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioVideo.Location = new System.Drawing.Point(168, 46);
+            this.radioVideo.Location = new System.Drawing.Point(168, 90);
             this.radioVideo.Name = "radioVideo";
             this.radioVideo.Size = new System.Drawing.Size(82, 17);
             this.radioVideo.TabIndex = 94;
@@ -148,7 +150,7 @@
             // 
             this.radioPhoto.AutoSize = true;
             this.radioPhoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioPhoto.Location = new System.Drawing.Point(41, 46);
+            this.radioPhoto.Location = new System.Drawing.Point(41, 90);
             this.radioPhoto.Name = "radioPhoto";
             this.radioPhoto.Size = new System.Drawing.Size(83, 17);
             this.radioPhoto.TabIndex = 93;
@@ -170,13 +172,12 @@
             this.txtPolyPathName.Name = "txtPolyPathName";
             this.txtPolyPathName.Size = new System.Drawing.Size(162, 20);
             this.txtPolyPathName.TabIndex = 95;
-            this.txtPolyPathName.Text = "Untitled - Polygon";
             this.txtPolyPathName.TextChanged += new System.EventHandler(this.txtPolyPathName_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 144);
+            this.label1.Location = new System.Drawing.Point(38, 188);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 97;
@@ -184,17 +185,37 @@
             // 
             // rtbPoly
             // 
-            this.rtbPoly.Location = new System.Drawing.Point(12, 218);
+            this.rtbPoly.Location = new System.Drawing.Point(12, 262);
             this.rtbPoly.Name = "rtbPoly";
             this.rtbPoly.Size = new System.Drawing.Size(268, 208);
             this.rtbPoly.TabIndex = 98;
             this.rtbPoly.Text = "";
+            // 
+            // cmbPolygon
+            // 
+            this.cmbPolygon.FormattingEnabled = true;
+            this.cmbPolygon.Location = new System.Drawing.Point(103, 47);
+            this.cmbPolygon.Name = "cmbPolygon";
+            this.cmbPolygon.Size = new System.Drawing.Size(162, 21);
+            this.cmbPolygon.TabIndex = 99;
+            this.cmbPolygon.SelectedIndexChanged += new System.EventHandler(this.cmbPolygon_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(31, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 100;
+            this.label2.Text = "Polygon";
             // 
             // DialogAddPolyGridPath
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 477);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cmbPolygon);
             this.Controls.Add(this.rtbPoly);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
@@ -234,5 +255,7 @@
         private System.Windows.Forms.TextBox txtPolyPathName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox rtbPoly;
+        private System.Windows.Forms.ComboBox cmbPolygon;
+        private System.Windows.Forms.Label label2;
     }
 }

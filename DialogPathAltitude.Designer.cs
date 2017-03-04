@@ -646,7 +646,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DialogPathAltitude";
-            this.Text = "Edit Path Altitude";
+            this.Text = "Edit Path Parameters";
             this.Load += new System.EventHandler(this.DialogPathAltitude_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartAlt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkAlt1)).EndInit();

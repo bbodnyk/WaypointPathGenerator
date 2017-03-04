@@ -67,7 +67,13 @@ namespace Waypoint_Path_Generator
             _over_hgt = _options.ver_overlap_percent;
 
             InitializeComponent();
-            
+
+            cmbPolygon.Items.Clear();
+            for (int i = 0; i < _wpg.ShapeCount(); i++)
+            {
+                cmbPolygon.Items.Add(_wpg.ShapeAt(i).name);
+            }
+
             // Get selected Polygon
 
 
@@ -77,6 +83,7 @@ namespace Waypoint_Path_Generator
                 if (_wpg.ShapeAt(i).selected)
                 {
                     _poly_index = i;
+                    cmbPolygon.SelectedIndex = i;
                     _poly_intid = _wpg.ShapeAt(i).internal_id;
                     _poly = _wpg.ShapeAt(i);
                     _poly.visible = true;
@@ -93,7 +100,7 @@ namespace Waypoint_Path_Generator
                 _path.selected = false;
                 _build = false;
                 txtGridAlt.Text = Convert.ToString(_options.def_altitude);
-                _build = true;
+                _build = false;
             }
             else
             {
@@ -112,6 +119,17 @@ namespace Waypoint_Path_Generator
                 _poly_intid = gui.poly_internal_id;
                 _poly = _wpg.ShapeWithId(_poly_intid);
                 _poly.visible = true;
+
+                shape_count = _wpg.ShapeCount();
+                for (int i = 0; i < shape_count; i++)
+                {
+                    if (_wpg.ShapeAt(i).internal_id == _poly_intid)
+                    {
+                        cmbPolygon.SelectedIndex = i;
+                        break;
+                    }
+                }
+
                 _build = true;
             }
             BuildPolyGridPath();
@@ -144,7 +162,12 @@ namespace Waypoint_Path_Generator
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (_new_path) _wpg.DeletePath(_path);
+            if (_new_path & _path != null) _wpg.DeletePath(_path);
+            if (_poly != null)
+            {
+                _poly.selected = false;
+                _poly.visible = false;
+            }
             _gmap.ReDrawgMap();
             this.Close();
         }
@@ -171,7 +194,7 @@ namespace Waypoint_Path_Generator
             Double[,] point_arr = new double[1000, 3];
             WPG_Vector[,] poly_vectors = new WPG_Vector[1000, 2];
             WPG_Vector[,] path_vectors = new WPG_Vector[1000, 2];
-            //int poly_index = cmbShape.SelectedIndex;
+            //_poly_index = cmbPolygon.SelectedIndex;
             if (_poly_index == -1)
             {
                 MessageBox.Show("Error : Select a Polygon");
@@ -372,27 +395,30 @@ namespace Waypoint_Path_Generator
             rtbPoly.AppendText("Waypoint Count :" + Convert.ToString(wp_count) + "\n");
 
             // Save Path
-
+            //path_name = "Untitled - Circular - " + Convert.ToString(_path.internal_id);
             // Save Path
 
             if (_new_path & _first_pass)
             {
-                String path_name = txtPolyPathName.Text;
-                if (path_name == "") path_name = "Untitled - Polygon";
+                String path_name = txtPolyPathName.Text; 
                 _path.Add_Path(_wpg, _gmap, path_name, "Polygon", new_list);
                 _path = _wpg.PathAt(_wpg.PathCount() - 1);
                 _current_intid = _path.internal_id;
-                path_name = "Untitled - Polygon - " + Convert.ToString(_path.internal_id);
-                _path.name = path_name;
+                if (path_name == "")
+                {
+                    path_name = "Untitled - Polygon - " + Convert.ToString(_current_intid);
+                    _path.name = path_name;
+                    txtPolyPathName.Text = path_name;
+                }
+                
                 _first_pass = false;
             }
             else
             {
-                String path_name = txtPolyPathName.Text;
-                if (path_name == "") path_name = "Untitled - Rectangular";
+                String path_name = txtPolyPathName.Text;               
                 _wpg.ChangePathWPIntId(_current_intid, new_list);
                 _path = _wpg.PathIntId(_current_intid);
-                _path.name = path_name;
+                if (path_name != "") _path.name = path_name;
                 //Models.Path path = _wpg.PathAt(_current_path_index);
                 //_gmap.Delete_gMapPath(path);
                 //_gmap.Add_gMapPath(path, false);
@@ -455,6 +481,7 @@ namespace Waypoint_Path_Generator
             path.polygridgui = gui;
             _poly.visible = false;
             _poly.selected = false;
+            _gmap.ReDrawgMap();
             this.Close();
         }
 
@@ -465,6 +492,18 @@ namespace Waypoint_Path_Generator
 
         private void txtPolyPathName_TextChanged(object sender, EventArgs e)
         {
+            //BuildPolyGridPath();
+        }
+
+        private void cmbPolygon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(_poly != null)_poly.visible = false;
+            _poly_index = cmbPolygon.SelectedIndex;
+            _poly = _wpg.ShapeAt(_poly_index);
+            _poly_intid = _poly.internal_id;            
+            _poly.visible = true;
+            _poly.selected = false;
+            _build = true;
             BuildPolyGridPath();
         }
     }
