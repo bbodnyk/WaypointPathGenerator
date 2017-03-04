@@ -3345,40 +3345,13 @@ namespace Waypoint_Path_Generator
             //    return;
             //}
 
-            //Globals.map_center = gMapControl.Position;
-            //Models.Path path = null;
-            //DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
-            //dialog.ShowDialog();
-            //GMAPTree.Update_GMapTree(_wpg, treGMap);
+            Globals.map_center = gMapControl.Position;
+            Models.Path path = null;
+            DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
+            dialog.ShowDialog();
+            GMAPTree.Update_GMapTree(_wpg, treGMap);
 
-            int path_count = _wpg.SelectedPathCount("Polygon");
-            if (path_count != 1)
-            {
-                MessageBox.Show("Select a single Polygon Grid Path");
-                return;
-            }
-            // Get Selected Path index
-            for (int i = 0; i < _wpg.PathCount(); i++)
-            {
-                if (_wpg.PathAt(i).selected & _wpg.PathAt(i).type == "Polygon")
-                {
-                    // Make sure path polygon still exists
-
-                    Models.Path path = _wpg.PathAt(i);
-                    PolygonGridGUI gui = path.polygridgui;
-                    int poly_id = gui.poly_internal_id;
-                    Models.Shape poly = _wpg.ShapeWithId(poly_id);
-                    if (poly == null)
-                    {
-                        MessageBox.Show("Polygon no longer exists");
-                        return;
-                    }
-                    Globals.map_center = gMapControl.Position;
-                    DialogAddPolyGridPath dialog = new DialogAddPolyGridPath(_wpg, _gmap, _options, path, Globals.map_center.Lat, Globals.map_center.Lng);
-                    dialog.ShowDialog();
-                    GMAPTree.Update_GMapTree(_wpg, treGMap);
-                }
-            }
+            
 
         }
 

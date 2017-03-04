@@ -21,6 +21,7 @@ namespace Waypoint_Path_Generator
         Models.Path _path = new Models.Path();
         WayPoints _wp = new WayPoints();
         int _current_path_index = -1;
+        int _old_poly = -1;
 
         public DialogPolyPerimPath(Waypoint_Path_Gen wpg, GMAP gmap, Options options, TreeView treeview)
         {
@@ -35,6 +36,25 @@ namespace Waypoint_Path_Generator
             {
                 cmbPolyPath.Items.Add(_wpg.ShapeAt(i).name);
             }
+
+            // Get selected Polygon
+
+            int polyindex = -1;
+            int shape_count = _wpg.ShapeCount();
+            for (int i = 0; i < shape_count; i++)
+            {
+                if (_wpg.ShapeAt(i).selected)
+                {
+                    polyindex = i;
+                    _old_poly = i;
+                    break;
+                }
+            }
+            if(polyindex != -1)
+            {
+                cmbPolyPath.SelectedIndex = polyindex;
+            }
+
         }
 
         private void txtAltPolyPath_TextChanged(object sender, EventArgs e)
@@ -49,14 +69,27 @@ namespace Waypoint_Path_Generator
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            if (_old_poly != -1)
+            {
+                Models.Shape poly = _wpg.ShapeAt(_old_poly);
+                poly.visible = false;
+                poly.selected = false;
+            }
             if (_current_path_index != -1) _wpg.DeletePath(_wpg.PathAt(_current_path_index));
             _current_path_index = -1;
             _gmap.ReDrawgMap();
+            GMAPTree.Update_GMapTree(_wpg, _treeview);
             this.Close();
         }
 
         private void btnAddPath_Click(object sender, EventArgs e)
         {
+            if (_old_poly != -1)
+            {
+                Models.Shape poly = _wpg.ShapeAt(_old_poly);
+                poly.visible = false;
+                poly.selected = false;
+            }
             GMAPTree.Update_GMapTree(_wpg, _treeview);
             this.Close();
         }
@@ -65,7 +98,7 @@ namespace Waypoint_Path_Generator
         {
             int polyindex = cmbPolyPath.SelectedIndex;
             if (polyindex == -1) return;
-
+            
             // Get Path
 
             double lat, lat_next;
@@ -137,13 +170,33 @@ namespace Waypoint_Path_Generator
                 newpath.waypoints = waypoints;
                 _gmap.Add_gMapPath(path, false);
             }
-
+            if (polyindex != -1)
+            {
+                _old_poly = polyindex;
+                poly = _wpg.ShapeAt(polyindex);
+                poly.visible = true;
+                poly.selected = false;
+            }            
             _gmap.ReDrawgMap();
 
         }
 
         private void cmbPolyPath_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Models.Shape poly;
+            int polyindex = cmbPolyPath.SelectedIndex; 
+            if(_old_poly != polyindex)
+            {
+                if (_old_poly != -1)
+                {
+                    poly = _wpg.ShapeAt(_old_poly);
+                    poly.visible = false;
+                    poly.selected = false;
+                }
+                poly = _wpg.ShapeAt(polyindex);
+                poly.visible = true;
+            }
+            _old_poly = polyindex;
             BuildPath();
         }
     }

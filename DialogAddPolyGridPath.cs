@@ -76,7 +76,7 @@ namespace Waypoint_Path_Generator
 
             // Get selected Polygon
 
-
+            _poly_index = -1;
             int shape_count = _wpg.ShapeCount();
             for (int i = 0; i < shape_count; i++)
             {
@@ -100,7 +100,7 @@ namespace Waypoint_Path_Generator
                 _path.selected = false;
                 _build = false;
                 txtGridAlt.Text = Convert.ToString(_options.def_altitude);
-                _build = false;
+                if(_poly_index != -1) _build = true;
             }
             else
             {
