@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 
 namespace Waypoint_Path_Generator.Models
 {
     public class Shape
     {
         public int internal_id;
+        public GMapPolygon poly_id;
         public string name;
         public LinkedList<PolyPoint> points;
         public bool selected;

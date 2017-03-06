@@ -146,7 +146,7 @@ namespace Waypoint_Path_Generator
                 else
                 { marker = new GMarkerGoogle(new PointLatLng(pnt.lat, pnt.lon), _poi_image); }
 
-                //    GMarkerGoogleType.blue_pushpin);
+                pnt.marker_id = marker;
 
                 //marker.Size = new Size(32, 32);
                 marker.Offset = new Point(-16, -16);
@@ -213,6 +213,7 @@ namespace Waypoint_Path_Generator
                 route.IsVisible = visible;
                 route.IsHitTestVisible = true;
                 _overroutes.Routes.Add(route);
+                path.route_id = route;
                 //mapcontrol.Overlays.Add(overroutes);
                 //mapcontrol.Overlays.Add(markers);
             }
@@ -389,7 +390,7 @@ namespace Waypoint_Path_Generator
                 poly.IsVisible = polyshape.visible;
                 poly.IsHitTestVisible = true;
                 _overpolys.Polygons.Add(poly);
-
+                polyshape.poly_id = poly;
             }
             _mapcontrol.Position = center_position;
         }
@@ -417,23 +418,14 @@ namespace Waypoint_Path_Generator
             marker.IsVisible = false;
             marker.IsHitTestVisible = false;
             _overmarkers.Markers.Add(marker);
+            point.marker_id = marker;
         }
 
         public void Delete_gMapPOI(POIPoints point)
         {
-            string pnt_name = point.name;
-
-            int mark_count = _overmarkers.Markers.Count;
-            for (int i = 0; i < mark_count; i++)
-            {
-                GMapMarker marker = _overmarkers.Markers.ElementAt(i);
-                string markname = Convert.ToString(marker.Tag);
-                if (pnt_name == markname)
-                {
-                    _overmarkers.Markers.RemoveAt(i);
-                    break;
-                }
-            }
+            GMapMarker pnt_marker = point.marker_id;
+            _overmarkers.Markers.Remove(pnt_marker);
+            _mapcontrol.Refresh();
         }
 
 

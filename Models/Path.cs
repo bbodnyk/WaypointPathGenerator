@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMap.NET;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 
 namespace Waypoint_Path_Generator.Models
 {
@@ -10,6 +13,7 @@ namespace Waypoint_Path_Generator.Models
     {
         public int id;
         public int internal_id;
+        public GMapRoute route_id;
         public string name;
         public string type;
         public LinkedList<WayPoints> waypoints;

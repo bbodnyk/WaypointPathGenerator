@@ -3251,11 +3251,12 @@ namespace Waypoint_Path_Generator
             {
                 if (_wpg.POIPointAt(i).selected)
                 {
+                    POIPoints pnt = _wpg.POIPointAt(i);
+                    _gmap.Delete_gMapPOI(pnt);
                     _wpg.POIPointDeleteAt(i);
                 }
             }
             GMAPTree.Update_GMapTree(_wpg, treGMap);
-            _gmap.ReDrawgMap();
         }
 
         private void deleteSelectedPolygonsToolStripMenuItem_Click(object sender, EventArgs e)
